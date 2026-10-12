@@ -27,7 +27,7 @@ celery>=5.4,<6.0
 # ---- Optimization ----
 ortools>=9.11
 networkx>=3.3
-numpy>=1.26,<3.0
+numpy>=2.5.3,<3.0
 
 # ---- Observability ----
 structlog>=24.4
