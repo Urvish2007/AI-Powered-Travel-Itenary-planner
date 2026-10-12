@@ -1,0 +1,219 @@
+=Toronto|CA
+CN Tower|43.6426|-79.3871|vp|arch,photo|1|3|553-metre tower with a glass floor and EdgeWalk|90
+Royal Ontario Museum|43.6677|-79.3948|mu|hist,nat,art|1|3|Canada's largest museum of world cultures and natural history|150
+Ripley's Aquarium of Canada|43.6424|-79.3860|at|nat,fam|2|3|Aquarium with a moving tunnel under sharks|120
+Distillery Historic District|43.6503|-79.3596|at|arch,food,art|2|0|Victorian industrial lanes of galleries and cafés|90
+Casa Loma|43.6780|-79.4094|lm|hist,arch|2|2|Gothic Revival castle with gardens and tunnels|90
+Toronto Islands|43.6200|-79.3780|pk|relax,fam,photo|1|1|Car-free island park a ferry ride from downtown|180
+Kensington Market|43.6545|-79.4005|sh|cult,food,shop|2|0|Bohemian streets of vintage shops and global food|90
+Art Gallery of Ontario|43.6536|-79.3925|mu|art|2|2|Frank Gehry-designed gallery of Canadian and global art|120
+High Park|43.6465|-79.4637|pk|nat,relax|3|0|Huge park with cherry blossoms and a zoo|120
+Rogers Centre|43.6414|-79.3894|at|sport|3|2|Home of the Blue Jays with a retractable roof|90
+Scarborough Bluffs|43.7060|-79.2330|nt|nat,photo|3|0|Dramatic lakeside cliffs|90
+Graffiti Alley|43.6480|-79.3960|at|art,photo|3|0|Laneway of vibrant street art|30
+Eaton Centre|43.6544|-79.3807|sh|shop|3|0|Downtown's giant shopping mall|90
+Evergreen Brick Works|43.6840|-79.3650|at|nat,food|3|0|Former quarry turned nature and market centre|90
+Toronto Zoo|43.8177|-79.1859|at|nat,fam|3|3|One of the world's largest zoos|240
+Hockey Hall of Fame|43.6472|-79.3773|mu|sport,fam|3|3|Stanley Cup and hockey history|90
+St. Lawrence Market|43.6487|-79.3715|rs|food|1|1|Historic market famed for peameal bacon sandwiches|75
+Pai Northern Thai Kitchen|43.6480|-79.3890|rs|food|2|2|Popular northern Thai restaurant|75
+Banh Mi Boys|43.6480|-79.3950|rs|food|3|1|Creative Vietnamese-style sandwiches|30
+Balzac's Coffee Distillery|43.6503|-79.3590|cf|food|3|2|Coffee in a former distillery warehouse|45
+
+=Mexico City|MX
+Zócalo|19.4326|-99.1332|at|hist,cult|1|0|One of the world's largest public squares|45
+Metropolitan Cathedral|19.4340|-99.1330|rl|arch,hist|1|0|Latin America's largest cathedral|45
+Templo Mayor|19.4350|-99.1314|lm|hist|1|2|Aztec temple ruins in the heart of the city|90
+Palacio de Bellas Artes|19.4352|-99.1412|lm|art,arch|1|2|Marble opera house with Rivera murals|75
+Chapultepec Castle|19.4204|-99.1819|lm|hist,photo|1|2|Hilltop castle in Chapultepec Park|120
+National Museum of Anthropology|19.4260|-99.1860|mu|hist,art|1|2|Aztec Sun Stone and pre-Columbian treasures|180
+Frida Kahlo Museum (Casa Azul)|19.3550|-99.1620|mu|art,hist|1|2|The blue house where Frida was born and lived|90
+Teotihuacan Pyramids|19.6925|-98.8438|lm|hist,adv|1|2|Pyramids of the Sun and Moon, a day trip|300
+Xochimilco Canals|19.2570|-99.1030|at|relax,cult|1|2|Colourful trajinera boats on ancient canals|150
+Coyoacán|19.3500|-99.1620|at|cult,food|2|0|Cobbled bohemian district of markets and plazas|120
+Plaza Garibaldi|19.4390|-99.1390|nl|music,night|2|0|Square of mariachi bands|60
+Monument to the Revolution|19.4360|-99.1540|lm|hist,photo|3|1|Art Deco dome with a rooftop viewpoint|45
+Torre Latinoamericana|19.4340|-99.1405|vp|photo|2|2|Historic skyscraper with a city view|45
+Roma Norte|19.4150|-99.1650|at|food,art|2|0|Hip neighbourhood of cafés, galleries and Art Nouveau mansions|120
+UNAM Central Campus|19.3320|-99.1870|at|art,arch|3|0|UNESCO university campus with giant murals|90
+Angel of Independence|19.4270|-99.1677|lm|hist,photo|3|0|Golden victory column on Paseo de la Reforma|20
+Contramar|19.4150|-99.1705|rs|food|1|3|Famed seafood restaurant known for its tuna tostadas|90
+El Cardenal|19.4330|-99.1380|rs|food,hist|2|2|Traditional Mexican breakfasts and escamoles|75
+Churrería El Moro|19.4285|-99.1410|cf|food,hist|2|1|Churros and hot chocolate since 1935|45
+Tacos Los Cocuyos|19.4290|-99.1370|rs|food|2|1|Beloved late-night taco stand|30
+
+=Cancún|MX
+Playa Delfines|21.0580|-86.7810|bc|relax,photo|1|0|Wide beach with a colourful 'Cancun' sign|150
+Isla Mujeres|21.2310|-86.7310|at|relax,photo|1|1|Laid-back island a ferry ride away|300
+El Rey Ruins|21.0710|-86.7780|lm|hist|3|1|Small Maya site in the hotel zone|45
+Isla Contoy|21.4900|-86.8000|nt|nat,adv|2|3|Protected island for snorkelling and birdwatching|480
+Puerto Morelos Botanical Garden|20.8500|-86.8760|pk|nat|3|2|Jungle garden and Maya medicinal plants|120
+Mercado 28|21.1630|-86.8250|sh|shop,food|3|0|Local market of crafts and cheap eats|75
+Playa Tortugas|21.1500|-86.8040|bc|relax,fam|3|0|Calm lagoon-side beach|120
+MUSA Underwater Museum|21.0100|-86.7600|at|art,adv|2|3|Sculpture garden for diving and snorkelling|180
+Punta Sur Isla Mujeres|21.2000|-86.7400|vp|nat,photo|3|1|Cliffs and sculptures at the island's southern tip|60
+Coco Bongo|21.1330|-86.7480|nl|night,music|2|3|Show-style nightclub|180
+Playa del Carmen Quinta Avenida|20.6300|-87.0720|sh|shop,food|2|0|Lively pedestrian street on the Riviera Maya|180
+Playa Mujeres|21.2090|-86.7870|bc|relax|3|0|Quiet, upscale beach north of the city|150
+Nichupté Lagoon Kayak|21.1000|-86.7900|at|adv,nat|3|2|Paddle through mangroves|120
+Crococun Zoo|20.8660|-86.8760|at|nat,fam|3|2|Interactive zoo with crocodiles and monkeys|120
+Cenote Siete Bocas|20.8750|-86.9300|nt|nat,adv|3|1|Jungle cenote for swimming|120
+Playa Gaviota Azul|21.1230|-86.7590|bc|relax,fam|3|0|Public beach in the hotel zone|120
+Parque de las Palapas|21.1640|-86.8260|rs|food,cult|2|1|Downtown park of street-food stalls|75
+La Habichuela|21.1630|-86.8230|rs|food|2|3|Romantic Mayan-themed garden restaurant|90
+Ki'bok Coffee|21.1631|-86.8280|cf|food|3|2|Local specialty coffee|45
+Mercado 28 Taquerías|21.1630|-86.8245|rs|food|3|1|Cheap tacos and seafood inside the market|45
+
+=Rio de Janeiro|BR
+Christ the Redeemer|-22.9519|-43.2105|lm|photo,hist|1|2|The iconic statue atop Corcovado|120
+Sugarloaf Mountain|-22.9486|-43.1546|vp|photo,adv|1|3|Cable-car ride to a panoramic summit|120
+Copacabana Beach|-22.9711|-43.1822|bc|relax|1|0|Four kilometres of famous beach|180
+Ipanema Beach|-22.9867|-43.2055|bc|relax,night|1|0|Beach of sunsets and bossa nova|180
+Selarón Steps|-22.9150|-43.1790|lm|art,photo|2|0|Mosaic staircase of tiles from around the world|30
+Maracanã Stadium|-22.9121|-43.2302|at|sport|2|2|The legendary football stadium|90
+Tijuca National Park|-22.9500|-43.2860|nt|nat,adv|2|0|Urban rainforest with trails and waterfalls|180
+Botanical Garden of Rio|-22.9680|-43.2240|pk|nat,relax|2|2|Royal palm avenue and tropical gardens|90
+Santa Teresa|-22.9210|-43.1860|at|art,cult|2|0|Hilltop bohemian neighbourhood with a vintage tram|120
+Lapa Arches|-22.9130|-43.1800|at|night,music,photo|2|0|Colonial aqueduct and samba nightlife|90
+Arpoador Rock|-22.9890|-43.1910|vp|photo|2|0|Rocky headland famous for sunset applause|60
+Museum of Tomorrow|-22.8940|-43.1790|mu|arch,nat|2|2|Science museum on the Porto Maravilha|90
+Parque Lage|-22.9610|-43.2120|pk|art,nat|3|0|Mansion and park at the foot of Corcovado|75
+Lagoa Rodrigo de Freitas|-22.9710|-43.2100|pk|relax,sport|3|0|Lagoon with a cycle path and swan boats|75
+Leblon Beach|-22.9860|-43.2240|bc|relax|3|0|Upscale beach at the end of Ipanema|150
+Barra da Tijuca Beach|-23.0000|-43.3660|bc|sport,relax|3|0|Long, wide beach popular with surfers|180
+Confeitaria Colombo|-22.9040|-43.1760|cf|food,hist,arch|2|2|Belle Époque tearoom from 1894|60
+Aprazível|-22.9210|-43.1930|rs|food,photo|3|3|Treetop restaurant with city views in Santa Teresa|90
+Bar do Mineiro|-22.9170|-43.1870|rs|food|2|2|Feijoada and bolinhos in Santa Teresa|75
+Casa da Feijoada|-22.9840|-43.2050|rs|food|3|2|Traditional feijoada in Ipanema|75
+
+=Buenos Aires|AR
+Plaza de Mayo and Casa Rosada|-34.6081|-58.3702|lm|hist|1|0|Historic plaza facing the pink presidential palace|60
+La Boca and Caminito|-34.6385|-58.3633|at|art,photo,cult|1|0|Brightly painted street of tango and football|90
+Recoleta Cemetery|-34.5875|-58.3930|at|hist,art|1|0|Ornate mausoleums including Eva Perón's|75
+Teatro Colón|-34.6010|-58.3830|en|music,arch|1|3|One of the world's great opera houses|75
+Bosques de Palermo|-34.5730|-58.4150|pk|relax,nat|2|0|Large parks, lakes and rose garden|120
+San Telmo Market|-34.6210|-58.3720|sh|shop,cult|1|0|Antique stalls and Sunday street fair|90
+El Ateneo Grand Splendid|-34.5958|-58.3943|sh|art,arch|1|0|Theatre transformed into a spectacular bookshop|45
+Obelisco|-34.6037|-58.3816|lm|photo|2|0|The city's iconic obelisk on Avenida 9 de Julio|20
+Puerto Madero and Puente de la Mujer|-34.6120|-58.3640|at|arch,relax|2|0|Redeveloped docklands and a dancer-shaped bridge|75
+Metropolitan Cathedral|-34.6080|-58.3730|rl|arch,hist|2|0|Cathedral holding San Martín's mausoleum|30
+MALBA|-34.5770|-58.4030|mu|art|2|2|Latin American art museum|90
+Floralis Genérica|-34.5830|-58.3930|lm|art,photo|3|0|Giant steel flower sculpture that opens and closes|20
+Tigre Delta|-34.4260|-58.5790|nt|nat,relax|2|2|River delta of islands and boat trips|240
+Palermo Soho|-34.5880|-58.4260|sh|shop,food|2|0|Boutiques, bars and street art|120
+El Zanjón de Granados|-34.6210|-58.3700|at|hist|3|2|Underground colonial tunnels|60
+Costanera Sur Ecological Reserve|-34.6180|-58.3480|nt|nat,relax|3|0|Wetland reserve on the river|120
+Don Julio|-34.5880|-58.4310|rs|food|1|3|Celebrated parrilla for Argentine beef|105
+Café Tortoni|-34.6089|-58.3790|cf|food,hist|1|2|Buenos Aires' oldest café, from 1858|60
+Café La Biela|-34.5880|-58.3900|cf|food,hist|3|2|Classic Recoleta café under a giant rubber tree|60
+Pizzería Güerrín|-34.6040|-58.3870|rs|food,hist|3|1|Classic fugazzeta pizza|45
+
+=Cusco|PE
+Plaza de Armas|-13.5167|-71.9786|at|hist,cult|1|0|Colonial heart of the former Inca capital|60
+Qorikancha|-13.5195|-71.9753|lm|hist,arch|1|2|Inca Temple of the Sun beneath a convent|60
+Sacsayhuamán|-13.5088|-71.9822|lm|hist,arch,photo|1|3|Massive Inca fortress of zig-zag stone walls|90
+Machu Picchu|-13.1631|-72.5450|lm|hist,adv,photo|1|3|The legendary Inca citadel in the clouds, a long day trip|480
+Pisac Archaeological Park|-13.4158|-71.8497|lm|hist,photo|2|2|Terraced ruins and an artisans' market|180
+Ollantaytambo|-13.2587|-72.2634|lm|hist|2|2|Living Inca town with a hillside fortress|150
+Moray|-13.3290|-72.1950|lm|hist,photo|3|2|Circular agricultural terraces|60
+Maras Salt Mines|-13.3000|-72.1560|lm|photo|2|2|Thousands of terraced salt pans|60
+San Blas|-13.5155|-71.9740|at|art,cult|2|0|Artisan quarter of steep lanes|90
+Cusco Cathedral|-13.5165|-71.9780|rl|arch,art|2|2|Colonial cathedral of Cusqueña paintings|60
+Qenqo|-13.5030|-71.9780|lm|hist|3|1|Inca ceremonial site|30
+Puka Pukara|-13.4950|-71.9610|lm|hist|3|1|Inca fort on the road to Tambomachay|30
+Tambomachay|-13.4890|-71.9600|lm|hist|3|1|Inca ritual baths|30
+Hatun Rumiyoc (Twelve-Angled Stone)|-13.5160|-71.9755|lm|hist,photo|2|0|Famous perfectly fitted Inca stone|15
+Museum of Pre-Columbian Art|-13.5150|-71.9770|mu|art,hist|3|2|Andean art in a colonial mansion|60
+Cristo Blanco|-13.5136|-71.9830|vp|photo|3|0|Hilltop statue with a city view|30
+San Pedro Market|-13.5210|-71.9840|rs|food,shop|1|0|Central market of fruit, juices and local dishes|75
+Chicha por Gastón Acurio|-13.5170|-71.9780|rs|food|2|3|Modern Andean cuisine|90
+Cicciolina|-13.5160|-71.9770|rs|food|3|3|Mediterranean-Andean restaurant|90
+Jack's Café|-13.5170|-71.9750|cf|food|3|2|Popular brunch café|60
+
+=Lima|PE
+Plaza Mayor|-12.0460|-77.0300|at|hist|1|0|Historic main square surrounded by the cathedral and palaces|45
+Larco Museum|-12.0700|-77.0710|mu|art,hist|1|2|Pre-Columbian art in a colonial mansion|90
+Miraflores Malecón|-12.1260|-77.0390|pk|relax,photo|1|0|Clifftop park with the Parque del Amor|90
+Huaca Pucllana|-12.1100|-77.0340|lm|hist|2|2|Adobe pyramid in the middle of Miraflores|60
+Barranco|-12.1490|-77.0220|at|art,night|1|0|Bohemian seaside district of murals and bars|120
+Convent of San Francisco|-12.0460|-77.0270|rl|hist,arch|2|2|Baroque convent with catacombs|60
+Larcomar|-12.1320|-77.0300|sh|shop,photo|3|0|Clifftop shopping centre|60
+Magic Water Circuit|-12.0700|-77.0350|at|fam,photo|2|1|Illuminated fountains in the Parque de la Reserva|60
+Lima Cathedral|-12.0463|-77.0297|rl|arch,hist|2|1|Cathedral with Pizarro's tomb|45
+Pachacamac|-12.2540|-76.9000|lm|hist|2|2|Pre-Inca ceremonial complex|150
+MALI Art Museum|-12.0690|-77.0360|mu|art|3|2|Art of Peru across the centuries|90
+Parque Kennedy|-12.1210|-77.0290|pk|cult|3|0|Miraflores' central park of cats and crafts|45
+Huaca Huallamarca|-12.0970|-77.0380|lm|hist|3|1|Small adobe temple in San Isidro|30
+Museo Pedro de Osma|-12.1450|-77.0230|mu|art|3|2|Colonial art in a Barranco mansion|75
+Parque de las Leyendas|-12.0700|-77.0830|at|nat,fam|3|1|Zoo and archaeological park|150
+Plaza San Martín|-12.0510|-77.0350|at|hist,arch|3|0|Historic plaza with a monument to San Martín|30
+Central Restaurante|-12.1420|-77.0230|rs|food|1|3|World-famous Peruvian tasting menus by altitude|150
+La Mar Cebichería|-12.1250|-77.0380|rs|food|2|3|Top-flight ceviche|75
+Café Haiti|-12.1210|-77.0300|cf|food,hist|3|2|Long-running Miraflores café|45
+Mercado de Surquillo|-12.1130|-77.0120|rs|food,shop|3|1|Local produce and cheap eats|60
+
+=Havana|CU
+Old Havana (Habana Vieja)|23.1370|-82.3500|at|hist,arch,cult|1|0|UNESCO colonial quarter of plazas and fortresses|180
+El Malecón|23.1450|-82.3600|pk|relax,photo|1|0|Eight-kilometre seawall promenade|75
+El Capitolio|23.1350|-82.3600|lm|arch,hist|1|1|Grand domed building modelled on Washington's Capitol|60
+Plaza de la Catedral|23.1420|-82.3510|at|arch,hist|1|0|Baroque cathedral square|45
+Plaza Vieja|23.1370|-82.3490|at|hist,food|2|0|Restored colonial square of cafés|45
+Castillo de la Real Fuerza|23.1430|-82.3490|lm|hist|3|1|One of the oldest stone forts in the Americas|45
+Morro Castle|23.1500|-82.3500|lm|hist,photo|2|2|Fortress guarding the harbour|75
+Plaza de la Revolución|23.1210|-82.3860|lm|hist|2|0|Revolution Square with the famous Che mural|30
+Hotel Nacional|23.1450|-82.3830|lm|hist,arch|3|0|Historic hotel with gardens and sea views|45
+Museo de la Revolución|23.1430|-82.3590|mu|hist|3|2|Housed in the former presidential palace|75
+Fusterlandia|23.0860|-82.4620|at|art,photo|3|0|Neighbourhood covered in mosaics by José Fuster|75
+Finca Vigía (Hemingway Museum)|23.0660|-82.3110|mu|hist|3|2|Hemingway's Cuban home|60
+Colón Cemetery|23.1260|-82.3920|at|hist,art|3|2|Sculpted monuments in a vast necropolis|75
+Callejón de Hamel|23.1370|-82.3680|at|art,music|2|0|Afro-Cuban art alley with Sunday rumba|60
+Paseo del Prado|23.1380|-82.3570|at|relax,arch|3|0|Tree-lined promenade|30
+Playas del Este|23.1900|-82.2000|bc|relax|2|0|Long white-sand beaches east of the city|240
+La Bodeguita del Medio|23.1390|-82.3510|rs|food,hist|2|2|Famous mojito spot once frequented by Hemingway|60
+El Floridita|23.1380|-82.3560|rs|food,hist|2|3|Home of the daiquiri|60
+Paladar La Guarida|23.1390|-82.3640|rs|food|2|3|Acclaimed paladar in a faded mansion|90
+Café El Escorial|23.1380|-82.3490|cf|food|3|2|Café on Plaza Vieja|45
+
+=Cartagena|CO
+Walled City of Cartagena|10.4220|-75.5510|at|hist,arch,photo|1|0|UNESCO old town of colourful colonial streets|180
+Castillo San Felipe de Barajas|10.4220|-75.5390|lm|hist|1|2|The largest Spanish fortress in the Americas|90
+Getsemaní|10.4200|-75.5470|at|art,night,cult|1|0|Street-art district of plazas and bars|120
+Plaza de los Coches|10.4230|-75.5500|at|hist|3|0|Colonial square at the clock tower gate|20
+Cartagena Cathedral|10.4230|-75.5510|rl|arch|3|0|Colonial cathedral with a striped tower|30
+Rosario Islands|10.1780|-75.7500|nt|nat,relax|1|3|Coral islands for snorkelling and beaches|480
+Playa Blanca|10.2290|-75.6030|bc|relax|2|1|White-sand beach on Barú Island|360
+Convento de la Popa|10.4170|-75.5350|lm|hist,photo|2|1|Hilltop convent with city views|75
+Las Bóvedas|10.4280|-75.5470|sh|shop,hist|3|0|Vaulted dungeons turned craft shops|45
+Plaza Santo Domingo|10.4247|-75.552|at|art,food|2|0|Plaza with Botero's Gertrudis sculpture|30
+Museo Naval del Caribe|10.4240|-75.5510|mu|hist|3|2|History of Caribbean naval defence|60
+Bocagrande Beach|10.4060|-75.5590|bc|relax|3|0|City beach beside high-rise hotels|120
+Totumo Mud Volcano|10.5220|-75.3010|at|adv,relax|2|2|Soak in a mud-filled crater|150
+Café del Mar|10.4240|-75.5550|br|night,photo|2|2|Sunset drinks on the city walls|90
+Torre del Reloj|10.4240|-75.5490|lm|hist,photo|3|0|Clock tower gateway to the old town|15
+Iglesia de San Pedro Claver|10.4225|-75.553|rl|hist,arch|3|1|Church and museum of a saintly Jesuit|45
+La Cevichería|10.4235|-75.5530|rs|food|2|3|Famous ceviche in the old town|75
+Café San Alberto|10.424|-75.5525|cf|food|3|2|Specialty Colombian coffee|45
+Plaza Trinidad Street Food|10.4200|-75.5460|rs|food,night|2|1|Evening street food in Getsemaní|75
+La Palettería|10.4240|-75.5500|cf|food|3|1|Fresh fruit popsicles|20
+
+=Santiago|CL
+Plaza de Armas|-33.4378|-70.6505|at|hist,cult|1|0|The city's historic main square|45
+Cerro San Cristóbal|-33.4200|-70.6340|vp|nat,photo|1|2|Hilltop park with a funicular and Virgin statue|120
+Cerro Santa Lucía|-33.4410|-70.6430|pk|hist,photo|2|0|Landscaped hill with a castle-like fort|60
+La Moneda Palace|-33.4429|-70.6538|lm|hist,arch|2|0|Presidential palace and cultural centre|45
+Museum of Memory and Human Rights|-33.4410|-70.6760|mu|hist|2|0|Moving museum of the dictatorship era|120
+Bellavista|-33.4300|-70.6340|at|night,art,food|2|0|Bohemian district of murals and bars|120
+Sky Costanera|-33.4170|-70.6060|vp|photo|2|2|Observation deck in Latin America's tallest tower|60
+Lastarria|-33.4380|-70.6410|at|cult,food|2|0|Cobbled neighbourhood of cafés and bookshops|90
+Pre-Columbian Art Museum|-33.4390|-70.6510|mu|art,hist|2|2|Fine collection of Andean artefacts|90
+Cajón del Maipo|-33.6410|-70.3510|nt|nat,adv|2|0|Andean valley for hiking and hot springs|240
+Pomaire|-33.6410|-71.1560|at|art,shop|3|0|Pottery village with grilled-meat restaurants|150
+Concha y Toro Winery|-33.6360|-70.5690|at|food,cult|2|2|Chile's most famous vineyard and cellars|150
+Parque Bicentenario|-33.4000|-70.6030|pk|relax,nat|3|0|Modern park with a lagoon and flamingos|75
+La Vega Central|-33.4260|-70.6510|sh|food|3|0|Bustling fresh produce market|60
+Barrio Italia|-33.4470|-70.6280|sh|shop,art|3|0|Antiques and design shops|90
+La Chascona|-33.4310|-70.6340|mu|art,hist|3|2|Pablo Neruda's Santiago house|60
+Mercado Central|-33.4340|-70.6510|rs|food,hist|1|2|Iron-framed seafood market and restaurants|75
+Fuente Alemana|-33.4370|-70.6410|rs|food|2|1|Famous for lomito sandwiches|30
+Emporio La Rosa|-33.4390|-70.6410|cf|food|3|2|Artisan ice cream and café|30
+La Piojera|-33.4310|-70.6500|br|food,hist|3|1|Traditional chicha and terremoto bar|60

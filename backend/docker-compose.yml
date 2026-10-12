@@ -1,0 +1,138 @@
+# Local development stack: API, MongoDB, Redis, and the Celery worker/beat pair.
+#
+# MongoDB runs as a single-node replica set. That is not for redundancy - it is
+# what enables multi-document transactions and change streams, neither of which
+# a standalone mongod supports. Starting this way avoids a disruptive migration
+# the first time either is needed.
+
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: itinerary-mongo
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      # Initiate the replica set on first boot; a no-op on every boot after.
+      test: >
+        mongosh --quiet --eval "
+          try { rs.status().ok }
+          catch (e) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongo:27017'}]}).ok }
+        "
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 20s
+
+  redis:
+    image: redis:7-alpine
+    container_name: itinerary-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # One-shot: applies pending data migrations, then exits. The API waits for it.
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: itinerary-migrate
+    environment:
+      ENVIRONMENT: local
+      MONGODB_URI: mongodb://mongo:27017/?replicaSet=rs0
+      MONGODB_DB_NAME: itinerary_planner
+    depends_on:
+      mongo:
+        condition: service_healthy
+    command: ["sh", "scripts/migrate.sh"]
+    restart: "no"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: itinerary-api
+    ports:
+      - "8000:8000"
+    environment:
+      ENVIRONMENT: local
+      MONGODB_URI: mongodb://mongo:27017/?replicaSet=rs0
+      MONGODB_DB_NAME: itinerary_planner
+      REDIS_ENABLED: "true"
+      REDIS_URI: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      LLM_PROVIDER: ${LLM_PROVIDER:-stub}
+      LLM_MODEL: ${LLM_MODEL:-}
+      GOOGLE_GEMINI_KEY: ${GOOGLE_GEMINI_KEY:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      SECRET_KEY: ${SECRET_KEY:-dev-only-insecure-secret-key-change-me-in-every-real-environment}
+      CORS_ORIGINS: http://localhost:3000
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    volumes:
+      - ./app:/app/app:ro
+      - ./scripts:/app/scripts:ro
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: itinerary-worker
+    environment:
+      ENVIRONMENT: local
+      MONGODB_URI: mongodb://mongo:27017/?replicaSet=rs0
+      MONGODB_DB_NAME: itinerary_planner
+      REDIS_ENABLED: "true"
+      REDIS_URI: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      LLM_PROVIDER: ${LLM_PROVIDER:-stub}
+      LLM_MODEL: ${LLM_MODEL:-}
+      GOOGLE_GEMINI_KEY: ${GOOGLE_GEMINI_KEY:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      SECRET_KEY: ${SECRET_KEY:-dev-only-insecure-secret-key-change-me-in-every-real-environment}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    # Solo pool: the OR-Tools solver is CPU-bound and releases no GIL time, so
+    # threads would not help. Scale with replicas instead of concurrency.
+    command: ["celery", "-A", "app.workers.celery_app.celery_app", "worker", "--loglevel=info", "--pool=solo"]
+
+  beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: itinerary-beat
+    environment:
+      ENVIRONMENT: local
+      MONGODB_URI: mongodb://mongo:27017/?replicaSet=rs0
+      REDIS_ENABLED: "true"
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      SECRET_KEY: ${SECRET_KEY:-dev-only-insecure-secret-key-change-me-in-every-real-environment}
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: ["celery", "-A", "app.workers.celery_app.celery_app", "beat", "--loglevel=info"]
+
+volumes:
+  mongo_data:
+  redis_data:

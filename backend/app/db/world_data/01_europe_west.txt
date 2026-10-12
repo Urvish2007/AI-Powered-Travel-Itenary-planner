@@ -1,0 +1,221 @@
+# Format: name|lat|lng|category|tags|tier|cost|blurb[|minutes]   (see app/db/world_seed.py)
+
+=London|GB
+Tower of London|51.5081|-0.0759|lm|hist,arch|1|3|Norman fortress guarding the Crown Jewels and 900 years of intrigue|150
+British Museum|51.5194|-0.1270|mu|hist,art,cult|1|0|Vast free collection from the Rosetta Stone to the Parthenon marbles|180
+Buckingham Palace|51.5014|-0.1419|lm|hist,arch|1|2|Royal residence, with the Changing of the Guard out front
+Westminster Abbey|51.4993|-0.1273|rl|hist,arch|1|2|Coronation church and resting place of monarchs and poets
+Big Ben and Houses of Parliament|51.5007|-0.1246|lm|arch,photo|1|0|Elizabeth Tower and the Gothic Revival seat of government|45
+Tower Bridge|51.5055|-0.0754|lm|arch,photo|1|1|Victorian bascule bridge with glass-floored high-level walkways|60
+St Paul's Cathedral|51.5138|-0.0984|rl|arch,hist|2|2|Wren's great dome, with a climb to the Whispering Gallery
+Tate Modern|51.5076|-0.0994|mu|art|2|0|Contemporary art in a converted Thames-side power station|150
+National Gallery|51.5089|-0.1283|mu|art|2|0|Old Masters on Trafalgar Square, from Van Gogh to Turner|150
+London Eye|51.5033|-0.1195|at|photo,fam|2|3|Giant riverside observation wheel with sweeping city views|45
+Hyde Park|51.5073|-0.1657|pk|nat,relax|2|0|Royal park with the Serpentine, Speakers' Corner and rowing boats|120
+Covent Garden|51.5117|-0.1240|sh|shop,cult|2|0|Piazza of street performers, boutiques and the old market hall
+Natural History Museum|51.4967|-0.1764|mu|nat,fam|2|0|Diplodocus skeleton in a cathedral-like Romanesque hall|150
+Kew Gardens|51.4787|-0.2956|pk|nat,relax|2|2|UNESCO botanic gardens with glasshouses and a treetop walkway|180
+Camden Market|51.5415|-0.1465|sh|shop,food,music|3|0|Canal-side stalls of vintage clothes, street food and crafts
+Royal Observatory Greenwich|51.4769|-0.0005|at|hist,photo|3|1|Stand on the Prime Meridian above the Old Royal Naval College|120
+Borough Market|51.5055|-0.0910|rs|food|1|2|Centuries-old food market of cheeses, pies and street-food stalls|75
+Dishoom Covent Garden|51.5127|-0.1266|rs|food|2|2|Bombay-style café known for bacon naan rolls and house black daal
+Afternoon Tea at The Ritz|51.5071|-0.1416|cf|food,cult|2|3|Gilded Palm Court tea service, a very British ritual|90
+The Churchill Arms|51.5069|-0.1928|br|food,cult|3|1|Flower-draped Kensington pub famous for Thai food and Victorian atmosphere
+
+=Barcelona|ES
+Sagrada Família|41.4036|2.1744|lm|arch,cult|1|3|Gaudí's soaring, still-unfinished basilica of light and stone|120
+Park Güell|41.4145|2.1527|pk|arch,art|1|2|Mosaic-covered hillside park with dragon fountain and city views|120
+Casa Batlló|41.3917|2.1649|lm|arch,art|1|3|Gaudí's skeletal, scale-roofed house on Passeig de Gràcia|90
+La Pedrera (Casa Milà)|41.3954|2.1618|lm|arch|2|3|Undulating stone facade and a rooftop of chimney warriors|90
+Barcelona Cathedral|41.3840|2.1762|rl|hist,arch|2|1|Gothic cathedral with a cloister of resident geese
+La Rambla|41.3809|2.1734|at|cult,shop|2|0|The famous tree-lined pedestrian boulevard from Plaça Catalunya to the sea|60
+Gothic Quarter|41.3833|2.1770|at|hist,cult|1|0|Medieval lanes and hidden plazas around the Roman core of the city|120
+Picasso Museum|41.3852|2.1806|mu|art|2|2|Early works by Picasso in five medieval palaces|120
+Palau de la Música Catalana|41.3875|2.1751|en|arch,music|2|2|Modernista concert hall ablaze in stained glass|60
+Montjuïc Castle|41.3635|2.1663|lm|hist,photo|2|1|Hilltop fortress with harbour views, reached by cable car|90
+Magic Fountain of Montjuïc|41.3712|2.1517|at|photo,fam|3|0|Evening light-and-music fountain show below the national palace|45
+Camp Nou|41.3809|2.1228|at|sport|2|3|Home of FC Barcelona, with a museum and stadium tour|120
+Barceloneta Beach|41.3785|2.1925|bc|relax|2|0|City beach with chiringuito bars and seafood restaurants|150
+Bunkers del Carmel|41.4187|2.1613|vp|photo|3|0|Civil-war lookout with a 360-degree panorama of the city|60
+National Art Museum of Catalonia|41.3688|2.1534|mu|art|3|2|Romanesque frescoes and Catalan art in the Palau Nacional|120
+Casa Vicens|41.4035|2.1508|lm|arch|3|2|Gaudí's first major house, a riot of tiles and colour|75
+Mercat de la Boqueria|41.3816|2.1719|rs|food|1|2|Legendary market of jamón, fruit and tapas counters|75
+Cal Pep|41.3843|2.1834|rs|food|2|3|Standing-room tapas counter near the Born, famed for seafood
+Els Quatre Gats|41.3861|2.1739|cf|food,art,hist|2|2|Modernist café where Picasso held his first show|60
+El Xampanyet|41.3853|2.1815|br|food|3|1|Cava-and-anchovy bar on Carrer de Montcada
+
+=Madrid|ES
+Prado Museum|40.4138|-3.6921|mu|art|1|2|Velázquez, Goya and Bosch in Spain's great picture gallery|180
+Royal Palace of Madrid|40.4180|-3.7143|lm|hist,arch|1|2|Europe's largest royal palace, with over 3,000 rooms|120
+Plaza Mayor|40.4155|-3.7074|at|hist,cult|1|0|Arcaded 17th-century square at the heart of old Madrid|45
+Retiro Park|40.4153|-3.6844|pk|relax,nat|1|0|Lakeside gardens with a Crystal Palace and rowing boats|120
+Reina Sofía Museum|40.4080|-3.6945|mu|art|1|2|Modern art home to Picasso's Guernica|150
+Puerta del Sol|40.4169|-3.7035|at|cult|2|0|Bustling square marking Spain's Kilometre Zero|30
+Almudena Cathedral|40.4155|-3.7148|rl|arch|2|1|Neo-Gothic cathedral facing the Royal Palace|45
+Templo de Debod|40.4240|-3.7177|lm|hist,photo|2|0|Egyptian temple rebuilt in a park, glorious at sunset|45
+Thyssen-Bornemisza Museum|40.4160|-3.6947|mu|art|2|2|A survey of European painting from the 13th century on|120
+Santiago Bernabéu Stadium|40.4531|-3.6883|at|sport|2|2|Real Madrid's home, with a museum and tour|120
+Gran Vía|40.4200|-3.7053|at|arch,shop|2|0|Madrid's Broadway of early-20th-century facades and theatres|60
+Cibeles Palace and Fountain|40.4193|-3.6932|lm|arch,photo|3|0|Neoclassical fountain before a wedding-cake palace|30
+Casa de Campo|40.4194|-3.7473|pk|nat,fam|3|0|Huge royal hunting park with a lake, zoo and funfair|150
+Malasaña|40.4257|-3.7044|at|night,cult|3|0|Indie boutiques, vintage shops and bars around Plaza Dos de Mayo|90
+El Rastro Flea Market|40.4088|-3.7071|sh|shop,cult|3|0|Sunday street market in La Latina|120
+Royal Botanical Garden|40.4111|-3.6903|pk|nat|3|1|Tranquil 18th-century botanic garden beside the Prado|75
+Mercado de San Miguel|40.4155|-3.7089|rs|food|1|2|Wrought-iron market hall of tapas and oysters by Plaza Mayor|75
+Restaurante Botín|40.4139|-3.7076|rs|food,hist|2|3|Guinness-certified oldest restaurant, famed for roast suckling pig|90
+Chocolatería San Ginés|40.4166|-3.7068|cf|food|2|1|Churros con chocolate since 1894|45
+Cava Baja Tapas Street|40.4121|-3.7085|rs|food|2|2|La Latina's strip of tapas bars, best done as a crawl|90
+
+=Seville|ES
+Real Alcázar of Seville|37.3833|-5.9905|lm|hist,arch|1|3|Moorish royal palace with lush gardens|150
+Seville Cathedral and Giralda|37.3859|-5.9932|rl|arch,hist|1|2|Vast Gothic cathedral with a climbable minaret tower|90
+Plaza de España|37.3772|-5.9869|lm|arch,photo|1|0|Semicircular Regionalist plaza with tiled provincial alcoves|60
+Barrio Santa Cruz|37.3861|-5.9899|at|hist,cult|1|0|Whitewashed lanes of the old Jewish quarter|90
+Metropol Parasol|37.3930|-5.9917|vp|arch,photo|2|1|Wooden 'mushrooms' with a rooftop walkway over the old town|45
+Torre del Oro|37.3822|-5.9963|lm|hist,photo|2|1|Riverside watchtower from the Almohad era|30
+Plaza de Toros de la Maestranza|37.3849|-5.9959|at|hist,cult|2|2|One of Spain's most beautiful bullrings, with a museum|60
+María Luisa Park|37.3697|-5.9861|pk|relax,nat|2|0|Shaded park of fountains, tiles and peacocks|90
+Archivo de Indias|37.3843|-5.9927|mu|hist|3|0|Renaissance building holding records of the Spanish empire|45
+Museum of Fine Arts of Seville|37.3915|-5.9981|mu|art|3|1|Murillo and Zurbarán in a former convent|90
+Casa de Pilatos|37.3894|-5.9887|lm|arch,hist|3|2|Andalusian palace of Mudéjar tiles and courtyards|60
+Triana|37.3835|-6.0035|at|cult,food|2|0|Flamenco and ceramics heartland across the river|90
+Flamenco Dance Museum|37.3877|-5.9913|mu|music,cult|3|2|Museum of flamenco with live shows|75
+Italica Roman Ruins|37.4419|-6.0467|lm|hist|3|1|Roman city and amphitheatre north of Seville|120
+Alameda de Hércules|37.4008|-5.9924|at|night,cult|3|0|Tree-lined promenade of bars and alternative nightlife|60
+Mercado de Triana|37.3838|-6.0022|rs|food|2|1|Riverside market with tapas stalls|60
+Bodega Santa Cruz Las Columnas|37.3865|-5.9913|rs|food|3|1|Busy standing tapas bar beside the Giralda
+El Rinconcillo|37.3930|-5.9893|rs|food,hist|2|2|Seville's oldest tapas bar, open since 1670
+Eslava|37.3965|-5.9881|rs|food|2|2|Cult tapas bar in San Lorenzo
+Tablao Los Gallos|37.3862|-5.9903|nl|music,cult|3|2|Intimate flamenco show in Plaza de Santa Cruz|90
+
+=Valencia|ES
+City of Arts and Sciences|39.4540|-0.3500|at|arch,fam|1|3|Calatrava's futuristic complex of museum, opera house and aquarium|180
+Valencia Cathedral and Miguelete Tower|39.4753|-0.3755|rl|arch,hist|1|2|Gothic cathedral said to hold a Holy Grail, with a tower climb|75
+La Lonja de la Seda|39.4743|-0.3782|lm|arch,hist|1|1|Gothic silk exchange with a twisted-column hall|45
+Central Market|39.4736|-0.3790|rs|food|1|1|Modernista iron-and-glass market, among Europe's largest|75
+Turia Gardens|39.4700|-0.3560|pk|relax,sport|1|0|Former riverbed turned into a nine-kilometre green ribbon|120
+Oceanogràfic|39.4530|-0.3480|at|nat,fam|2|3|Europe's largest aquarium|180
+Plaza de la Virgen|39.4749|-0.3757|at|cult|2|0|Old-town square with the Turia fountain and cathedral|30
+Torres de Serranos|39.4794|-0.3757|lm|hist|2|1|Gothic city gate with a climb to the top|45
+Malvarrosa Beach|39.4772|-0.3235|bc|relax|2|0|Wide city beach with a seafront promenade|150
+Albufera Natural Park|39.3300|-0.3500|nt|nat|2|1|Freshwater lagoon of rice fields with sunset boat rides|180
+Bioparc Valencia|39.4787|-0.4083|at|nat,fam|3|3|Zoo designed without visible bars|150
+Ruzafa|39.4600|-0.3730|at|food,night|3|0|Hip neighbourhood of cafés, bars and boutiques|90
+IVAM|39.4787|-0.3855|mu|art|3|1|Valencian Institute of Modern Art|90
+Museum of Fine Arts of Valencia|39.4801|-0.3697|mu|art|3|0|Spanish masters from Sorolla to Goya|90
+El Carmen|39.4790|-0.3800|at|cult,hist|3|0|Medieval barrio of street art, small bars and towers|90
+Mestalla Stadium|39.4746|-0.3583|at|sport|3|2|Home of Valencia CF|60
+Horchatería Santa Catalina|39.4737|-0.3764|cf|food|2|1|Historic café serving horchata and fartons|45
+La Pepica|39.4635|-0.3239|rs|food|2|3|Beachfront paella institution once favoured by Hemingway
+Casa Montaña|39.4674|-0.3287|rs|food|3|2|Historic Cabanyal bodega known for tapas and vermouth
+Mercado de Colón|39.4680|-0.3691|rs|food,arch|3|2|Modernista market hall turned gourmet food court
+
+=Amsterdam|NL
+Rijksmuseum|52.3600|4.8852|mu|art,hist|1|3|Rembrandt's Night Watch and Dutch Golden Age masterworks|180
+Van Gogh Museum|52.3584|4.8811|mu|art|1|3|The world's largest collection of Van Gogh's paintings|120
+Anne Frank House|52.3752|4.8840|mu|hist|1|3|The secret annex where Anne Frank hid, now a moving museum|90
+Dam Square and Royal Palace|52.3732|4.8914|lm|hist|2|1|Amsterdam's central square, with the 17th-century palace|60
+Vondelpark|52.3579|4.8686|pk|relax|1|0|The city's beloved green heart of ponds and lawns|90
+Herengracht Canal Ring|52.3667|4.8880|at|photo,arch|1|0|UNESCO belt of 17th-century canals and gabled houses|90
+Jordaan|52.3740|4.8797|at|cult,shop|2|0|Charming lanes of galleries, brown cafés and courtyards|90
+Begijnhof|52.3696|4.8899|lm|hist,relax|3|0|Hidden 14th-century courtyard of almshouses|30
+Rembrandt House Museum|52.3695|4.9014|mu|art,hist|3|2|The painter's home and studio|75
+Heineken Experience|52.3579|4.8918|at|food|2|2|Interactive tour of the old Heineken brewery|90
+Albert Cuyp Market|52.3555|4.8944|sh|food,shop|3|0|Amsterdam's largest street market, with stroopwafels and cheese|75
+Nine Streets|52.3688|4.8830|sh|shop|3|0|Small boutiques and vintage shops between the canals|90
+NEMO Science Museum|52.3742|4.9123|mu|fam|3|2|Hands-on science in a green ship-shaped building|120
+Stedelijk Museum|52.3580|4.8797|mu|art|3|2|Modern and contemporary art and design|120
+Artis Royal Zoo|52.3660|4.9166|at|nat,fam|3|2|One of Europe's oldest zoos, in a park setting|180
+Westerkerk|52.3742|4.8838|rl|arch,hist|3|1|Church with a tower climb and Rembrandt's burial|45
+Foodhallen|52.3667|4.8683|rs|food|2|2|Indoor street-food hall in a former tram depot|75
+Winkel 43|52.3789|4.8827|cf|food|2|1|Famous for its apple pie on Noordermarkt|45
+Café 't Smalle|52.3736|4.8823|br|food,hist|3|2|Candlelit canal-side brown café since 1780|75
+The Pancake Bakery|52.3743|4.8834|rs|food|3|2|Dutch pannenkoeken in a 17th-century canal warehouse|75
+
+=Brussels|BE
+Grand-Place|50.8467|4.3525|at|hist,arch|1|0|Ornate guildhalls around one of Europe's finest squares|45
+Atomium|50.8949|4.3415|lm|arch,photo|1|3|Giant iron-crystal structure from the 1958 World Fair|90
+Manneken Pis|50.8450|4.3500|lm|cult,fam|2|0|The city's cheeky little bronze mascot|20
+Royal Palace of Brussels|50.8420|4.3626|lm|hist|3|0|Official palace of the Belgian monarchy|60
+Cathedral of St Michael and St Gudula|50.8484|4.3603|rl|arch|2|0|Gothic cathedral with striking stained glass|45
+Magritte Museum|50.8417|4.3592|mu|art|2|2|The world's biggest collection of Magritte's surrealism|90
+Royal Museums of Fine Arts|50.8419|4.3578|mu|art|3|2|Flemish Primitives to Rubens and Bruegel|120
+Musical Instruments Museum|50.8421|4.3609|mu|music,art|3|2|Thousands of instruments in an Art Nouveau department store|90
+Cinquantenaire Park|50.8404|4.3931|pk|hist,relax|2|0|Triumphal arch and museums in a royal park|75
+Mont des Arts|50.8437|4.3565|vp|photo|3|0|Terraced gardens with a sweeping view of the old town|30
+Sablon|50.8402|4.3555|rl|arch,shop|3|0|Antiques district around Notre-Dame du Sablon|60
+Galeries Royales Saint-Hubert|50.8477|4.3547|sh|arch,shop|2|0|Glass-roofed 19th-century arcade of chocolatiers and cafés|45
+Horta Museum|50.8256|4.3547|mu|arch,art|3|2|Art Nouveau architect Victor Horta's own home|60
+Belgian Comic Strip Center|50.8546|4.3585|mu|art,fam|3|2|Tintin and friends in an Art Nouveau warehouse|75
+Bois de la Cambre|50.8106|4.3777|pk|nat|3|0|Forest park with a lake and tea house|90
+Basilica of Koekelberg|50.8637|4.3225|rl|arch,photo|3|1|One of the world's largest Art Deco churches|60
+Maison Dandoy|50.8477|4.3523|cf|food|2|1|Speculoos biscuits and waffles since 1829|45
+Maison Antoine|50.8374|4.3811|rs|food|2|1|Beloved frites stand on Place Jourdan|30
+Delirium Café|50.8485|4.3544|br|food|2|2|Bar with thousands of beers on the menu|75
+Chez Léon|50.8483|4.3542|rs|food,hist|3|2|Moules-frites since 1893|75
+
+=Bruges|BE
+Markt Square and Belfry|51.2085|3.2245|lm|hist,arch|1|2|Medieval market square with a climbable 83-metre belfry|75
+Burg Square|51.2087|3.2267|at|hist,arch|1|0|Town-hall square of Gothic and Renaissance facades|45
+Basilica of the Holy Blood|51.2089|3.2270|rl|hist|2|1|Twin chapels holding a relic of Christ's blood|45
+Rozenhoedkaai|51.2078|3.2262|vp|photo|1|0|The postcard canal view of Bruges|30
+Church of Our Lady|51.2026|3.2266|rl|art,arch|2|2|Brick spire and Michelangelo's Madonna and Child|45
+Groeninge Museum|51.2039|3.2263|mu|art|2|2|Flemish Primitives including Jan van Eyck|90
+Minnewater|51.1987|3.2222|pk|relax,photo|2|0|The 'Lake of Love' with swans and a lock house|45
+Beguinage (Begijnhof)|51.2000|3.2242|lm|hist,relax|2|0|Whitewashed almshouses around a peaceful lawn|45
+Canal Boat Tour|51.2054|3.2254|at|relax,photo|1|2|Half-hour cruise through the medieval canals|45
+Kruisvest Windmills|51.2153|3.2337|vp|photo|3|0|Four windmills along the old city rampart|45
+Choco-Story Chocolate Museum|51.2063|3.2276|mu|food,fam|3|2|The history of chocolate, with tastings|60
+Jan van Eyckplein|51.2115|3.2288|at|hist|3|0|Old harbour square with the Poortersloge|30
+Saint Salvator's Cathedral|51.2062|3.2226|rl|arch|3|0|Bruges' oldest parish church, with a treasury|45
+Gruuthuse Museum|51.2049|3.2245|mu|hist,art|3|2|Medieval lord's mansion of tapestries and lace|75
+Straffe Hendrik Brewery|51.2018|3.2261|at|food|2|2|Bruges' working city-centre brewery, with tours|75
+Jerusalem Church|51.2119|3.2320|rl|hist|3|1|Quirky Jerusalem-inspired chapel and lace museum|45
+Chocolatier Dumon|51.2078|3.2236|cf|food|2|1|Small-batch pralines on Eiermarkt|30
+'t Brugs Beertje|51.2074|3.2233|br|food|2|2|Cosy pub serving hundreds of Belgian beers|75
+Den Dyver|51.2044|3.2264|rs|food|3|3|Beer-inspired Flemish cuisine on the Dijver|90
+Frietmuseum|51.2078|3.2231|mu|food,fam|3|2|The world's only museum devoted to the chip|60
+
+=Lisbon|PT
+Belém Tower|38.6916|-9.2160|lm|hist,arch|1|2|Manueline fortress on the Tagus, symbol of the Age of Discovery|60
+Jerónimos Monastery|38.6979|-9.2068|rl|arch,hist|1|2|Sumptuous Manueline monastery, home to Vasco da Gama's tomb|90
+Alfama|38.7118|-9.1300|at|cult,hist|1|0|Lisbon's oldest quarter of steep lanes and fado houses|120
+São Jorge Castle|38.7139|-9.1334|lm|hist,photo|1|2|Moorish hilltop castle with city-wide views|90
+Praça do Comércio|38.7075|-9.1364|at|arch,photo|2|0|Grand riverside square framed by yellow arcades|30
+Rossio Square|38.7139|-9.1393|at|cult|3|0|Wave-patterned pavement and the Baixa's central meeting point|30
+Santa Justa Lift|38.7120|-9.1394|vp|photo|2|1|Neo-Gothic iron elevator with rooftop views|30
+Miradouro da Senhora do Monte|38.7196|-9.1327|vp|photo|2|0|Lisbon's highest viewpoint, best at sunset|30
+Lisbon Cathedral|38.7098|-9.1330|rl|hist,arch|3|0|The city's fortress-like Romanesque Sé|30
+Carmo Convent|38.7124|-9.1407|lm|hist|3|1|Gothic ruins open to the sky after the 1755 earthquake|45
+LX Factory|38.7031|-9.1786|sh|shop,art|2|0|Creative complex of shops, studios and cafés in an old mill|90
+Oceanário de Lisboa|38.7634|-9.0937|at|nat,fam|2|2|One of Europe's largest aquariums|150
+MAAT|38.6960|-9.1938|mu|art,arch|3|2|Museum of art, architecture and technology on the waterfront|90
+National Tile Museum|38.7247|-9.1140|mu|art,hist|3|1|Five centuries of azulejos in a former convent|75
+Gulbenkian Museum|38.7369|-9.1537|mu|art|3|2|Lalique jewellery and old masters in a modernist park|120
+Pena Palace, Sintra|38.7876|-9.3906|lm|arch,photo|1|3|Fairy-tale palace of clashing colours on a Sintra hilltop|180
+Time Out Market|38.7068|-9.1459|rs|food|1|2|Food hall of the city's best chefs|75
+Pastéis de Belém|38.6975|-9.2033|cf|food|1|1|Home of the original custard tarts since 1837|45
+A Ginjinha|38.7145|-9.1391|br|food,cult|3|0|Tiny bar serving cherry liqueur near Rossio|20
+Café A Brasileira|38.7104|-9.1424|cf|food,hist,art|2|1|Chiado café with a Pessoa statue outside|45
+
+=Porto|PT
+Livraria Lello|41.1466|-8.6148|lm|art,arch|1|1|Neo-Gothic bookshop with a sweeping crimson staircase|45
+Ribeira District|41.1408|-8.6120|at|hist,photo|1|0|Colourful riverfront quarter of narrow lanes|90
+Dom Luís I Bridge|41.1399|-8.6094|lm|arch,photo|1|0|Double-deck iron arch bridge over the Douro|45
+Porto Cathedral|41.1428|-8.6113|rl|hist,arch|2|1|Hilltop Sé with a cloister of blue azulejos|45
+São Bento Railway Station|41.1456|-8.6105|lm|art,arch|1|0|Concourse covered in 20,000 blue-and-white tiles|30
+Clérigos Tower|41.1458|-8.6146|vp|photo,arch|2|1|Baroque tower with a 225-step climb|45
+Palácio da Bolsa|41.1409|-8.6157|lm|arch,hist|2|2|Stock exchange palace with the ornate Arab Room|60
+Serralves Museum and Park|41.1590|-8.6597|mu|art,nat|2|2|Contemporary art and an Art Deco villa in landscaped gardens|150
+Casa da Música|41.1587|-8.6306|en|music,arch|3|1|Angular concert hall by Rem Koolhaas|60
+Crystal Palace Gardens|41.1483|-8.6265|pk|relax,nat|3|0|Peacocks and river views in a hilltop garden|75
+Foz do Douro|41.1508|-8.6742|at|relax,photo|3|0|Seafront promenade where the river meets the Atlantic|90
+Graham's Port Lodge|41.1391|-8.6136|at|food,cult|1|2|Port tasting in the cellars of Vila Nova de Gaia|90
+Jardim do Morro|41.1378|-8.6091|vp|photo|2|0|Sunset viewpoint beside the bridge in Gaia|30
+Church of São Francisco|41.1414|-8.6155|rl|hist,art|2|2|Gothic church glittering with gilded woodwork|45
+Douro River Cruise|41.1404|-8.6102|at|relax,photo|2|2|Six Bridges cruise under Porto's arches|60
+Matosinhos Beach|41.1782|-8.7000|bc|relax,food|3|0|Wide Atlantic beach with grilled-fish restaurants|120
+Mercado do Bolhão|41.1493|-8.6076|rs|food|2|0|Renovated neoclassical market of produce and snacks|60
+Majestic Café|41.1468|-8.6070|cf|food,hist|2|2|Belle Époque café on Rua de Santa Catarina|60
+Café Santiago|41.1466|-8.6081|rs|food|2|1|Home of the francesinha sandwich|60
+Casa Guedes|41.1459|-8.6023|rs|food|3|1|Pork sandwich institution at Praça dos Poveiros|30
