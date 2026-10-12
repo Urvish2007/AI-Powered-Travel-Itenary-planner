@@ -36,4 +36,4 @@ sentry-sdk>=2.18
 
 # ---- Utils ----
 python-slugify>=8.0
-tenacity>=9.0
+tenacity>=9.2.1
