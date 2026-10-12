@@ -122,7 +122,7 @@ jobs:
       # Opt-in (set repo variable RUN_STAGING_VERIFY=true). It logs in as the
       # seeded demo admin, plans a trip (real LLM calls) and deletes a place, so
       # only enable it against a seeded, non-public staging database.
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         if: ${{ vars.RUN_STAGING_VERIFY == 'true' }}
         with:
           python-version: "3.12"
