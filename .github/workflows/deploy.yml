@@ -68,7 +68,7 @@ jobs:
 
       - name: Build and push backend
         if: ${{ inputs.image_tag == '' }}
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: backend
           push: true
@@ -83,7 +83,7 @@ jobs:
       # Vercel, skip this and let Vercel build from the repo.
       - name: Build and push frontend
         if: ${{ inputs.image_tag == '' && vars.BUILD_FRONTEND_IMAGE == 'true' }}
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: frontend
           push: true
