@@ -1,0 +1,219 @@
+=Dubrovnik|HR
+Dubrovnik City Walls|42.6413|18.1108|lm|hist,photo|1|3|Two kilometres of medieval ramparts above the Adriatic|120
+Stradun|42.6410|18.1100|at|hist,cult|1|0|Limestone-paved main street of the old town|45
+Rector's Palace|42.6399|18.1107|mu|hist,arch|2|2|Gothic-Renaissance seat of the Ragusan Republic|60
+Onofrio's Great Fountain|42.6407|18.1067|lm|hist|3|0|16th-century fountain at the Pile Gate|15
+Mount Srđ Cable Car|42.6493|18.1128|vp|photo|1|2|Cable car to a panorama of the old town and islands|75
+Lovrijenac Fortress|42.6407|18.1040|lm|hist,photo|2|2|Cliff-top fortress known as Dubrovnik's Gibraltar|60
+Dubrovnik Cathedral|42.6395|18.1104|rl|arch|3|1|Baroque cathedral with a treasury of relics|30
+Lokrum Island|42.6250|18.1230|nt|nat,relax|2|2|Car-free island of botanical gardens and swimming|180
+Banje Beach|42.6412|18.1170|bc|relax|2|0|City beach with old-town views|120
+Sponza Palace|42.6412|18.1105|lm|hist,arch|3|1|Gothic-Renaissance palace and state archives|30
+Franciscan Monastery and Pharmacy|42.6416|18.1071|mu|hist|3|2|One of Europe's oldest working pharmacies|45
+Cavtat|42.5808|18.2178|at|relax,photo|3|0|Seaside town south of Dubrovnik|180
+Koločep Island|42.6698|18.0536|nt|relax,nat|3|1|Quiet Elaphiti island reached by ferry|180
+Ston Walls|42.8403|17.6947|lm|hist,adv|3|1|Europe's longest fortification wall, with oyster country below|150
+Trsteno Arboretum|42.7119|17.9990|pk|nat|3|1|Renaissance garden by the sea|75
+Old Port|42.6396|18.1123|at|photo,cult|3|0|Harbour at the eastern end of the old town|30
+Buža Bar|42.6401|18.1116|br|food,relax|2|1|Cliff-edge bar cut into the city walls|75
+Gradska Kavana Arsenal|42.6396|18.1113|cf|food|3|2|Café in a former arsenal on the old port|60
+Nautika|42.6412|18.1050|rs|food|3|3|Fine dining with Adriatic sunset views|105
+Proto Fish Restaurant|42.6413|18.1081|rs|food|2|3|Longstanding seafood restaurant in the old town|90
+
+=Salzburg|AT
+Hohensalzburg Fortress|47.7947|13.0478|lm|hist,photo|1|3|Vast hilltop fortress overlooking the old town|120
+Mozart's Birthplace|47.8004|13.0433|mu|music,hist|1|2|Yellow house where Mozart was born|60
+Mirabell Palace and Gardens|47.8054|13.0427|pk|arch,relax|1|0|Baroque gardens made famous by The Sound of Music|60
+Salzburg Cathedral|47.7981|13.0469|rl|arch,hist|2|0|Baroque cathedral where Mozart was baptised|45
+Getreidegasse|47.8006|13.0428|sh|shop,cult|2|0|Shopping lane with wrought-iron guild signs|45
+Residenz Salzburg|47.7984|13.0470|lm|hist|3|2|Prince-archbishops' palace|60
+St. Peter's Abbey and Catacombs|47.7975|13.0447|rl|hist|3|1|Oldest monastery in the German-speaking world|45
+Mönchsberg Viewpoint|47.7986|13.0384|vp|photo,nat|2|1|Cliff-top lookout reached by lift|60
+Hellbrunn Palace|47.7622|13.0625|lm|fam,hist|2|2|Palace known for trick fountains|120
+Untersberg Cable Car|47.7315|13.0034|vp|nat,adv|2|3|Cable car to Alpine views|150
+Festival Hall|47.7989|13.0411|en|music,arch|3|2|Home of the Salzburg Festival|45
+Nonnberg Abbey|47.7960|13.0503|rl|hist,cult|3|0|Convent featured in The Sound of Music|30
+Hallein Salt Mine|47.6836|13.1025|at|hist,adv|2|3|Underground salt mine with slides and boat rides|120
+Schloss Leopoldskron|47.7898|13.0330|lm|arch,photo|3|0|Lakeside rococo palace seen in films|30
+Hangar-7|47.7935|13.0043|mu|art,arch|3|0|Aircraft and art in a glass dome|60
+Mozart's Residence|47.8043|13.0450|mu|music,hist|3|2|The family's later home|60
+Café Tomaselli|47.7989|13.0455|cf|food,hist|2|2|Vienna-style café open since 1705|60
+Café Fürst|47.8009|13.0446|cf|food|2|1|Birthplace of the Mozartkugel|30
+St. Peter Stiftskulinarium|47.7977|13.0450|rs|food,hist|2|3|Claimed to be Europe's oldest restaurant, dating to 803|90
+Augustiner Bräustübl Müllner Bräu|47.8062|13.0316|br|food|2|1|Monastery beer hall with a big chestnut garden|90
+
+=Nice|FR
+Promenade des Anglais|43.6950|7.2620|at|relax,photo|1|0|Palm-lined seafront boulevard on the Baie des Anges|60
+Vieux Nice|43.6957|7.2755|at|hist,food|1|0|Pastel lanes and squares of the old town|90
+Castle Hill|43.6955|7.2815|vp|photo,nat|1|0|Park and viewpoint above the harbour|75
+Cours Saleya Market|43.6952|7.2745|rs|food|1|0|Flower and produce market with socca stalls|75
+Place Masséna|43.6976|7.2707|at|arch|2|0|Chequerboard square lined with Italianate buildings|30
+Russian Orthodox Cathedral|43.7040|7.2500|rl|arch|3|1|Onion-domed cathedral|30
+Matisse Museum|43.7196|7.2755|mu|art|2|2|Matisse works in a Genoese villa|75
+Chagall Museum|43.7085|7.2687|mu|art|2|2|The Biblical Message paintings by Chagall|75
+Villa Ephrussi de Rothschild|43.6906|7.3314|lm|art,nat|2|3|Pink Riviera villa with themed gardens|120
+Monte Carlo Casino|43.7396|7.4276|lm|arch,hist|2|1|Belle Époque casino in Monaco|90
+Èze Village|43.7278|7.3617|at|photo,hist|2|0|Medieval village perched over the sea|120
+Saint-Paul-de-Vence|43.6960|7.1220|at|art,photo|2|0|Walled hilltop village of galleries|150
+Port Lympia|43.6947|7.2843|at|photo|3|0|Colourful working harbour|45
+Basilique Notre-Dame de Nice|43.7000|7.2588|rl|arch|3|0|Neo-Gothic basilica|30
+MAMAC|43.7027|7.2764|mu|art|3|2|Modern and contemporary art with a rooftop terrace|75
+Promenade du Paillon|43.6980|7.2730|pk|relax,fam|3|0|Green corridor with fountains|45
+Plage Beau Rivage|43.6935|7.2700|bc|relax|3|1|Popular pebble beach|120
+Chez Pipo|43.7007|7.2844|rs|food|2|1|Legendary socca since 1923|45
+Fenocchio|43.6960|7.2750|cf|food|2|1|Famous ice-cream parlour with 90-plus flavours|30
+Chez Theresa Socca|43.6952|7.2743|rs|food|3|1|Chickpea pancake stand on Cours Saleya|30
+
+=Lyon|FR
+Vieux Lyon|45.7621|4.8270|at|hist,arch|1|0|Renaissance old town of secret passages|120
+Basilica of Notre-Dame de Fourvière|45.7623|4.8228|rl|arch,hist|1|0|Hilltop basilica above the city|60
+Roman Theatres of Fourvière|45.7597|4.8199|lm|hist|2|1|Ancient Roman theatre still used for concerts|60
+Traboules of Croix-Rousse|45.7708|4.8330|at|hist|2|0|Hidden passageways of the silk-weavers' quarter|75
+Place Bellecour|45.7578|4.8320|at|hist|2|0|One of Europe's largest public squares|30
+Parc de la Tête d'Or|45.7772|4.8523|pk|relax,fam|2|0|Huge park with a lake, zoo and botanical garden|120
+Musée des Confluences|45.7326|4.8181|mu|nat,arch|3|2|Science and society museum at the river confluence|120
+Museum of Fine Arts|45.7670|4.8340|mu|art|2|2|One of France's largest fine arts museums|120
+Saint-Jean Cathedral|45.7605|4.8272|rl|arch,hist|3|0|Gothic cathedral with an astronomical clock|30
+Place des Terreaux|45.7674|4.8340|at|arch|3|0|Square with the Bartholdi fountain|20
+Lumière Museum|45.7454|4.8686|mu|hist,art|3|2|Birthplace of cinema in the Lumière villa|75
+Rhône Riverbanks|45.7530|4.8420|pk|relax|3|0|Landscaped promenades along the river|60
+Mur des Canuts|45.7783|4.8290|at|art|3|0|Giant trompe-l'oeil mural|20
+Amphitheatre of the Three Gauls|45.7729|4.8320|lm|hist|3|0|Roman amphitheatre on Croix-Rousse hill|30
+Museum of Miniatures and Cinema|45.7620|4.8267|mu|art,fam|3|2|Film props and miniature scenes|75
+Croix-Rousse Market|45.7787|4.8325|sh|food|2|0|Morning market on the hill|60
+Les Halles de Lyon Paul Bocuse|45.7628|4.8500|rs|food|1|2|Covered market showcasing Lyon's gastronomy|90
+Brasserie Georges|45.7487|4.8262|rs|food,hist|2|2|Grand brasserie serving Lyonnais classics since 1836|90
+Café Comptoir Abel|45.7526|4.8272|rs|food,hist|2|2|Traditional bouchon in an old house|90
+Bernachon Chocolatier|45.7674|4.8508|cf|food|3|2|Bean-to-bar chocolate and pastries|30
+
+=Tbilisi|GE
+Narikala Fortress|41.6875|44.8082|lm|hist,photo|1|0|Ancient fortress above the old town, reached by cable car|60
+Abanotubani Sulfur Baths|41.6889|44.8110|at|relax,hist|1|2|Domed bathhouses over natural hot springs|90
+Holy Trinity Cathedral (Sameba)|41.7092|44.8175|rl|arch|1|0|Georgia's largest cathedral|45
+Bridge of Peace|41.6924|44.8087|lm|arch,photo|2|0|Glass-and-steel pedestrian bridge over the Kura|20
+Mother of Georgia|41.6875|44.8052|lm|hist,photo|2|0|Aluminium statue watching over the city|30
+Rustaveli Avenue|41.7016|44.7990|at|shop,cult|2|0|Grand boulevard of theatres and museums|60
+Old Tbilisi|41.6905|44.8085|at|hist,cult|1|0|Wooden balconies and winding lanes|120
+Dry Bridge Market|41.6942|44.8036|sh|shop,cult|2|0|Flea market of Soviet memorabilia and antiques|60
+Georgian National Museum|41.6958|44.8009|mu|hist|3|2|Treasury of Georgian gold and history|90
+Tbilisi Botanical Garden|41.6840|44.8060|pk|nat|3|0|Gardens in a valley behind Narikala|75
+Freedom Square|41.6935|44.8007|at|hist|3|0|Central square with the golden St George|20
+Rike Park|41.6900|44.8145|pk|relax,photo|3|0|Riverside park near the Bridge of Peace|45
+Metekhi Church|41.6895|44.8122|rl|hist,photo|3|0|Cliff-top church above the Kura|30
+Mtatsminda Park|41.6957|44.7883|at|fam,photo|3|1|Hilltop amusement park with city views|120
+Jvari Monastery|41.8379|44.7330|rl|hist,photo|1|0|6th-century monastery above the Mtskheta confluence|60
+Svetitskhoveli Cathedral|41.8442|44.7226|rl|arch,hist|1|0|11th-century cathedral in ancient Mtskheta|60
+Café Stamba|41.7094|44.7899|cf|food,arch|3|2|Café in a converted Soviet printing house|60
+Barbarestan|41.6957|44.7994|rs|food,hist|2|3|Recipes from a 19th-century Georgian cookbook|90
+Dezerter Bazaar|41.7212|44.7958|rs|food|2|0|Sprawling market of cheese, spices and churchkhela|75
+Shardeni Street|41.6923|44.8102|rs|food,night|3|2|Lively lane of bars and Georgian restaurants|90
+
+=Jerusalem|IL
+Western Wall|31.7767|35.2345|rl|hist|1|0|Sacred remnant of the Second Temple's retaining wall|45
+Church of the Holy Sepulchre|31.7785|35.2296|rl|hist,arch|1|0|Christianity's holiest church|60
+Dome of the Rock|31.7780|35.2354|lm|arch,photo|1|0|Golden-domed shrine on the Temple Mount (access restricted)|45
+Old City Ramparts Walk|31.7767|35.2300|at|hist,photo|3|1|Walk along the Ottoman city walls|75
+Via Dolorosa|31.7793|35.2328|at|hist|2|0|Traditional route of the Stations of the Cross|45
+Mount of Olives|31.7788|35.2450|vp|photo,hist|2|0|Classic panorama of the Old City|60
+Tower of David Museum|31.7767|35.2276|mu|hist|2|2|Citadel museum of Jerusalem's history|90
+Yad Vashem|31.7746|35.1750|mu|hist|1|0|World Holocaust Remembrance Center|150
+Israel Museum|31.7726|35.2043|mu|art,hist|2|2|Dead Sea Scrolls and world art|150
+Mahane Yehuda Market|31.7857|35.2122|rs|food|1|1|Lively market of spices, halva and bars|90
+Garden of Gethsemane|31.7795|35.2397|rl|hist|3|0|Ancient olive garden at the foot of the Mount of Olives|30
+City of David|31.7735|35.2355|at|hist,adv|2|2|Archaeological site with Hezekiah's water tunnel|120
+Armenian Quarter|31.7737|35.2300|at|cult,hist|3|0|Quiet quarter around St James Cathedral|45
+Damascus Gate|31.7823|35.2299|lm|hist|3|0|Grandest entrance to the Old City|20
+Ein Karem|31.7649|35.1596|at|hist,relax|3|0|Leafy village of churches and cafés|90
+Cenacle (Room of the Last Supper)|31.7716|35.2288|rl|hist|3|0|Traditional site of the Last Supper on Mount Zion|30
+Abu Shukri|31.7795|35.2316|rs|food|2|1|Celebrated hummus restaurant in the Muslim Quarter|45
+Machneyuda|31.7857|35.2117|rs|food|2|3|Buzzing chef's restaurant beside the market|90
+Zalatimo Sweets|31.7783|35.2296|cf|food,hist|3|1|Old City sweet shop famed for mutabbaq|30
+Mamilla Mall|31.7787|35.2213|sh|shop|3|0|Open-air shopping street beside the Old City|60
+
+=Dubai|AE
+Burj Khalifa|25.1972|55.2744|lm|arch,photo|1|3|The world's tallest tower, with observation decks|90
+Dubai Mall|25.1985|55.2796|sh|shop,fam|1|0|Enormous mall with an aquarium and ice rink|180
+Dubai Fountain|25.1950|55.2755|at|photo|1|0|Choreographed fountain show on Burj Lake|30
+Atlantis The Palm|25.1304|55.1171|at|fam,relax|2|3|Palm Jumeirah resort with aquarium and waterpark|180
+Burj Al Arab|25.1412|55.1853|lm|arch,photo|2|0|Sail-shaped luxury hotel icon|30
+Kite Beach|25.1417|55.1930|bc|relax,sport|2|0|Beach with a view of Burj Al Arab|120
+Dubai Frame|25.2349|55.3003|vp|arch,photo|2|2|Giant picture-frame skyscraper with a sky bridge|60
+Al Fahidi Historical District|25.2637|55.2972|at|hist,cult|1|0|Wind-tower old town of galleries and courtyards|90
+Dubai Creek Abra Ride|25.2650|55.2970|at|hist,photo|1|1|Wooden boat ride across the historic creek|30
+Gold Souk|25.2870|55.2986|sh|shop,cult|2|0|Deira market of glittering gold jewellery|60
+Spice Souk|25.2690|55.2980|sh|shop,food|2|0|Aromatic lanes of saffron, incense and dried fruit|45
+Ski Dubai|25.1181|55.2004|en|fam,adv|3|3|Indoor ski slope in Mall of the Emirates|120
+Dubai Marina Walk|25.0800|55.1400|at|relax,photo|2|0|Promenade among glass towers and yachts|90
+JBR Beach|25.0780|55.1330|bc|relax|3|0|Beachfront strip of cafés|120
+Museum of the Future|25.2196|55.2820|mu|arch,cult|2|3|Calligraphy-wrapped torus of future-facing exhibits|120
+Jumeirah Mosque|25.2340|55.2657|rl|arch,cult|3|1|Mosque open to visitors for guided tours|45
+Bu Qtair|25.1417|55.1878|rs|food|2|1|No-frills seaside fish shack with cult status|60
+Arabian Tea House|25.2640|55.2985|cf|food,cult|3|2|Courtyard café in the Al Fahidi district|60
+Ravi Restaurant|25.2300|55.2760|rs|food|3|1|Satwa institution for Pakistani curries|60
+Pierchic|25.1330|55.1854|rs|food|3|3|Seafood restaurant at the end of a pier|105
+
+=Abu Dhabi|AE
+Sheikh Zayed Grand Mosque|24.4128|54.4750|rl|arch,photo|1|0|Marble mosque with 82 domes and a vast chandelier|90
+Louvre Abu Dhabi|24.5336|54.3983|mu|art,arch|1|2|Jean Nouvel's dome of light over world art|150
+Qasr Al Watan|24.4626|54.3040|lm|arch,hist|2|2|Presidential palace open to visitors|120
+Emirates Palace|24.4617|54.3170|lm|arch|3|0|Opulent palace hotel on the waterfront|45
+Corniche|24.4682|54.3450|pk|relax|2|0|Beach-lined promenade|90
+Ferrari World|24.4838|54.6072|en|fam,adv|2|3|Theme park with the world's fastest roller coaster|240
+Yas Waterworld|24.4880|54.6080|en|fam|3|3|Waterpark on Yas Island|240
+Qasr Al Hosn|24.4818|54.3542|lm|hist|2|1|Oldest stone building in the city|75
+Etihad Towers Observation Deck|24.4560|54.3215|vp|photo|3|3|Deck at 300 metres above the city|60
+Mangrove National Park|24.4600|54.4200|nt|nat,adv|2|2|Kayak through mangrove channels|120
+Saadiyat Beach|24.5470|54.4280|bc|relax|2|2|White-sand beach on the cultural island|180
+Heritage Village|24.4727|54.3120|at|hist,cult|3|0|Recreation of a traditional Emirati village|60
+Warner Bros. World|24.4870|54.6000|en|fam|3|3|Indoor theme park on Yas Island|240
+Marina Mall|24.4760|54.3220|sh|shop|3|0|Waterfront mall|90
+Abrahamic Family House|24.5306|54.4324|rl|arch,cult|2|0|Interfaith complex with a mosque, church and synagogue|60
+Jubail Mangrove Park|24.5330|54.4050|pk|nat|3|1|Boardwalks through mangrove forest|60
+Yas Marina Circuit|24.4672|54.6031|at|sport|3|3|Formula 1 circuit with tours|120
+Mina Zayed Fish Market|24.5133|54.3711|rs|food|3|1|Working fish market and grill|60
+Le Café at Emirates Palace|24.4611|54.3163|cf|food|3|3|Café known for gold-flecked cappuccino|45
+Mezlai|24.4614|54.3171|rs|food,cult|2|3|Emirati fine dining inside Emirates Palace|90
+
+=Doha|QA
+Museum of Islamic Art|25.2954|51.5390|mu|art,arch|1|0|I. M. Pei's museum of Islamic art on the bay|120
+Souq Waqif|25.2867|51.5330|sh|shop,cult|1|0|Restored bazaar of spices, falcons and coffee|120
+The Pearl-Qatar|25.3705|51.5510|at|relax,shop|2|0|Marina island of Mediterranean-style promenades|90
+Katara Cultural Village|25.3590|51.5250|at|art,cult|2|0|Amphitheatre, galleries and beach|120
+National Museum of Qatar|25.2955|51.5490|mu|hist,arch|1|2|Desert-rose building telling Qatar's story|120
+Doha Corniche|25.2950|51.5220|pk|relax,photo|2|0|Seaside promenade with dhow views|75
+Msheireb Museums|25.2850|51.5240|mu|hist|3|2|Restored heritage houses|75
+Aspire Park|25.2640|51.4470|pk|relax,fam|3|0|Large green park beside the tower|75
+Khalifa International Stadium|25.2618|51.4483|at|sport|3|1|World Cup stadium|60
+Qatar National Library|25.3110|51.4340|lm|arch,cult|2|0|Striking library in Education City|60
+Falcon Souq|25.2860|51.5350|sh|cult|3|0|Falcon shops and a falcon hospital|45
+3-2-1 Qatar Olympic and Sports Museum|25.2610|51.4480|mu|sport|3|2|Sport heritage museum|90
+Fire Station Artist Residency|25.2878|51.5325|mu|art|3|0|Art centre in a converted fire station|60
+Al Wakrah Souq|25.1650|51.6030|sh|cult,food|3|0|Pastel coastal souq|75
+Dhow Cruise|25.2950|51.5300|at|relax,photo|2|2|Traditional dhow boat trip on the bay|60
+Katara Beach|25.3600|51.5300|bc|relax|3|1|Beach in the cultural village|120
+Souq Waqif Dining|25.2865|51.5335|rs|food|1|2|Open-air restaurants in the alleys of the souq|75
+Parisa Souq Waqif|25.2866|51.5343|rs|food|2|3|Persian restaurant with a theatrical interior|90
+Cafés of Katara|25.3585|51.5255|cf|food|3|2|Waterfront cafés|60
+Msheireb Downtown Dining|25.2860|51.5245|rs|food|3|3|Restaurants of the redeveloped downtown|75
+
+=Petra|JO|@30.3285,35.4444,Asia/Amman
+Treasury (Al-Khazneh)|30.3285|35.4513|lm|hist,arch,photo|1|3|The rose-red rock-cut facade at the end of the Siq|60
+The Siq|30.3225|35.4489|at|hist,photo|1|0|Winding kilometre-long canyon entrance|60
+Monastery (Ad Deir)|30.3383|35.4193|lm|hist,adv|1|0|Colossal rock-cut monument up 800 steps|150
+Royal Tombs|30.3340|35.4485|lm|hist|2|0|Grand tombs in the Wadi Musa cliff face|60
+Great Temple|30.3283|35.4437|lm|hist|3|0|Nabataean temple complex|45
+Colonnaded Street|30.3288|35.4450|at|hist|3|0|The Roman-era main street|30
+High Place of Sacrifice|30.3272|35.4470|vp|hist,adv|2|0|Hike to an ancient altar with sweeping views|120
+Petra by Night|30.328|35.451|at|photo,cult|2|3|Candlelit walk through the Siq to the Treasury|120
+Little Petra|30.4200|35.4600|lm|hist|2|0|Smaller Nabataean site to the north|90
+Petra Museum|30.3290|35.4430|mu|hist|3|0|Artefacts from Nabataean Petra|45
+Beidha|30.3850|35.4425|lm|hist|3|0|Neolithic village site|60
+Qasr al-Bint|30.3280|35.4420|lm|hist|3|0|Freestanding Nabataean temple|30
+Nabataean Theatre|30.3289|35.4522|lm|hist|3|0|Ancient rock-cut theatre|30
+Street of Facades|30.3290|35.4490|lm|hist|3|0|Row of Nabataean tombs|30
+Petra Church|30.3290|35.4441|rl|hist,art|3|0|Byzantine church with mosaic floors|30
+Wadi Farasa Trail|30.3240|35.4460|at|adv,nat|3|0|Quieter trail among tombs and gardens|90
+Best View Trail to Ad Deir|30.3400|35.4190|vp|adv,photo|3|0|Panoramic viewpoint beyond the Monastery|45
+Cave Bar|30.3223|35.4487|br|food,hist|3|2|Bar in a 2,000-year-old Nabataean tomb|60
+Petra Kitchen|30.3219|35.4787|rs|food,cult|3|2|Cooking class and dinner in Wadi Musa|150
+Wadi Musa Main Street Eateries|30.3225|35.4775|rs|food|2|1|Falafel, mansaf and mint tea in the town|60

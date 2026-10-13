@@ -1,0 +1,161 @@
+name: Deploy
+
+# Flow on every push to main:
+#   build images -> staging: migrate, deploy, verify -> production: (approval) migrate, deploy, verify
+#
+# This workflow does NOT run the test suites itself. Protect `main` with the
+# required checks from backend.yml / frontend.yml so only green code lands here.
+#
+# Host-agnostic on purpose: images go to GHCR, and each environment is told to
+# roll out through a "deploy hook" URL (Render, Railway, Coolify, Fly machines
+# behind a webhook, or your own endpoint). See the README for the secrets/vars.
+#
+# Production approval: Settings -> Environments -> production -> Required reviewers.
+
+on:
+  push:
+    branches: [main]
+    paths: ["backend/**", "frontend/**", ".github/workflows/deploy.yml"]
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Redeploy an existing image tag (e.g. sha-1a2b3c4) instead of building. Use this to roll back."
+        required: false
+        type: string
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build:
+    name: Build and push images
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve image tag
+        id: tag
+        env:
+          INPUT_TAG: ${{ inputs.image_tag }}
+        run: |
+          # Passed through env, never interpolated into the script: a
+          # workflow_dispatch input is untrusted text.
+          if [ -n "$INPUT_TAG" ]; then
+            case "$INPUT_TAG" in
+              *[!A-Za-z0-9._-]*) echo "::error::Invalid image tag"; exit 1 ;;
+            esac
+            echo "tag=$INPUT_TAG" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set image names (registry paths must be lowercase)
+        run: |
+          repo="$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')"
+          echo "BACKEND_IMAGE=${REGISTRY}/${repo}/backend" >> "$GITHUB_ENV"
+          echo "FRONTEND_IMAGE=${REGISTRY}/${repo}/frontend" >> "$GITHUB_ENV"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push backend
+        if: ${{ inputs.image_tag == '' }}
+        uses: docker/build-push-action@v6
+        with:
+          context: backend
+          push: true
+          tags: |
+            ${{ env.BACKEND_IMAGE }}:${{ steps.tag.outputs.tag }}
+            ${{ env.BACKEND_IMAGE }}:latest
+          cache-from: type=gha,scope=backend
+          cache-to: type=gha,mode=max,scope=backend
+
+      # NEXT_PUBLIC_* are baked in at build time, so a frontend image is tied to
+      # one environment. Only build it if you host the frontend yourself; on
+      # Vercel, skip this and let Vercel build from the repo.
+      - name: Build and push frontend
+        if: ${{ inputs.image_tag == '' && vars.BUILD_FRONTEND_IMAGE == 'true' }}
+        uses: docker/build-push-action@v6
+        with:
+          context: frontend
+          push: true
+          tags: |
+            ${{ env.FRONTEND_IMAGE }}:${{ steps.tag.outputs.tag }}
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ vars.PRODUCTION_API_URL }}
+            NEXT_PUBLIC_SITE_URL=${{ vars.PRODUCTION_SITE_URL }}
+            NEXT_PUBLIC_MAPBOX_TOKEN=${{ vars.NEXT_PUBLIC_MAPBOX_TOKEN }}
+            NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ vars.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
+            NEXT_PUBLIC_APPLE_CLIENT_ID=${{ vars.NEXT_PUBLIC_APPLE_CLIENT_ID }}
+            NEXT_PUBLIC_APPLE_REDIRECT_URI=${{ vars.NEXT_PUBLIC_APPLE_REDIRECT_URI }}
+          cache-from: type=gha,scope=frontend
+          cache-to: type=gha,mode=max,scope=frontend
+
+  staging:
+    name: Staging
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ vars.STAGING_API_URL }}
+    env:
+      IMAGE_TAG: ${{ needs.build.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/rollout
+        with:
+          image_tag: ${{ env.IMAGE_TAG }}
+          mongodb_uri: ${{ secrets.MONGODB_URI }}
+          mongodb_db_name: ${{ vars.MONGODB_DB_NAME }}
+          deploy_hook_url: ${{ secrets.DEPLOY_HOOK_URL }}
+          api_url: ${{ vars.STAGING_API_URL }}
+          registry_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Opt-in (set repo variable RUN_STAGING_VERIFY=true). It logs in as the
+      # seeded demo admin, plans a trip (real LLM calls) and deletes a place, so
+      # only enable it against a seeded, non-public staging database.
+      - uses: actions/setup-python@v5
+        if: ${{ vars.RUN_STAGING_VERIFY == 'true' }}
+        with:
+          python-version: "3.12"
+      - name: Verify every endpoint
+        if: ${{ vars.RUN_STAGING_VERIFY == 'true' }}
+        working-directory: backend
+        run: |
+          pip install -q -r requirements.txt
+          python -m scripts.verify_endpoints --base-url "${{ vars.STAGING_API_URL }}"
+
+  production:
+    name: Production
+    needs: [build, staging]
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ vars.PRODUCTION_API_URL }}
+    env:
+      IMAGE_TAG: ${{ needs.build.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/rollout
+        with:
+          image_tag: ${{ env.IMAGE_TAG }}
+          mongodb_uri: ${{ secrets.MONGODB_URI }}
+          mongodb_db_name: ${{ vars.MONGODB_DB_NAME }}
+          deploy_hook_url: ${{ secrets.DEPLOY_HOOK_URL }}
+          api_url: ${{ vars.PRODUCTION_API_URL }}
+          registry_token: ${{ secrets.GITHUB_TOKEN }}

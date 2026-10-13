@@ -1,0 +1,7 @@
+# Optional AI provider SDKs - backend runs in deterministic stub mode without them.
+# Gemini (GOOGLE_GEMINI_KEY) and Groq (GROQ_API_KEY) are the primary providers.
+anthropic>=0.40
+openai>=1.55
+google-genai>=1.0
+langgraph>=0.2.45
+groq>=0.30

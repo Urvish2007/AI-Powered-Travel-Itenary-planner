@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 790" width="1180" height="790" role="img" aria-labelledby="t d" font-family="'Segoe UI', 'Inter', Helvetica, Arial, sans-serif"><title id="t">AI planning pipeline</title><desc id="d">Seven isometric blocks in a staircase: parse intent, retrieve, score, optimize, assemble, narrate, validate.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#1a1446"/>
+  </linearGradient>
+  <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#a5b4fc"/>
+  </linearGradient>
+  <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#6366f1" stop-opacity="0.55"/>
+    <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
+  <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#c7d2fe"/>
+  </marker>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+    <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.045"/>
+  </pattern>
+</defs>
+<rect width="1180" height="790" rx="22" fill="url(#bg)"/>
+<rect width="1180" height="790" rx="22" fill="url(#grid)"/><text x="40" y="52" font-size="26" font-weight="800" fill="#fff">Planning pipeline</text><text x="40" y="78" font-size="14" fill="#a5b4fc">Seven async nodes sharing one PlanningState. LangGraph-ready, runs fine without it.</text><path d="M155.9,190.7 L219.8,227.6" stroke="#c7d2fe" stroke-width="2.2" marker-end="url(#arrow)" fill="none"/>
+<path d="M293.0,269.9 L356.9,306.8" stroke="#c7d2fe" stroke-width="2.2" marker-end="url(#arrow)" fill="none"/>
+<path d="M430.2,349.1 L494.1,386.0" stroke="#c7d2fe" stroke-width="2.2" marker-end="url(#arrow)" fill="none"/>
+<path d="M567.4,428.3 L631.3,465.2" stroke="#c7d2fe" stroke-width="2.2" marker-end="url(#arrow)" fill="none"/>
+<path d="M704.6,507.5 L768.5,544.4" stroke="#c7d2fe" stroke-width="2.2" marker-end="url(#arrow)" fill="none"/>
+<path d="M841.7,586.7 L905.7,623.6" stroke="#c7d2fe" stroke-width="2.2" marker-end="url(#arrow)" fill="none"/>
+<polygon points="120.0,161.6 191.7,203.0 120.0,244.4 48.3,203.0" fill="#000" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.4" filter="url(#blur)"/>
+<polygon points="57.6,176.0 120.0,212.0 120.0,174.0 57.6,138.0" fill="#8342c1" stroke="#c690fa" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="182.4,176.0 120.0,212.0 120.0,174.0 182.4,138.0" fill="#5c2f88" stroke="#c690fa" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="120.0,102.0 182.4,138.0 120.0,174.0 57.6,138.0" fill="#b874f8" stroke="#c690fa" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="120.0" y="143.0" font-size="20" font-weight="800" text-anchor="middle" fill="#fff" fill-opacity="0.92">1</text>
+<text x="82.0" y="246.0" font-size="15.5" font-weight="800" text-anchor="middle" fill="#fff" font-family="'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace">parse_intent</text>
+<text x="82.0" y="266.0" font-size="12" text-anchor="middle" fill="#a5b4fc">Read the brief</text>
+<rect x="46.0" y="276.0" width="72" height="20" rx="10" fill="#a855f7" fill-opacity="0.25" stroke="#a855f7"/><text x="82.0" y="290.5" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">LLM</text>
+<polygon points="257.2,240.8 328.9,282.2 257.2,323.6 185.5,282.2" fill="#000" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.4" filter="url(#blur)"/>
+<polygon points="194.8,255.2 257.2,291.2 257.2,253.2 194.8,217.2" fill="#bf7b09" stroke="#f8c060" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="319.5,255.2 257.2,291.2 257.2,253.2 319.5,217.2" fill="#875706" stroke="#f8c060" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="257.2,181.2 319.5,217.2 257.2,253.2 194.8,217.2" fill="#f7af37" stroke="#f8c060" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="257.2" y="222.2" font-size="20" font-weight="800" text-anchor="middle" fill="#fff" fill-opacity="0.92">2</text>
+<text x="219.2" y="325.2" font-size="15.5" font-weight="800" text-anchor="middle" fill="#fff" font-family="'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace">retrieve</text>
+<text x="219.2" y="345.2" font-size="12" text-anchor="middle" fill="#a5b4fc">Vector + filter recall</text>
+<rect x="183.2" y="355.2" width="72" height="20" rx="10" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b"/><text x="219.2" y="369.7" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">Data</text>
+<polygon points="394.4,320.0 466.1,361.4 394.4,402.8 322.6,361.4" fill="#000" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.4" filter="url(#blur)"/>
+<polygon points="332.0,334.4 394.4,370.4 394.4,332.4 332.0,296.4" fill="#bf7b09" stroke="#f8c060" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="456.7,334.4 394.4,370.4 394.4,332.4 456.7,296.4" fill="#875706" stroke="#f8c060" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="394.4,260.4 456.7,296.4 394.4,332.4 332.0,296.4" fill="#f7af37" stroke="#f8c060" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="394.4" y="301.4" font-size="20" font-weight="800" text-anchor="middle" fill="#fff" fill-opacity="0.92">3</text>
+<text x="356.4" y="404.4" font-size="15.5" font-weight="800" text-anchor="middle" fill="#fff" font-family="'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace">score</text>
+<text x="356.4" y="424.4" font-size="12" text-anchor="middle" fill="#a5b4fc">Rank by interests</text>
+<rect x="320.4" y="434.4" width="72" height="20" rx="10" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b"/><text x="356.4" y="448.9" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">Data</text>
+<polygon points="531.5,399.2 603.2,440.6 531.5,482.0 459.8,440.6" fill="#000" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.4" filter="url(#blur)"/>
+<polygon points="531.5,377.6 593.9,413.6 531.5,449.6 469.2,413.6" fill="#06b6d4" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.35" filter="url(#blur)"/>
+<polygon points="469.2,413.6 531.5,449.6 531.5,393.6 469.2,357.6" fill="#058ea5" stroke="#5dd0e3" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="593.9,413.6 531.5,449.6 531.5,393.6 593.9,357.6" fill="#036475" stroke="#5dd0e3" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="531.5,321.6 593.9,357.6 531.5,393.6 469.2,357.6" fill="#33c3dc" stroke="#5dd0e3" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="531.5" y="362.6" font-size="20" font-weight="800" text-anchor="middle" fill="#fff" fill-opacity="0.92">4</text>
+<text x="493.5" y="483.6" font-size="15.5" font-weight="800" text-anchor="middle" fill="#fff" font-family="'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace">optimize</text>
+<text x="493.5" y="503.6" font-size="12" text-anchor="middle" fill="#a5b4fc">Days, order, time windows</text>
+<rect x="457.5" y="513.6" width="72" height="20" rx="10" fill="#06b6d4" fill-opacity="0.25" stroke="#06b6d4"/><text x="493.5" y="528.1" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">OR-Tools</text>
+<polygon points="668.7,478.4 740.4,519.8 668.7,561.2 597.0,519.8" fill="#000" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.4" filter="url(#blur)"/>
+<polygon points="606.4,492.8 668.7,528.8 668.7,490.8 606.4,454.8" fill="#4d50bc" stroke="#9a9cf6" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="731.1,492.8 668.7,528.8 668.7,490.8 731.1,454.8" fill="#363885" stroke="#9a9cf6" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="668.7,418.8 731.1,454.8 668.7,490.8 606.4,454.8" fill="#7f82f4" stroke="#9a9cf6" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="668.7" y="459.8" font-size="20" font-weight="800" text-anchor="middle" fill="#fff" fill-opacity="0.92">5</text>
+<text x="630.7" y="562.8" font-size="15.5" font-weight="800" text-anchor="middle" fill="#fff" font-family="'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace">assemble</text>
+<text x="630.7" y="582.8" font-size="12" text-anchor="middle" fill="#a5b4fc">Stops, meals, gaps</text>
+<rect x="594.7" y="592.8" width="72" height="20" rx="10" fill="#6366f1" fill-opacity="0.25" stroke="#6366f1"/><text x="630.7" y="607.3" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">Code</text>
+<polygon points="805.9,557.6 877.6,599.0 805.9,640.4 734.2,599.0" fill="#000" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.4" filter="url(#blur)"/>
+<polygon points="743.5,572.0 805.9,608.0 805.9,570.0 743.5,534.0" fill="#8342c1" stroke="#c690fa" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="868.2,572.0 805.9,608.0 805.9,570.0 868.2,534.0" fill="#5c2f88" stroke="#c690fa" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="805.9,498.0 868.2,534.0 805.9,570.0 743.5,534.0" fill="#b874f8" stroke="#c690fa" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="805.9" y="539.0" font-size="20" font-weight="800" text-anchor="middle" fill="#fff" fill-opacity="0.92">6</text>
+<text x="767.9" y="642.0" font-size="15.5" font-weight="800" text-anchor="middle" fill="#fff" font-family="'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace">narrate</text>
+<text x="767.9" y="662.0" font-size="12" text-anchor="middle" fill="#a5b4fc">Human-friendly copy</text>
+<rect x="731.9" y="672.0" width="72" height="20" rx="10" fill="#a855f7" fill-opacity="0.25" stroke="#a855f7"/><text x="767.9" y="686.5" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">LLM</text>
+<polygon points="943.1,636.8 1014.8,678.2 943.1,719.6 871.4,678.2" fill="#000" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.4" filter="url(#blur)"/>
+<polygon points="880.7,651.2 943.1,687.2 943.1,649.2 880.7,613.2" fill="#0c9065" stroke="#64d2ad" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="1005.4,651.2 943.1,687.2 943.1,649.2 1005.4,613.2" fill="#096647" stroke="#64d2ad" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="943.1,577.2 1005.4,613.2 943.1,649.2 880.7,613.2" fill="#3bc698" stroke="#64d2ad" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="943.1" y="618.2" font-size="20" font-weight="800" text-anchor="middle" fill="#fff" fill-opacity="0.92">7</text>
+<text x="905.1" y="721.2" font-size="15.5" font-weight="800" text-anchor="middle" fill="#fff" font-family="'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace">validate</text>
+<text x="905.1" y="741.2" font-size="12" text-anchor="middle" fill="#a5b4fc">Re-check every rule</text>
+<rect x="869.1" y="751.2" width="72" height="20" rx="10" fill="#10b981" fill-opacity="0.25" stroke="#10b981"/><text x="905.1" y="765.7" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">Guard</text></svg>

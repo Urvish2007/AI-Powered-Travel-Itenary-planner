@@ -1,0 +1,219 @@
+=Berlin|DE
+Brandenburg Gate|52.5163|13.3777|lm|hist,arch,photo|1|0|Neoclassical gateway and symbol of German reunification|30
+Reichstag Building|52.5186|13.3762|lm|hist,arch|1|0|Parliament crowned by a glass dome with free rooftop views (register ahead)|75
+Berlin Wall Memorial|52.5352|13.3903|lm|hist|1|0|Preserved stretch of the Wall with a watchtower and documentation centre|90
+East Side Gallery|52.5050|13.4397|at|art,hist|1|0|1.3 km of the Wall covered in murals|60
+Museum Island|52.5169|13.4019|mu|art,hist|1|3|Five world-class museums on a Spree island|240
+Checkpoint Charlie|52.5075|13.3904|lm|hist|2|0|Cold War crossing point between East and West|30
+Holocaust Memorial|52.5139|13.3789|lm|hist|2|0|2,711 concrete slabs in a sombre field of remembrance|45
+Berlin Cathedral|52.5192|13.4010|rl|arch|2|2|Grand Neo-Renaissance cathedral with a dome climb|60
+Charlottenburg Palace|52.5208|13.2958|lm|hist,arch|2|2|Baroque royal palace with formal gardens|120
+Tiergarten|52.5145|13.3501|pk|relax,nat|2|0|Vast central park of lakes and the Victory Column|120
+Berlin TV Tower|52.5208|13.4094|vp|photo|2|3|368-metre Fernsehturm with panoramic views|60
+Topography of Terror|52.5067|13.3835|mu|hist|3|0|Exhibition on Nazi terror on the site of the former Gestapo headquarters|75
+Tempelhofer Feld|52.4732|13.4016|pk|relax,sport|3|0|Former airport runways turned into a giant public park|90
+Gendarmenmarkt|52.5136|13.3927|at|arch|3|0|Elegant square flanked by two matching cathedrals|30
+Berlin Zoological Garden|52.5079|13.3377|at|nat,fam|3|2|One of the world's most species-rich zoos|180
+Hackesche Höfe|52.5245|13.4023|sh|shop,art|3|0|Art Nouveau courtyards of boutiques and cafés|45
+Mustafas Gemüse Kebap|52.4938|13.3878|rs|food|1|1|Cult doner stand near Mehringdamm, worth the queue|30
+Curry 36|52.4937|13.3877|rs|food|2|1|Classic Berlin currywurst kiosk|30
+Markthalle Neun|52.5020|13.4313|rs|food|2|1|Kreuzberg market hall, famous for Street Food Thursday|75
+Café Einstein Unter den Linden|52.5162|13.3888|cf|food,hist|3|2|Viennese-style coffeehouse on Berlin's grand boulevard|60
+
+=Munich|DE
+Marienplatz|48.1374|11.5755|at|hist,arch|1|0|Central square with the Glockenspiel show|45
+Nymphenburg Palace|48.1584|11.5033|lm|hist,arch|1|2|Baroque summer residence with a sprawling park|150
+English Garden|48.1642|11.5920|pk|relax,nat|1|0|Huge park with river surfers and a beer garden|120
+Munich Residenz|48.1416|11.5798|lm|hist,art|1|2|Former royal palace of the Bavarian monarchs|120
+Hofbräuhaus|48.1376|11.5799|br|food,cult,music|1|1|World-famous beer hall with oompah bands|90
+Deutsches Museum|48.1299|11.5835|mu|fam,hist|2|3|World's largest science and technology museum|210
+BMW Museum and Welt|48.1774|11.5559|mu|arch|2|1|Car museum beside the Olympic Park|120
+Olympiapark|48.1750|11.5514|pk|sport,arch|2|1|1972 Olympic site with tower views|120
+Frauenkirche|48.1386|11.5736|rl|arch,hist|2|0|Twin-domed cathedral defining the Munich skyline|30
+Viktualienmarkt|48.1352|11.5762|rs|food|1|1|Open-air food market in the city centre|60
+Alte Pinakothek|48.1482|11.5702|mu|art|2|2|Old Masters collection|120
+Dachau Memorial Site|48.2698|11.4685|mu|hist|2|0|Memorial at the former concentration camp|150
+Asamkirche|48.1345|11.5688|rl|arch,art|3|0|Ornate Baroque church built by the Asam brothers|30
+Odeonsplatz|48.1424|11.5773|at|arch|3|0|Italianate square with the Feldherrnhalle|20
+Eisbachwelle|48.1436|11.5878|at|adv,sport|3|0|Urban river wave where surfers ride year-round|30
+Theresienwiese|48.1315|11.5497|at|cult|3|0|The Oktoberfest grounds|30
+Augustiner Bräustuben|48.1370|11.5461|rs|food|2|2|Traditional Bavarian food and Augustiner beer|90
+Schneider Weisses Bräuhaus|48.1367|11.5786|rs|food|2|2|Historic Weisswurst tavern near Marienplatz|75
+Schmalznudel Café Frischhut|48.1352|11.5765|cf|food|3|1|Fried-dough Schmalznudeln since 1900|30
+Käfer Schänke|48.1465|11.6015|rs|food|3|3|Munich's classic gourmet delicatessen restaurant|90
+
+=Prague|CZ
+Prague Castle|50.0909|14.4005|lm|hist,arch|1|3|The world's largest ancient castle complex|180
+Charles Bridge|50.0865|14.4114|lm|hist,photo|1|0|Statue-lined 14th-century bridge over the Vltava|45
+Old Town Square and Astronomical Clock|50.0875|14.4213|at|hist,arch|1|0|Medieval square with the hourly astronomical clock show|60
+St. Vitus Cathedral|50.0909|14.4010|rl|arch,hist|1|2|Soaring Gothic cathedral within the castle grounds|60
+Jewish Quarter (Josefov)|50.0903|14.4185|at|hist,cult|2|2|Synagogues and the Old Jewish Cemetery|90
+Wenceslas Square|50.0810|14.4276|at|hist,shop|2|0|Grand boulevard at the heart of modern Prague|30
+Petřín Hill and Lookout Tower|50.0833|14.3950|vp|photo,nat|2|1|Eiffel-like lookout tower on a hilltop park|90
+Lennon Wall|50.0865|14.4059|at|art,hist|3|0|Graffiti wall of peace messages|20
+Dancing House|50.0754|14.4141|lm|arch,photo|3|0|Deconstructivist building by Frank Gehry|20
+Vyšehrad|50.0642|14.4193|lm|hist,photo|3|0|Riverside fort with a cemetery and city views|90
+Municipal House|50.0875|14.4283|lm|arch,art|3|1|Art Nouveau civic hall beside the Powder Tower|45
+Strahov Monastery Library|50.0864|14.3898|mu|hist,arch|3|2|Baroque library halls of glorious painted ceilings|45
+National Museum|50.0787|14.4306|mu|hist,nat|3|2|Grand neo-Renaissance museum atop Wenceslas Square|90
+Letná Park|50.0966|14.4224|pk|relax,photo|3|0|Riverside park with a beer garden and skyline views|60
+Kampa Island|50.0833|14.4085|pk|relax,art|3|0|Tranquil island park with Museum Kampa|60
+Prague Zoo|50.1177|14.4062|at|nat,fam|3|2|One of the world's best zoos|180
+Lokál Dlouhááá|50.0902|14.4262|rs|food|1|1|Classic Czech pub food and fresh Pilsner|75
+Café Louvre|50.0811|14.4197|cf|food,hist|2|2|Grand café from 1902|60
+U Fleků|50.0796|14.4183|br|food,hist|3|2|Brewery-restaurant brewing since 1499|90
+Café Savoy|50.0770|14.4066|cf|food|3|2|Neo-Renaissance café known for its breakfasts|60
+
+=Vienna|AT
+Schönbrunn Palace|48.1845|16.3122|lm|hist,arch|1|3|Habsburg summer palace with baroque gardens|180
+St. Stephen's Cathedral|48.2086|16.3731|rl|arch,hist|1|1|Gothic cathedral with a patterned tile roof and tower climb|60
+Hofburg Palace|48.2065|16.3663|lm|hist|1|3|Imperial palace complex, including the Sisi Museum|150
+Belvedere Palace|48.1916|16.3806|mu|art,arch|1|3|Baroque palace displaying Klimt's The Kiss|120
+Vienna State Opera|48.2029|16.3690|en|music,arch|2|3|One of the world's leading opera houses|75
+Naschmarkt|48.1986|16.3630|rs|food|2|0|Vienna's best-known market of stalls and snack bars|75
+Kunsthistorisches Museum|48.2038|16.3617|mu|art|1|2|Habsburg art collection in a spectacular building|150
+Prater and Giant Ferris Wheel|48.2166|16.3959|at|fam,photo|2|2|Historic amusement park with the Riesenrad|120
+Albertina|48.2043|16.3687|mu|art|2|2|Monet to Picasso above the Hofburg terrace|90
+Karlskirche|48.1985|16.3716|rl|arch|2|1|Baroque church with a giant dome|45
+MuseumsQuartier|48.2033|16.3591|mu|art|3|1|Cultural quarter of art museums and courtyard cafés|120
+Schönbrunn Zoo|48.1791|16.3019|at|nat,fam|3|2|The world's oldest zoo|150
+Stadtpark|48.2046|16.3809|pk|relax|3|0|Park with the golden Johann Strauss statue|45
+Hundertwasserhaus|48.2072|16.3944|lm|arch,art|3|0|Colourful apartment building by Hundertwasser|30
+Vienna Central Cemetery|48.1519|16.4405|at|hist,music|3|0|Graves of Beethoven, Brahms and Schubert|75
+Café Central|48.2106|16.3655|cf|food,hist|1|2|Grand coffeehouse from 1876|60
+Café Sacher|48.2038|16.3694|cf|food,hist|1|3|Home of the original Sachertorte|60
+Café Landtmann|48.2119|16.3613|cf|food,hist|3|2|Ringstrasse coffeehouse since 1873|60
+Figlmüller|48.2087|16.3766|rs|food|2|2|Famous for its plate-sized Wiener schnitzel|75
+Zum Schwarzen Kameel|48.2093|16.3672|rs|food,hist|3|2|Art Nouveau deli-restaurant known for open sandwiches|60
+
+=Budapest|HU
+Hungarian Parliament Building|47.5073|19.0456|lm|arch,hist|1|3|Neo-Gothic riverside parliament, stunning from across the Danube|60
+Buda Castle|47.4961|19.0396|lm|hist|1|0|Castle Hill palace complex with museums and views|120
+Fisherman's Bastion|47.5022|19.0348|vp|photo,arch|1|1|Fairy-tale turrets with the best view over the Danube|45
+Matthias Church|47.5019|19.0342|rl|arch,hist|2|2|Colourful tile-roofed Gothic church|45
+Széchenyi Thermal Baths|47.5186|19.0818|at|relax|1|3|Grand neo-Baroque thermal spa in City Park|180
+Chain Bridge|47.4989|19.0435|lm|arch,photo|2|0|Iconic 19th-century suspension bridge|30
+Shoes on the Danube Bank|47.5049|19.0447|lm|hist|2|0|Poignant memorial of iron shoes on the river's edge|15
+Great Market Hall|47.4872|19.0587|rs|food,shop|1|0|Vast neo-Gothic market of paprika, lángos and souvenirs|75
+Heroes' Square|47.5148|19.0779|lm|hist|2|0|Monument to Hungary's leaders and the millennium|30
+St. Stephen's Basilica|47.5008|19.0539|rl|arch|2|1|Neoclassical basilica with a dome-viewing terrace|45
+Gellért Hill and Citadella|47.4868|19.0466|vp|photo|2|0|Hilltop viewpoint with the Liberty Statue|75
+Gellért Thermal Baths|47.4841|19.0517|at|relax,arch|2|3|Art Nouveau bathhouse|150
+Szimpla Kert|47.4969|19.0644|br|night,cult|2|1|The original ruin bar in the Jewish Quarter|90
+Margaret Island|47.5304|19.0463|pk|relax,nat|3|0|Riverside park with rose gardens|90
+House of Terror|47.5074|19.0653|mu|hist|3|2|Museum on Hungary's 20th-century totalitarian regimes|90
+Hospital in the Rock|47.5010|19.0331|mu|hist|3|2|Cold War bunker hospital inside the Castle Hill caves|75
+Café New York|47.4985|19.0705|cf|food,hist,arch|1|3|Opulent belle époque café, often called the world's most beautiful|75
+Central Café|47.4924|19.0577|cf|food|3|2|Traditional Budapest coffeehouse|60
+Gundel|47.5155|19.0850|rs|food,hist|3|3|Legendary Hungarian restaurant beside the zoo|90
+Ruszwurm|47.5005|19.0343|cf|food,hist|3|1|Budapest's oldest confectionery, from 1827|45
+
+=Krakow|PL|Kraków
+Main Market Square|50.0617|19.9373|at|hist,arch|1|0|Europe's largest medieval square|60
+Wawel Castle|50.0540|19.9354|lm|hist,arch|1|2|Royal castle and cathedral on Wawel Hill|150
+St. Mary's Basilica|50.0616|19.9394|rl|arch,art|1|1|Gothic church with a magnificent altarpiece and trumpeter tower|45
+Cloth Hall|50.0617|19.9375|sh|shop,hist|2|0|Renaissance trading hall with a Polish art gallery upstairs|60
+Kazimierz|50.0510|19.9450|at|hist,cult|1|0|Historic Jewish quarter of synagogues, cafés and street food|120
+Schindler's Factory Museum|50.0473|19.9622|mu|hist|1|2|Kraków under Nazi occupation, in Oskar Schindler's factory|120
+Wieliczka Salt Mine|49.9833|20.0553|at|hist,adv|1|3|UNESCO salt mine with underground chapels|180
+Auschwitz-Birkenau Memorial|50.0343|19.1784|mu|hist|2|1|Memorial and museum at the former camp, west of Kraków|300
+Planty Park|50.0620|19.9350|pk|relax|3|0|Green ring of parkland around the old town|45
+Barbican and Florian Gate|50.0654|19.9418|lm|hist|3|0|Remnants of the medieval city defences|30
+Czartoryski Museum|50.0665|19.9411|mu|art|3|2|Home of Leonardo's Lady with an Ermine|90
+Vistula Boulevards|50.0526|19.9296|pk|relax|3|0|Riverside promenade below Wawel|60
+Kościuszko Mound|50.0551|19.8933|vp|photo|3|1|Man-made mound with a wide city panorama|60
+Collegium Maius|50.0614|19.9339|mu|hist|3|1|Jagiellonian University's oldest building|60
+Rynek Underground|50.0617|19.9370|mu|hist|2|2|Medieval market excavated beneath the square|75
+MOCAK|50.0476|19.9618|mu|art|3|1|Museum of Contemporary Art beside Schindler's Factory|75
+Café Camelot|50.0617|19.9403|cf|food|2|2|Atmospheric café near the square|45
+Restauracja Wierzynek|50.0620|19.9378|rs|food,hist|2|3|One of Europe's oldest restaurants, dating to 1364|90
+Hevre|50.0508|19.9449|rs|food|3|2|Restaurant in a former synagogue in Kazimierz|75
+Plac Nowy|50.0514|19.9462|rs|food|2|1|Kazimierz street-food hub famed for zapiekanki|30
+
+=Copenhagen|DK
+Nyhavn|55.6798|12.5910|at|photo,cult|1|0|Colourful 17th-century harbour lined with cafés|45
+Tivoli Gardens|55.6737|12.5681|en|fam,cult|1|3|Historic amusement park in the heart of the city|180
+The Little Mermaid|55.6929|12.5993|lm|photo,cult|2|0|Bronze statue on the Langelinie promenade|20
+Rosenborg Castle|55.6858|12.5771|lm|hist|2|2|Renaissance castle housing the Crown Jewels|75
+Christiansborg Palace|55.6761|12.5800|lm|hist,arch|2|2|Seat of parliament, with a free tower viewpoint|90
+Amalienborg Palace|55.6841|12.5936|lm|hist|2|2|Royal residence with the Changing of the Guard|60
+Round Tower|55.6813|12.5758|vp|photo,hist|3|1|17th-century observatory tower with a spiral ramp|45
+National Museum of Denmark|55.6735|12.5787|mu|hist|3|2|Danish history from the Vikings onward|120
+Freetown Christiania|55.6736|12.6094|at|cult,art|2|0|Self-governing freetown of street art and alternative culture|90
+Kastellet|55.6914|12.5939|pk|hist,relax|3|0|Star-shaped fortress and park|60
+Copenhagen Botanical Garden|55.6866|12.5726|pk|nat|3|0|Glasshouses and gardens near Rosenborg|75
+Ny Carlsberg Glyptotek|55.6727|12.5722|mu|art|2|2|Art museum with a palm-filled winter garden|90
+Design Museum Denmark|55.6890|12.5934|mu|art|3|2|Danish design in a former rococo hospital|90
+Strøget|55.6785|12.5745|sh|shop|3|0|One of Europe's longest pedestrian shopping streets|60
+Church of Our Saviour|55.6728|12.5942|rl|arch,photo|3|1|Baroque spire with an external spiral staircase|45
+Canal Tour|55.6789|12.5900|at|relax,photo|2|2|Sightseeing boat tour of the canals|60
+Torvehallerne|55.6835|12.5709|rs|food|1|2|Glass-hall food market near Nørreport|75
+Café Norden|55.6789|12.5787|cf|food|3|2|Corner café on Strøget|45
+Schønnemann|55.6809|12.5747|rs|food,hist|2|3|Historic Danish open-sandwich restaurant since 1877|75
+Copenhagen Street Food|55.6920|12.6161|rs|food|2|2|Street-food market on Refshaleøen|75
+
+=Stockholm|SE
+Vasa Museum|59.3280|18.0910|mu|hist|1|2|17th-century warship salvaged from the sea|120
+Gamla Stan|59.3251|18.0711|at|hist,cult|1|0|Medieval old town of cobbled lanes|120
+Royal Palace|59.3268|18.0717|lm|hist,arch|1|2|One of Europe's largest palaces|90
+Skansen|59.3268|18.1040|at|hist,fam,nat|1|2|The world's oldest open-air museum|180
+ABBA The Museum|59.3241|18.0968|mu|music,fam|2|3|Interactive museum of Sweden's pop phenomenon|120
+Stockholm City Hall|59.3275|18.0541|lm|arch,photo|2|2|Brick building for Nobel banquets, with a tower viewpoint|75
+Fotografiska|59.3178|18.0854|mu|art|2|2|Contemporary photography museum on the waterfront|90
+Djurgården|59.3260|18.1130|pk|nat,relax|2|0|Green royal island of museums and parks|120
+Moderna Museet|59.3269|18.0844|mu|art|3|0|Modern and contemporary art on Skeppsholmen|90
+Drottningholm Palace|59.3216|17.8869|lm|hist,arch|2|2|UNESCO palace, home of the royal family|120
+Archipelago Cruise|59.3283|18.0778|at|nat,relax|2|3|Boat trip into thousands of islands|180
+Stockholm Cathedral|59.3255|18.0708|rl|arch|3|1|Coronation church of Sweden|30
+SoFo|59.3138|18.0640|sh|shop,cult|3|0|Hip Södermalm district of boutiques and vintage shops|90
+Monteliusvägen|59.3204|18.0459|vp|photo|3|0|Cliff-top path with a classic skyline view|30
+Nobel Prize Museum|59.3250|18.0709|mu|hist|3|2|History of the Nobel laureates|60
+Sergels Torg|59.3326|18.0641|at|arch|3|0|Modernist central square|20
+Östermalms Saluhall|59.3363|18.0757|rs|food|1|2|Historic food hall of Swedish delicacies|75
+Café Saturnus|59.3357|18.0678|cf|food|3|2|Known for gigantic cinnamon buns|45
+Rosendals Trädgård|59.3235|18.1349|cf|food,nat|2|2|Garden café on Djurgården|60
+Meatballs for the People|59.3145|18.0732|rs|food|2|2|Modern take on the classic Swedish meatball|75
+
+=Oslo|NO
+Vigeland Sculpture Park|59.9270|10.7005|pk|art|1|0|Over 200 sculptures by Gustav Vigeland in Frogner Park|90
+Oslo Opera House|59.9075|10.7530|lm|arch,music|1|0|Marble-clad waterfront opera house with a walkable roof|60
+Fram Museum|59.9034|10.6994|mu|hist,adv|1|2|The polar-exploration ship Fram|90
+Kon-Tiki Museum|59.9046|10.6969|mu|hist,adv|3|2|Thor Heyerdahl's balsa raft and Pacific voyages|60
+Akershus Fortress|59.9075|10.7368|lm|hist|1|0|Medieval castle overlooking the harbour|75
+Holmenkollen Ski Jump|59.9639|10.6683|lm|sport,photo|1|2|Ski jump with a museum and panoramic tower|90
+Royal Palace Oslo|59.9169|10.7275|lm|hist|2|1|The king's residence at the end of Karl Johans gate|45
+Karl Johans gate|59.9139|10.7392|at|shop,cult|2|0|Oslo's main boulevard from station to palace|45
+Munch Museum|59.9066|10.7576|mu|art|1|2|Edvard Munch's works including The Scream|120
+National Museum|59.9119|10.7197|mu|art|2|2|The Nordic countries' largest art museum|120
+Aker Brygge|59.9100|10.7291|at|food,cult|3|0|Waterfront district of restaurants and shops|60
+Ekebergparken Sculpture Park|59.8995|10.7645|pk|art,photo|3|0|Hillside sculpture park with a fjord view|75
+Nobel Peace Center|59.9124|10.7318|mu|hist|3|2|Exhibitions on peace prize laureates|60
+Oslo Fjord Sightseeing|59.9106|10.7292|at|nat,relax|3|3|Boat tour of the fjord and its islands|120
+Oslo City Hall|59.9127|10.7339|lm|art,arch|2|0|Brick civic building hosting the Nobel Peace Prize ceremony|45
+Oslo Botanical Garden|59.9170|10.7692|pk|nat|3|0|University botanical garden|60
+Mathallen Oslo|59.9226|10.7529|rs|food|1|2|Food hall in the Vulkan district|75
+Tim Wendelboe|59.9242|10.7584|cf|food|2|2|Famous specialty coffee roastery in Grünerløkka|45
+Villa Paradiso|59.9228|10.7586|rs|food|3|2|Beloved Neapolitan pizza on Olaf Ryes plass|75
+Grand Café|59.9134|10.7396|cf|food,hist|3|3|Ibsen's historic café at the Grand Hotel|60
+
+=Helsinki|FI
+Helsinki Cathedral|60.1704|24.9522|rl|arch|1|0|Neoclassical white cathedral above Senate Square|30
+Suomenlinna Sea Fortress|60.1450|24.9880|lm|hist,nat|1|1|UNESCO island fortress reached by ferry|180
+Temppeliaukio Church|60.1730|24.9252|rl|arch|1|1|Church built into solid rock|30
+Senate Square|60.1699|24.9525|at|hist,arch|2|0|Neoclassical square at the heart of the city|20
+Market Square|60.1673|24.9536|sh|food,shop|1|0|Harbourside market of fish and souvenirs|60
+Uspenski Cathedral|60.1677|24.9599|rl|arch|2|0|Largest Orthodox church in Western Europe|30
+Ateneum Art Museum|60.1698|24.9440|mu|art|2|2|Finland's national gallery|90
+Kiasma|60.1719|24.9370|mu|art|3|2|Contemporary art museum|90
+Oodi Central Library|60.1739|24.9382|lm|arch,cult|2|0|Striking public library with a rooftop terrace|60
+Sibelius Monument|60.1824|24.9131|lm|art,music|2|0|Steel-pipe sculpture honouring the composer|30
+Seurasaari Open-Air Museum|60.1837|24.8850|at|hist,nat|3|2|Historic Finnish buildings on an island|120
+Design Museum Helsinki|60.1631|24.9455|mu|art|3|2|Finnish design history|75
+Löyly|60.1544|24.9188|at|relax|2|3|Architectural public sauna by the sea|120
+Allas Sea Pool|60.1670|24.9563|at|relax|3|3|Heated pools and saunas on the harbour|120
+Esplanadi Park|60.1675|24.9450|pk|relax,shop|3|0|Central park boulevard|45
+Korkeasaari Zoo|60.1743|24.9866|at|nat,fam|3|2|Island zoo|150
+Old Market Hall|60.1667|24.9532|rs|food|1|2|1889 market hall of Finnish delicacies|60
+Cafe Regatta|60.1798|24.9151|cf|food|2|1|Cosy seaside café known for cinnamon buns|45
+Ravintola Savotta|60.1680|24.9443|rs|food|3|3|Finnish cuisine in a log-cabin setting|75
+Cafe Ekberg|60.1651|24.9430|cf|food,hist|3|2|One of Helsinki's oldest cafés, from 1861|45

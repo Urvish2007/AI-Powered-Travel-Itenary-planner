@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 740" width="1240" height="740" role="img" aria-labelledby="t d" font-family="'Segoe UI', 'Inter', Helvetica, Arial, sans-serif"><title id="t">Layered architecture</title><desc id="d">Isometric stack: Next.js client, FastAPI API, AI and OR-Tools intelligence layer, MongoDB and Redis data layer.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#1a1446"/>
+  </linearGradient>
+  <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#a5b4fc"/>
+  </linearGradient>
+  <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#6366f1" stop-opacity="0.55"/>
+    <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
+  <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#c7d2fe"/>
+  </marker>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+    <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.045"/>
+  </pattern>
+</defs>
+<rect width="1240" height="740" rx="22" fill="url(#bg)"/>
+<rect width="1240" height="740" rx="22" fill="url(#grid)"/><text x="40" y="52" font-size="26" font-weight="800" fill="#fff">System architecture</text><text x="40" y="78" font-size="14" fill="#a5b4fc">Four layers, one direction of dependency.</text><ellipse cx="330" cy="420" rx="300" ry="320" fill="url(#halo)"/>
+<polygon points="330.0,498.2 601.6,655.0 449.2,743.0 177.6,586.2" fill="#000" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.25" filter="url(#blur)"/>
+<polygon points="330.0,479.0 593.3,631.0 449.2,714.2 185.9,562.2" fill="#10b981" stroke="none" stroke-width="1" stroke-linejoin="round" opacity="0.35" filter="url(#blur)"/>
+<polygon points="185.9,562.2 449.2,714.2 449.2,700.2 185.9,548.2" fill="#0c9065" stroke="#64d2ad" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="593.3,631.0 449.2,714.2 449.2,700.2 593.3,617.0" fill="#096647" stroke="#64d2ad" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="330.0,465.0 593.3,617.0 449.2,700.2 185.9,548.2" fill="#3bc698" stroke="#64d2ad" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<polygon points="215.0,549.0 272.3,582.1 272.3,556.1 215.0,523.0" fill="#56b48f" stroke="#a1efd0" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="327.7,550.1 272.3,582.1 272.3,556.1 327.7,524.1" fill="#3d7f65" stroke="#a1efd0" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="270.4,491.0 327.7,524.1 272.3,556.1 215.0,523.0" fill="#92edc9" stroke="#a1efd0" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="243.6" y="555.2" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Mongo</text>
+<polygon points="302.7,599.7 360.0,632.7 360.0,598.7 302.7,565.7" fill="#29a577" stroke="#7be2bd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="415.4,600.7 360.0,632.7 360.0,598.7 415.4,566.7" fill="#1d7454" stroke="#7be2bd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="358.2,533.7 415.4,566.7 360.0,598.7 302.7,565.7" fill="#67deb2" stroke="#7be2bd" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="331.4" y="601.5" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Redis</text>
+<polygon points="390.5,650.3 447.8,683.4 447.8,657.4 390.5,624.3" fill="#82bea2" stroke="#c6f7e0" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="503.2,651.4 447.8,683.4 447.8,657.4 503.2,625.4" fill="#5c8672" stroke="#c6f7e0" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="445.9,592.3 503.2,625.4 447.8,657.4 390.5,624.3" fill="#bdf6dc" stroke="#c6f7e0" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="419.1" y="656.6" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Celery</text>
+<path d="M521.2,665.6 L666,665.6" stroke="#10b981" stroke-width="1.6" stroke-dasharray="3 5" fill="none"/>
+<circle cx="521.2" cy="665.6" r="4" fill="#10b981"/>
+<rect x="666" y="629.6" width="500" height="68" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#10b981" stroke-opacity="0.7"/>
+<text x="686" y="655.6" font-size="21" font-weight="800" fill="#fff">Data</text>
+<text x="686" y="679.6" font-size="13.5" fill="#c7d2fe">MongoDB (Beanie) · Redis cache · Celery workers</text>
+<polygon points="185.9,442.2 449.2,594.2 449.2,580.2 185.9,428.2" fill="#8342c1" stroke="#c690fa" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="593.3,511.0 449.2,594.2 449.2,580.2 593.3,497.0" fill="#5c2f88" stroke="#c690fa" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="330.0,345.0 593.3,497.0 449.2,580.2 185.9,428.2" fill="#b874f8" stroke="#c690fa" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<polygon points="215.0,429.0 272.3,462.1 272.3,436.1 215.0,403.0" fill="#a88cc6" stroke="#e6cefe" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="327.7,430.1 272.3,462.1 272.3,436.1 327.7,404.1" fill="#77638c" stroke="#e6cefe" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="270.4,371.0 327.7,404.1 272.3,436.1 215.0,403.0" fill="#e2c7fe" stroke="#e6cefe" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="243.6" y="435.2" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">LLM</text>
+<polygon points="302.7,479.7 360.0,512.7 360.0,478.7 302.7,445.7" fill="#9667c5" stroke="#d6affd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="415.4,480.7 360.0,512.7 360.0,478.7 415.4,446.7" fill="#6a498b" stroke="#d6affd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="358.2,413.7 415.4,446.7 360.0,478.7 302.7,445.7" fill="#d0a3fd" stroke="#d6affd" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="331.4" y="481.5" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Embed</text>
+<polygon points="390.5,530.3 447.8,563.4 447.8,537.4 390.5,504.3" fill="#bb85c5" stroke="#f5c8fd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="503.2,531.4 447.8,563.4 447.8,537.4 503.2,505.4" fill="#845e8b" stroke="#f5c8fd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="445.9,472.3 503.2,505.4 447.8,537.4 390.5,504.3" fill="#f4c0fd" stroke="#f5c8fd" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="419.1" y="536.6" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Solver</text>
+<path d="M521.2,545.6 L666,545.6" stroke="#a855f7" stroke-width="1.6" stroke-dasharray="3 5" fill="none"/>
+<circle cx="521.2" cy="545.6" r="4" fill="#a855f7"/>
+<rect x="666" y="509.6" width="500" height="68" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#a855f7" stroke-opacity="0.7"/>
+<text x="686" y="535.6" font-size="21" font-weight="800" fill="#fff">Intelligence</text>
+<text x="686" y="559.6" font-size="13.5" fill="#c7d2fe">LLM (Gemini / Groq) · embeddings · OR-Tools solver</text>
+<polygon points="185.9,322.2 449.2,474.2 449.2,460.2 185.9,308.2" fill="#058ea5" stroke="#5dd0e3" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="593.3,391.0 449.2,474.2 449.2,460.2 593.3,377.0" fill="#036475" stroke="#5dd0e3" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="330.0,225.0 593.3,377.0 449.2,460.2 185.9,308.2" fill="#33c3dc" stroke="#5dd0e3" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<polygon points="215.0,309.0 272.3,342.1 272.3,316.1 215.0,283.0" fill="#50b5c2" stroke="#9cf0fb" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="327.7,310.1 272.3,342.1 272.3,316.1 327.7,284.1" fill="#398089" stroke="#9cf0fb" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="270.4,251.0 327.7,284.1 272.3,316.1 215.0,283.0" fill="#8deefa" stroke="#9cf0fb" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="243.6" y="315.2" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Auth</text>
+<polygon points="302.7,359.7 360.0,392.7 360.0,358.7 302.7,325.7" fill="#1ba5ba" stroke="#6fe2f4" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="415.4,360.7 360.0,392.7 360.0,358.7 415.4,326.7" fill="#137483" stroke="#6fe2f4" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="358.2,293.7 415.4,326.7 360.0,358.7 302.7,325.7" fill="#59def2" stroke="#6fe2f4" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="331.4" y="361.5" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Trips</text>
+<polygon points="390.5,410.3 447.8,443.4 447.8,417.4 390.5,384.3" fill="#81bec5" stroke="#c4f7fd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="503.2,411.4 447.8,443.4 447.8,417.4 503.2,385.4" fill="#5b868b" stroke="#c4f7fd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="445.9,352.3 503.2,385.4 447.8,417.4 390.5,384.3" fill="#bcf6fd" stroke="#c4f7fd" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="419.1" y="416.6" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Places</text>
+<path d="M521.2,425.6 L666,425.6" stroke="#06b6d4" stroke-width="1.6" stroke-dasharray="3 5" fill="none"/>
+<circle cx="521.2" cy="425.6" r="4" fill="#06b6d4"/>
+<rect x="666" y="389.6" width="500" height="68" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#06b6d4" stroke-opacity="0.7"/>
+<text x="686" y="415.6" font-size="21" font-weight="800" fill="#fff">API</text>
+<text x="686" y="439.6" font-size="13.5" fill="#c7d2fe">FastAPI · JWT + OAuth · rate limiting · Prometheus</text>
+<polygon points="185.9,202.2 449.2,354.2 449.2,340.2 185.9,188.2" fill="#4d50bc" stroke="#9a9cf6" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="593.3,271.0 449.2,354.2 449.2,340.2 593.3,257.0" fill="#363885" stroke="#9a9cf6" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="330.0,105.0 593.3,257.0 449.2,340.2 185.9,188.2" fill="#7f82f4" stroke="#9a9cf6" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<polygon points="215.0,189.0 272.3,222.1 272.3,196.1 215.0,163.0" fill="#818cc5" stroke="#c4cefd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="327.7,190.1 272.3,222.1 272.3,196.1 327.7,164.1" fill="#5b638b" stroke="#c4cefd" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="270.4,131.0 327.7,164.1 272.3,196.1 215.0,163.0" fill="#bcc7fd" stroke="#c4cefd" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="243.6" y="195.2" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Pages</text>
+<polygon points="302.7,239.7 360.0,272.7 360.0,238.7 302.7,205.7" fill="#656dc1" stroke="#adb4fa" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="415.4,240.7 360.0,272.7 360.0,238.7 415.4,206.7" fill="#474d88" stroke="#adb4fa" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="358.2,173.7 415.4,206.7 360.0,238.7 302.7,205.7" fill="#a0a9fa" stroke="#adb4fa" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="331.4" y="241.5" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">Map</text>
+<polygon points="390.5,290.3 447.8,323.4 447.8,297.4 390.5,264.3" fill="#9ba4c6" stroke="#dbe2fe" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="503.2,291.4 447.8,323.4 447.8,297.4 503.2,265.4" fill="#6d748c" stroke="#dbe2fe" stroke-width="0.6" stroke-linejoin="round" opacity="1.0" />
+<polygon points="445.9,232.3 503.2,265.4 447.8,297.4 390.5,264.3" fill="#d5ddfe" stroke="#dbe2fe" stroke-width="0.8" stroke-linejoin="round" opacity="1.0" />
+<text x="419.1" y="296.6" font-size="11.5" font-weight="700" text-anchor="middle" fill="#0b1020">State</text>
+<path d="M521.2,305.6 L666,305.6" stroke="#6366f1" stroke-width="1.6" stroke-dasharray="3 5" fill="none"/>
+<circle cx="521.2" cy="305.6" r="4" fill="#6366f1"/>
+<rect x="666" y="269.6" width="500" height="68" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#6366f1" stroke-opacity="0.7"/>
+<text x="686" y="295.6" font-size="21" font-weight="800" fill="#fff">Client</text>
+<text x="686" y="319.6" font-size="13.5" fill="#c7d2fe">Next.js 16 · React 19 · TanStack Query · Leaflet</text>
+<path d="M137.9,172.2 L137.9,552.2" stroke="#c7d2fe" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 6" fill="none"/>
+<text x="127.9" y="362.2" font-size="12" fill="#a5b4fc" text-anchor="middle" transform="rotate(-90 127.9 362.2)" letter-spacing="3">REQUEST FLOW</text></svg>

@@ -1,0 +1,86 @@
+[project]
+name = "ai-itinerary-planner-backend"
+version = "0.1.0"
+description = "FastAPI + MongoDB backend for an AI itinerary planner with OR-Tools route optimisation."
+requires-python = ">=3.12"
+readme = "README.md"
+# Single source of truth: the pinned requirements files, so the wheel, the
+# Docker image and CI can never drift apart.
+dynamic = ["dependencies", "optional-dependencies"]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+# The world-city corpus is data, not code; without this it is silently left out
+# of built wheels and seeding fails after `pip install`.
+[tool.setuptools.package-data]
+"app.db" = ["world_data/*.json", "world_data/*.txt"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools.dynamic.optional-dependencies]
+ai = { file = ["requirements-ai.txt"] }
+
+[tool.ruff]
+line-length = 92
+target-version = "py312"
+exclude = [".venv", "__pycache__"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "C4",   # comprehensions
+    "SIM",  # simplify
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "B008",  # FastAPI dependencies are function calls in defaults by design.
+    "N818",  # Domain errors read better without a forced "Error" suffix.
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Beanie declares collection indexes as a class attribute; that is the ODM's
+# documented API, not an accidental mutable default.
+"app/models/*" = ["RUF012"]
+# Tests may shadow builtins and use long descriptive names.
+"tests/*" = ["E501", "RUF012"]
+# The seed corpus is data, and reads better wide.
+"app/db/seed.py" = ["E501", "RUF012"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+exclude = ["\\.venv", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["ortools.*", "celery.*", "structlog.*", "slugify.*"]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["app/workers/*", "app/observability/tracing.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "\\.\\.\\.",
+]

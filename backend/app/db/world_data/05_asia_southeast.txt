@@ -1,0 +1,219 @@
+=Bangkok|TH
+Grand Palace|13.7500|100.4913|lm|hist,arch|1|3|Dazzling royal complex housing the Emerald Buddha|150
+Wat Pho|13.7465|100.4927|rl|hist,relax|1|1|Temple of the giant Reclining Buddha and Thai massage school|90
+Wat Arun|13.7437|100.4888|rl|arch,photo|1|1|Riverside temple of the Dawn with porcelain-covered spires|60
+Jim Thompson House|13.7490|100.5285|mu|art,hist|2|2|Teak house and collection of the Thai silk entrepreneur|75
+Chatuchak Weekend Market|13.7999|100.5500|sh|shop,food|1|0|One of the world's largest markets, with 15,000 stalls|180
+Khao San Road|13.7589|100.4974|at|night,cult|2|0|Backpacker hub of street food, bars and stalls|90
+Lumphini Park|13.7314|100.5414|pk|relax,nat|2|0|Central park with monitor lizards and paddle boats|75
+Chinatown (Yaowarat)|13.7400|100.5095|at|food,cult|1|0|Neon-lit street-food capital after dark|120
+Wat Saket (Golden Mount)|13.7537|100.5066|rl|photo,hist|2|1|Hilltop temple with a 360-degree city view|60
+Erawan Shrine|13.7443|100.5403|rl|cult|3|0|Busy Hindu shrine with traditional dance offerings|20
+Chao Phraya River Cruise|13.7270|100.5110|at|relax,photo|2|2|Boat ride past temples and riverside life|90
+Bangkok National Museum|13.7575|100.4931|mu|hist|3|1|Thailand's largest museum|90
+Siam Paragon|13.7461|100.5347|sh|shop,fam|3|0|Luxury mall with an aquarium|120
+Asiatique The Riverfront|13.7044|100.5030|sh|shop,food|3|0|Night market with a Ferris wheel|120
+MahaNakhon SkyWalk|13.7237|100.5285|vp|photo|3|3|Skyscraper observation deck with a glass floor|60
+Bang Krachao|13.6780|100.5600|pk|nat,adv|3|1|Green lung of the city, explored by bicycle|180
+Thip Samai|13.7536|100.5044|rs|food|1|1|The legendary pad thai restaurant|45
+Jay Fai|13.7527|100.5040|rs|food|2|3|Michelin-starred street-food master with goggles and a wok|75
+Or Tor Kor Market|13.7994|100.5480|rs|food|2|1|Immaculate market of Thai fruit and ready meals|60
+Soul Food Mahanakorn|13.7243|100.5826|rs|food|3|2|Modern Thai dishes in Thonglor|75
+
+=Chiang Mai|TH
+Wat Phra That Doi Suthep|18.8049|98.9217|rl|hist,photo|1|1|Golden hilltop temple with panoramic views|120
+Three Kings Monument|18.7871|98.9931|lm|hist|3|0|Statue of the founders of the Lanna kingdom|15
+Wat Chedi Luang|18.7869|98.9867|rl|hist,arch|1|1|Ruined giant chedi in the old city|60
+Wat Phra Singh|18.7880|98.9818|rl|hist,arch|1|1|Royal temple with a revered Buddha image|60
+Sunday Walking Street|18.7880|98.9870|sh|shop,cult|1|0|Weekly street market along Ratchadamnoen Road|150
+Night Bazaar|18.7860|99.0000|sh|shop,food|2|0|Nightly market of crafts and snacks|120
+Wat Umong|18.7800|98.9500|rl|hist,relax|3|0|Forest temple with ancient tunnels|60
+Wiang Kum Kam|18.7500|99.0190|lm|hist|3|0|Ruins of a lost Lanna town|90
+Chiang Mai Zoo|18.8100|98.9470|at|nat,fam|3|2|Hillside zoo with a panda house|180
+Nimmanhaemin Road|18.7990|98.9680|sh|shop,food|2|0|Trendy strip of cafés and boutiques|90
+Huay Tung Tao Lake|18.8610|98.9570|pk|relax|3|0|Lakeside huts for lunch and lazing|120
+Warorot Market|18.7900|99.0010|sh|food,shop|2|0|Bustling local market of northern Thai snacks|75
+Bo Sang Umbrella Village|18.7700|99.0700|at|art,shop|3|0|Craft village of painted paper umbrellas|90
+Wat Phra That Doi Kham|18.7650|98.9280|rl|hist,photo|3|0|Temple of the Golden Mountain|60
+Tha Phae Gate|18.7877|98.9936|lm|hist|3|0|Old city gate and meeting place|20
+Wat Suan Dok|18.7880|98.9700|rl|hist,arch|3|0|Temple of white chedis|45
+Khao Soi Lamduan Faharm|18.7830|99.0030|rs|food|1|1|Well-loved curry noodles|45
+Huen Phen|18.7860|98.9830|rs|food,hist|2|2|Classic northern Thai dishes in a teak house|75
+Ristr8to Lab|18.8000|98.9670|cf|food|2|2|Award-winning latte art café|45
+Chiang Mai Gate Night Food|18.7808|98.9923|rs|food|2|1|Grilled snacks and noodles near the south gate|60
+
+=Phuket|TH
+Big Buddha Phuket|7.8275|98.3128|lm|relax,photo|1|0|45-metre white marble Buddha on a hilltop|60
+Wat Chalong|7.8464|98.3370|rl|hist,cult|1|0|Phuket's most important Buddhist temple|60
+Phuket Old Town|7.8840|98.3880|at|hist,food,photo|1|0|Sino-Portuguese shophouses in pastel colours|120
+Patong Beach|7.8960|98.2960|bc|night,relax|2|0|Busiest beach, with shops and nightlife|180
+Kata Beach|7.8200|98.2980|bc|relax,sport|2|0|Wide sandy beach popular for surfing|180
+Karon Beach|7.8430|98.2950|bc|relax|2|0|Long stretch of soft sand|180
+Promthep Cape|7.7620|98.3050|vp|photo|1|0|Southern tip famed for sunsets|60
+Phi Phi Islands|7.7407|98.7784|nt|nat,adv|1|3|Boat trip to turquoise bays and snorkelling|480
+Phang Nga Bay|8.2746|98.5012|nt|nat,photo|1|3|Limestone karsts and sea caves|480
+Bangla Road|7.8945|98.2965|nl|night|2|0|Patong's neon nightlife street|120
+Nai Harn Beach|7.7796|98.3041|bc|relax|2|0|Calmer beach near Promthep|180
+Sirinat National Park|8.0910|98.2980|nt|nat,relax|3|1|Long sandy park with turtle nesting|150
+Dibuk Road|7.8823|98.3877|at|hist,photo|3|0|Sino-Portuguese heritage lane|45
+Naka Weekend Market|7.8870|98.3800|sh|shop,food|3|0|Night market of clothes and street food|120
+Karon Viewpoint|7.8090|98.3050|vp|photo|2|0|Lookout over three beaches|30
+Kata Noi Beach|7.8050|98.2990|bc|relax|3|0|Smaller, quieter beach|150
+One Chun Café and Restaurant|7.8825|98.3885|rs|food,hist|2|2|Phuket-style dishes in an old townhouse|75
+Raya Restaurant|7.8842|98.3881|rs|food,hist|1|2|Local Phuket cuisine in a Sino-Portuguese mansion|75
+Kopitiam by Wilai|7.8865|98.3895|rs|food|2|2|Old-town café with Phuket specialities|60
+Rawai Seafood Market|7.7800|98.3250|rs|food|3|2|Pick fresh seafood and have it grilled|75
+
+=Singapore|SG
+Gardens by the Bay|1.2816|103.8636|pk|nat,photo|1|2|Supertrees, flower domes and a night light show|150
+Marina Bay Sands SkyPark|1.2834|103.8607|vp|arch,photo|1|3|Rooftop deck and infinity pool views|75
+Merlion Park|1.2868|103.8545|lm|photo|1|0|The city's half-lion, half-fish mascot|30
+Sentosa Island|1.2494|103.8303|at|fam,relax|1|2|Resort island of beaches and attractions|240
+Singapore Zoo|1.4043|103.7930|at|nat,fam|2|3|Open-concept zoo in a rainforest setting|210
+Night Safari|1.4025|103.7890|at|nat,fam|2|3|World's first nocturnal zoo|150
+Chinatown Heritage|1.2834|103.8440|at|hist,cult|2|0|Temples, shophouses and the Buddha Tooth Relic Temple|120
+Little India|1.3066|103.8518|at|cult,food|2|0|Colourful streets and Tekka Centre|120
+Kampong Glam|1.3024|103.8590|at|cult,shop|2|0|Sultan Mosque and Arab Street boutiques|90
+Singapore Botanic Gardens|1.3138|103.8159|pk|nat,relax|1|0|UNESCO garden with the National Orchid Garden|120
+Orchard Road|1.3048|103.8318|sh|shop|2|0|Singapore's shopping boulevard|120
+Clarke Quay|1.2906|103.8465|at|night,food|3|0|Riverside bars and restaurants|90
+Jewel Changi Airport|1.3602|103.9893|at|arch,photo|2|0|Indoor waterfall and forest at the airport|120
+Fort Canning Park|1.2945|103.8459|pk|hist,relax|3|0|Hilltop park of history trails|75
+National Gallery Singapore|1.2903|103.8515|mu|art,arch|2|2|Southeast Asian art in two colonial buildings|120
+ArtScience Museum|1.2863|103.8593|mu|art,arch|3|3|Lotus-shaped museum of immersive exhibitions|90
+Maxwell Food Centre|1.2802|103.8448|rs|food|1|1|Hawker centre famed for Tian Tian chicken rice|60
+Lau Pa Sat|1.2806|103.8504|rs|food,hist|2|1|Victorian market hall turned hawker centre|60
+Ya Kun Kaya Toast|1.2836|103.8480|cf|food|2|1|Classic kaya toast and soft-boiled eggs|45
+Jumbo Seafood Riverside Point|1.2893|103.8450|rs|food|3|3|Famed chilli crab on the river|90
+
+=Kuala Lumpur|MY
+Petronas Twin Towers|3.1579|101.7116|lm|arch,photo|1|3|Iconic twin towers with a sky bridge|90
+Batu Caves|3.2379|101.6840|rl|cult,adv|1|0|Hindu shrines in limestone caves behind a rainbow staircase|120
+KL Tower|3.1528|101.7038|vp|photo|2|3|Telecom tower with a 360-degree observation deck|60
+Merdeka Square|3.1479|101.6933|at|hist|2|0|Where Malaysian independence was declared|30
+Sultan Abdul Samad Building|3.1482|101.6943|lm|arch,hist|3|0|Moorish colonial building on the square|20
+Masjid Jamek|3.1494|101.6966|rl|arch|3|0|Mosque at the confluence of two rivers|30
+Central Market|3.1447|101.6955|sh|shop,art|2|0|Art deco market of crafts and batik|75
+Petaling Street|3.1435|101.6975|sh|shop,food|2|0|Chinatown's street market|90
+Bukit Bintang|3.1466|101.7110|sh|shop,night|2|0|Shopping and entertainment district|120
+KLCC Park|3.1544|101.7136|pk|relax,photo|2|0|Landscaped park below the towers|60
+Islamic Arts Museum Malaysia|3.1420|101.6890|mu|art|2|2|Southeast Asia's largest Islamic art museum|90
+National Mosque|3.1420|101.6917|rl|arch|3|0|Modernist mosque with an umbrella-shaped dome|30
+Thean Hou Temple|3.1193|101.6870|rl|arch,cult|3|0|Six-tiered Chinese temple on a hill|45
+Perdana Botanical Gardens|3.1430|101.6850|pk|nat,relax|3|0|Lake Gardens with orchids and hibiscus|90
+KL Bird Park|3.1428|101.6870|at|nat,fam|3|2|Large walk-in aviary|120
+Putrajaya|2.9264|101.6964|at|arch,photo|3|0|Planned administrative city with grand mosques|180
+Jalan Alor|3.1459|101.7088|rs|food,night|1|1|Night food street of satay, noodles and seafood|90
+Madras Lane Curry Laksa|3.1439|101.6985|rs|food|3|1|Hawker stall famed for curry laksa|30
+Old China Café|3.1466|101.6969|rs|food,hist|2|2|Nyonya dishes in a former guild hall|75
+Yut Kee|3.1554|101.7017|rs|food,hist|2|1|Hainanese kopitiam dating to 1928|60
+
+=Hanoi|VN
+Hoan Kiem Lake|21.0285|105.8522|pk|relax,photo|1|0|Legend-shrouded lake at the city's heart|60
+Old Quarter|21.0340|105.8500|at|cult,shop,food|1|0|36 streets of trades, street food and motorbikes|150
+Temple of Literature|21.0287|105.8355|rl|hist,arch|1|1|Vietnam's first university, founded in 1070|75
+Ho Chi Minh Mausoleum|21.0368|105.8346|lm|hist|2|0|Resting place of Vietnam's leader|60
+One Pillar Pagoda|21.0359|105.8337|rl|hist|3|0|Tiny 11th-century pagoda on a single pillar|20
+Hoa Lo Prison|21.0252|105.8465|mu|hist|2|1|The 'Hanoi Hilton' prison museum|75
+Vietnam Museum of Ethnology|21.0407|105.7985|mu|hist,cult|2|1|Museum of Vietnam's 54 ethnic groups|120
+Ngoc Son Temple|21.0290|105.8525|rl|hist|2|1|Island temple reached by a red bridge|30
+St. Joseph's Cathedral|21.0289|105.8489|rl|arch|3|0|Neo-Gothic cathedral beside cafés|20
+West Lake|21.0560|105.8200|pk|relax|3|0|Large lake with lakeside temples and cafés|90
+Tran Quoc Pagoda|21.0490|105.8360|rl|hist,photo|3|0|Oldest Buddhist temple in Hanoi on a West Lake islet|30
+Thang Long Water Puppet Theatre|21.0313|105.8525|en|cult,fam|1|1|Traditional water puppetry|60
+Long Bien Bridge|21.0433|105.8600|lm|hist,photo|3|0|Historic steel bridge over the Red River|45
+Train Street|21.0245|105.8410|at|photo|3|0|Narrow lane where trains pass close to cafés|30
+Dong Xuan Market|21.0386|105.8490|sh|shop,food|3|0|Largest covered market in the Old Quarter|60
+Bat Trang Ceramic Village|20.9750|105.9150|at|art,shop|3|0|Potters' village outside the city|150
+Bún Chả Hương Liên|21.0131|105.8517|rs|food|1|1|The bun cha spot where Obama and Bourdain dined|45
+Phở Gia Truyền|21.0335|105.8462|rs|food|2|1|Legendary beef pho on Bát Đàn|30
+Giảng Café|21.0322|105.8531|cf|food|1|1|Birthplace of Hanoi's egg coffee|30
+Café Đinh|21.0298|105.8524|cf|food|3|1|Classic egg coffee above the lake|30
+
+=Ho Chi Minh City|VN
+War Remnants Museum|10.7794|106.6920|mu|hist|1|1|Sobering museum of the Vietnam War|90
+Reunification Palace|10.7770|106.6955|lm|hist|1|1|Preserved 1960s palace where the war ended|75
+Notre-Dame Cathedral Basilica|10.7798|106.6990|rl|arch|2|0|Red-brick Romanesque cathedral|30
+Central Post Office|10.7799|106.6999|lm|arch,hist|2|0|Eiffel-era colonial post office|30
+Ben Thanh Market|10.7725|106.6980|sh|shop,food|1|0|Bustling central market|90
+Cu Chi Tunnels|11.1420|106.4620|at|hist,adv|1|2|Network of Viet Cong tunnels, a half-day trip|240
+Bui Vien Walking Street|10.7670|106.6930|nl|night,food|2|0|Backpacker street of bars and street food|90
+Jade Emperor Pagoda|10.7922|106.6982|rl|cult,hist|2|1|Smoky Taoist temple of carved deities|45
+Bitexco Financial Tower Skydeck|10.7717|106.7043|vp|photo|2|2|Observation deck above the city|45
+Saigon Opera House|10.7766|106.7030|lm|arch,music|3|0|French colonial municipal theatre|20
+Nguyen Hue Walking Street|10.7740|106.7030|at|cult,photo|2|0|Broad pedestrian boulevard|45
+Cholon Binh Tay Market|10.7496|106.6500|sh|shop,cult|2|0|Wholesale market in Chinatown|75
+Thien Hau Temple|10.7520|106.6610|rl|cult|3|0|Temple to the sea goddess in Cholon|30
+Saigon Zoo and Botanical Gardens|10.7875|106.7050|at|nat,fam|3|1|Historic zoo in a green park|120
+Vinh Nghiem Pagoda|10.7900|106.6770|rl|arch|3|0|Modern pagoda with a nine-storey tower|30
+Landmark 81 SkyView|10.7950|106.7220|vp|photo|3|3|Vietnam's tallest tower with a top-floor lookout|60
+Phở Hòa Pasteur|10.7865|106.6885|rs|food|2|1|Long-standing pho house|45
+Bánh Mì Huỳnh Hoa|10.7695|106.6880|rs|food|1|1|Huge, loaded banh mi|20
+The Workshop Coffee|10.7746|106.7044|cf|food|3|2|Specialty coffee in an old building|45
+The Cafe Apartment|10.7745|106.7040|cf|food,photo|3|2|Coffee shops stacked in a colonial apartment block|60
+
+=Siem Reap|KH
+Angkor Wat|13.4125|103.8670|rl|hist,arch,photo|1|3|The world's largest religious monument, at its best at sunrise|240
+Angkor Thom and the Bayon|13.4412|103.8589|lm|hist,photo|1|3|Gate-towers and the smiling faces of the Bayon|180
+Ta Prohm|13.4350|103.8890|lm|hist,photo|1|3|Temple swallowed by giant tree roots|90
+Banteay Srei|13.5990|103.9630|rl|art,hist|2|3|Exquisitely carved pink sandstone temple|90
+Pub Street|13.3540|103.8550|nl|night,food|2|0|Lively street of bars and restaurants|90
+Psar Chas (Old Market)|13.3547|103.8552|sh|shop,food|2|0|Central market of souvenirs and snacks|60
+Phnom Bakheng|13.4330|103.8600|vp|photo,hist|2|3|Hilltop temple for sunset views|75
+Kampong Phluk|13.2150|103.9830|at|cult,nat|3|2|Floating village on stilts at the Tonle Sap|180
+Angkor National Museum|13.3690|103.8600|mu|hist|3|2|Introduction to the Khmer empire|90
+Preah Khan|13.4610|103.8850|lm|hist|3|3|Sprawling temple of corridors and trees|75
+Neak Pean|13.4630|103.8990|lm|hist|3|3|Island temple in a reservoir|30
+Beng Mealea|13.4750|104.2380|lm|hist,adv|3|2|Overgrown jungle temple far east of Angkor|120
+Artisans Angkor|13.3550|103.8520|sh|art,shop|3|0|Workshops reviving Khmer crafts|60
+Phare Cambodian Circus|13.3563|103.8517|en|art,cult|2|3|Acrobatic circus from a social enterprise|75
+Wat Damnak|13.3430|103.8620|rl|cult,hist|3|0|Active pagoda near the centre|30
+Angkor Night Market|13.3590|103.8540|sh|shop,food|3|0|Evening stalls of crafts and street food|75
+Cuisine Wat Damnak|13.3480|103.8640|rs|food|2|3|Acclaimed Khmer tasting menu|105
+Khmer Kitchen|13.3540|103.8540|rs|food|3|1|Classic amok and lok lak|60
+Little Red Fox Espresso|13.3533|103.8514|cf|food|3|2|Specialty coffee and brunch|45
+Old Market Food Stalls|13.3547|103.8555|rs|food|3|1|Noodle soups and sweets inside the market|45
+
+=Bali|ID|Denpasar
+Tanah Lot|-8.6212|115.0868|rl|photo,hist|1|1|Sea temple on a rocky outcrop, stunning at sunset|90
+Uluwatu Temple|-8.8291|115.0849|rl|photo,hist|1|1|Clifftop temple with Kecak fire dances at dusk|120
+Sacred Monkey Forest Sanctuary|-8.5190|115.2588|nt|nat,fam|1|1|Forest of ancient temples and macaques|90
+Tegallalang Rice Terraces|-8.4312|115.2796|nt|photo,nat|1|1|Iconic terraced rice paddies|90
+Tirta Empul Temple|-8.4153|115.3153|rl|cult,relax|2|1|Holy spring temple for purification rituals|75
+Ubud Palace|-8.5069|115.2625|lm|hist,arch|2|0|Royal palace in the heart of Ubud|30
+Ubud Art Market|-8.5068|115.2619|sh|shop,art|2|0|Crafts, textiles and souvenirs|60
+Seminyak Beach|-8.6913|115.1587|bc|relax,night|2|0|Trendy beach of sunset bars|150
+Kuta Beach|-8.7184|115.1686|bc|sport,night|2|0|Surf beach with a lively scene|150
+Sanur Beach|-8.6939|115.2630|bc|relax,fam|3|0|Calm, reef-protected beach|150
+Nusa Dua Beach|-8.8006|115.2313|bc|relax|3|0|Resort beach with gentle water|150
+Garuda Wisnu Kencana Cultural Park|-8.8100|115.1680|at|cult,photo|3|2|Giant Vishnu and Garuda statue park|120
+Ulun Danu Beratan Temple|-8.2753|115.1668|rl|photo,hist|1|1|Lakeside temple on Bali's highlands|75
+Campuhan Ridge Walk|-8.5100|115.2500|nt|nat,relax|2|0|Scenic ridge path outside Ubud|75
+Bali Museum|-8.6554|115.2165|mu|hist,cult|3|1|Balinese art and history in Denpasar|75
+Sukawati Art Market|-8.5950|115.2870|sh|shop,art|3|0|Handicrafts and paintings at bargain prices|75
+Naughty Nuri's Warung|-8.5113|115.2533|rs|food|2|2|Famous grilled ribs and martinis|75
+Warung Babi Guling Ibu Oka|-8.5070|115.2635|rs|food|1|1|Ubud's celebrated suckling pig|45
+Jimbaran Seafood Cafés|-8.7900|115.1660|rs|food|2|3|Beach barbecues of fresh seafood at sunset|90
+Revolver Espresso|-8.6860|115.1630|cf|food|3|2|Specialty coffee in Seminyak|45
+
+=Colombo|LK
+Gangaramaya Temple|6.9166|79.8563|rl|hist,art|1|1|Eclectic Buddhist temple of relics and curios|60
+Galle Face Green|6.9271|79.8448|pk|relax,food|1|0|Seafront promenade for sunsets and street food|90
+Colombo National Museum|6.9109|79.8612|mu|hist|2|1|Sri Lanka's largest museum|90
+Independence Memorial Hall|6.9020|79.8680|lm|hist|3|0|Monument to independence|30
+Pettah Market|6.9374|79.8524|sh|shop,cult|2|0|Crowded bazaar district|90
+Lotus Tower|6.9272|79.8587|vp|arch,photo|2|2|Tall tower with a view of the city|60
+Viharamahadevi Park|6.9147|79.8622|pk|relax|3|0|Central park with a giant Buddha|45
+Jami Ul-Alfar Mosque (Red Mosque)|6.9372|79.8530|rl|arch,photo|2|0|Candy-striped mosque in Pettah|30
+Seema Malaka|6.9167|79.8563|rl|arch,relax|2|1|Floating temple on Beira Lake|30
+Dutch Hospital Shopping Precinct|6.9343|79.8427|sh|shop,food,hist|2|0|Restored colonial hospital of restaurants|75
+Mount Lavinia Beach|6.8300|79.8650|bc|relax|2|0|Golden beach south of the city|150
+Kelaniya Raja Maha Vihara|6.9570|79.9220|rl|hist,cult|3|0|Ancient temple with murals|45
+Dehiwala Zoo|6.8560|79.8740|at|nat,fam|3|2|Historic zoo with elephant shows|150
+Wolvendaal Church|6.9380|79.8670|rl|hist|3|0|Dutch Reformed church from 1757|30
+St. Lucia's Cathedral|6.9505|79.8600|rl|arch|3|0|Neoclassical cathedral|30
+Negombo|7.2090|79.8380|at|relax,food|3|0|Fishing town and beach north of the airport|180
+Ministry of Crab|6.9335|79.8430|rs|food|1|3|Celebrated Sri Lankan crab restaurant|90
+Galle Face Hotel Afternoon Tea|6.9241|79.8453|cf|food,hist|2|3|Colonial hotel's seafront tea|75
+Pettah Street Food|6.9365|79.8525|rs|food|3|1|Hot snacks in the bazaar lanes|45
+Galle Face Green Street Food|6.9260|79.8443|rs|food|2|1|Kottu and isso wade stalls at dusk|45

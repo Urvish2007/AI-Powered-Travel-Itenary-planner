@@ -1,0 +1,219 @@
+=New York|US|New York City
+Statue of Liberty|40.6892|-74.0445|lm|hist,photo|1|2|Lady Liberty on her island, reached by ferry|180
+Empire State Building|40.7484|-73.9857|vp|arch,photo|1|3|Art Deco skyscraper with 86th and 102nd floor decks|75
+Central Park|40.7829|-73.9654|pk|relax,nat|1|0|843 acres of lakes, meadows and bridges in Manhattan|150
+Times Square|40.7580|-73.9855|at|night,shop|1|0|Neon crossroads of Broadway and the city|45
+Brooklyn Bridge|40.7061|-73.9969|lm|arch,photo|1|0|Gothic-arched suspension bridge with a pedestrian promenade|60
+The Metropolitan Museum of Art|40.7794|-73.9632|mu|art|1|3|Five thousand years of art across two million works|240
+Museum of Modern Art|40.7614|-73.9776|mu|art|2|3|Van Gogh's Starry Night and modern icons|150
+9/11 Memorial and Museum|40.7115|-74.0134|mu|hist|1|3|Reflecting pools and a museum at the Twin Towers site|120
+Top of the Rock|40.7593|-73.9794|vp|photo|2|3|Rockefeller Center observation deck with Central Park views|60
+The High Line|40.7480|-74.0048|pk|relax,arch|2|0|Elevated rail line turned garden path|75
+Grand Central Terminal|40.7527|-73.9772|lm|arch,hist|2|0|Beaux-Arts station with a star-studded ceiling|45
+American Museum of Natural History|40.7813|-73.9740|mu|nat,fam|2|3|Dinosaurs, the blue whale and the Hayden Planetarium|180
+Washington Square Park|40.7308|-73.9973|pk|cult,music|3|0|Village park with the famous arch and buskers|45
+Coney Island|40.5755|-73.9707|at|fam,relax|3|0|Boardwalk, beach, amusement rides and hot dogs|180
+Chinatown|40.7158|-73.9970|at|food,cult|3|0|Dense lanes of dim sum, markets and bakeries|90
+Staten Island Ferry|40.7013|-74.0132|at|photo|2|0|Free ferry with views of Lady Liberty|60
+Katz's Delicatessen|40.7223|-73.9874|rs|food,hist|1|2|Pastrami on rye since 1888|60
+Joe's Pizza|40.7306|-74.0021|rs|food|2|1|Classic New York slice in Greenwich Village|20
+Russ and Daughters|40.7223|-73.9882|cf|food,hist|3|2|Bagels and lox since 1914|30
+Shake Shack Madison Square Park|40.7413|-73.9881|rs|food|3|1|The original burger stand|30
+
+=Los Angeles|US
+Griffith Observatory|34.1184|-118.3004|at|nat,photo|1|0|Free observatory with a skyline view and the Hollywood Sign|90
+Hollywood Walk of Fame|34.1016|-118.3267|at|cult,photo|1|0|Stars of entertainment legends along Hollywood Boulevard|60
+Santa Monica Pier|34.0092|-118.4973|at|fam,photo|1|0|Ferris wheel and amusements at the end of Route 66|90
+Venice Beach Boardwalk|33.9850|-118.4695|at|cult,relax|1|0|Skaters, street performers and Muscle Beach|120
+The Getty Center|34.0780|-118.4741|mu|art,arch|1|0|Hilltop art museum with gardens and views|180
+Universal Studios Hollywood|34.1381|-118.3534|en|fam|2|3|Studio theme park with a backlot tram tour|480
+Hollywood Sign Viewpoint|34.1280|-118.3190|vp|photo|2|0|Lake Hollywood Park lookout for the famous sign|45
+The Grove|34.0720|-118.3570|sh|shop|3|0|Outdoor shopping centre beside the Farmers Market|90
+LACMA|34.0639|-118.3592|mu|art|2|3|Largest art museum in the western US, home of Urban Light|120
+Rodeo Drive|34.0680|-118.4000|sh|shop|3|0|Beverly Hills' luxury shopping street|60
+Griffith Park|34.1366|-118.2942|pk|nat,adv|2|0|Huge urban park with hiking trails|150
+Runyon Canyon|34.1180|-118.3500|nt|adv,nat|3|0|Popular hike with city views|90
+Walt Disney Concert Hall|34.0553|-118.2498|lm|arch,music|2|0|Frank Gehry's steel-sailed concert hall|45
+TCL Chinese Theatre|34.1022|-118.3410|lm|hist,photo|2|2|Movie palace with celebrity handprints|45
+Malibu Beach|34.0259|-118.7798|bc|relax,nat|2|0|Pacific coast beaches west of the city|180
+Hollywood Bowl|34.1122|-118.3391|en|music|3|2|Iconic outdoor amphitheatre|120
+Grand Central Market|34.0508|-118.2490|rs|food|1|1|Historic downtown food hall|75
+Pink's Hot Dogs|34.0838|-118.3440|rs|food,hist|2|1|Hollywood hot-dog stand since 1939|30
+Philippe the Original|34.0560|-118.2360|rs|food,hist|2|1|Birthplace of the French dip sandwich|45
+Canter's Deli|34.0830|-118.3610|rs|food,hist|3|2|24-hour Jewish deli since 1931|60
+
+=San Francisco|US
+Golden Gate Bridge|37.8199|-122.4783|lm|arch,photo|1|0|The International Orange icon over the bay|75
+Alcatraz Island|37.8267|-122.4230|at|hist|1|3|Former federal prison reached by ferry|180
+Fisherman's Wharf|37.8080|-122.4177|at|fam,food|2|0|Sea lions at Pier 39 and crab stands|90
+Lombard Street|37.8021|-122.4187|lm|photo|2|0|The 'crookedest street' of eight hairpin turns|20
+Golden Gate Park|37.7694|-122.4862|pk|nat,relax|1|0|Larger than Central Park, with gardens and museums|150
+Painted Ladies|37.7763|-122.4328|lm|arch,photo|2|0|Victorian houses beside Alamo Square|30
+Powell-Hyde Cable Car|37.7845|-122.4079|at|hist,photo|1|1|Ride the world's last manually operated cable cars|45
+Chinatown|37.7941|-122.4078|at|cult,food|2|0|The oldest Chinatown in North America|90
+Coit Tower|37.8024|-122.4058|vp|photo,art|2|1|Telegraph Hill tower with murals and city views|45
+Ferry Building Marketplace|37.7956|-122.3934|sh|food|2|0|Waterfront food hall and farmers market|75
+Palace of Fine Arts|37.8029|-122.4484|lm|arch,photo|2|0|Rotunda and lagoon from the 1915 Exposition|30
+Twin Peaks|37.7544|-122.4477|vp|photo|2|0|Panoramic hilltop viewpoint|30
+Muir Woods National Monument|37.8970|-122.5811|nt|nat|1|2|Old-growth coastal redwood forest|120
+de Young Museum|37.7715|-122.4687|mu|art|3|2|Art museum with a tower observation deck|90
+California Academy of Sciences|37.7699|-122.4661|mu|nat,fam|2|3|Aquarium, planetarium and living roof|180
+Sausalito|37.8591|-122.4853|at|relax,photo|2|0|Waterfront town across the bridge|150
+Tartine Bakery|37.7614|-122.4241|cf|food|1|2|Famed morning buns and country bread|45
+Swan Oyster Depot|37.7907|-122.4208|rs|food,hist|2|2|Counter-only seafood institution since 1912|60
+Boudin Bakery|37.8084|-122.4152|cf|food,hist|3|1|Sourdough bread in a clam chowder bowl|45
+La Taqueria|37.7506|-122.4182|rs|food|2|1|Celebrated Mission-style burritos|30
+
+=Las Vegas|US
+Welcome to Fabulous Las Vegas Sign|36.0820|-115.1728|lm|photo|1|0|The classic roadside sign at the south end of the Strip|20
+Bellagio Fountains|36.1127|-115.1767|at|photo|1|0|Choreographed water show on a lake|30
+The Venetian and Grand Canal|36.1212|-115.1697|at|arch,fam|2|1|Gondolas and canals inside a casino resort|75
+Fremont Street Experience|36.1708|-115.1423|at|night,music|1|0|Canopy of lights over Old Las Vegas|90
+High Roller Observation Wheel|36.1177|-115.1681|vp|photo|2|3|One of the world's tallest observation wheels|45
+Hoover Dam|36.0160|-114.7377|lm|hist,arch|1|2|Art Deco dam on the Colorado River|150
+Red Rock Canyon|36.1350|-115.4270|nt|nat,adv|1|1|Sandstone cliffs and scenic loop drive|180
+Sphere|36.1207|-115.1668|en|arch,music|2|3|Giant LED dome for immersive shows|120
+Caesars Palace|36.1162|-115.1745|lm|arch|3|0|Roman-themed casino resort with the Forum Shops|60
+The Mob Museum|36.1720|-115.1420|mu|hist|2|2|Museum of organised crime and law enforcement|120
+The Neon Museum|36.1790|-115.1350|mu|art,hist,photo|2|2|Boneyard of vintage Las Vegas signs|75
+Shark Reef Aquarium|36.0910|-115.1750|at|nat,fam|3|3|Aquarium at Mandalay Bay|90
+Seven Magic Mountains|35.8370|-115.2710|at|art,photo|3|0|Colourful stacked boulders in the desert|45
+Springs Preserve|36.1730|-115.1900|at|nat,hist|3|2|Desert gardens and museum|120
+Eiffel Tower Experience|36.1125|-115.1708|vp|photo|3|2|Half-scale Eiffel Tower viewing deck|45
+The STRAT Tower|36.1475|-115.1565|vp|adv,photo|3|2|Observation tower with thrill rides|75
+Bacchanal Buffet|36.1163|-115.1747|rs|food|2|3|Huge buffet at Caesars Palace|90
+Mon Ami Gabi|36.1125|-115.1718|rs|food|3|3|Parisian bistro facing the Bellagio fountains|90
+Eggslut|36.1097|-115.1738|cf|food|3|2|Cult egg sandwiches at The Cosmopolitan|30
+Lotus of Siam|36.1438|-115.1427|rs|food|2|2|Acclaimed northern Thai restaurant|75
+
+=Chicago|US
+Cloud Gate (The Bean)|41.8827|-87.6233|lm|art,photo|1|0|Reflective steel sculpture in Millennium Park|30
+Art Institute of Chicago|41.8796|-87.6237|mu|art|1|3|American Gothic, Nighthawks and Impressionist masterworks|180
+Navy Pier|41.8917|-87.6019|at|fam|2|0|Lakefront pier with a Ferris wheel and boat tours|120
+Willis Tower Skydeck|41.8789|-87.6359|vp|photo,arch|1|3|Glass ledge 103 storeys above the city|60
+Crown Fountain|41.8814|-87.6246|at|art,fam|3|0|Video-tower fountains in Millennium Park|30
+Chicago Riverwalk|41.8880|-87.6290|pk|relax,arch|2|0|Walkway along the river with architecture views|75
+Magnificent Mile|41.8940|-87.6240|sh|shop|2|0|North Michigan Avenue's shopping boulevard|90
+Lincoln Park Zoo|41.9212|-87.6340|at|nat,fam|2|0|Free historic zoo|120
+Field Museum|41.8663|-87.6169|mu|nat,hist|2|3|Sue the T. rex and natural history|180
+Museum of Science and Industry|41.7906|-87.5830|mu|fam|2|3|Largest science museum in the western hemisphere|180
+Shedd Aquarium|41.8676|-87.6140|at|nat,fam|2|3|Lakeside aquarium|150
+Wrigley Field|41.9484|-87.6553|at|sport,hist|2|2|Historic home of the Chicago Cubs|90
+Chicago Architecture River Cruise|41.8885|-87.6240|at|arch,relax|1|3|Boat tour among the skyscrapers|90
+360 Chicago|41.8989|-87.6232|vp|photo,adv|3|3|Observation deck with TILT window|60
+Garfield Park Conservatory|41.8860|-87.7170|pk|nat|3|0|Glasshouses and tropical plants|75
+Buckingham Fountain|41.8758|-87.6189|lm|photo|3|0|Grant Park's grand fountain|20
+Lou Malnati's|41.8900|-87.6340|rs|food|1|2|Famed deep-dish pizza|75
+Portillo's|41.8930|-87.6310|rs|food|2|1|Chicago-style hot dogs and Italian beef|45
+Garrett Popcorn Shops|41.8928|-87.6244|cf|food|3|1|Caramel and cheese popcorn mix|20
+Au Cheval|41.8845|-87.6479|rs|food|2|2|Cult burger in the West Loop|60
+
+=Miami|US
+South Beach and Ocean Drive|25.7800|-80.1300|bc|night,relax,photo|1|0|Pastel Art Deco hotels facing a famous beach|180
+Art Deco Historic District|25.7810|-80.1310|at|arch,hist|1|0|Largest concentration of Art Deco buildings in the world|75
+Wynwood Walls|25.8010|-80.1990|at|art,photo|1|2|Open-air street art museum|75
+Vizcaya Museum and Gardens|25.7444|-80.2108|mu|arch,hist|2|3|Italian Renaissance-style bayfront villa|120
+Little Havana (Calle Ocho)|25.7660|-80.2190|at|cult,food|2|0|Cuban cafés, cigars and dominoes|90
+Everglades Airboat Ride|25.7600|-80.5300|nt|nat,adv|1|3|Airboat tour across the river of grass|120
+Bayfront Park|25.7750|-80.1860|pk|relax,music|3|0|Downtown waterfront park|45
+Pérez Art Museum Miami|25.7860|-80.1860|mu|art,arch|3|2|Contemporary art on Biscayne Bay|90
+Bill Baggs Cape Florida State Park|25.6670|-80.1560|nt|nat,relax|3|1|Lighthouse and beaches on Key Biscayne|150
+Venetian Pool|25.7510|-80.2730|at|relax,hist|2|2|1920s coral-rock swimming lagoon in Coral Gables|90
+Fairchild Tropical Botanic Garden|25.6770|-80.2740|pk|nat|3|2|Large tropical botanical garden|120
+Miami Seaquarium|25.7330|-80.1630|at|nat,fam|3|3|Marine park on Virginia Key|180
+Lincoln Road Mall|25.7910|-80.1400|sh|shop,food|2|0|Pedestrian mall of shops and cafés|75
+Miami Beach Botanical Garden|25.7960|-80.1330|pk|nat,relax|3|0|Garden oasis beside Collins Park|45
+Miami Design District|25.8130|-80.1930|sh|shop,art|3|0|Luxury shopping and public art|75
+Matheson Hammock Park|25.6780|-80.2750|bc|relax,nat|3|1|Atoll pool and mangroves|90
+Joe's Stone Crab|25.7690|-80.1350|rs|food,hist|1|3|Miami Beach institution since 1913|90
+Versailles Restaurant|25.7650|-80.2500|rs|food|2|2|Famous Cuban restaurant on Calle Ocho|75
+Ball and Chain|25.7660|-80.2150|br|music,night|3|2|Historic Little Havana bar with live Latin music|90
+Azucar Ice Cream Company|25.7650|-80.2190|cf|food|3|1|Cuban-flavoured ice cream|30
+
+=Washington D.C.|US|Washington
+Lincoln Memorial|38.8893|-77.0502|lm|hist,photo|1|0|Marble temple to the 16th president at the Reflecting Pool|45
+Washington Monument|38.8895|-77.0353|lm|hist,photo|1|0|555-foot obelisk at the heart of the Mall|45
+U.S. Capitol|38.8899|-77.0091|lm|hist,arch|1|0|Seat of Congress under a cast-iron dome|75
+The White House|38.8977|-77.0365|lm|hist|1|0|Official residence of the US president|45
+National Air and Space Museum|38.8882|-77.0199|mu|hist,fam|1|0|Wright Flyer, Apollo 11 and spacecraft|150
+National Museum of Natural History|38.8913|-77.0261|mu|nat,fam|1|0|Hope Diamond and a famous elephant in the rotunda|150
+National Gallery of Art|38.8913|-77.0200|mu|art|2|0|Da Vinci's Ginevra de' Benci and Impressionists|120
+Vietnam Veterans Memorial|38.8914|-77.0477|lm|hist|2|0|Black granite wall engraved with names|30
+Jefferson Memorial|38.8814|-77.0365|lm|hist,photo|2|0|Domed memorial on the Tidal Basin|30
+Library of Congress|38.8887|-77.0047|mu|arch,hist|2|0|Gilded reading room and a Gutenberg Bible|90
+Georgetown|38.9076|-77.0653|at|shop,food,hist|2|0|Cobbled streets, canal and boutiques|120
+National Museum of African American History and Culture|38.8911|-77.0326|mu|hist,cult|1|0|Powerful museum on the African American story|180
+Arlington National Cemetery|38.8783|-77.0689|at|hist|1|0|Military cemetery with the Tomb of the Unknown Soldier|120
+Tidal Basin|38.8838|-77.0396|pk|nat,photo|2|0|Cherry-blossom-lined basin|60
+National Portrait Gallery|38.8979|-77.0230|mu|art,hist|3|0|Portraits of Americans from presidents to icons|90
+Smithsonian National Zoo|38.9296|-77.0498|at|nat,fam|3|0|Free zoo with giant pandas|150
+Ben's Chili Bowl|38.9170|-77.0290|rs|food,hist|2|1|Half-smokes on U Street since 1958|45
+Old Ebbitt Grill|38.8978|-77.0332|rs|food,hist|2|3|Historic saloon near the White House|75
+Founding Farmers|38.9000|-77.0420|rs|food|3|2|Farm-to-table American comfort food|75
+Georgetown Cupcake|38.9055|-77.0650|cf|food|3|1|Cupcake shop made famous on TV|20
+
+=New Orleans|US
+French Quarter|29.9584|-90.0644|at|hist,cult,food|1|0|Wrought-iron balconies and jazz in America's most distinctive district|180
+Jackson Square|29.9574|-90.0629|at|hist,art|1|0|Historic plaza with artists, readers and street performers|45
+St. Louis Cathedral|29.9580|-90.0636|rl|arch,hist|2|0|Iconic cathedral on Jackson Square|30
+Bourbon Street|29.9590|-90.0690|nl|night,music|2|0|Famous party street of bars and clubs|90
+Frenchmen Street|29.9650|-90.0580|nl|music,night|1|0|Live jazz clubs beloved by locals|120
+Garden District|29.9290|-90.0870|at|arch,hist|1|0|Antebellum mansions and oak-lined streets|120
+Preservation Hall|29.9585|-90.0657|en|music,hist|1|3|Intimate traditional jazz in a historic hall|60
+The National WWII Museum|29.9430|-90.0700|mu|hist|1|3|Top-rated museum of the Second World War|180
+Mardi Gras World|29.9420|-90.0630|at|fam,cult|3|2|Behind-the-scenes look at float building|75
+St. Louis Cemetery No. 1|29.9600|-90.0710|at|hist|2|2|Above-ground tombs, including Marie Laveau's|45
+City Park|29.9930|-90.0940|pk|nat,relax|2|0|Giant park with ancient oaks and a sculpture garden|120
+Steamboat Natchez Cruise|29.9530|-90.0630|at|relax,photo|2|3|Paddlewheeler ride on the Mississippi|120
+Barataria Swamp Tour|29.7830|-90.1150|nt|nat,adv|2|3|Bayou boat tour with alligators|180
+Magazine Street|29.9270|-90.0900|sh|shop,food|3|0|Six miles of boutiques and cafés|90
+French Market|29.9600|-90.0610|sh|shop,food|3|0|Open-air market since 1791|60
+Audubon Zoo|29.9250|-90.1280|at|nat,fam|3|2|Zoo with swamp exhibits|150
+Café du Monde|29.9575|-90.0618|cf|food,hist|1|1|Beignets and chicory coffee since 1862|45
+Commander's Palace|29.9285|-90.0840|rs|food,hist|2|3|Grande dame of Creole cuisine in a turquoise mansion|120
+Central Grocery|29.9600|-90.0620|rs|food,hist|2|1|Birthplace of the muffuletta sandwich|30
+Willie Mae's Scotch House|29.9690|-90.0770|rs|food|2|2|Legendary fried chicken|60
+
+=Honolulu|US
+Waikiki Beach|21.2767|-157.8267|bc|relax,sport|1|0|Famous crescent beach with surf lessons and Diamond Head views|180
+Diamond Head Crater|21.2620|-157.8060|nt|adv,photo|1|1|Volcanic crater hike with a panoramic summit|120
+Pearl Harbor (USS Arizona Memorial)|21.3649|-157.9500|lm|hist|1|1|Memorial over the sunken battleship|180
+Iolani Palace|21.3068|-157.8584|lm|hist,arch|2|2|Only royal palace on US soil|75
+Hanauma Bay|21.2690|-157.6940|nt|nat,relax|1|2|Marine preserve and snorkelling bay|180
+Waimea Valley|21.6410|-158.0640|nt|nat|3|2|Botanical garden and waterfall on the North Shore|120
+Manoa Falls|21.3330|-157.8000|nt|nat,adv|2|0|Rainforest hike to a 150-foot waterfall|90
+Honolulu Museum of Art|21.3050|-157.8470|mu|art|3|2|Asian and Pacific art|90
+Bishop Museum|21.3330|-157.8720|mu|hist,nat|3|2|Hawaii's largest museum|120
+Koko Head Crater Trail|21.2830|-157.7000|nt|adv,sport|3|0|Brutal stair-climb up railroad ties|90
+Kailua Beach|21.4000|-157.7240|bc|relax|2|0|Powdery sand and calm turquoise water|180
+Lanikai Pillbox Hike|21.3930|-157.7150|nt|adv,photo|2|0|Short ridge hike with a twin-islet view|75
+Dole Plantation|21.5260|-158.0380|at|fam,food|3|2|Pineapple garden and maze|90
+Ala Moana Beach Park|21.2890|-157.8510|bc|relax,fam|3|0|Local favourite beach park|120
+Polynesian Cultural Center|21.6400|-157.9200|at|cult,fam|2|3|Villages and shows of Pacific cultures|300
+Kualoa Ranch|21.5130|-157.8400|at|adv,fam|2|3|Jurassic Park filming location and adventure tours|240
+Leonard's Bakery|21.2830|-157.8120|cf|food,hist|1|1|Warm malasadas since 1952|30
+Helena's Hawaiian Food|21.3290|-157.8680|rs|food,hist|2|2|James Beard Award-winning local plates|60
+Waiola Shave Ice|21.2970|-157.8230|cf|food|3|1|Hawaiian shave ice since 1940|30
+Marukame Udon Waikiki|21.2790|-157.8310|rs|food|3|1|Fresh udon with a perpetual line|45
+
+=Vancouver|CA
+Stanley Park|49.3043|-123.1443|pk|nat,relax|1|0|Rainforest park with a seawall and totem poles|180
+Granville Island Public Market|49.2712|-123.1342|rs|food,shop|1|0|Waterfront market of local produce and artisans|90
+Capilano Suspension Bridge Park|49.3429|-123.1149|at|adv,nat|1|3|Swaying bridge above a rainforest canyon|120
+Gastown Steam Clock|49.2845|-123.1089|lm|hist,photo|2|0|Victorian steam clock in a historic district|30
+Grouse Mountain|49.3730|-123.0990|nt|adv,nat|1|3|Skyride to peak views and a grizzly refuge|180
+Vancouver Aquarium|49.3009|-123.1308|at|nat,fam|2|3|Marine life in Stanley Park|120
+English Bay Beach|49.2865|-123.1426|bc|relax,photo|2|0|Sunset beach near the West End|90
+Science World|49.2734|-123.1038|mu|fam|3|2|Geodesic dome museum|120
+Lynn Canyon Park|49.3420|-123.0160|nt|nat,adv|2|0|Free suspension bridge and forest trails|120
+Museum of Anthropology at UBC|49.2690|-123.2590|mu|art,hist|2|2|Haida and Pacific Northwest First Nations art|90
+Queen Elizabeth Park|49.2412|-123.1124|pk|relax,photo|3|0|Garden hilltop with city views|60
+Chinatown and Dr. Sun Yat-Sen Garden|49.2800|-123.1030|at|cult,hist|2|2|Classical Chinese garden and old Chinatown|90
+VanDusen Botanical Garden|49.2390|-123.1280|pk|nat|3|2|Botanical garden with a hedge maze|90
+Kitsilano Beach|49.2740|-123.1550|bc|relax,sport|3|0|Beach with a heated outdoor pool|120
+Vancouver Lookout|49.2840|-123.1120|vp|photo|3|2|360-degree observation deck downtown|45
+Richmond Night Market|49.1850|-123.0910|sh|food,shop|3|0|Asian-style summer night market of street food|120
+Japadog|49.2796|-123.1213|rs|food|2|1|Japanese-style hot dogs|20
+Meat and Bread|49.2833|-123.1090|rs|food|3|1|Famous porchetta sandwiches|30
+Cartems Donuterie|49.2831|-123.1060|cf|food|3|1|Creative donuts in Gastown|20
+Gastown Brewpubs|49.2840|-123.1080|br|food,night|3|2|Craft beer in the historic district|75

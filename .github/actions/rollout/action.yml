@@ -1,0 +1,97 @@
+name: Rollout
+description: Apply migrations, trigger the host's deploy hook, then wait for the API to report ready.
+
+inputs:
+  image_tag:
+    description: Backend image tag being rolled out (e.g. sha-1a2b3c4).
+    required: true
+  api_url:
+    description: Public base URL of the API for this environment (no trailing slash).
+    required: true
+  deploy_hook_url:
+    description: URL the host exposes to start a deploy. Required.
+    required: true
+  registry_token:
+    description: Token for pulling the private image from GHCR (GITHUB_TOKEN works).
+    required: true
+  mongodb_uri:
+    description: >
+      Connection string to migrate. Leave empty to skip the migration step - do that
+      if your host runs `sh scripts/migrate.sh` as a pre-deploy/release command, or if
+      the database only accepts connections from allow-listed IPs.
+    required: false
+    default: ""
+  mongodb_db_name:
+    description: Database name.
+    required: false
+    default: itinerary_planner
+
+runs:
+  using: composite
+  steps:
+    - name: Check required configuration
+      shell: bash
+      env:
+        HOOK: ${{ inputs.deploy_hook_url }}
+        API_URL: ${{ inputs.api_url }}
+      run: |
+        # Fail before touching the database rather than migrating and then
+        # discovering there is nothing to deploy with.
+        [ -n "$HOOK" ] || { echo "::error::DEPLOY_HOOK_URL secret is not set for this environment."; exit 1; }
+        [ -n "$API_URL" ] || { echo "::error::The API URL variable is not set for this environment."; exit 1; }
+
+    - name: Log in to GHCR
+      if: ${{ inputs.mongodb_uri != '' }}
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ inputs.registry_token }}
+
+    # Migrations run BEFORE the new code starts, so each one must stay compatible
+    # with the version that is still serving traffic (add first, remove later).
+    - name: Apply database migrations
+      if: ${{ inputs.mongodb_uri != '' }}
+      shell: bash
+      env:
+        MONGODB_URI: ${{ inputs.mongodb_uri }}
+        MONGODB_DB_NAME: ${{ inputs.mongodb_db_name }}
+        IMAGE_TAG: ${{ inputs.image_tag }}
+        REPO: ${{ github.repository }}
+      run: |
+        image="ghcr.io/$(echo "$REPO" | tr '[:upper:]' '[:lower:]')/backend:${IMAGE_TAG}"
+        docker run --rm \
+          -e MONGODB_URI -e MONGODB_DB_NAME \
+          "$image" sh scripts/migrate.sh
+
+    - name: Note skipped migrations
+      if: ${{ inputs.mongodb_uri == '' }}
+      shell: bash
+      run: echo "::warning::No MONGODB_URI provided - skipping migrations. Make sure your host runs scripts/migrate.sh before starting the new version."
+
+    - name: Trigger deploy
+      shell: bash
+      env:
+        HOOK: ${{ inputs.deploy_hook_url }}
+        IMAGE_TAG: ${{ inputs.image_tag }}
+      run: |
+        # Hosts differ on how a hook selects the version; this sends the tag as a
+        # JSON body and most hooks simply redeploy the configured image.
+        curl --fail --silent --show-error --max-time 60 -X POST \
+          -H "Content-Type: application/json" \
+          --data "{\"image_tag\": \"${IMAGE_TAG}\"}" \
+          "$HOOK"
+        echo "Deploy triggered for ${IMAGE_TAG}"
+
+    - name: Wait for the API to be ready
+      shell: bash
+      env:
+        API_URL: ${{ inputs.api_url }}
+      run: |
+        # /health/ready pings MongoDB, so a 200 means the new instance can serve.
+        # Up to ~10 minutes: hosts take a while to pull and start a new image.
+        curl --fail --silent --show-error \
+          --retry 60 --retry-delay 10 --retry-all-errors --max-time 15 \
+          "${API_URL%/}/api/v1/health/ready"
+        echo
+        echo "API is ready at ${API_URL}"

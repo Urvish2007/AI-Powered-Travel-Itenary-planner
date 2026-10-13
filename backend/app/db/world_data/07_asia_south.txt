@@ -1,0 +1,219 @@
+=Delhi|IN
+Red Fort|28.6562|77.2410|lm|hist,arch|1|2|Mughal fortress-palace and the site of Independence Day speeches|120
+India Gate|28.6129|77.2295|lm|hist,photo|1|0|War memorial arch at the end of Rajpath|45
+Qutub Minar|28.5245|77.1855|lm|hist,arch|1|2|73-metre victory tower from the 12th century|90
+Humayun's Tomb|28.5933|77.2507|lm|hist,arch|1|2|Garden-tomb that inspired the Taj Mahal|90
+Lotus Temple|28.5535|77.2588|rl|arch,relax|2|0|Bahá'í house of worship shaped like a lotus|60
+Jama Masjid|28.6507|77.2334|rl|arch,hist|1|1|One of India's largest mosques|60
+Akshardham Temple|28.6127|77.2773|rl|arch,cult|1|1|Vast carved-stone temple complex|180
+Chandni Chowk|28.6506|77.2303|sh|shop,food,hist|1|0|Old Delhi's chaotic, ancient market street|120
+Lodhi Gardens|28.5931|77.2197|pk|relax,hist|2|0|Tombs and lawns beloved by morning walkers|75
+Rashtrapati Bhavan|28.6143|77.1994|lm|arch,hist|3|0|The President's residence designed by Lutyens|45
+Raj Ghat|28.6410|77.2490|lm|hist|3|0|Memorial to Mahatma Gandhi|45
+Hauz Khas Village|28.5535|77.1940|at|night,food,hist|2|0|Lakeside ruins surrounded by cafés and boutiques|120
+Safdarjung's Tomb|28.5894|77.2110|lm|hist,arch|3|1|Last garden-tomb of the Mughals|45
+National Museum|28.6119|77.2192|mu|hist,art|2|1|Indian art and history across 5,000 years|120
+Connaught Place|28.6315|77.2167|sh|shop,food|3|0|Colonnaded colonial circle at the heart of New Delhi|90
+Gurudwara Bangla Sahib|28.6264|77.2092|rl|cult|2|0|Sikh temple with a sacred pool and free langar|60
+Karim's|28.6495|77.2335|rs|food,hist|1|1|Mughlai kebabs and curries since 1913|60
+Paranthe Wali Gali|28.6563|77.2300|rs|food,hist|2|1|Lane of stuffed fried parathas|45
+Indian Coffee House|28.6310|77.2185|cf|food,hist|3|1|Classic coffeehouse of Connaught Place|45
+Bukhara|28.5972|77.1727|rs|food|3|3|Celebrated tandoor and dal makhani|90
+
+=Mumbai|IN
+Gateway of India|18.9220|72.8347|lm|hist,photo|1|0|Basalt arch on the harbour|45
+Chhatrapati Shivaji Maharaj Terminus|18.9398|72.8355|lm|arch,hist|1|0|Gothic Revival railway station, a UNESCO site|45
+Marine Drive|18.9442|72.8230|pk|relax,photo|1|0|Curving seaside promenade known as the Queen's Necklace|60
+Elephanta Caves|18.9633|72.9315|lm|hist,art|2|1|Rock-cut Shiva temples on an island|180
+Haji Ali Dargah|18.9827|72.8089|rl|cult,photo|2|0|Mosque on a causeway out at sea|60
+Juhu Beach|19.0988|72.8267|bc|food,relax|2|0|Beach with chaat stalls at sunset|90
+Colaba Causeway|18.9140|72.8310|sh|shop|2|0|Street market of curios and fashion|90
+Kanheri Caves|19.2058|72.9060|lm|hist,nat|3|1|Buddhist rock-cut caves in the national park|150
+Dharavi|19.0430|72.8530|at|cult|2|2|Guided walk through a thriving informal economy|120
+Crawford Market|18.9473|72.8340|sh|food,shop|3|0|Colonial market of spices and fruit|60
+Dhobi Ghat|18.9820|72.8300|at|photo,cult|3|0|The world's largest open-air laundry|30
+Siddhivinayak Temple|19.0170|72.8300|rl|cult|3|0|Famous Ganesh temple|45
+Girgaum Chowpatty|18.9560|72.8120|bc|food,relax|3|0|Beach with bhel puri and sunset crowds|75
+Chhatrapati Shivaji Maharaj Vastu Sangrahalaya|18.9269|72.8326|mu|hist,art|2|2|Museum of art and history in an Indo-Saracenic building|120
+Mani Bhavan|18.9606|72.8110|mu|hist|3|0|Gandhi's Mumbai residence|45
+Bandra Bandstand|19.0430|72.8200|at|relax,photo|3|0|Seafront promenade with celebrity homes|60
+Leopold Café|18.9230|72.8320|cf|food,hist|2|2|Legendary Colaba café since 1871|60
+Britannia and Co.|18.9350|72.8420|rs|food,hist|1|2|Parsi café famed for berry pulao|75
+Bademiya|18.9226|72.8310|rs|food|2|1|Late-night kebab roll stall behind the Taj|45
+Ashok Vada Pav|19.0188|72.8416|rs|food|3|0|Beloved vada pav stall in Dadar|20
+
+=Jaipur|IN
+Amber Fort|26.9855|75.8513|lm|hist,arch,photo|1|2|Hilltop fort-palace of mirrors and courtyards|150
+City Palace|26.9255|75.8236|lm|hist,arch|1|2|Royal residence of the Jaipur maharajas|120
+Hawa Mahal|26.9239|75.8267|lm|arch,photo|1|1|The 'Palace of Winds' with 953 windows|45
+Jantar Mantar|26.9247|75.8244|lm|hist,photo|1|1|18th-century astronomical instruments, UNESCO listed|60
+Nahargarh Fort|26.9373|75.8153|lm|hist,photo|2|1|Hilltop fort with sunset views|90
+Jaigarh Fort|26.9850|75.8460|lm|hist|2|1|Fort housing the world's largest cannon on wheels|90
+Jal Mahal|26.9535|75.8460|lm|photo|2|0|Palace seemingly floating on a lake|20
+Albert Hall Museum|26.9118|75.8190|mu|hist,art|3|1|Indo-Saracenic museum of crafts|75
+Johari Bazaar|26.9210|75.8250|sh|shop,cult|2|0|Jewellery and textile market|75
+Birla Temple|26.8920|75.8150|rl|arch|3|0|White marble Lakshmi Narayan temple|45
+Galta Ji Temple|26.9190|75.8630|rl|hist,photo|3|0|Monkey temple in a hillside gorge|75
+Bapu Bazaar|26.9170|75.8215|sh|shop|3|0|Market of juttis and block prints|75
+Panna Meena ka Kund|26.9870|75.8520|lm|hist,photo|3|0|Geometric stepwell near Amber|30
+Chokhi Dhani Village|26.7770|75.8350|at|food,cult,fam|3|2|Rajasthani village-themed dinner and folk shows|180
+Anokhi Museum of Hand Printing|26.9870|75.8510|mu|art,shop|3|1|Block printing museum in an old haveli|60
+Sanganer Block Printing Village|26.8300|75.8000|at|art,shop|3|1|Workshops of hand-block printing|90
+Laxmi Misthan Bhandar|26.9219|75.8265|rs|food,hist|1|1|Iconic sweet and snack house on Johari Bazaar|60
+Rawat Mishthan Bhandar|26.9150|75.7980|rs|food|2|1|Famous for pyaaz kachori|30
+Peacock Rooftop Restaurant|26.9235|75.8265|rs|food,photo|3|2|Terrace with a view of the Hawa Mahal|75
+Lassiwala|26.9164|75.8190|cf|food|2|1|Legendary clay-cup lassi on MI Road|20
+
+=Agra|IN
+Taj Mahal|27.1751|78.0421|lm|hist,arch,photo|1|3|Marble mausoleum of love, at its best at sunrise|180
+Agra Fort|27.1795|78.0211|lm|hist,arch|1|2|Mughal red sandstone fortress along the Yamuna|120
+Mehtab Bagh|27.1791|78.0470|pk|photo,relax|2|1|Garden across the river with Taj views|60
+Fatehpur Sikri|27.0940|77.6610|lm|hist,arch|1|2|Abandoned Mughal capital of red sandstone|180
+Itimad-ud-Daulah (Baby Taj)|27.1930|78.0310|lm|hist,arch|2|2|Jewel-box tomb that inspired the Taj|60
+Akbar's Tomb, Sikandra|27.2203|77.9488|lm|hist,arch|2|1|Grand tomb of the Mughal emperor Akbar|75
+Jama Masjid Agra|27.1830|78.0170|rl|arch,hist|3|0|17th-century congregational mosque|30
+Kinari Bazaar|27.1810|78.0150|sh|shop,cult|3|0|Old market of zari, leather and sweets|60
+Ram Bagh|27.2090|78.0450|pk|hist,relax|3|1|Earliest Mughal garden in India|45
+Taj Ganj|27.1720|78.0430|at|cult,photo|2|0|Lanes beside the Taj with rooftop cafés|60
+Chini Ka Rauza|27.2040|78.0270|lm|arch,hist|3|1|Persian-style tomb faced with glazed tiles|30
+Keoladeo National Park|27.1590|77.5230|nt|nat|2|1|Bird sanctuary near Bharatpur|240
+Soami Bagh Samadhi|27.2200|78.0050|rl|arch|3|0|Marble samadhi still under decorative construction|45
+Wildlife SOS Elephant Conservation Centre|27.2290|77.9280|at|nat,fam|3|2|Sanctuary for rescued elephants|90
+Shilpgram Craft Village|27.1700|78.0560|sh|shop,art|3|1|Craft village beside the Taj|75
+Sur Sarovar Bird Sanctuary|27.2360|77.9280|nt|nat|3|1|Keetham Lake wildlife sanctuary|120
+Joney's Place|27.1730|78.0420|rs|food|3|1|Backpacker café near the Taj|45
+Deviram Sweets|27.1913|78.0160|cf|food|2|1|Famous for jalebis and bedai|30
+Panchhi Petha|27.1890|78.0080|cf|food|2|1|Agra's signature petha sweet|20
+Sheroes Hangout|27.1655|78.0340|cf|food,cult|3|1|Café run by acid-attack survivors|60
+
+=Varanasi|IN
+Dashashwamedh Ghat|25.3070|83.0105|at|cult,photo|1|0|The main ghat and home of the evening Ganga aarti|90
+Kashi Vishwanath Temple|25.3109|83.0107|rl|cult,hist|1|0|Varanasi's holiest Shiva temple|75
+Assi Ghat|25.2886|83.0060|at|cult,relax|2|0|Southern ghat for sunrise rituals and yoga|60
+Sarnath|25.3811|83.0230|lm|hist,cult|1|1|Where the Buddha gave his first sermon|120
+Manikarnika Ghat|25.3110|83.0145|at|cult|3|0|Principal cremation ghat on the Ganges|30
+Ganga Aarti Boat Ride|25.3065|83.0100|at|cult,photo|1|2|Sunrise or sunset boat trip along the ghats|75
+Banaras Hindu University|25.2677|82.9913|at|hist,arch|3|0|Vast campus with Bharat Kala Bhavan museum|90
+Durga Temple|25.2850|82.9970|rl|cult|3|0|18th-century red 'Monkey Temple'|30
+Tulsi Manas Temple|25.2840|82.9990|rl|cult,hist|3|0|Temple where the Ramcharitmanas was composed|30
+Ramnagar Fort|25.2690|83.0230|lm|hist|3|1|Fort across the river with a vintage car museum|90
+Sankat Mochan Hanuman Temple|25.2860|82.9930|rl|cult|3|0|Famed Hanuman temple|45
+Harishchandra Ghat|25.3000|83.0130|at|cult|3|0|The second cremation ghat|20
+Dhamek Stupa|25.3812|83.0245|lm|hist|2|1|Massive Buddhist stupa at Sarnath|45
+Alamgir Mosque|25.3180|83.0180|rl|arch,hist|3|0|Mughal mosque above Panchganga Ghat|30
+Chaukhandi Stupa|25.3558|83.0307|lm|hist|3|0|Ancient stupa mound near Sarnath|30
+Bharat Mata Temple|25.3175|82.9900|rl|art,cult|3|0|Temple with a relief map of India|30
+Kachori Gali|25.3098|83.0110|rs|food|1|1|Lane of kachori-sabzi and jalebi near the temple|30
+Blue Lassi Shop|25.3065|83.0095|cf|food|2|1|Thick lassi in clay cups|30
+Kashi Chat Bhandar|25.3095|83.0070|rs|food|2|1|Famous chaat and tamatar chaat|30
+Pizzeria Vaatika Café|25.2880|83.0070|cf|food|3|2|Riverside café at Assi Ghat|60
+
+=Udaipur|IN
+City Palace Udaipur|24.5760|73.6835|lm|hist,arch|1|2|Grand lake-facing palace complex|120
+Lake Pichola Boat Ride|24.5700|73.6800|at|relax,photo|1|2|Sunset boat ride to Jag Mandir|60
+Jag Mandir|24.5600|73.6790|lm|hist,photo|2|2|Island palace in Lake Pichola|75
+Jagdish Temple|24.5790|73.6840|rl|arch,cult|2|0|Indo-Aryan temple on a high platform|30
+Saheliyon Ki Bari|24.5990|73.6900|pk|relax|2|1|Garden of the maidens with fountains|60
+Fateh Sagar Lake|24.6000|73.6760|pk|relax,photo|2|0|Lake ringed by hills and promenades|75
+Monsoon Palace (Sajjangarh)|24.5900|73.6350|lm|photo,hist|2|1|Hilltop palace with sunset views|90
+Bagore Ki Haveli|24.5800|73.6800|mu|cult,hist|2|1|Haveli museum with evening folk dance|75
+Vintage Car Museum|24.5640|73.6910|mu|fam|3|2|Royal collection of classic cars|60
+Maharana Pratap Smarak|24.6000|73.6700|lm|hist,photo|3|0|Hilltop memorial to a warrior king|45
+Shilpgram|24.6030|73.6560|at|art,cult|3|1|Rural arts and crafts village|120
+Ahar Cenotaphs|24.5970|73.7240|lm|hist|3|1|Royal cenotaphs of the Mewar rulers|45
+Eklingji Temple|24.6840|73.7160|rl|hist,arch|3|0|Shiva temple complex north of the city|60
+Sas-Bahu Temples, Nagda|24.6990|73.7150|lm|hist,arch|3|0|Medieval temples on a lake|60
+Gulab Bagh and Zoo|24.5760|73.6900|pk|nat,fam|3|0|Rose garden with a small zoo|60
+Ambrai Ghat|24.5790|73.6810|at|photo,relax|2|0|Lakeside ghat with a sunset view of the palace|45
+Ambrai Restaurant|24.5780|73.6800|rs|food,photo|2|3|Lakeside dining across from the City Palace|90
+Natraj Dining Hall|24.5780|73.6830|rs|food|2|1|Unlimited Rajasthani thali|60
+Jheel's Ginger Coffee Bar|24.5800|73.6820|cf|food|3|2|Cosy café by the lake|45
+Millets of Mewar|24.5760|73.6810|rs|food|3|2|Local millet-based Rajasthani cuisine|75
+
+=Kolkata|IN
+Victoria Memorial|22.5448|88.3426|mu|hist,arch|1|1|White marble memorial and museum|120
+Howrah Bridge|22.5851|88.3468|lm|arch,photo|1|0|Giant cantilever bridge carrying millions each day|30
+Dakshineswar Kali Temple|22.6553|88.3573|rl|cult,hist|1|0|Riverside temple of Ramakrishna|75
+Belur Math|22.6325|88.3552|rl|arch,cult|2|0|Headquarters of the Ramakrishna Mission|75
+Indian Museum|22.5580|88.3510|mu|hist,nat|2|1|India's oldest and largest museum|120
+St. Paul's Cathedral|22.5440|88.3470|rl|arch|3|0|Indo-Gothic cathedral|30
+Marble Palace|22.5830|88.3570|lm|arch,art|3|0|Neoclassical mansion full of antiques|60
+College Street Book Market|22.5750|88.3640|sh|shop,cult|2|0|Asia's largest second-hand book market|90
+Park Street|22.5520|88.3530|nl|night,food|2|0|Restaurant and nightlife boulevard|90
+Eden Gardens|22.5646|88.3433|at|sport|2|1|Historic cricket stadium|60
+Kumartuli|22.6000|88.3650|at|art,cult|3|0|Potters' quarter making clay idols|60
+Jorasanko Thakur Bari|22.5850|88.3590|mu|hist,art|3|1|Tagore family house museum|75
+Mullick Ghat Flower Market|22.5870|88.3470|sh|photo,cult|3|0|Riverside flower market beside Howrah Bridge|45
+Science City|22.5400|88.3970|at|fam|3|2|Large science museum|150
+Prinsep Ghat|22.5600|88.3340|pk|relax,photo|3|0|Riverside promenade beside the Hooghly|60
+Kalighat Kali Temple|22.5188|88.3425|rl|cult|2|0|One of the Shakti Peethas|60
+Flurys|22.5530|88.3510|cf|food,hist|2|2|Tea room on Park Street since 1927|60
+Peter Cat|22.5520|88.3520|rs|food|2|2|Famous for chelo kebab|75
+Indian Coffee House (College Street)|22.5746|88.3641|cf|food,hist,cult|2|1|Intellectual haunt of Kolkata|60
+Arsalan Biryani|22.5420|88.3640|rs|food|2|2|Famous Kolkata-style biryani|60
+
+=Kochi|IN
+Chinese Fishing Nets|9.9658|76.2420|at|photo,cult|1|0|Giant cantilevered nets, best at sunset|45
+Fort Kochi Beach|9.9650|76.2410|bc|relax|2|0|Promenade beach beside the nets|60
+St. Francis Church|9.9650|76.2430|rl|hist,arch|2|0|India's oldest European-built church|30
+Mattancherry Palace|9.9580|76.2590|mu|hist,art|2|1|Dutch Palace with Kerala murals|45
+Jew Town and Paradesi Synagogue|9.9570|76.2600|at|hist,shop|1|1|Antiques lane and 16th-century synagogue|75
+Santa Cruz Basilica|9.9660|76.2440|rl|arch|3|0|Gothic-style Catholic cathedral|30
+Dutch Cemetery|9.9640|76.2400|lm|hist|3|0|Colonial-era tombstones|20
+Marine Drive Kochi|9.9790|76.2760|pk|relax|3|0|Backwater promenade in Ernakulam|60
+Kathakali Performance|9.9662|76.2428|en|art,cult|1|2|Classical dance-drama with elaborate make-up|120
+Cherai Beach|10.1370|76.1780|bc|relax|3|0|Long beach with backwater views|150
+Hill Palace Museum|9.9440|76.3510|mu|hist|3|1|Largest archaeological museum in Kerala|75
+Lulu Mall|10.0270|76.3080|sh|shop,fam|3|0|One of India's biggest malls|150
+Bolgatty Palace|9.9890|76.2630|lm|hist|3|0|Dutch-era palace on an island|60
+Mangalavanam Bird Sanctuary|9.9930|76.2790|nt|nat|3|0|Mangrove patch in the city|45
+Ernakulathappan Temple|9.9840|76.2800|rl|cult|3|0|Major Shiva temple in the city|30
+Vasco da Gama Square|9.9655|76.2415|at|hist|2|0|Seafront promenade of tea stalls|30
+Kashi Art Café|9.9657|76.2443|cf|food,art|2|2|Art gallery and café in Fort Kochi|60
+Teapot Café|9.9650|76.2400|cf|food|3|1|Tea-themed café with a teapot collection|45
+Dhe Puttu|9.9647|76.2436|rs|food|2|2|Kerala steamed puttu in many versions|60
+Fort Kochi Seafood Stalls|9.9660|76.2420|rs|food|2|2|Fresh fish fried to order beside the nets|60
+
+=Ahmedabad|IN
+Sabarmati Ashram|23.0607|72.5809|lm|hist|1|0|Gandhi's home and the starting point of the Salt March|75
+Adalaj Stepwell|23.1666|72.5811|lm|hist,arch|1|0|Intricately carved five-storey stepwell|60
+Sidi Saiyyed Mosque|23.0272|72.5805|rl|arch,photo|1|0|Famous for its lacework stone window|30
+Jama Masjid Ahmedabad|23.0235|72.5818|rl|arch,hist|2|0|15th-century Indo-Islamic mosque|45
+Akshardham Gandhinagar|23.2260|72.6700|rl|arch,cult|1|1|Grand carved-stone temple complex with a light show|180
+Kankaria Lake|23.0066|72.6000|pk|relax,fam|2|1|Large lake with a zoo and balloon ride|120
+Sabarmati Riverfront|23.0450|72.5710|pk|relax,photo|2|0|Landscaped promenade along the river|75
+Hutheesing Jain Temple|23.0590|72.5900|rl|arch|2|0|White marble temple with delicate carvings|45
+Calico Museum of Textiles|23.0580|72.5970|mu|art,hist|2|1|Renowned collection of Indian textiles|120
+Law Garden Night Market|23.0300|72.5560|sh|shop,food|3|0|Evening market of embroidered clothes|75
+Teen Darwaza|23.0250|72.5810|lm|hist,arch|3|0|Triple-arched gateway to the old royal square|20
+Bhadra Fort|23.0260|72.5810|lm|hist|3|0|Mughal-era fort and palace complex|45
+Science City|23.0750|72.4930|at|fam|3|1|Large science museum and IMAX|150
+Sarkhej Roza|22.9930|72.5100|lm|hist,arch|3|0|Mausoleum and mosque complex|60
+Indroda Nature Park|23.1920|72.6600|nt|nat,fam|3|1|Dinosaur fossil park in Gandhinagar|120
+Old City Heritage Pols|23.0270|72.5870|at|hist,cult|1|1|Walk through the carved-wood pols of the old city|120
+Agashiye|23.0250|72.5830|rs|food,hist|2|3|Gujarati thali in the House of MG heritage hotel|90
+Manek Chowk Night Food Market|23.0243|72.5855|rs|food|1|1|Square that turns into a street-food bazaar at night|75
+Lucky Tea House|23.0220|72.5840|cf|food,hist|2|1|Legendary tea beside a cemetery|45
+Chandravilas|23.0250|72.5840|rs|food,hist|3|1|Old Ahmedabad's classic tea and snacks stop|45
+
+=Amritsar|IN
+Golden Temple (Harmandir Sahib)|31.6200|74.8765|rl|cult,hist,photo|1|0|The holiest Sikh shrine, with a free community kitchen|120
+Jallianwala Bagh|31.6206|74.8800|lm|hist|1|0|Memorial garden of the 1919 massacre|45
+Wagah Border Ceremony|31.6040|74.5730|at|cult,hist|1|0|Daily flag-lowering ceremony at the India-Pakistan border|150
+Partition Museum|31.6240|74.8780|mu|hist|1|1|Museum of the 1947 Partition|90
+Durgiana Temple|31.6310|74.8640|rl|cult,arch|2|0|Hindu temple resembling the Golden Temple|45
+Gobindgarh Fort|31.6265|74.8570|lm|hist,fam|2|2|18th-century fort with shows and museums|120
+Maharaja Ranjit Singh Museum|31.6330|74.8560|mu|hist|3|1|Museum in the Ram Bagh summer palace|60
+Hall Bazaar|31.6240|74.8700|sh|shop,food|3|0|Old market of phulkari and sweets|75
+Khalsa College|31.6430|74.8190|lm|arch,hist|3|0|Indo-Saracenic college campus|45
+Ram Bagh Gardens|31.6320|74.8600|pk|relax|3|0|Mughal-style gardens|45
+Tarn Taran Sahib|31.4510|74.9270|rl|cult|3|0|Sikh gurdwara with a vast sarovar|60
+Mata Lal Devi Temple|31.6290|74.8800|rl|cult|3|0|Hindu temple with a maze of shrines|45
+Gurdwara Baba Atal Rai|31.6190|74.8770|rl|arch|3|0|Nine-storey gurdwara beside the Golden Temple|30
+Heritage Street|31.6215|74.8765|at|hist,cult,photo|1|0|Pedestrian street leading to the Golden Temple|45
+Sadda Pind|31.6120|74.9200|at|cult,fam|3|2|Punjabi cultural village with folk shows|120
+Pul Kanjri Heritage Site|31.5920|74.5990|lm|hist|3|0|Maharaja Ranjit Singh era mosque and bridge|30
+Kesar Da Dhaba|31.6270|74.8750|rs|food,hist|1|1|Famous for dal and parathas since 1916|60
+Bharawan Da Dhaba|31.6270|74.8760|rs|food|2|1|Classic Amritsari kulcha and chole|45
+Gurdas Ram Jalebi Wala|31.6230|74.8760|cf|food|2|1|Giant crisp jalebis|20
+Kulcha Land|31.6350|74.8840|rs|food|2|1|Amritsari kulcha with chole|45

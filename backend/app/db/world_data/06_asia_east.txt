@@ -1,0 +1,219 @@
+=Hong Kong|HK
+Victoria Peak|22.2759|114.1455|vp|photo,nat|1|2|Skyline panorama reached by the historic Peak Tram|120
+Tian Tan Buddha|22.2540|113.9047|lm|relax,photo|1|1|34-metre bronze Buddha atop Lantau Island|150
+Star Ferry|22.2937|114.1685|at|photo,hist|1|1|Century-old ferry across Victoria Harbour|30
+Temple Street Night Market|22.3099|114.1707|sh|shop,food|2|0|Evening market of fortune tellers and street food|90
+Man Mo Temple|22.2840|114.1500|rl|hist,cult|2|0|Incense-filled 19th-century temple|30
+Tsim Sha Tsui Promenade|22.2930|114.1740|at|photo|1|0|Harbourfront with the nightly light show view|60
+Hong Kong Disneyland|22.3130|114.0413|en|fam|2|3|Disney park in the hills of Lantau|360
+Ocean Park|22.2465|114.1760|en|fam,nat|3|3|Theme park with pandas and thrill rides|360
+Wong Tai Sin Temple|22.3419|114.1938|rl|cult|2|0|Colourful Taoist temple known for fortune-telling|45
+Stanley Market|22.2190|114.2110|sh|shop|3|0|Seaside village market in the south|90
+Repulse Bay|22.2370|114.1970|bc|relax|3|0|Popular crescent beach on the south side|120
+Dragon's Back|22.2330|114.2400|nt|adv,nat|2|0|Ridge hike with sea views, among Asia's best urban trails|180
+Nan Lian Garden|22.3390|114.2050|pk|relax,arch|3|0|Tang-style classical garden beside Chi Lin Nunnery|75
+Lan Kwai Fong|22.2810|114.1555|nl|night|3|0|Central's concentrated bar district|120
+Central-Mid-Levels Escalator|22.2830|114.1530|at|cult,photo|3|0|World's longest outdoor covered escalator|30
+Lamma Island|22.2230|114.1130|nt|relax,food|3|1|Car-free island of seafood restaurants and hikes|240
+Tim Ho Wan Sham Shui Po|22.3305|114.1620|rs|food|1|1|The original Michelin-starred dim sum house|60
+Mak's Noodle|22.2831|114.1535|rs|food,hist|2|1|Famous wonton noodle shop|45
+Lin Heung Tea House|22.2844|114.1520|cf|food,hist|3|1|Old-school trolley-style dim sum teahouse|75
+Kam Wah Café|22.3235|114.1695|cf|food|3|1|Cha chaan teng known for pineapple buns|45
+
+=Seoul|KR
+Gyeongbokgung Palace|37.5796|126.9770|lm|hist,arch|1|1|Grand 14th-century royal palace with a changing-of-the-guard ceremony|120
+Bukchon Hanok Village|37.5826|126.9830|at|hist,photo|1|0|Alleys of traditional Korean houses|90
+N Seoul Tower|37.5512|126.9882|vp|photo|1|2|Tower atop Namsan with panoramic views|75
+Myeongdong|37.5636|126.9822|sh|shop,food|2|0|Cosmetics, fashion and street-food district|120
+Changdeokgung Palace|37.5794|126.9910|lm|hist,nat|1|2|UNESCO palace with the Secret Garden|120
+Dongdaemun Design Plaza|37.5667|127.0090|lm|arch,art|2|0|Zaha Hadid's curvaceous design hub|75
+Insadong|37.5740|126.9850|sh|art,cult|2|0|Traditional teahouses, galleries and crafts|90
+Hongdae|37.5563|126.9236|nl|night,music|2|0|University district of indie music and nightlife|120
+DMZ and Imjingak|37.8890|126.7430|at|hist|2|2|Border area with tunnels and a peace park|300
+Lotte World Tower|37.5126|127.1025|vp|photo,arch|2|3|Korea's tallest tower with a sky deck|75
+Cheonggyecheon Stream|37.5690|126.9780|pk|relax,photo|3|0|Restored downtown stream walk|45
+Jogyesa Temple|37.5724|126.9835|rl|cult|3|0|Centre of Korean Seon Buddhism|45
+Deoksugung Palace|37.5658|126.9751|lm|hist|3|1|Palace mixing Korean and Western architecture|60
+National Museum of Korea|37.5239|126.9803|mu|hist,art|2|0|One of Asia's largest museums|150
+Starfield Library|37.5100|127.0600|at|arch,photo|3|0|Soaring bookshelves in a COEX mall|30
+Itaewon|37.5340|126.9945|nl|night,food|3|0|International dining and nightlife district|120
+Gwangjang Market|37.5701|126.9996|rs|food|1|1|Historic market famed for mung-bean pancakes and kimbap|75
+Tosokchon Samgyetang|37.5775|126.9720|rs|food|2|2|Ginseng chicken soup in a hanok|60
+Myeongdong Kyoja|37.5632|126.9850|rs|food|2|1|Michelin-recognised kalguksu and dumplings|45
+Onion Anguk|37.5766|126.9873|cf|food|3|2|Bakery café in a converted hanok|45
+
+=Busan|KR
+Gamcheon Culture Village|35.0975|129.0106|at|art,photo|1|0|Pastel hillside village of murals and lanes|120
+Haeundae Beach|35.1587|129.1604|bc|relax,night|1|0|Korea's most famous beach|150
+Haedong Yonggungsa Temple|35.1883|129.2233|rl|photo,hist|1|0|Rare seaside temple on the cliffs|75
+Gwangalli Beach|35.1532|129.1186|bc|relax,night|2|0|Beach facing the lit-up Gwangan Bridge|120
+Taejongdae|35.0510|129.0870|nt|nat,photo|2|2|Cliffside park with a lighthouse and sea views|150
+BIFF Square and Nampo|35.0980|129.0280|sh|shop,food|2|0|Film-festival street and shopping area|90
+Beomeosa Temple|35.2720|129.0670|rl|hist,nat|2|0|Mountain temple founded in 678|90
+Haeundae Blueline Park|35.1594|129.1790|at|relax,photo|2|2|Coastal train and sky-capsule line|90
+Yongdusan Park and Busan Tower|35.1010|129.0320|vp|photo|3|1|Hilltop park with a city tower|60
+Songdo Skywalk|35.0760|129.0170|at|photo,adv|3|1|Coastal walkway over the sea|60
+Huinnyeoul Culture Village|35.0780|129.0450|at|art,photo|3|0|Seaside village of cafés and cliff views|90
+Dongnae Hot Springs|35.2050|129.0820|at|relax|3|2|Traditional hot-spring spa district|90
+Oryukdo Skywalk|35.1000|129.1230|vp|photo|3|0|Glass-floored lookout at the island cluster|45
+Shinsegae Centum City|35.1690|129.1310|sh|shop|3|0|World's largest department store|120
+Igidae Coastal Walk|35.1180|129.1230|nt|nat,relax|3|0|Cliff trail with sea views|90
+Busan Sea Life Aquarium|35.1590|129.1600|at|nat,fam|3|2|Aquarium at Haeundae Beach|90
+Jagalchi Fish Market|35.0969|129.0306|rs|food|1|2|Korea's largest seafood market, with raw-fish halls|75
+Ssiat Hotteok|35.0985|129.0285|cf|food|2|1|Famous seed-filled sweet pancakes in BIFF Square|20
+Haeundae Market|35.1627|129.1648|rs|food|3|1|Traditional market with street snacks|60
+Gukje Market|35.1000|129.0290|rs|food,shop|3|1|Sprawling market of food stalls and goods|75
+
+=Kyoto|JP
+Fushimi Inari Taisha|34.9671|135.7727|rl|photo,hist|1|0|Thousands of vermilion torii gates up a mountain|120
+Kinkaku-ji (Golden Pavilion)|35.0394|135.7292|rl|photo,hist|1|1|Gold-leaf-covered Zen temple on a pond|45
+Kiyomizu-dera|34.9949|135.7850|rl|photo,hist|1|1|Wooden temple stage over the hillside|75
+Arashiyama Bamboo Grove|35.0170|135.6713|nt|photo,nat|1|0|Towering bamboo path in western Kyoto|60
+Gion District|35.0037|135.7756|at|cult,hist|1|0|Geisha quarter of wooden machiya houses|90
+Nijo Castle|35.0142|135.7479|lm|hist,arch|2|1|Shogun's palace with nightingale floors|90
+Ginkaku-ji (Silver Pavilion)|35.0270|135.7982|rl|arch,relax|2|1|Zen temple with a moss and sand garden|60
+Philosopher's Path|35.0240|135.7960|pk|relax,nat|2|0|Canal-side walk lined with cherry trees|60
+Kyoto Imperial Palace Park|35.0254|135.7621|pk|hist,relax|3|0|Former imperial residence in a large park|75
+Tenryu-ji|35.0157|135.6741|rl|hist,nat|2|1|Zen temple with a garden of borrowed scenery|60
+Ryoan-ji|35.0345|135.7185|rl|relax,hist|3|1|The famous rock garden|45
+Sanjusangen-do|34.9879|135.7720|rl|hist,art|3|1|Hall of 1,001 statues of Kannon|45
+Heian Shrine|35.0160|135.7826|rl|arch,photo|3|0|Vermilion shrine with a giant torii|45
+Toji Temple|34.9807|135.7476|rl|hist,arch|3|1|Five-storey pagoda, Japan's tallest|60
+Nanzen-ji|35.0113|135.7937|rl|arch,hist|3|0|Zen temple with a brick aqueduct|60
+Pontocho Alley|35.0055|135.7710|nl|night,food|2|0|Lantern-lit lane of restaurants|90
+Nishiki Market|35.0050|135.7650|rs|food|1|1|Kyoto's kitchen, a covered market of pickles and snacks|75
+Honke Daiichi Asahi|34.9886|135.7603|rs|food|3|1|Old-school ramen beside the station|45
+% Arabica Higashiyama|35.0007|135.7810|cf|food|2|2|Minimalist coffee shop near Kiyomizu|30
+Gion Tsujiri|35.0036|135.7752|cf|food|2|2|Matcha desserts in the geisha district|45
+
+=Osaka|JP
+Osaka Castle|34.6873|135.5262|lm|hist,arch|1|2|16th-century castle with a museum and park|120
+Dotonbori|34.6687|135.5013|at|night,food|1|0|Neon canal street and the Glico man|120
+Universal Studios Japan|34.6654|135.4323|en|fam|1|3|Theme park with Super Nintendo World|480
+Shitenno-ji|34.6537|135.5163|rl|hist|3|1|One of Japan's oldest Buddhist temples|60
+Umeda Sky Building|34.7052|135.4905|vp|photo,arch|2|2|Twin towers joined by a rooftop observatory|60
+Osaka Aquarium Kaiyukan|34.6544|135.4290|at|nat,fam|1|3|One of the world's largest aquariums|150
+Shinsekai and Tsutenkaku|34.6525|135.5063|at|cult,food|2|1|Retro district with a landmark tower|90
+Sumiyoshi Taisha|34.6128|135.4930|rl|hist,arch|3|0|One of Japan's oldest shrines|60
+Namba Yasaka Shrine|34.6610|135.4960|rl|photo,cult|3|0|Shrine with a giant lion-head stage|30
+Nakanoshima Park|34.6930|135.5040|pk|relax,arch|3|0|Park on a river island|60
+Spa World|34.6516|135.5072|at|relax,fam|3|2|Huge themed public baths|180
+Minoo Park|34.8530|135.4700|nt|nat,adv|2|0|Waterfall hike north of Osaka|150
+Abeno Harukas|34.6455|135.5139|vp|photo|3|2|Japan's tallest skyscraper with an observatory|60
+Cup Noodles Museum Ikeda|34.8214|135.4310|mu|fam,food|3|1|Design your own cup noodles|90
+Hozenji Yokocho|34.6680|135.5020|at|hist,food|3|0|Moss-covered Buddha in a lantern-lit alley|45
+Tempozan Ferris Wheel|34.6550|135.4310|at|fam,photo|3|1|Giant wheel beside the aquarium|30
+Kuromon Market|34.6624|135.5063|rs|food|1|1|Osaka's kitchen of seafood and street snacks|75
+Kushikatsu Daruma|34.6521|135.5058|rs|food|2|1|Deep-fried skewers in Shinsekai|60
+Okonomiyaki Mizuno|34.6684|135.5017|rs|food|2|2|Michelin-recognised okonomiyaki|60
+Rikuro Ojisan Cheesecake|34.6661|135.5017|cf|food|3|1|Famous jiggly baked cheesecake|20
+
+=Beijing|CN
+Forbidden City|39.9163|116.3972|lm|hist,arch|1|2|Imperial palace complex of 980 buildings|210
+Tiananmen Square|39.9055|116.3976|at|hist|1|0|One of the world's largest public squares|45
+Temple of Heaven|39.8822|116.4066|rl|hist,arch|1|1|Circular temple where emperors prayed for harvests|90
+Summer Palace|39.9999|116.2755|lm|hist,nat,arch|1|2|Imperial lakeside garden of pavilions and bridges|180
+Lama Temple|39.9472|116.4170|rl|cult,hist|2|1|Tibetan Buddhist temple with a giant Maitreya statue|75
+Beihai Park|39.9254|116.3833|pk|relax,hist|2|1|Imperial garden around a lake|90
+Jingshan Park|39.9246|116.3965|pk|photo|2|0|Hill with a view over the Forbidden City|60
+Nanluoguxiang|39.9370|116.4033|at|shop,food,cult|2|0|Hutong lane of boutiques and snacks|90
+798 Art Zone|39.9840|116.4950|at|art|2|0|Galleries in former factory buildings|120
+Bird's Nest Stadium|39.9928|116.3965|lm|arch,sport|2|1|The 2008 Olympic stadium|60
+Wangfujing|39.9140|116.4108|sh|shop,food|3|0|Famous shopping street and snack alley|75
+Drum and Bell Towers|39.9400|116.3970|lm|hist|3|1|Ancient timekeeping towers with city views|60
+Panjiayuan Market|39.8760|116.4630|sh|shop,art|3|0|Weekend antiques and curios market|90
+Mutianyu Great Wall|40.4319|116.5704|lm|hist,adv,photo|1|2|Restored section of the Great Wall with a toboggan|300
+Ming City Wall Ruins Park|39.9040|116.4310|pk|hist|3|0|Remnants of the old city wall|45
+Beijing Zoo|39.9380|116.3320|at|nat,fam|3|1|Home to giant pandas|150
+Quanjude Roast Duck|39.8996|116.3995|rs|food,hist|1|3|Historic Peking duck since 1864|90
+Donghuamen Night Market|39.9143|116.4115|rs|food|3|1|Street-food stalls near Wangfujing|60
+Liqun Roast Duck|39.8927|116.4026|rs|food|2|2|Famed hutong courtyard roast duck|75
+Lao She Teahouse|39.8996|116.3938|cf|food,cult|3|2|Tea and traditional performances|90
+
+=Shanghai|CN
+The Bund|31.2400|121.4900|at|hist,arch,photo|1|0|Waterfront promenade of colonial-era buildings facing Pudong|75
+Yu Garden|31.2272|121.4920|pk|hist,arch|1|2|Classical Ming-dynasty garden and bazaar|90
+Oriental Pearl Tower|31.2397|121.4998|vp|photo,arch|2|3|Iconic TV tower with glass-floored observation|75
+Shanghai Tower Observation Deck|31.2355|121.5055|vp|photo,arch|1|3|China's tallest tower, with a 118th-floor deck|75
+Nanjing Road|31.2340|121.4750|sh|shop|2|0|The main shopping street|90
+Jing'an Temple|31.2237|121.4450|rl|cult,arch|2|1|Golden-roofed temple amid skyscrapers|45
+Tianzifang|31.2102|121.4690|sh|art,shop|2|0|Maze of lanes with studios and cafés|90
+Shanghai Museum|31.2305|121.4750|mu|art,hist|2|0|Ancient Chinese bronzes and ceramics|120
+Zhujiajiao Water Town|31.1090|121.0510|at|hist,photo|2|1|Canal village with stone bridges|180
+Xintiandi|31.2200|121.4750|at|food,night|2|0|Restored shikumen lanes of restaurants|90
+Longhua Temple|31.1730|121.4470|rl|hist|3|1|Shanghai's oldest and largest temple complex|60
+M50 Art District|31.2490|121.4510|at|art|3|0|Galleries by Suzhou Creek|90
+Shanghai Disney Resort|31.1440|121.6570|en|fam|2|3|Disney park with a Chinese castle|480
+Huangpu River Cruise|31.2380|121.4960|at|photo,relax|2|2|Night cruise past the skyline|60
+Century Park|31.2150|121.5500|pk|relax,fam|3|0|Shanghai's biggest park|90
+Propaganda Poster Art Centre|31.2092|121.4460|mu|art,hist|3|1|Basement museum of revolutionary posters|45
+Nanxiang Steamed Bun Restaurant|31.2276|121.4925|rs|food,hist|1|1|Home of the soup dumpling beside Yu Garden|60
+Yang's Fry-Dumpling|31.2330|121.4690|rs|food|2|1|Pan-fried pork buns|30
+Din Tai Fung Xintiandi|31.2203|121.4742|rs|food|2|2|Famed xiaolongbao|60
+Huxinting Teahouse|31.2270|121.4915|cf|food,hist|2|2|Zigzag-bridge teahouse in Yu Garden|60
+
+=Xi'an|CN
+Terracotta Army|34.3841|109.2785|lm|hist|1|3|Thousands of life-sized clay warriors guarding the first emperor|240
+Xi'an City Wall|34.2465|108.9473|lm|hist,adv|1|2|Ming-dynasty wall you can cycle around|120
+Bell Tower|34.2583|108.9420|lm|hist,arch|2|1|Ming bell tower at the city centre|45
+Drum Tower|34.2630|108.9400|lm|hist|2|1|Drum tower beside the Muslim Quarter|45
+Muslim Quarter|34.2640|108.9400|at|food,cult|1|0|Bustling lanes of street food and crafts|120
+Great Mosque of Xi'an|34.2640|108.9390|rl|hist,arch|2|1|Chinese-style mosque from the Tang dynasty|60
+Big Wild Goose Pagoda|34.2190|108.9640|rl|hist,arch|1|2|Tang-dynasty pagoda built to house Buddhist scriptures|75
+Small Wild Goose Pagoda|34.2380|108.9420|rl|hist|3|1|Slender Tang-era pagoda|45
+Shaanxi History Museum|34.2220|108.9600|mu|hist|2|0|Treasures of ancient capitals|120
+Tang Paradise|34.2160|108.9690|pk|hist,fam|3|2|Tang-dynasty theme park|120
+Huaqing Palace|34.3633|109.2150|lm|hist|3|2|Imperial hot-spring retreat at Mount Li|120
+Hanyangling Museum|34.4380|108.9890|mu|hist|3|2|Underground tomb museum|90
+Beilin Forest of Steles|34.2560|108.9540|mu|art,hist|2|1|Thousands of carved stone tablets|75
+Daming Palace National Heritage Park|34.2900|108.9600|lm|hist|3|1|Ruins of a vast Tang palace|90
+Qujiang Pool Park|34.2020|108.9930|pk|relax|3|0|Landscaped lake park|60
+Mount Li Cable Car|34.3600|109.2200|vp|nat|3|2|Cable car above the Huaqing Palace slopes|90
+Jia Sange Soup Dumplings|34.2637|108.9393|rs|food|2|1|Xi'an's famous soup-filled baozi|45
+Defachang Dumpling Restaurant|34.2593|108.9420|rs|food|2|2|Banquet of dumplings near the Bell Tower|75
+Laosun Jia Yangrou Paomo|34.2599|108.9468|rs|food|2|1|Crumbled flatbread in lamb soup|45
+Muslim Quarter Roujiamo|34.2645|108.9395|rs|food|1|1|Xi'an's signature meat sandwich|20
+
+=Taipei|TW
+Taipei 101|25.0339|121.5645|vp|arch,photo|1|3|Tower with a 89th-floor observatory and a damper ball|75
+Chiang Kai-shek Memorial Hall|25.0361|121.5198|lm|hist,arch|1|0|Monument with a changing-of-the-guard ceremony|60
+National Palace Museum|25.1024|121.5485|mu|art,hist|1|2|Over 600,000 pieces of Chinese imperial treasure|150
+Shilin Night Market|25.0879|121.5243|sh|food,shop|1|0|Taipei's largest night market|120
+Longshan Temple|25.0371|121.4999|rl|cult,hist|1|0|Busy 18th-century Buddhist and Taoist temple|45
+Elephant Mountain|25.0270|121.5760|vp|nat,photo,adv|1|0|Short hike for the classic 101 skyline view|75
+Beitou Hot Springs|25.1370|121.5070|at|relax|2|2|Volcanic spa district|120
+Jiufen Old Street|25.1090|121.8440|at|photo,food,hist|1|0|Hillside mining town of teahouses and lanterns|180
+Dihua Street|25.0560|121.5100|sh|shop,hist|3|0|Historic street of herbs, fabrics and tea|75
+Maokong Gondola|24.9690|121.5880|at|nat,photo|2|2|Gondola to tea gardens on the hills|150
+Ximending|25.0420|121.5080|sh|shop,night|2|0|Youth shopping and entertainment district|90
+Raohe Street Night Market|25.0505|121.5774|sh|food|2|0|Night market with a temple entrance|90
+Taipei Zoo|24.9980|121.5810|at|nat,fam|3|2|Home to giant pandas|180
+Presidential Office Building|25.0400|121.5120|lm|arch,hist|3|0|Red-brick colonial building|30
+Yangmingshan National Park|25.1630|121.5470|nt|nat,adv|2|0|Volcanic park with hot springs and trails|180
+Shifen Waterfall|25.0400|121.7770|nt|nat,photo|2|1|Wide waterfall near the lantern-releasing railway town|120
+Din Tai Fung Xinyi|25.0334|121.5298|rs|food|1|2|The original xiaolongbao house|75
+Fu Hang Soy Milk|25.0445|121.5230|rs|food|2|1|Queue for a classic Taiwanese breakfast|45
+Ay-Chung Flour-Rice Noodle|25.0429|121.5075|rs|food|2|1|Famous oyster vermicelli stand|30
+Smoothie House|25.0334|121.5299|cf|food|3|1|Mango shaved ice on Yongkang Street|30
+
+=Kathmandu|NP
+Boudhanath Stupa|27.7215|85.3620|rl|hist,cult|1|1|One of the largest stupas in the world|75
+Swayambhunath|27.7149|85.2904|rl|hist,photo|1|1|Hilltop 'Monkey Temple' above the valley|90
+Pashupatinath Temple|27.7105|85.3488|rl|hist,cult|1|1|Holy Hindu temple complex on the Bagmati River|90
+Kathmandu Durbar Square|27.7048|85.3070|lm|hist,arch|1|2|Palaces and temples of the old royal city|90
+Patan Durbar Square|27.6727|85.3250|lm|hist,arch,art|1|2|Newari art and architecture in Lalitpur|120
+Bhaktapur Durbar Square|27.6722|85.4298|lm|hist,arch|1|2|Medieval city of brick, potters and woodcarving|150
+Thamel|27.7154|85.3123|sh|shop,night|2|0|Tourist hub of shops, bars and trekking gear|90
+Garden of Dreams|27.7125|85.3165|pk|relax|3|1|Neoclassical garden retreat|60
+Narayanhiti Palace Museum|27.7140|85.3200|mu|hist|3|2|Former royal palace|75
+Nagarkot|27.7172|85.5200|vp|nat,photo|2|0|Hilltop village for Himalayan sunrise|180
+Changu Narayan Temple|27.7160|85.4280|rl|hist,arch|2|1|Oldest Hindu temple in the valley|75
+Kopan Monastery|27.7400|85.3640|rl|relax,cult|3|0|Tibetan Buddhist monastery with meditation courses|75
+Budhanilkantha|27.7770|85.3630|rl|hist,cult|3|0|Giant reclining Vishnu statue|45
+Dakshinkali Temple|27.6040|85.2800|rl|cult|3|0|Kali temple south of the city|60
+Ason Bazaar|27.7090|85.3090|sh|food,cult|3|0|Spice and vegetable market of old Kathmandu|45
+Rani Pokhari|27.7060|85.3160|at|hist,relax|3|0|Historic pond with a shrine|20
+Himalayan Java Coffee|27.7150|85.3110|cf|food|3|2|Popular Thamel coffee shop|45
+KC's Restaurant|27.7135|85.3120|rs|food|3|2|Long-running Thamel restaurant|60
+Bhojan Griha|27.7080|85.3300|rs|food,cult|2|3|Nepali set meals in a heritage building|105
+Thamel Momo Shops|27.7155|85.3105|rs|food|2|1|Steaming plates of Nepali momos|30

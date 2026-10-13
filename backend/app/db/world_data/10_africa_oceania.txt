@@ -1,0 +1,219 @@
+=Cairo|EG
+Pyramids of Giza|29.9792|31.1342|lm|hist,photo|1|3|The last surviving wonder of the ancient world|180
+Great Sphinx|29.9753|31.1376|lm|hist,photo|1|0|The enigmatic limestone guardian of the plateau|45
+Egyptian Museum|30.0478|31.2336|mu|hist|1|2|Tutankhamun's treasures and a vast pharaonic collection|180
+Grand Egyptian Museum|29.9940|31.1190|mu|hist,arch|1|3|Enormous new museum beside the pyramids|240
+Khan el-Khalili|30.0477|31.2622|sh|shop,cult|1|0|Medieval bazaar of spices, lamps and souvenirs|120
+Step Pyramid of Djoser, Saqqara|29.8713|31.2165|lm|hist|1|2|The oldest large-scale stone building in the world|150
+Citadel of Saladin|30.0287|31.2599|lm|hist,arch|2|2|Hilltop fortress with the Muhammad Ali Mosque|120
+Al-Azhar Mosque|30.0457|31.2625|rl|hist,arch|2|0|Mosque and university founded in 970|45
+Coptic Cairo|30.0053|31.2305|at|hist,cult|2|1|Hanging Church and ancient churches|120
+Al-Muizz Street|30.0500|31.2620|at|hist,arch|2|0|Open-air museum of Islamic architecture|120
+Red Pyramid of Dahshur|29.8086|31.2062|lm|hist,adv|3|2|The first true smooth-sided pyramid|120
+Memphis Open-Air Museum|29.8490|31.2540|mu|hist|3|1|Colossal statue of Ramses II|45
+Nile Felucca Ride|30.0450|31.2240|at|relax,photo|2|1|Sailboat ride on the Nile at sunset|60
+Cairo Tower|30.0459|31.2243|vp|photo|3|2|Lotus-shaped tower with a panoramic view|45
+Mosque of Ibn Tulun|30.0287|31.2495|rl|arch,hist|3|1|One of Cairo's oldest and largest mosques|45
+Al-Azhar Park|30.0400|31.2650|pk|relax,photo|3|1|Hilltop park with skyline views|90
+Abou Tarek|30.0488|31.2381|rs|food|1|1|The city's most famous koshari|45
+Felfela Restaurant|30.0475|31.2370|rs|food,hist|2|1|Egyptian classics since 1959|60
+El Fishawy Café|30.0477|31.2627|cf|food,hist|2|1|Mirrored café open 24 hours in the bazaar|60
+Naguib Mahfouz Café|30.0475|31.2622|cf|food,hist|3|2|Café in Khan el-Khalili named for the Nobel laureate|60
+
+=Luxor|EG
+Karnak Temple|25.7188|32.6573|lm|hist,arch|1|2|The vast temple complex of Amun-Ra|180
+Luxor Temple|25.6995|32.6390|lm|hist,arch|1|2|Temple beautifully lit at night|75
+Valley of the Kings|25.7402|32.6014|lm|hist|1|3|Rock-cut tombs of New Kingdom pharaohs|150
+Temple of Hatshepsut|25.7380|32.6065|lm|hist,arch|1|2|Terraced mortuary temple of the female pharaoh|75
+Colossi of Memnon|25.7207|32.6104|lm|hist,photo|2|0|Two giant statues of Amenhotep III|20
+Valley of the Queens|25.7280|32.5920|lm|hist|2|2|Tombs including that of Nefertari|75
+Medinet Habu|25.7195|32.6003|lm|hist|2|2|Ramses III's mortuary temple|75
+Luxor Museum|25.7060|32.6410|mu|hist|3|2|Well-curated pharaonic artefacts|75
+The Ramesseum|25.7280|32.6140|lm|hist|3|2|Mortuary temple of Ramses II|60
+Deir el-Medina|25.7285|32.5995|lm|hist|3|2|Village of the tomb builders|60
+Hot Air Balloon over the West Bank|25.7300|32.6100|at|adv,photo|2|3|Sunrise flight over temples and valleys|90
+Dendera Temple|26.1416|32.6700|lm|hist,art|2|2|Hathor temple with an astronomical ceiling|120
+Luxor Corniche|25.6990|32.6380|pk|relax|3|0|Nile-side promenade|60
+Avenue of Sphinxes|25.7100|32.6490|lm|hist|2|0|Restored sphinx-lined avenue linking two temples|60
+Mummification Museum|25.6950|32.6400|mu|hist|3|2|Exhibits on ancient embalming|60
+Banana Island|25.6700|32.6180|at|relax,nat|3|1|Nile island with a plantation and picnic spots|120
+Sofra Restaurant|25.6993|32.6395|rs|food|2|2|Egyptian home cooking in a 1930s house|75
+Al-Sahaby Lane|25.6990|32.6410|rs|food|3|2|Rooftop dining with temple views|75
+Kebabgy|25.7020|32.6400|rs|food|3|2|Grilled meats and Egyptian mezze|75
+Luxor Souq Cafés|25.6995|32.6425|cf|food,shop|3|1|Tea and shisha in the bazaar|45
+
+=Marrakech|MA|Marrakesh
+Jemaa el-Fnaa|31.6258|-7.9891|at|cult,food,music|1|0|The medina's legendary square of storytellers and food stalls|120
+Koutoubia Mosque|31.6237|-7.9936|rl|arch,hist|1|0|77-metre minaret that guides the city|30
+Bahia Palace|31.6215|-7.9830|lm|arch,hist|1|2|Ornate 19th-century palace of tiles and courtyards|60
+Majorelle Garden|31.6417|-8.0033|pk|art,nat|1|2|Cobalt-blue villa and cactus garden|75
+Saadian Tombs|31.6170|-7.9890|lm|hist,arch|2|2|Lavish 16th-century royal tombs|45
+El Badi Palace|31.6180|-7.9850|lm|hist|2|2|Ruined palace with storks nesting on the walls|60
+Medina Souks|31.6300|-7.9870|sh|shop,cult|1|0|Labyrinth of leather, spice and lantern stalls|150
+Ben Youssef Madrasa|31.6330|-7.9860|lm|arch,hist|2|2|Beautiful Quranic school with carved stucco|45
+Menara Gardens|31.6130|-8.0190|pk|relax,photo|3|1|Olive groves and a pavilion with an Atlas backdrop|60
+Yves Saint Laurent Museum|31.6420|-8.0030|mu|art|3|2|Fashion museum beside Majorelle|75
+Mellah|31.6190|-7.9840|at|hist,cult|3|0|The old Jewish quarter|60
+Hammam Experience|31.6270|-7.9870|at|relax|2|2|Traditional steam bath and scrub|90
+Imlil and Atlas Mountains|31.1370|-7.9180|nt|nat,adv|1|1|Berber village and trailhead below Mount Toubkal|480
+Ourika Valley|31.3170|-7.7400|nt|nat|2|1|Waterfalls and Berber villages|300
+Agafay Desert|31.4500|-8.1750|nt|adv,photo|2|2|Rocky desert for camel rides and dinners|240
+Le Jardin Secret|31.6330|-7.9890|pk|hist,relax|3|1|Restored Islamic garden in the medina|45
+Café des Épices|31.6300|-7.9860|cf|food|2|2|Rooftop café in the spice square|60
+Nomad|31.6310|-7.9860|rs|food|1|2|Modern Moroccan cuisine with a terrace|75
+Le Jardin|31.6320|-7.9880|rs|food|2|2|Garden restaurant in a former riad|75
+Chez Chegrouni|31.6260|-7.9890|rs|food|3|1|Budget tagines on the main square|60
+
+=Cape Town|ZA
+Table Mountain|-33.9628|18.4098|nt|adv,photo|1|3|Flat-topped icon with a cable car and hiking trails|180
+Cape of Good Hope|-34.3568|18.4740|nt|nat,photo|1|1|Rugged tip of the Cape Peninsula|120
+Boulders Beach Penguin Colony|-34.1970|18.4510|nt|nat,fam|1|1|Swim among African penguins|90
+V&A Waterfront|-33.9020|18.4210|at|shop,food|1|0|Harbour district of shops, aquarium and restaurants|150
+Robben Island|-33.8070|18.3710|mu|hist|1|3|Mandela's prison island|270
+Kirstenbosch National Botanical Garden|-33.9880|18.4320|pk|nat,relax|1|1|Garden on the slopes of Table Mountain|120
+Camps Bay Beach|-33.9500|18.3770|bc|relax|2|0|White-sand beach beneath the Twelve Apostles|150
+Chapman's Peak Drive|-34.0780|18.3620|at|photo|2|1|Spectacular coastal road cut into cliffs|60
+Bo-Kaap|-33.9200|18.4140|at|photo,cult|2|0|Brightly coloured houses and Cape Malay heritage|60
+Groot Constantia|-34.0270|18.4220|at|food,hist|2|2|South Africa's oldest wine estate|120
+Cape Point Funicular|-34.3530|18.4970|vp|photo|2|2|Funicular up to the lighthouse|75
+Signal Hill|-33.9190|18.3980|vp|photo|3|0|Sunset viewpoint over the city|45
+Muizenberg Beach|-34.1060|18.4710|bc|sport,photo|3|0|Surf beach with colourful huts|120
+Hout Bay|-34.0480|18.3500|at|relax,food|3|0|Fishing harbour with seal cruises|120
+Stellenbosch Winelands|-33.9321|18.8602|at|food,hist|2|2|Historic university town amid vineyards|300
+Castle of Good Hope|-33.9250|18.4260|lm|hist|3|1|Oldest colonial building in South Africa|60
+Neighbourgoods Market|-33.9275|18.4590|rs|food,shop|1|1|Saturday market at the Old Biscuit Mill|90
+Mzoli's Meats|-33.9750|18.5650|rs|food,cult|2|1|Township braai institution|90
+Truth Coffee Roasting|-33.9265|18.4250|cf|food,arch|2|2|Steampunk-themed coffee roastery|45
+Marco's African Place|-33.9205|18.4140|rs|food,music|3|3|African-themed restaurant with live music|90
+
+=Nairobi|KE
+Nairobi National Park|-1.3733|36.8580|nt|nat,fam|1|2|A wildlife park with the city skyline behind lions and giraffe|180
+David Sheldrick Wildlife Trust|-1.3560|36.7690|at|nat,fam|1|2|Orphaned elephant rescue and rehabilitation|60
+Giraffe Centre|-1.3750|36.7440|at|nat,fam|1|2|Feed endangered Rothschild's giraffes|60
+Karen Blixen Museum|-1.3520|36.7140|mu|hist|2|1|Home of the Out of Africa author|60
+Nairobi National Museum|-1.2740|36.8160|mu|hist,nat|2|1|Kenya's heritage and fossils|90
+Bomas of Kenya|-1.3410|36.7370|at|cult|3|1|Cultural village and traditional dance|120
+Kazuri Beads Factory|-1.3560|36.7140|sh|art,shop|3|0|Women's cooperative of handmade ceramic jewellery|60
+Maasai Market|-1.2860|36.8200|sh|shop,cult|3|0|Rotating market of beadwork and crafts|75
+Karura Forest|-1.2460|36.8230|nt|nat,relax|3|0|Urban forest with waterfalls and cycling|120
+Nairobi Safari Walk|-1.3720|36.8070|at|nat,fam|3|1|Boardwalk through wildlife habitats|75
+Ngong Hills|-1.4590|36.6360|nt|adv,photo|3|0|Ridge hike with Rift Valley views|180
+Nairobi Arboretum|-1.2740|36.8040|pk|nat,relax|3|0|Quiet urban forest park|60
+Kenyatta International Convention Centre|-1.2880|36.8230|vp|photo,arch|3|1|Cylindrical tower with a rooftop viewpoint|45
+Nairobi Gallery|-1.2880|36.8170|mu|art|3|0|Colonial building with local art|45
+Railway Museum|-1.2910|36.8280|mu|hist|3|1|Steam locomotives and colonial rail history|60
+Nairobi Snake Park|-1.2746|36.8148|at|nat,fam|3|1|Reptile park beside the National Museum|60
+Carnivore Restaurant|-1.3240|36.8010|rs|food|1|3|Famed all-you-can-eat meat feast|105
+Talisman|-1.3430|36.7090|rs|food|2|2|Eclectic restaurant in Karen|75
+Dorman's Coffee|-1.3520|36.7090|cf|food|3|2|Kenyan coffee roaster and café|45
+Nyama Mama|-1.2880|36.8200|rs|food|3|2|Contemporary Kenyan classics|75
+
+=Zanzibar|TZ|@-6.1659,39.2026,Africa/Dar_es_Salaam
+Stone Town|-6.1630|39.1920|at|hist,cult,arch|1|0|UNESCO old town of carved doors and winding lanes|180
+House of Wonders|-6.1610|39.1900|mu|hist,arch|2|2|Sultan's ceremonial palace on the waterfront|60
+Forodhani Gardens|-6.1620|39.1880|pk|relax,photo|2|0|Seaside gardens and sunset promenade|45
+Old Fort|-6.1620|39.1895|lm|hist|3|0|17th-century Omani fort and amphitheatre|30
+Prison Island|-6.1130|39.1710|nt|nat,fam|2|2|Giant tortoises and snorkelling a short boat ride away|180
+Jozani Forest|-6.2440|39.4230|nt|nat|2|2|Home of the endemic red colobus monkey|120
+Spice Farm Tour|-6.1680|39.2630|at|food,nat|1|2|Taste and smell the island's spices|150
+Nungwi Beach|-5.7260|39.2970|bc|relax|1|0|Powder-white beach in the north|240
+Kendwa Beach|-5.7480|39.2870|bc|relax,night|2|0|Beach known for full-moon parties|240
+Paje Beach|-6.2700|39.5380|bc|sport,relax|2|0|Kitesurfing beach with shallow turquoise water|240
+Mnemba Atoll|-5.8200|39.3840|nt|nat,adv|1|3|Snorkelling and diving among dolphins and coral|300
+Darajani Market|-6.1650|39.1950|sh|food,cult|2|0|Bustling local produce and fish market|60
+Anglican Cathedral and Slave Market|-6.1635|39.1943|rl|hist|2|2|Cathedral on the site of the old slave market|60
+Freddie Mercury Museum|-6.1647|39.1907|mu|music,hist|3|2|House where the singer was born|45
+Mangapwani Slave Chamber|-6.0800|39.1500|lm|hist|3|1|Coral cave used to hide enslaved people|60
+Kizimkazi Dolphin Tour|-6.4470|39.4510|at|nat,adv|2|3|Boat trip to swim near dolphins|180
+Forodhani Night Market|-6.1623|39.1883|rs|food|1|1|Nightly seafood grill by the sea|75
+Lukmaan Restaurant|-6.1640|39.1930|rs|food|3|1|Local Swahili dishes|60
+Emerson on Hurumzi Rooftop|-6.1637|39.1913|rs|food,photo|3|3|Rooftop tea house above the old town|90
+Zanzibar Coffee House|-6.1651|39.1936|cf|food|3|2|Coffee in a restored Stone Town building|45
+
+=Sydney|AU
+Sydney Opera House|-33.8568|151.2153|lm|arch,music,photo|1|3|The sail-roofed icon on Bennelong Point|90
+Sydney Harbour Bridge|-33.8523|151.2108|lm|arch,adv,photo|1|2|The Coathanger, with a climb or pylon lookout|90
+Bondi Beach|-33.8915|151.2767|bc|relax,sport|1|0|Australia's most famous surf beach|180
+Royal Botanic Garden Sydney|-33.8642|151.2166|pk|nat,relax|1|0|Harbourside gardens with Mrs Macquarie's Chair|90
+Taronga Zoo|-33.8430|151.2410|at|nat,fam|2|3|Harbour-view zoo reached by ferry|180
+The Rocks|-33.8590|151.2090|at|hist,shop|2|0|Sydney's oldest district of cobbled lanes and markets|90
+Darling Harbour|-33.8730|151.1990|at|fam,food|2|0|Waterfront precinct of museums and aquarium|120
+Manly Beach and Ferry|-33.7970|151.2880|bc|relax,photo|1|1|Ferry ride to a laid-back surf beach|240
+Art Gallery of New South Wales|-33.8688|151.2174|mu|art|2|0|Australian and Indigenous art|90
+Queen Victoria Building|-33.8719|151.2067|sh|arch,shop|3|0|Romanesque shopping arcade|45
+Sydney Tower Eye|-33.8705|151.2089|vp|photo|3|3|Observation tower with a skywalk|60
+Bondi to Coogee Coastal Walk|-33.9070|151.2630|nt|nat,photo,adv|1|0|Clifftop walk past beaches and rock pools|150
+Hyde Park and ANZAC Memorial|-33.8750|151.2110|pk|hist,relax|3|0|Central park with a war memorial|45
+Luna Park|-33.8480|151.2100|at|fam|3|2|Retro amusement park under the Bridge|120
+Barangaroo Reserve|-33.8600|151.2010|pk|nat,hist|3|0|Headland park on the former docks|60
+Watsons Bay and The Gap|-33.8410|151.2800|vp|photo,food|2|0|Dramatic cliffs and fish-and-chip lunches|120
+Harry's Café de Wheels|-33.8700|151.2220|rs|food,hist|2|1|Famous pie cart since 1938|30
+Dixon Street Chinatown|-33.8780|151.2040|rs|food|3|2|Dumplings and noodles in the CBD|75
+Bourke Street Bakery|-33.8890|151.2130|cf|food|3|2|Sourdough and pastries in Surry Hills|45
+Doyle's on the Beach|-33.8460|151.2820|rs|food,hist|2|3|Fresh seafood by the sand since 1885|90
+
+=Melbourne|AU
+Federation Square|-37.8180|144.9690|at|art,cult|2|0|Cultural hub opposite Flinders Street Station|60
+Royal Botanic Gardens Victoria|-37.8304|144.9796|pk|nat,relax|1|0|Lakeside gardens on the Yarra|90
+Queen Victoria Market|-37.8076|144.9568|sh|food,shop|1|0|Historic market of produce and street food|90
+Melbourne Cricket Ground|-37.8200|144.9834|at|sport|2|2|The MCG, a sporting cathedral|90
+St Kilda Beach and Pier|-37.8680|144.9740|bc|relax,fam|2|0|Seaside suburb with little penguins at dusk|120
+National Gallery of Victoria|-37.8226|144.9689|mu|art|2|0|Australia's oldest and most visited art museum|120
+Hosier Lane|-37.8167|144.9690|at|art,photo|1|0|Graffiti-covered laneway|30
+Melbourne Museum and Royal Exhibition Building|-37.8046|144.9717|mu|hist,fam|2|2|World Heritage exhibition hall and museum|120
+Eureka Skydeck|-37.8211|144.9644|vp|photo|3|3|Observation deck on the 88th floor|60
+Yarra Valley Wineries|-37.6550|145.5180|at|food,nat|2|2|Cool-climate wine region|300
+Healesville Sanctuary|-37.6640|145.5230|at|nat,fam|3|3|Native wildlife in bushland|180
+Puffing Billy Railway|-37.9090|145.3560|at|fam,photo|2|2|Steam train through the Dandenong Ranges|180
+Fitzroy Gardens|-37.8130|144.9800|pk|relax,hist|3|0|Gardens with Cooks' Cottage|60
+Melbourne Zoo|-37.7840|144.9510|at|nat,fam|3|3|Historic zoo|180
+Brighton Bathing Boxes|-37.9130|144.9860|bc|photo,relax|3|0|Colourful beach huts|60
+Flinders Street Station|-37.8183|144.9671|lm|arch,hist|3|0|Landmark yellow station|20
+Pellegrini's Espresso Bar|-37.8130|144.9690|cf|food,hist|2|1|Italian café unchanged since 1954|45
+Lune Croissanterie|-37.7960|144.9790|cf|food|1|2|Famous cult croissants|45
+Hutong Dumpling Bar|-37.8115|144.9680|rs|food|2|2|Celebrated Shanghainese soup dumplings|75
+Movida|-37.8170|144.9690|rs|food|3|3|Acclaimed Spanish tapas bar in Hosier Lane|90
+
+=Auckland|NZ
+Sky Tower|-36.8485|174.7622|vp|photo,adv|1|3|328-metre tower with a SkyWalk and bungy|75
+Waiheke Island|-36.7800|175.0000|at|food,relax|1|2|Vineyard-covered island a ferry ride away|360
+Auckland War Memorial Museum|-36.8600|174.7770|mu|hist,nat|2|2|Maori treasures and natural history|120
+Mount Eden Summit|-36.8760|174.7640|vp|nat,photo|1|0|Volcanic cone with 360-degree city views|60
+One Tree Hill (Maungakiekie)|-36.9000|174.7830|vp|nat,hist|2|0|Volcanic summit with an obelisk|75
+Viaduct Harbour|-36.8420|174.7590|at|food,night|2|0|Waterfront of restaurants and superyachts|75
+Devonport|-36.8330|174.7980|at|relax,photo|2|1|Seaside village across the harbour|150
+Piha Beach|-36.9530|174.4680|bc|adv,nat|1|0|Black-sand surf beach beneath Lion Rock|180
+Rangitoto Island|-36.7890|174.8600|nt|adv,nat|1|2|Volcanic island hike with a summit view|240
+Auckland Domain and Wintergardens|-36.8618|174.7787|pk|nat,relax|3|0|Parkland and Victorian glasshouses|75
+Kelly Tarlton's Sea Life Aquarium|-36.8470|174.8250|at|nat,fam|3|3|Underwater tunnel and Antarctic penguins|120
+Auckland Art Gallery|-36.8520|174.7650|mu|art|3|1|New Zealand's largest art gallery|90
+Muriwai Gannet Colony|-36.8310|174.4350|nt|nat,photo|3|0|Nesting gannets above a black-sand beach|90
+Mission Bay|-36.8490|174.8310|bc|relax,food|3|0|City beach with cafés|120
+Cornwall Park|-36.8960|174.7860|pk|relax,fam|3|0|Sheep grazing beneath volcanic hills|75
+Arataki Visitor Centre|-36.9210|174.6490|nt|nat,cult|3|0|Gateway to the Waitakere Ranges rainforest|75
+Auckland Fish Market|-36.8420|174.7490|rs|food|1|2|Seafood stalls and restaurants|75
+Giapo|-36.8490|174.7640|cf|food,art|2|2|Theatrical, artistic gelato|30
+Federal Delicatessen|-36.8480|174.7625|rs|food|2|2|New York-style deli|60
+Ponsonby Central|-36.8570|174.7390|rs|food|3|2|Food court of the trendy Ponsonby district|60
+
+=Queenstown|NZ|@-45.0312,168.6626,Pacific/Auckland
+Skyline Gondola|-45.0270|168.6600|vp|photo,adv|1|3|Gondola to a hilltop view of Lake Wakatipu|90
+Lake Wakatipu Foreshore|-45.0360|168.6570|pk|relax,photo|1|0|Lakeside walk beneath the Remarkables|60
+Shotover Jet|-44.9920|168.7170|at|adv|1|3|High-speed jet boat through canyon walls|60
+Kawarau Bridge Bungy|-45.0120|168.8190|at|adv|1|3|The world's first commercial bungy jump|90
+Arrowtown|-44.9400|168.8300|at|hist,photo|1|0|Gold-rush village famed for autumn colours|150
+Glenorchy|-44.8500|168.3870|at|nat,photo|1|0|Gateway to Lord of the Rings landscapes|240
+The Remarkables Ski Area|-45.0610|168.8140|nt|adv,sport|2|3|Alpine skiing and summer views|240
+Queenstown Gardens|-45.0360|168.6620|pk|relax|3|0|Peninsula park with a frisbee golf course|60
+TSS Earnslaw Steamship|-45.0340|168.6590|at|hist,relax|2|3|Vintage steamship across the lake|180
+Cardrona Valley|-44.8800|168.9500|at|photo,adv|3|0|Alpine valley with a famous bra fence|120
+Gibbston Valley Winery|-45.0120|168.9180|at|food|2|2|Cellar tours in a cool-climate wine valley|120
+Walter Peak High Country Farm|-45.1180|168.5920|at|fam,nat|3|3|Sheepdog and sheep-shearing show across the lake|180
+Lake Hayes|-44.9710|168.8040|nt|photo,relax|3|0|Mirror-like lake near Arrowtown|60
+Coronet Peak|-44.9210|168.7370|vp|adv,photo|3|2|Mountain with a panoramic view|120
+Queenstown Hill Time Walk|-45.0260|168.6700|nt|adv,photo|3|0|Short hike with lake and mountain views|120
+Skyline Luge|-45.0270|168.6620|en|fam,adv|2|2|Downhill luge track above the lake|60
+Fergburger|-45.0330|168.6590|rs|food|1|2|Legendary burgers with a queue to match|45
+Patagonia Chocolates|-45.0340|168.6600|cf|food|3|2|Hot chocolate and handmade sweets by the lake|30
+Joe's Garage|-45.0337|168.6606|cf|food|3|2|Local coffee roaster and café|45
+Amisfield Bistro|-44.9870|168.8040|rs|food|2|3|Tasting menus in a vineyard setting|120

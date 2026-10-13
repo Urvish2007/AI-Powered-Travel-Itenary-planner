@@ -1,0 +1,219 @@
+=Athens|GR
+Acropolis of Athens|37.9715|23.7267|lm|hist,arch|1|3|Ancient citadel crowned by the Parthenon|150
+Acropolis Museum|37.9685|23.7286|mu|hist,art|1|2|Museum of finds from the Acropolis slopes|120
+Ancient Agora of Athens|37.9755|23.7217|lm|hist|1|2|Marketplace of classical Athens with the Temple of Hephaestus|90
+Temple of Olympian Zeus|37.9693|23.7331|lm|hist|2|2|Colossal columns of the largest temple in Greece|45
+Plaka|37.9717|23.7297|at|cult,shop|1|0|Charming old neighbourhood of tavernas below the Acropolis|90
+Monastiraki Square|37.9762|23.7256|at|shop,cult|2|0|Flea-market square with an Acropolis view|45
+Panathenaic Stadium|37.9684|23.7411|lm|hist,sport|2|1|Marble stadium that hosted the first modern Olympics|45
+Mount Lycabettus|37.9819|23.7430|vp|photo,nat|2|0|Highest hill in central Athens, ideal for sunset|75
+National Archaeological Museum|37.9892|23.7326|mu|hist|1|2|The finest collection of ancient Greek art|150
+Syntagma Square|37.9755|23.7348|at|hist,cult|2|0|Parliament and the ceremonial Evzone guards|30
+Hadrian's Library|37.9757|23.7250|lm|hist|3|1|Ruins of a Roman library|30
+Roman Agora and Tower of the Winds|37.9749|23.7261|lm|hist|3|1|Ancient weather station in a Roman marketplace|30
+Cape Sounion|37.6503|24.0245|lm|hist,photo|2|2|Clifftop Temple of Poseidon above the Aegean, best at sunset|150
+Benaki Museum|37.9763|23.7422|mu|art,hist|3|2|Greek art through the ages|90
+Anafiotika|37.9727|23.7311|at|photo,cult|3|0|Whitewashed Cycladic-style lanes on the Acropolis slope|30
+Filopappou Hill|37.9682|23.7196|vp|photo,nat|3|0|Wooded hill with a superb Acropolis view|75
+Varvakios Central Market|37.9789|23.7266|rs|food|3|0|Bustling meat-and-fish market|45
+Thanasis Kebab|37.9761|23.7254|rs|food|2|1|Famous grilled kebabs off Monastiraki Square|30
+Brettos Bar|37.9722|23.7302|br|food,cult|3|2|Colourful distillery-bar in Plaka since 1909|60
+Lukumades|37.9776|23.7283|cf|food|3|1|Hot Greek honey doughnuts|30
+
+=Istanbul|TR
+Hagia Sophia|41.0086|28.9802|rl|hist,arch|1|2|Byzantine cathedral turned mosque, one of architecture's wonders|75
+Blue Mosque|41.0054|28.9768|rl|arch,hist|1|0|Six-minaret mosque lined with blue tiles|45
+Topkapı Palace|41.0115|28.9834|lm|hist|1|3|Palace of the Ottoman sultans|150
+Basilica Cistern|41.0084|28.9779|lm|hist|1|2|Atmospheric Byzantine underground reservoir|45
+Grand Bazaar|41.0107|28.9680|sh|shop,cult|1|0|One of the world's oldest and largest covered markets|120
+Galata Tower|41.0256|28.9744|vp|photo,hist|1|2|Medieval tower with panoramic views|45
+Süleymaniye Mosque|41.0162|28.9640|rl|arch|2|0|Sinan's grand mosque above the Golden Horn|45
+Spice Bazaar|41.0166|28.9706|sh|food,shop|2|0|Aromatic 17th-century market of spices and sweets|60
+Bosphorus Cruise|41.0180|28.9740|at|relax,photo|1|2|Boat trip between Europe and Asia|120
+Dolmabahçe Palace|41.0392|29.0000|lm|hist,arch|2|2|Opulent 19th-century palace on the Bosphorus|90
+Istanbul Archaeology Museums|41.0117|28.9817|mu|hist|3|2|Ancient treasures beside Topkapı|90
+Chora Church|41.0313|28.9389|rl|art,hist|3|2|Breathtaking Byzantine mosaics and frescoes|60
+Galata Bridge|41.0203|28.9736|lm|photo,food|3|0|Fishermen above, fish restaurants below|30
+Istiklal Avenue|41.0335|28.9784|at|shop,cult|2|0|Pedestrian boulevard with a nostalgic tram|75
+Maiden's Tower|41.0212|29.0041|lm|hist,photo|3|2|Islet tower in the Bosphorus|60
+Pierre Loti Hill|41.0546|28.9337|vp|photo|3|0|Tea garden above the Golden Horn|60
+Karaköy Güllüoğlu|41.0227|28.9782|cf|food|1|1|Famous baklava shop|30
+Hafız Mustafa 1864|41.0165|28.9742|cf|food|2|1|Turkish delight and sweets since 1864|30
+Çiya Sofrası|40.9899|29.0248|rs|food|1|2|Kadıköy restaurant famed for regional Anatolian dishes|75
+Karaköy Lokantası|41.0234|28.9769|rs|food|2|2|Stylish modern Turkish restaurant|75
+
+=Venice|IT
+St. Mark's Basilica|45.4345|12.3397|rl|arch,hist,art|1|2|Golden Byzantine basilica of glittering mosaics|60
+Doge's Palace|45.4337|12.3403|lm|hist,arch,art|1|3|Gothic palace of the Venetian Republic|120
+Rialto Bridge|45.4380|12.3359|lm|arch,photo|1|0|Oldest bridge over the Grand Canal|30
+Grand Canal Vaporetto Ride|45.4364|12.3345|at|photo,relax|1|1|Line 1 waterbus past a parade of palazzi|60
+St. Mark's Campanile|45.4341|12.3387|vp|photo|2|2|Bell tower with a panoramic view|30
+Bridge of Sighs|45.4340|12.3408|lm|hist,photo|2|0|Enclosed limestone bridge between palace and prison|20
+Gallerie dell'Accademia|45.4318|12.3283|mu|art|2|2|Venetian masters from Bellini to Tintoretto|120
+Peggy Guggenheim Collection|45.4306|12.3316|mu|art|2|2|Modern art in a Grand Canal palazzo|90
+Santa Maria della Salute|45.4307|12.3347|rl|arch|2|0|Baroque basilica at the mouth of the Grand Canal|30
+Murano|45.4589|12.3527|at|art,shop|2|0|Glassmaking island|120
+Burano|45.4853|12.4167|at|photo,cult|1|0|Colourful fishermen's island of lace|120
+Rialto Market|45.4386|12.3345|rs|food|2|0|Fish and produce market beside the Rialto|45
+Basilica dei Frari|45.4372|12.3265|rl|art|3|2|Home of Titian's Assumption|45
+Scuola Grande di San Rocco|45.4369|12.3258|mu|art|3|2|Tintoretto's masterworks|60
+Lido di Venezia|45.4054|12.3712|bc|relax|3|0|Sandy beach island|120
+Torcello|45.4988|12.4177|at|hist|3|0|Ancient island with a Byzantine cathedral|90
+Cannaregio and the Ghetto|45.4453|12.3268|at|hist,cult|3|0|The world's first Jewish ghetto and quieter canals|60
+Cantina Do Mori|45.4384|12.3350|br|food|2|1|Historic wine bar serving cicchetti since 1462|45
+Caffè Florian|45.4337|12.3388|cf|food,hist|2|3|Café on St Mark's Square since 1720|60
+Osteria alle Testiere|45.4340|12.3466|rs|food|3|3|Tiny seafood osteria with a devoted following|90
+
+=Florence|IT
+Florence Cathedral and Duomo|43.7731|11.2560|rl|arch,hist|1|3|Brunelleschi's dome over the city|120
+Uffizi Gallery|43.7677|11.2553|mu|art|1|3|Botticelli's Birth of Venus and the greatest Renaissance art|150
+Accademia Gallery|43.7768|11.2590|mu|art|1|3|Home of Michelangelo's David|75
+Ponte Vecchio|43.7679|11.2531|lm|hist,photo,shop|1|0|Medieval bridge lined with jewellers|30
+Piazza della Signoria|43.7696|11.2558|at|hist,art|1|0|Open-air gallery of sculpture|45
+Palazzo Vecchio|43.7693|11.2563|lm|hist,art|2|2|Town hall fortress of the Medici|75
+Pitti Palace and Boboli Gardens|43.7650|11.2500|lm|art,nat|2|3|Medici palace with grand gardens|150
+Piazzale Michelangelo|43.7629|11.2650|vp|photo|1|0|The classic panorama of Florence|45
+Santa Croce Basilica|43.7687|11.2622|rl|art,hist|2|2|Tombs of Michelangelo and Galileo|60
+Medici Chapels|43.7752|11.2544|rl|art,hist|2|2|Michelangelo's New Sacristy|60
+Giotto's Campanile|43.7728|11.2558|vp|photo|3|2|Bell tower with 414 steps|45
+Bargello Museum|43.7703|11.2585|mu|art|3|2|Renaissance sculpture including Donatello's David|75
+Santa Maria Novella|43.7745|11.2496|rl|art|3|2|Tuscan Gothic church|45
+San Miniato al Monte|43.7599|11.2651|rl|arch,hist|3|0|Romanesque church on a hill|45
+Fiesole|43.8055|11.2929|at|hist,photo|3|0|Etruscan hill town above Florence|150
+Mercato Centrale|43.7767|11.2530|rs|food|1|1|Two-storey market and food hall|75
+Trattoria Mario|43.7768|11.2539|rs|food|3|1|Lunch-only market trattoria|60
+Gelateria dei Neri|43.7686|11.2585|cf|food|2|1|Beloved gelato near Santa Croce|20
+All'Antico Vinaio|43.7681|11.2581|rs|food|1|1|Legendary schiacciata sandwiches|30
+Caffè Gilli|43.7713|11.2545|cf|food,hist|3|2|Historic café on Piazza della Repubblica since 1733|45
+
+=Milan|IT
+Duomo di Milano|45.4641|9.1919|rl|arch,hist|1|3|Gothic marble cathedral with a rooftop walk|90
+Galleria Vittorio Emanuele II|45.4659|9.1900|sh|arch,shop|1|0|Grand 19th-century glass-domed arcade|45
+The Last Supper|45.4660|9.1710|mu|art|1|3|Leonardo's mural at Santa Maria delle Grazie (book ahead)|30
+Sforza Castle|45.4705|9.1794|lm|hist|1|0|Renaissance fortress with museums|90
+La Scala Opera House|45.4674|9.1897|en|music,arch|2|3|Legendary opera house and museum|60
+Pinacoteca di Brera|45.4720|9.1880|mu|art|2|2|Old Masters in a neoclassical palace|90
+Sempione Park|45.4728|9.1745|pk|relax|2|0|Large park behind the castle|60
+Navigli|45.4500|9.1780|at|night,food|2|0|Canal district of aperitivo bars|90
+Monumental Cemetery|45.4870|9.1770|at|art,hist|3|0|Elaborate funerary sculpture|60
+Bosco Verticale|45.4871|9.1908|lm|arch,photo|3|0|The famous vertical-forest towers|20
+San Siro Stadium|45.4781|9.1240|at|sport|2|2|Home of AC Milan and Inter|90
+Basilica di Sant'Ambrogio|45.4623|9.1738|rl|hist,arch|3|0|Early-medieval basilica|45
+Quadrilatero della Moda|45.4685|9.1960|sh|shop|3|0|Luxury fashion streets|60
+Museo del Novecento|45.4640|9.1889|mu|art|3|2|20th-century Italian art on Piazza Duomo|75
+Fondazione Prada|45.4447|9.2014|mu|art,arch|3|2|Contemporary art in a former distillery|90
+Piazza Gae Aulenti|45.4839|9.1900|at|arch|3|0|Modern towers and plaza of Porta Nuova|30
+Luini Panzerotti|45.4649|9.1904|cf|food|1|1|Iconic panzerotti since 1949|20
+Pasticceria Marchesi|45.4657|9.1834|cf|food,hist|2|2|Historic pastry shop since 1824|45
+Trattoria Milanese|45.4622|9.1837|rs|food|2|2|Traditional Milanese cuisine|75
+Peck|45.4631|9.1877|rs|food|3|3|Historic gourmet deli and restaurant near the Duomo|75
+
+=Naples|IT
+Pompeii|40.7462|14.4989|lm|hist|1|3|Roman city frozen in time by Vesuvius|240
+Mount Vesuvius|40.8224|14.4289|nt|adv,nat|1|2|Crater hike on the volcano|180
+National Archaeological Museum|40.8535|14.2506|mu|hist|1|2|Pompeii mosaics and the Farnese collection|150
+Spaccanapoli|40.8480|14.2571|at|cult,hist|1|0|The dead-straight street through the historic centre|90
+Naples Cathedral|40.8527|14.2589|rl|arch,hist|3|0|Home of the blood of San Gennaro|45
+Galleria Umberto I|40.8391|14.2489|sh|arch|3|0|Iron-and-glass arcade|30
+Castel dell'Ovo|40.8280|14.2478|lm|hist,photo|2|0|Seaside castle on the bay|60
+Royal Palace of Naples|40.8358|14.2489|lm|hist,arch|3|2|Bourbon palace on Piazza del Plebiscito|75
+Naples Underground|40.8516|14.2554|at|hist,adv|2|2|Tunnels and Greek-Roman cisterns beneath the city|75
+Cappella Sansevero|40.8487|14.2564|mu|art|2|2|Home of the Veiled Christ sculpture|45
+Certosa di San Martino|40.8438|14.2410|mu|art,hist|3|2|Monastery with a panoramic view of the bay|90
+Capodimonte Museum|40.8687|14.2503|mu|art|3|2|Farnese art collection in a Bourbon palace|120
+Herculaneum|40.8060|14.3476|lm|hist|2|2|Better-preserved Roman town|120
+Lungomare Caracciolo|40.8283|14.2340|pk|relax,photo|3|0|Seafront promenade with a Vesuvius view|60
+Piazza del Plebiscito|40.8358|14.2496|at|arch|3|0|Grand square facing the Royal Palace|30
+Villa Comunale|40.8302|14.2366|pk|relax|3|0|Seaside gardens with an aquarium|45
+L'Antica Pizzeria da Michele|40.8497|14.2627|rs|food|1|1|Legendary pizzeria serving just Margherita or Marinara|60
+Sorbillo|40.8512|14.2559|rs|food|1|1|Famed Neapolitan pizza on Via dei Tribunali|60
+Gran Caffè Gambrinus|40.8364|14.2496|cf|food,hist|2|2|Belle Époque café since 1860|45
+Pasticceria Pintauro|40.8397|14.2488|cf|food|3|1|Sfogliatella pastries since 1785|20
+
+=Edinburgh|GB
+Edinburgh Castle|55.9486|-3.1999|lm|hist,arch|1|3|Hilltop fortress and home of the Honours of Scotland|150
+Royal Mile|55.9503|-3.1883|at|hist,cult|1|0|Historic street from castle to palace|90
+Palace of Holyroodhouse|55.9525|-3.1720|lm|hist|1|3|The monarch's official Scottish residence|90
+Arthur's Seat|55.9441|-3.1618|nt|adv,nat,photo|1|0|Extinct volcano with sweeping city views|150
+Scott Monument|55.9520|-3.1933|lm|arch,photo|3|1|Gothic monument with a climbable tower|45
+Princes Street Gardens|55.9507|-3.1970|pk|relax|2|0|Gardens beneath the castle|45
+National Museum of Scotland|55.9470|-3.1900|mu|hist,fam|1|0|Free museum of science, art and history|150
+St Giles' Cathedral|55.9495|-3.1909|rl|arch,hist|2|1|Crown-spired High Kirk of Edinburgh|45
+Calton Hill|55.9552|-3.1826|vp|photo|2|0|Monuments and skyline views|60
+Royal Botanic Garden Edinburgh|55.9652|-3.2098|pk|nat|3|0|Glasshouses and landscaped gardens|120
+Camera Obscura and World of Illusions|55.9488|-3.1946|at|fam|3|3|Victorian rooftop attraction of optical illusions|60
+Dean Village|55.9527|-3.2175|at|photo|3|0|Picturesque riverside hamlet in the city|45
+Victoria Street|55.9490|-3.1927|sh|shop,photo|3|0|Curved, colourful street said to have inspired Diagon Alley|30
+The Real Mary King's Close|55.9500|-3.1907|at|hist|2|3|Preserved 17th-century streets beneath the Royal Mile|75
+Scottish National Gallery|55.9509|-3.1961|mu|art|3|0|Old Masters to Impressionists|90
+Royal Yacht Britannia|55.9812|-3.1739|at|hist|2|3|The royal family's former floating residence|120
+The Elephant House|55.9474|-3.1912|cf|food,cult|2|1|Café known as a Harry Potter writing spot|45
+The Witchery by the Castle|55.9490|-3.1970|rs|food,hist|3|3|Gothic-styled restaurant beside the castle|90
+Deacon Brodie's Tavern|55.9494|-3.1913|br|food,hist|3|1|Historic Royal Mile pub|60
+Oink|55.9488|-3.1924|rs|food|3|1|Famous hog-roast rolls|20
+
+=Dublin|IE
+Guinness Storehouse|53.3419|-6.2867|at|food,hist|1|3|Home of Guinness, ending with a rooftop pint|120
+Trinity College and the Book of Kells|53.3438|-6.2546|mu|hist,art|1|3|Ancient illuminated manuscript and the Long Room library|90
+Dublin Castle|53.3429|-6.2674|lm|hist|2|2|Medieval castle and state apartments|75
+St Patrick's Cathedral|53.3394|-6.2717|rl|hist,arch|2|2|Ireland's national cathedral|45
+Kilmainham Gaol|53.3419|-6.3100|mu|hist|1|2|Prison of Irish rebels, now a museum|75
+Temple Bar|53.3455|-6.2646|at|night,music|1|0|Cobbled lanes of pubs and live music|90
+Phoenix Park|53.3559|-6.3298|pk|nat,relax|2|0|Huge park with wild deer and the zoo|120
+Christ Church Cathedral|53.3433|-6.2711|rl|hist,arch|2|2|Medieval cathedral with a crypt|45
+National Museum of Ireland: Archaeology|53.3402|-6.2547|mu|hist|3|0|Bog bodies and Celtic gold|75
+Grafton Street|53.3418|-6.2600|sh|shop,music|3|0|Buskers and boutiques|45
+St Stephen's Green|53.3382|-6.2591|pk|relax|3|0|Victorian park in the city centre|45
+Ha'penny Bridge|53.3463|-6.2631|lm|photo|3|0|Iron footbridge over the Liffey|15
+Howth Cliff Walk|53.3902|-6.0654|nt|adv,nat,photo|2|0|Coastal path on a peninsula outside Dublin|180
+EPIC The Irish Emigration Museum|53.3492|-6.2482|mu|hist|3|2|Immersive story of Irish emigrants|90
+Jameson Distillery Bow St.|53.3485|-6.2775|at|food|3|2|Whiskey tour in the original distillery|75
+Chester Beatty Library|53.3428|-6.2670|mu|art|3|0|Free museum of manuscripts and art|60
+The Brazen Head|53.3449|-6.2761|rs|food,hist,music|1|1|Ireland's oldest pub, dating to 1198|75
+Queen of Tarts|53.3435|-6.2673|cf|food|3|2|Beloved café near Dublin Castle|45
+Leo Burdock|53.3428|-6.2704|rs|food|2|1|Dublin's famed fish and chips since 1913|30
+O'Donoghue's|53.3378|-6.2529|br|music,food|2|1|Traditional music pub near St Stephen's Green|75
+
+=Zurich|CH
+Altstadt (Old Town)|47.3717|8.5423|at|hist,cult|1|0|Medieval lanes on both sides of the Limmat|90
+Grossmünster|47.3700|8.5441|rl|arch,hist|1|1|Twin-towered Romanesque church|45
+Fraumünster|47.3699|8.5417|rl|art,arch|1|1|Church with stained-glass windows by Chagall|45
+Lake Zurich Promenade|47.3630|8.5450|pk|relax,photo|1|0|Lakeside walk with mountain views|60
+Bahnhofstrasse|47.3745|8.5390|sh|shop|2|0|One of the world's most exclusive shopping streets|60
+Lindenhof|47.3728|8.5417|vp|photo|2|0|Tree-lined hilltop with city views|30
+Swiss National Museum|47.3792|8.5406|mu|hist|2|2|Swiss history in a castle-like building|90
+Kunsthaus Zurich|47.3703|8.5480|mu|art|2|2|Major art museum|90
+Uetliberg|47.3494|8.4919|vp|nat,adv,photo|2|1|City mountain with sweeping views|150
+Zurich Zoo|47.3850|8.5744|at|nat,fam|2|2|Renowned zoo with a rainforest hall|150
+Rhine Falls|47.6779|8.6155|nt|nat,photo|2|1|Europe's largest waterfall, a day trip north|180
+Lake Zurich Boat Cruise|47.3660|8.5450|at|relax,photo|2|2|Sightseeing cruise on the lake|90
+FIFA World Football Museum|47.3650|8.5290|mu|sport|3|3|The story of football|90
+Zurich Botanical Garden|47.3579|8.5605|pk|nat|3|0|University botanic garden|60
+Lindt Home of Chocolate|47.3196|8.5641|at|food,fam|1|3|Chocolate museum in Kilchberg|120
+Museum Rietberg|47.3557|8.5307|mu|art|3|2|Non-European art in a lakeside park|75
+Confiserie Sprüngli|47.3702|8.5390|cf|food,hist|1|2|Famous for Luxemburgerli macarons|45
+Zeughauskeller|47.3714|8.5388|rs|food,hist|2|2|Historic beer hall serving Swiss classics|75
+Kronenhalle|47.3661|8.5450|rs|food,art|3|3|Art-lined brasserie|90
+Café Odeon|47.3663|8.5442|cf|food,hist|3|2|Historic Belle Époque café|45
+
+=Reykjavik|IS|Reykjavík
+Hallgrímskirkja|64.1417|-21.9266|rl|arch,photo|1|1|Rocket-shaped church with a tower viewpoint|45
+Harpa Concert Hall|64.1503|-21.9328|lm|arch,music|1|0|Glass-faced concert hall on the harbour|45
+Blue Lagoon|63.8804|-22.4495|at|relax|1|3|Geothermal spa in a lava field|180
+Þingvellir National Park|64.2559|-21.1299|nt|nat,hist|1|0|Rift valley and site of the world's oldest parliament|180
+Sun Voyager|64.1476|-21.9227|lm|art,photo|2|0|Steel sculpture of a dreamboat on the shore|20
+Perlan|64.1291|-21.9186|mu|nat,fam|2|3|Glass dome with glacier and lava exhibits|90
+National Museum of Iceland|64.1416|-21.9490|mu|hist|2|2|Iceland's story from settlement to today|90
+Laugavegur|64.1454|-21.9271|sh|shop|3|0|Main shopping street of cafés and boutiques|60
+Whales of Iceland|64.1520|-21.9469|mu|nat,fam|3|3|Life-size whale models|75
+Whale Watching|64.1512|-21.9460|at|nat,adv|2|3|Boat tour from the Old Harbour|180
+Reykjavik Old Harbour|64.1516|-21.9450|at|cult,food|3|0|Working harbour of restaurants and tour boats|45
+Viðey Island|64.1580|-21.8920|pk|nat,relax|3|0|Island with the Imagine Peace Tower|120
+Nauthólsvík Geothermal Beach|64.1229|-21.9247|bc|relax|3|0|Heated sea lagoon and hot tubs|90
+Laugardalslaug Pool|64.1431|-21.8735|at|relax,fam|3|1|Largest public thermal pool complex|90
+Reykjadalur Hot Spring Valley|64.0271|-21.2016|nt|adv,relax|2|0|Hike to a bathable hot river|240
+Kerið Crater|64.0413|-20.8853|nt|nat,photo|3|1|Vivid red volcanic crater lake|60
+Bæjarins Beztu Pylsur|64.1487|-21.9418|rs|food|1|1|Iceland's famous hot dog stand|20
+Café Loki|64.1423|-21.9273|rs|food|3|2|Traditional Icelandic dishes opposite Hallgrímskirkja|60
+Sægreifinn|64.1518|-21.9484|rs|food|2|2|Harbourside lobster soup|60
+Reykjavik Roasters|64.1430|-21.9286|cf|food|3|2|Specialty coffee|30
