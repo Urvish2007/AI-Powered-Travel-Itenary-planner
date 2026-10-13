@@ -14,6 +14,7 @@ from app.ai.embeddings import (
 )
 from app.core.exceptions import ConflictError, NotFoundError
 from app.db.mongodb import get_database
+from app.db.sorting import descending
 from app.models.base import GeoPoint
 from app.models.enums import PlaceCategory
 from app.models.place import Place
@@ -167,7 +168,7 @@ async def list_places(
     total = await Place.find(query).count()
     items = (
         await Place.find(query)
-        .sort(-Place.rating, -Place.popularity)
+        .sort(descending(Place.rating), descending(Place.popularity))
         .skip(skip)
         .limit(limit)
         .to_list()
@@ -278,7 +279,7 @@ async def city_summary() -> list[dict[str, Any]]:
     wrong across the antimeridian; no city crosses it today.)
     """
     database = get_database()
-    pipeline = [
+    pipeline: list[dict[str, Any]] = [
         {"$match": {"is_active": True}},
         {
             "$group": {

@@ -71,7 +71,7 @@ export default function RootLayout({
     // suppressHydrationWarning: next-themes sets the class on <html> before
     // React hydrates, which would otherwise be reported as a mismatch.
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jakarta.variable} antialiased`}>
+      <body className={`${inter.variable} ${jakarta.variable} antialiased`} suppressHydrationWarning>
         {/* Keyboard users land here first and can jump straight to content. */}
         <a
           href="#main"

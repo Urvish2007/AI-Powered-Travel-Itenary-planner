@@ -122,11 +122,13 @@ def optimize(
 
     if ORTOOLS_AVAILABLE:
         try:
-            result = _solve_with_ortools(request)
-            if result is not None and result.feasible:
-                result.distance_before_km = baseline
+            # Its own name: OR-Tools may return nothing, unlike the greedy
+            # fallback below, which always produces a plan.
+            ortools_result = _solve_with_ortools(request)
+            if ortools_result is not None and ortools_result.feasible:
+                ortools_result.distance_before_km = baseline
                 OPTIMIZER_RUNS.labels("success").inc()
-                return result
+                return ortools_result
             logger.warning(
                 "optimizer_no_solution",
                 places=len(request.places),

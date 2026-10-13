@@ -9,7 +9,6 @@ from typing import Annotated, Literal
 from pydantic import (
     AliasChoices,
     Field,
-    MongoDsn,
     RedisDsn,
     SecretStr,
     field_validator,
@@ -95,7 +94,9 @@ class Settings(BaseSettings):
     )
 
     # ---- MongoDB ----
-    mongodb_uri: MongoDsn = Field(default=MongoDsn("mongodb://localhost:27017"))
+    # Plain str, NOT MongoDsn: Pydantic's MongoDsn injects :27017 into every
+    # URI, which breaks mongodb+srv:// (SRV URIs must not contain a port).
+    mongodb_uri: str = "mongodb://localhost:27017"
     mongodb_db_name: str = "itinerary_planner"
     # Atlas Vector Search is unavailable on a plain self-hosted mongod; when this is
     # False the retrieval layer falls back to in-process cosine similarity.
@@ -220,7 +221,7 @@ class Settings(BaseSettings):
 
     @property
     def mongodb_uri_str(self) -> str:
-        return str(self.mongodb_uri)
+        return self.mongodb_uri
 
 
 @lru_cache(maxsize=1)

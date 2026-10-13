@@ -244,7 +244,7 @@ export function CityExplorer({ city }: { city: string }) {
           Turn {city} into a day-by-day plan
         </h2>
         <p className="mx-auto mt-2 max-w-md text-muted-foreground">
-          We&apos;ll pick from these places, schedule them around opening hours and
+          We&rsquo;ll pick from these places, schedule them around opening hours and
           keep the walking inside your limit.
         </p>
         <Button asChild size="lg" className="mt-6">

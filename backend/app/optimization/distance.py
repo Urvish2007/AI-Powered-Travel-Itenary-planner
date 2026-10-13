@@ -79,7 +79,7 @@ def haversine_matrix_km(coords: list[Coordinate]) -> np.ndarray:
         np.sin(dlat / 2.0) ** 2
         + np.cos(lats)[:, None] * np.cos(lats)[None, :] * np.sin(dlng / 2.0) ** 2
     )
-    matrix = 2.0 * EARTH_RADIUS_KM * np.arcsin(np.sqrt(np.clip(h, 0.0, 1.0)))
+    matrix: np.ndarray = 2.0 * EARTH_RADIUS_KM * np.arcsin(np.sqrt(np.clip(h, 0.0, 1.0)))
     np.fill_diagonal(matrix, 0.0)
     return matrix
 

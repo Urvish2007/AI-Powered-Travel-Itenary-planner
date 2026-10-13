@@ -129,7 +129,7 @@ async def embed_text(text: str) -> list[float]:
                 input=text,
                 dimensions=settings.embedding_dimensions,
             )
-            return response.data[0].embedding
+            return [float(value) for value in response.data[0].embedding]
         except Exception as exc:  # pragma: no cover - network
             logger.warning("embedding_provider_failed", error=str(exc))
 
@@ -247,8 +247,15 @@ async def _cosine_fallback(
     ranked = np.argsort(-scores)[:limit]
     results: list[dict[str, Any]] = []
     for position in ranked:
+        score = float(scores[int(position)])
+        # A zero score means the query shares no vocabulary at all with this
+        # place, so its position in the ranking is arbitrary. Returning those
+        # would dress up "no matches" as three confident suggestions, which is
+        # worse than an empty result the caller can report honestly.
+        if score <= 0.0:
+            break
         document = dict(documents[int(position)])
         document.pop("embedding", None)
-        document["search_score"] = round(float(scores[int(position)]), 6)
+        document["search_score"] = round(score, 6)
         results.append(document)
     return results

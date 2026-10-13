@@ -5,6 +5,7 @@ from __future__ import annotations
 from fastapi import APIRouter
 
 from app.core.deps import AdminUser, CurrentUser
+from app.db.sorting import descending
 from app.models.user import TravelPreferences
 from app.schemas.common import Message, Page, PaginationDep
 from app.schemas.user import UserPublic, UserUpdate
@@ -64,7 +65,7 @@ async def deactivate_me(user: CurrentUser) -> Message:
 
     user.is_active = False
     await user.save()
-    await auth_service.revoke_all_for_user(user.id)
+    await auth_service.revoke_all_for_user(user.persisted_id)
     return Message(message="Account deactivated.")
 
 
@@ -82,7 +83,7 @@ async def list_users(
     total = await User.find_all().count()
     users = (
         await User.find_all()
-        .sort(-User.created_at)
+        .sort(descending(User.created_at))
         .skip(pagination.skip)
         .limit(pagination.limit)
         .to_list()

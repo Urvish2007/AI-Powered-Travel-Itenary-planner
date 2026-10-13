@@ -8,7 +8,6 @@ mapping layer.
 
 from __future__ import annotations
 
-import re
 from typing import Any
 
 from beanie import init_beanie
@@ -25,56 +24,6 @@ logger = get_logger(__name__)
 _client: AsyncIOMotorClient | None = None
 _database: AsyncIOMotorDatabase | None = None
 
-_SRV_PREFIX = "mongodb+srv://"
-# Matches a trailing ":<digits>" at the end of a host section.
-_TRAILING_PORT = re.compile(r":\d+$")
-
-
-def normalize_mongo_uri(uri: str) -> str:
-    """Return a URI that pymongo will accept.
-
-    ``mongodb+srv://`` URIs must not contain a port: the host, port and replica
-    set members come from DNS. Pydantic's ``MongoDsn`` type applies a default
-    port of 27017 when it serialises a URI back to a string, which turns a valid
-    Atlas SRV string into one pymongo rejects with
-    ``InvalidURI: mongodb+srv:// URIs must not include a port number``.
-
-    This strips that port for SRV URIs and leaves every other URI untouched.
-    Credentials are never modified, so special characters in the password are
-    safe.
-    """
-    uri = uri.strip().strip("\"'")  # tolerate quotes pasted into env vars
-
-    if not uri.startswith(_SRV_PREFIX):
-        return uri
-
-    rest = uri[len(_SRV_PREFIX):]
-
-    # The authority ends at the first "/" or "?" (a "/" or "?" cannot appear
-    # unescaped in credentials, so this split is safe).
-    end = len(rest)
-    for sep in ("/", "?"):
-        idx = rest.find(sep)
-        if idx != -1:
-            end = min(end, idx)
-    authority, tail = rest[:end], rest[end:]
-
-    # Split credentials from host on the LAST "@" (passwords may contain "@"
-    # only when percent-encoded, but be defensive).
-    if "@" in authority:
-        creds, host = authority.rsplit("@", 1)
-        creds += "@"
-    else:
-        creds, host = "", authority
-
-    host = _TRAILING_PORT.sub("", host)
-    return f"{_SRV_PREFIX}{creds}{host}{tail}"
-
-
-def _redact(uri: str) -> str:
-    """Hide credentials so a URI is safe to log."""
-    return re.sub(r"//[^@/]+@", "//***:***@", uri)
-
 
 async def connect_to_mongo(
     uri: str | None = None, db_name: str | None = None
@@ -82,40 +31,39 @@ async def connect_to_mongo(
     """Open the Motor client and register every Beanie document.
 
     Safe to call more than once: a second call reuses the existing client.
-    If startup fails part-way, the half-open client is closed so a retry starts
-    clean.
     """
     global _client, _database
 
     if _database is not None:
         return _database
 
-    raw_uri = uri or settings.mongodb_uri_str
-    uri = normalize_mongo_uri(str(raw_uri))
+    uri = uri or settings.mongodb_uri_str
     db_name = db_name or settings.mongodb_db_name
 
-    logger.info("mongodb_connecting", uri=_redact(uri), database=db_name)
-
-    client = AsyncIOMotorClient(
-        uri,
-        uuidRepresentation="standard",
-        serverSelectionTimeoutMS=5_000,
-        connectTimeoutMS=5_000,
-        maxPoolSize=50,
-        minPoolSize=5,
-        retryWrites=True,
-    )
-    database = client[db_name]
-
     try:
-        await init_beanie(database=database, document_models=ALL_DOCUMENTS)
-    except Exception:
-        # Do not leave a dangling client/pool behind on a failed startup.
-        client.close()
-        DB_UP.set(0)
-        raise
+        _client = AsyncIOMotorClient(
+            uri,
+            uuidRepresentation="standard",
+            serverSelectionTimeoutMS=5_000,
+            connectTimeoutMS=5_000,
+            maxPoolSize=50,
+            minPoolSize=5,
+            retryWrites=True,
+        )
+    except PyMongoError as exc:
+        _hint = ""
+        if "mongodb+srv" in (uri or ""):
+            _hint = (
+                " mongodb+srv:// URIs require the 'dnspython' package. "
+                "Install it with: pip install dnspython"
+            )
+        raise RuntimeError(
+            f"Failed to create MongoDB client: {exc}.{_hint}"
+        ) from exc
 
-    _client, _database = client, database
+    _database = _client[db_name]
+
+    await init_beanie(database=_database, document_models=ALL_DOCUMENTS)
 
     logger.info("mongodb_connected", database=db_name)
     DB_UP.set(1)
@@ -183,6 +131,5 @@ async def drop_database(db_name: str | None = None) -> None:
     if settings.is_production:
         raise RuntimeError("refusing to drop a database in production")
     client = get_client()
-    target = db_name or settings.mongodb_db_name
-    await client.drop_database(target)
-    logger.warning("mongodb_database_dropped", database=target)
+    await client.drop_database(db_name or settings.mongodb_db_name)
+    logger.warning("mongodb_database_dropped", database=db_name or settings.mongodb_db_name)

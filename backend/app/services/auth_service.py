@@ -87,14 +87,18 @@ async def authenticate(email: str, password: str) -> User:
             "Use that button instead, or set a password first."
         )
 
-    if not verify_password(password, user.hashed_password or ""):
+    # The guard above establishes that a hash exists; binding it once keeps both
+    # checks below on a plain `str` instead of re-widening to the optional field.
+    stored_hash = user.hashed_password or ""
+
+    if not verify_password(password, stored_hash):
         raise AuthenticationError("Incorrect email or password.")
 
     if not user.is_active:
         raise AuthenticationError("This account has been disabled.")
 
     # Opportunistically upgrade hashes when Argon2 parameters change.
-    if needs_rehash(user.hashed_password):
+    if needs_rehash(stored_hash):
         user.hashed_password = hash_password(password)
 
     user.touch_login()
@@ -180,14 +184,21 @@ async def change_password(user: User, current: str, new: str) -> None:
     """Change a password and invalidate every existing session.
 
     Raises:
+        ConflictError: when the account has no password to change.
         AuthenticationError: when the current password does not match.
     """
-    if not verify_password(current, user.hashed_password):
+    # A federated-only account has nothing to verify `current` against. Checking
+    # this first keeps the Argon2 call below on a real hash, and points the user
+    # at the endpoint that actually applies to them.
+    if not user.has_password:
+        raise ConflictError("This account has no password yet. Use set-password instead.")
+
+    if not verify_password(current, user.hashed_password or ""):
         raise AuthenticationError("The current password is incorrect.")
 
     user.hashed_password = hash_password(new)
     await user.save()
-    await revoke_all_for_user(user.id)
+    await revoke_all_for_user(user.persisted_id)
     logger.info("password_changed", user_id=str(user.id))
 
 

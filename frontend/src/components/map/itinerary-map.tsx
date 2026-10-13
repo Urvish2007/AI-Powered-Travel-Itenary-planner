@@ -63,7 +63,7 @@ export function ItineraryMap({
   routeColor?: string;
   label?: string;
 }) {
-  const { containerRef, ctx, layerId, selectLayer, tilesFailed } =
+  const { containerRef, ctx, layerId, selectLayer, tilesFailed, setTilesFailed, retryTiles } =
     useLeafletMap();
   const bounds = useRef<Leaflet.LatLngBounds | null>(null);
 
@@ -156,6 +156,20 @@ export function ItineraryMap({
       animate: false,
     });
 
+    // After fitting bounds, the container may still be at its initial size
+    // (e.g. the first render of a sticky sidebar). A deferred invalidateSize
+    // forces Leaflet to re-read the real dimensions so every tile loads.
+    requestAnimationFrame(() => {
+      map.invalidateSize({ animate: false });
+      if (bounds.current) {
+        map.fitBounds(bounds.current, {
+          padding: [56, 56],
+          maxZoom: 16,
+          animate: false,
+        });
+      }
+    });
+
     return () => {
       group.remove();
     };
@@ -173,6 +187,8 @@ export function ItineraryMap({
       layerId={layerId}
       onLayerChange={selectLayer}
       tilesFailed={tilesFailed}
+      onRetry={retryTiles}
+      onDismiss={() => setTilesFailed(false)}
       onFit={stops.length > 1 ? fit : undefined}
       label={label}
       className={className}

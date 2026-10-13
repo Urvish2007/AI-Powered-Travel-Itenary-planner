@@ -5,6 +5,7 @@ from __future__ import annotations
 from fastapi import APIRouter
 
 from app.core.deps import CurrentUser
+from app.db.sorting import descending
 from app.schemas.common import Message, Page, PaginationDep
 from app.schemas.itinerary import (
     AlgorithmInfo,
@@ -78,7 +79,7 @@ async def list_itineraries(
     total = await Itinerary.find(Itinerary.user_id == user.id).count()
     items = (
         await Itinerary.find(Itinerary.user_id == user.id)
-        .sort(-Itinerary.created_at)
+        .sort(descending(Itinerary.created_at))
         .skip(pagination.skip)
         .limit(pagination.limit)
         .to_list()

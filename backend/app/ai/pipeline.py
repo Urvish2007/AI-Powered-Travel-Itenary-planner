@@ -232,9 +232,9 @@ async def retrieve_candidates(state: PlanningState) -> PlanningState:
     # found them.
     for place_id in trip.constraints.must_include_place_ids:
         if str(place_id) not in merged:
-            place = await Place.get(place_id)
-            if place is not None:
-                merged[str(place.id)] = place
+            required = await Place.get(place_id)
+            if required is not None:
+                merged[str(required.id)] = required
 
     for place_id in trip.constraints.must_avoid_place_ids:
         merged.pop(str(place_id), None)

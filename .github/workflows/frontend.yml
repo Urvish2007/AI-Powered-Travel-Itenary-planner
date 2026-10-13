@@ -7,13 +7,6 @@ on:
   pull_request:
     paths: ["frontend/**", ".github/workflows/frontend.yml"]
 
-concurrency:
-  group: frontend-${{ github.ref }}
-  cancel-in-progress: true
-
-permissions:
-  contents: read
-
 defaults:
   run:
     working-directory: frontend

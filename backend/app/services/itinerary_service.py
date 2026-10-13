@@ -14,6 +14,7 @@ from app.ai.pipeline import build_itinerary_document
 from app.core.config import OptimizerAlgorithm
 from app.core.exceptions import NotFoundError, OptimizationError, PermissionDeniedError
 from app.core.timeutils import MINUTES_PER_DAY, overflows_day, to_clock, to_minutes
+from app.db.sorting import descending
 from app.models.ai_run import AIRun
 from app.models.enums import (
     AIRunStatus,
@@ -37,6 +38,7 @@ from app.optimization.schemas import (
     DayConfig,
     OptimizationPlace,
     OptimizationRequest,
+    OptimizationResult,
 )
 from app.schemas.itinerary import (
     AlgorithmInfo,
@@ -68,7 +70,7 @@ async def generate_itinerary(
 
     existing = (
         await Itinerary.find(Itinerary.trip_id == trip.id)
-        .sort(-Itinerary.version)
+        .sort(descending(Itinerary.version))
         .limit(1)
         .to_list()
     )
@@ -168,7 +170,7 @@ async def get_owned_itinerary(
 async def list_for_trip(trip: Trip) -> list[Itinerary]:
     return (
         await Itinerary.find(Itinerary.trip_id == trip.id)
-        .sort(-Itinerary.version)
+        .sort(descending(Itinerary.version))
         .to_list()
     )
 
@@ -181,7 +183,7 @@ async def latest_for_trip(trip: Trip) -> Itinerary:
     """
     itineraries = (
         await Itinerary.find(Itinerary.trip_id == trip.id)
-        .sort(-Itinerary.version)
+        .sort(descending(Itinerary.version))
         .limit(1)
         .to_list()
     )
@@ -452,17 +454,14 @@ async def compare_route_algorithms(payload: CompareRouteRequest) -> CompareRoute
             "No feasible route exists for those places within the given hours."
         )
 
-    best = min(feasible, key=lambda r: r.objective_value)
+    best = min(feasible, key=_comparable_cost)
     fastest = min(results, key=lambda r: r.duration_seconds)
+    best_cost = _comparable_cost(best)
 
     runs: list[AlgorithmRun] = []
     for result in results:
         info = _algorithm_info(result.engine)
-        gap = (
-            (result.objective_value - best.objective_value) / best.objective_value * 100
-            if best.objective_value
-            else 0.0
-        )
+        gap = (_comparable_cost(result) - best_cost) / best_cost * 100 if best_cost else 0.0
         runs.append(
             AlgorithmRun(
                 algorithm=result.engine,
@@ -484,6 +483,23 @@ async def compare_route_algorithms(payload: CompareRouteRequest) -> CompareRoute
     return CompareRouteResponse(
         runs=runs, best_algorithm=best.engine, fastest_algorithm=fastest.engine
     )
+
+
+def _comparable_cost(result: OptimizationResult) -> int:
+    """The score ``compare_algorithms`` attached to a result.
+
+    ``objective_value`` is optional on the dataclass because a plan can exist
+    before anyone has costed it, but every result from ``compare_algorithms`` has
+    been through the shared evaluator. Stating that here keeps the comparison and
+    the gap arithmetic on plain integers, and turns a broken contract into a
+    reported failure rather than a ``TypeError`` halfway through building a
+    response.
+    """
+    if result.objective_value is None:  # pragma: no cover - contract of the comparer
+        raise OptimizationError(
+            f"The {result.engine} run returned a plan with no comparable cost."
+        )
+    return result.objective_value
 
 
 def _algorithm_info(engine: str) -> dict[str, str]:

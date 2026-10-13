@@ -1,17 +1,19 @@
 # syntax=docker/dockerfile:1
 
 # ---- Builder -------------------------------------------------------------
-# Wheels are built once here so the runtime image carries no compiler toolchain.
+# Dependencies are installed once here; only the finished venv is copied to the runtime image.
 FROM python:3.12-slim AS builder
 
 ENV PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_DEFAULT_TIMEOUT=100 \
+    PIP_RETRIES=10
 
 WORKDIR /build
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential \
-    && rm -rf /var/lib/apt/lists/*
+# No compiler toolchain needed: every dependency ships a prebuilt wheel for
+# Python 3.12 on Linux. (If a future dependency needs compiling, add
+# build-essential back here.)
 
 COPY requirements.txt requirements-ai.txt ./
 RUN python -m venv /opt/venv \
@@ -39,8 +41,7 @@ USER app
 
 EXPOSE 8000
 
-# Liveness only: /health proves the process is up. Readiness (/health/ready, which
-# pings MongoDB) is what the deploy pipeline polls before declaring a rollout done.
+# The readiness probe checks MongoDB; plain /health only proves the process is up.
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
     CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health').status==200 else 1)"
 

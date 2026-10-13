@@ -5,7 +5,15 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Literal, Self
 
-from beanie import Document, Insert, Replace, SaveChanges, Update, before_event
+from beanie import (
+    Document,
+    Insert,
+    PydanticObjectId,
+    Replace,
+    SaveChanges,
+    Update,
+    before_event,
+)
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -67,6 +75,22 @@ class TimestampedDocument(Document):
     @before_event(Replace, Update, SaveChanges)
     def _set_updated(self) -> None:
         self.updated_at = utcnow()
+
+    @property
+    def persisted_id(self) -> PydanticObjectId:
+        """This document's id, for a document that must already be stored.
+
+        Beanie types ``id`` as optional because a freshly constructed document has
+        not been inserted yet. Anything loaded from the database — a dependency's
+        current user, a query result — always has one, and callers that stringify
+        the id need that guarantee: ``str(None)`` is the perfectly valid key
+        ``"None"``, so a missing id would quietly match nothing instead of failing.
+        """
+        if self.id is None:  # pragma: no cover - unreachable for a loaded document
+            raise RuntimeError(
+                f"{type(self).__name__} has no id; it has not been inserted yet."
+            )
+        return self.id
 
     class Settings:
         use_state_management = True

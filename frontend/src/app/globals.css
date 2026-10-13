@@ -1,3 +1,4 @@
+@import "leaflet/dist/leaflet.css";
 @import "tailwindcss";
 
 /* ==========================================================================
@@ -374,11 +375,84 @@
 /* ---------------------------------------------------------------------------
    Maps (Leaflet). Restyled so a map matches the rest of the product rather than
    shipping Leaflet's default chrome.
+
+   ⚠ IMPORTANT: Tailwind v4's Preflight sets `img { max-width: 100%; height:
+   auto }` and resets borders/box-sizing globally.  This breaks every Leaflet
+   tile (they render as tiny slivers instead of filling their pane) and misaligns
+   controls.  The overrides below undo those resets for everything inside a
+   `.leaflet-container` so the map renders correctly.
    ------------------------------------------------------------------------ */
+
+/* Tile images MUST be 256×256 (or the tile size) with no max-width cap.
+   Tailwind Preflight sets `img { max-width:100%; height:auto }` — both break
+   tiles. The !important here is needed to win regardless of source order. */
+.leaflet-container img {
+  max-width: none !important;
+  max-height: none !important;
+  /* `height: auto` on tiles causes them to collapse to intrinsic height;
+     we set it to `unset` so Leaflet's own sizing (or our .leaflet-tile rule)
+     is what sticks. Non-tile images (e.g. marker icons) size themselves. */
+  height: unset !important;
+  border-style: none;
+}
+
+/* Tile images specifically need the exact pixel dimensions Leaflet expects. */
+.leaflet-tile {
+  width: 256px !important;
+  height: 256px !important;
+  /* Prevent any inherited object-fit from stretching tiles. */
+  object-fit: unset !important;
+}
+
+/* The tile container should not clip or add its own sizing logic. */
+.leaflet-tile-container {
+  pointer-events: none;
+}
+
+/* Panes and overlays use absolute/relative positioning that Preflight can break. */
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* The map pane is the root of all tile and overlay layers. */
+.leaflet-map-pane {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+/* Leaflet controls expect `content-box`; Tailwind sets `border-box` globally. */
+.leaflet-control {
+  box-sizing: content-box;
+}
+
+/* Override Tailwind's `* { border-style: solid }` which gives everything a
+   visible border. Leaflet elements should have no border by default. */
+.leaflet-container *,
+.leaflet-container *::before,
+.leaflet-container *::after {
+  border-style: none;
+  box-sizing: content-box;
+}
+
 .leaflet-container {
   font: inherit;
   background: hsl(var(--muted));
   outline: none;
+  /* Ensure the map's own stacking context is isolated. */
+  isolation: isolate;
 }
 
 .leaflet-container:focus-visible {

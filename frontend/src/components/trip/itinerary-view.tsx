@@ -25,6 +25,7 @@ import {
   DaySelector,
   DayTimeline,
 } from "@/components/trip/itinerary-timeline";
+import { RouteLab } from "@/components/trip/route-lab";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -57,7 +58,7 @@ export function ItineraryView({
 }) {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [selectedDay, setActiveDay] = useState(1);
+  const [activeDay, setActiveDay] = useState(1);
   const [shareOpen, setShareOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
 
@@ -77,8 +78,10 @@ export function ItineraryView({
   const trip = tripQuery.data;
 
   // Clamp the selected day when a regenerate returns a shorter itinerary.
-  const activeDay =
-    itinerary && selectedDay > itinerary.days.length ? 1 : selectedDay;
+  // Derived rather than corrected in an effect: there is no frame on which the
+  // view points at a day the itinerary no longer has.
+  const dayCount = itinerary?.days.length ?? 0;
+  const selectedDay = dayCount > 0 && activeDay > dayCount ? 1 : activeDay;
 
   const regenerate = useMutation({
     mutationFn: () => api.trips.generate(tripId!, { regenerate: true }),
@@ -137,8 +140,8 @@ export function ItineraryView({
   });
 
   const currentDay = useMemo(
-    () => itinerary?.days.find((d) => d.day_number === activeDay),
-    [itinerary, activeDay],
+    () => itinerary?.days.find((d) => d.day_number === selectedDay),
+    [itinerary, selectedDay],
   );
 
   if (itineraryQuery.isLoading || tripQuery.isLoading) {
@@ -319,7 +322,7 @@ export function ItineraryView({
 
         <DaySelector
           days={itinerary.days}
-          active={activeDay}
+          active={selectedDay}
           onSelect={setActiveDay}
         />
 
@@ -341,15 +344,23 @@ export function ItineraryView({
 
           {/* The map tracks the selected day and stays put while the timeline
               scrolls, so the two never drift out of sync. */}
-          <aside className="lg:sticky lg:top-24 lg:h-[calc(100svh-8rem)]">
-            <div className="h-[420px] lg:h-full">
+          <aside className="lg:sticky lg:top-24 lg:flex lg:h-[calc(100svh-8rem)] lg:flex-col lg:gap-3">
+            <div className="h-[420px] lg:min-h-[320px] lg:flex-1">
               {currentDay && (
                 <ItineraryMap
                   stops={activitiesToStops(currentDay.activities)}
                   distanceKm={currentDay.total_distance_km}
+                  className="h-full"
                 />
               )}
             </div>
+            {currentDay && (
+              <RouteLab
+                day={currentDay}
+                transportMode={trip?.constraints.preferred_transport}
+                className="mt-3 lg:mt-0 lg:shrink-0"
+              />
+            )}
           </aside>
         </div>
       </main>

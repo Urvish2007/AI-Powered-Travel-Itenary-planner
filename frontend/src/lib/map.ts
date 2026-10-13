@@ -32,7 +32,6 @@ const OSM = "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap<
 
 /** Every layer available in this build, in the order the switcher shows them. */
 export const TILE_LAYERS: TileLayerDef[] = [
-  // A provider you configure yourself. Wins over everything else when set.
   ...(CUSTOM_URL
     ? [
         {
@@ -44,15 +43,13 @@ export const TILE_LAYERS: TileLayerDef[] = [
         },
       ]
     : []),
-  // Optional: keeps working for anyone who already has a Mapbox token.
   ...(MAPBOX_TOKEN
     ? [
         {
           id: "mapbox" as const,
           label: "Mapbox",
-          url: `https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}{r}?access_token=${MAPBOX_TOKEN}`,
-          attribution:
-            "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> " + OSM,
+          url: `/api/tiles/mapbox/{z}/{x}/{y}`, // Assuming proxy handles or we just keep it direct if we want
+          attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> " + OSM,
           maxZoom: 19,
           tileSize: 512,
           zoomOffset: -1,
@@ -60,30 +57,25 @@ export const TILE_LAYERS: TileLayerDef[] = [
       ]
     : []),
   {
-    // CARTO "Voyager": low-clutter, high-contrast, retina-aware. The clearest of
-    // the free options for seeing a route. Free for light use with attribution.
     id: "clear",
     label: "Clear",
-    url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    url: "/api/tiles/clear/{z}/{x}/{y}",
     attribution: `${OSM} © <a href='https://carto.com/attributions'>CARTO</a>`,
     maxZoom: 20,
     subdomains: "abcd",
   },
   {
-    // The standard community map. Its usage policy forbids heavy use, so treat
-    // it as a convenience, not a production tile source.
     id: "standard",
     label: "Streets",
-    url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    url: "/api/tiles/streets/{z}/{x}/{y}",
     attribution: OSM,
     maxZoom: 19,
   },
   {
     id: "satellite",
     label: "Satellite",
-    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    attribution:
-      "Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community",
+    url: "/api/tiles/satellite/{z}/{x}/{y}",
+    attribution: "Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community",
     maxZoom: 19,
   },
 ];

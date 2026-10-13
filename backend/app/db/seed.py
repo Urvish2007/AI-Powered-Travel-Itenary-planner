@@ -26,13 +26,15 @@ from app.observability.logging import get_logger
 logger = get_logger(__name__)
 
 # Monday-Sunday, a standard museum-ish week with a Monday closure.
-_CLOSED_MONDAY = [
+_CLOSED_MONDAY: list[dict[str, Any]] = [
     {"day_of_week": 0, "closed": True},
     *[{"day_of_week": d, "opens": "09:30", "closes": "18:00"} for d in range(1, 7)],
 ]
 _DAILY_9_TO_6 = [{"day_of_week": d, "opens": "09:00", "closes": "18:00"} for d in range(7)]
 _DAILY_LONG = [{"day_of_week": d, "opens": "08:00", "closes": "22:00"} for d in range(7)]
-_ALWAYS = []  # No recorded hours means "assume open"; see Place.is_open_on.
+_ALWAYS: list[
+    dict[str, Any]
+] = []  # No recorded hours means "assume open"; see Place.is_open_on.
 _RESTAURANT_HOURS = [
     {"day_of_week": d, "opens": "11:30", "closes": "22:30"} for d in range(7)
 ]
@@ -744,7 +746,7 @@ TOKYO: list[dict[str, Any]] = [
 
 ALL_SEED_PLACES = [*PARIS, *ROME, *TOKYO]
 
-DEMO_USERS = [
+DEMO_USERS: list[dict[str, Any]] = [
     {
         "email": "demo@example.com",
         "password": "demopassword1",

@@ -77,7 +77,7 @@ async def logout(payload: RefreshRequest) -> Message:
     summary="Revoke every session for the current account",
 )
 async def logout_all(user: CurrentUser) -> Message:
-    revoked = await auth_service.revoke_all_for_user(user.id)
+    revoked = await auth_service.revoke_all_for_user(user.persisted_id)
     return Message(message="All sessions revoked.", details={"revoked": revoked})
 
 

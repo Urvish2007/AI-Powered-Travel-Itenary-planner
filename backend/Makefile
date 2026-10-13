@@ -1,6 +1,6 @@
 # Convenience targets. On Windows, run the underlying commands directly or use
 # Git Bash / WSL.
-.PHONY: help install dev seed reset test test-unit test-cov lint format typecheck verify run worker beat docker-up docker-down clean
+.PHONY: help install dev seed seed-core reset validate-data test test-unit test-cov lint format typecheck verify run worker beat docker-up docker-down clean
 
 VENV := .venv
 PY   := $(VENV)/bin/python
@@ -19,11 +19,17 @@ install:  ## Create the venv and install runtime + dev dependencies
 dev: install  ## Install optional AI provider SDKs as well
 	$(PY) -m pip install -r requirements-ai.txt
 
-seed:  ## Seed users and places
+seed:  ## Seed users, the core places and the 2,000-place world corpus
 	$(PY) -m scripts.seed_db
 
-reset:  ## Drop the database and reseed
+seed-core:  ## Seed without the world corpus (Paris, Rome and Tokyo only)
+	$(PY) -m scripts.seed_db --no-world
+
+reset:  ## Drop the database and reseed everything
 	$(PY) -m scripts.seed_db --reset
+
+validate-data:  ## Check the world data for structural and geographic errors
+	$(PY) -m scripts.validate_world_data
 
 run:  ## Start the API with auto-reload
 	$(PY) -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000

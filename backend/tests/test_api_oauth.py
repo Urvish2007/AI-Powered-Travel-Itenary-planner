@@ -554,3 +554,31 @@ class TestPasswordInteraction:
             json={"id_token": make_token(email=email, subject=subject)},
         )
         assert response.status_code == 403
+
+    async def test_change_password_on_a_social_only_account_is_a_clean_refusal(
+        self, client: AsyncClient
+    ) -> None:
+        """A Google-only account has no current password to verify.
+
+        This used to reach ``verify_password(current, None)`` and raise an
+        AttributeError deep in Argon2, surfacing as a 500. The account state is
+        perfectly ordinary, so the refusal has to be a 4xx that tells the user
+        to use set-password instead.
+        """
+        federated = await client.post(
+            f"{AUTH}/oauth/google",
+            json={"id_token": make_token(email=f"chpw-{uuid.uuid4().hex[:8]}@e.com")},
+        )
+        auth = {"Authorization": f"Bearer {federated.json()['tokens']['access_token']}"}
+
+        response = await client.post(
+            f"{AUTH}/change-password",
+            headers=auth,
+            json={
+                "current_password": "whateverTheyType1",
+                "new_password": "brandNewPass123",
+            },
+        )
+
+        assert response.status_code == 409, response.text
+        assert "set-password" in response.json()["error"]["message"]

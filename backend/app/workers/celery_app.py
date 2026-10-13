@@ -12,6 +12,7 @@ connection and closes it again; there is no shared event loop with the API.
 from __future__ import annotations
 
 import asyncio
+from collections.abc import Coroutine
 from typing import Any
 
 from celery import Celery
@@ -98,7 +99,7 @@ def _shutdown_worker(**_: Any) -> None:
     logger.info("celery_worker_stopped")
 
 
-def run_async(coro: Any) -> Any:
+def run_async[T](coro: Coroutine[Any, Any, T]) -> T:
     """Run a coroutine on the worker's loop.
 
     Falls back to ``asyncio.run`` when no worker loop exists, which is the case

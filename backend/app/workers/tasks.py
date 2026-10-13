@@ -78,4 +78,7 @@ def purge_expired_tokens() -> dict[str, int]:
 @shared_task(name="app.workers.tasks.reoptimize_trip")
 def reoptimize_trip(trip_id: str) -> dict[str, Any]:
     """Re-run planning for one trip, producing a new version."""
-    return generate_itinerary_task(trip_id, brief="", regenerate=True)
+    # `@shared_task` leaves the decorated callable untyped, so state the shape
+    # the task contract promises.
+    result: dict[str, Any] = generate_itinerary_task(trip_id, brief="", regenerate=True)
+    return result

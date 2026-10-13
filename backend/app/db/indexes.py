@@ -85,7 +85,9 @@ async def ensure_vector_search_index() -> bool:
 async def list_indexes(collection: str) -> list[dict[str, Any]]:
     """Return the regular indexes on ``collection``, for diagnostics."""
     database = get_database()
-    return await database[collection].list_indexes().to_list(length=None)
+    indexes = await database[collection].list_indexes().to_list(length=None)
+    # Motor yields MutableMapping; callers and the response model want plain dicts.
+    return [dict(index) for index in indexes]
 
 
 async def index_report() -> dict[str, list[str]]:

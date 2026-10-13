@@ -12,6 +12,7 @@ from __future__ import annotations
 import time
 from collections import defaultdict
 from collections.abc import Awaitable, Callable
+from typing import Any
 
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
@@ -79,7 +80,9 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self.limit = limit or settings.rate_limit_requests
         self.window = window or settings.rate_limit_window_seconds
         self._local = _LocalWindow()
-        self._redis = None
+        # `redis` is an optional dependency, imported lazily in `_check_redis`,
+        # so the client cannot be named in an annotation here.
+        self._redis: Any | None = None
         self._redis_failed = False
 
     async def dispatch(
@@ -138,23 +141,23 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
 
     async def _check_redis(self, key: str) -> tuple[bool, int, float] | None:
         try:
-            if self._redis is None:
+            client = self._redis
+            if client is None:
                 import redis.asyncio as aioredis
 
-                self._redis = aioredis.from_url(
-                    str(settings.redis_uri), decode_responses=True
-                )
+                client = aioredis.from_url(str(settings.redis_uri), decode_responses=True)
+                self._redis = client
 
             redis_key = f"ratelimit:{key}"
             # INCR then EXPIRE on first hit gives a fixed window with one round trip
             # for every request after the first.
-            pipeline = self._redis.pipeline()
+            pipeline = client.pipeline()
             pipeline.incr(redis_key)
             pipeline.ttl(redis_key)
             count, ttl = await pipeline.execute()
 
             if ttl < 0:
-                await self._redis.expire(redis_key, self.window)
+                await client.expire(redis_key, self.window)
                 ttl = self.window
 
             if count > self.limit:

@@ -11,6 +11,7 @@ from app.ai.llm import LLMMessage, get_llm_provider
 from app.ai.prompts import PARSE_INTENT_SYSTEM, build_intent_prompt
 from app.ai.schemas import TripIntent
 from app.core.deps import CurrentUser
+from app.db.sorting import descending
 from app.models.ai_run import AIRun
 from app.schemas.place import PlacePublic
 from app.services import place_service, trip_service
@@ -84,7 +85,7 @@ async def list_runs(
 ) -> list[dict]:
     runs = (
         await AIRun.find(AIRun.user_id == user.id)
-        .sort(-AIRun.created_at)
+        .sort(descending(AIRun.created_at))
         .limit(limit)
         .to_list()
     )

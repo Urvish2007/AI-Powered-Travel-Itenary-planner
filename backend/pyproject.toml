@@ -4,9 +4,6 @@ version = "0.1.0"
 description = "FastAPI + MongoDB backend for an AI itinerary planner with OR-Tools route optimisation."
 requires-python = ">=3.12"
 readme = "README.md"
-# Single source of truth: the pinned requirements files, so the wheel, the
-# Docker image and CI can never drift apart.
-dynamic = ["dependencies", "optional-dependencies"]
 
 [build-system]
 requires = ["setuptools>=69"]
@@ -14,17 +11,6 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["app*"]
-
-# The world-city corpus is data, not code; without this it is silently left out
-# of built wheels and seeding fails after `pip install`.
-[tool.setuptools.package-data]
-"app.db" = ["world_data/*.json", "world_data/*.txt"]
-
-[tool.setuptools.dynamic]
-dependencies = { file = ["requirements.txt"] }
-
-[tool.setuptools.dynamic.optional-dependencies]
-ai = { file = ["requirements-ai.txt"] }
 
 [tool.ruff]
 line-length = 92

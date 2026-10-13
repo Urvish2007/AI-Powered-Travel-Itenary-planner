@@ -60,10 +60,12 @@ export function SiteHeader({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // A route change should never leave the mobile menu hanging open.
-  const [menuPath, setMenuPath] = useState(pathname);
-  if (menuPath !== pathname) {
-    setMenuPath(pathname);
+  // A route change should never leave the mobile menu hanging open. Adjusting
+  // during render rather than in an effect means the menu is already closed on
+  // the first frame of the new page, with no flash of the open overlay.
+  const [menuPathname, setMenuPathname] = useState(pathname);
+  if (menuPathname !== pathname) {
+    setMenuPathname(pathname);
     setMenuOpen(false);
   }
 

@@ -86,12 +86,38 @@ python -m scripts.seed_db --reset
 uvicorn app.main:app --reload --port 8000
 ```
 
-Seeding creates 37 real places across Paris, Rome and Tokyo, plus two accounts:
+Seeding creates two accounts:
 
 | Email | Password | Role |
 |---|---|---|
 | `demo@example.com` | `demopassword1` | traveller |
 | `admin@example.com` | `adminpassword1` | admin |
+
+…and two sets of places:
+
+| Set | Size | Source |
+|---|---|---|
+| Core | 37 places across Paris, Rome and Tokyo | hand-written, `app/db/seed.py` |
+| World | 2,000 places across 100 cities | `app/db/world_data/*.txt` via `app/db/world_seed.py` |
+
+```bash
+python -m scripts.seed_db --reset       # drop, then seed both sets
+python -m scripts.seed_db --no-world    # core set only
+python -m scripts.seed_db --no-embed    # skip embeddings
+python -m scripts.validate_world_data   # structural + geographic checks
+```
+
+With `LLM_PROVIDER=openai`, embedding 2,000 places is 2,000 API calls — use
+`--no-embed`, or any other provider, which uses the local hash embedder.
+
+**On the world data's accuracy.** City centres, countries and timezones come from
+GeoNames and are reliable. Place names and coordinates were written from a
+language model's memory: each is validated against its city centre (over 65 km
+fails) and overlapping points were separated, but a pin may still be a few hundred
+metres out. Ratings, popularity and prices are *derived* from an editorial tier
+and cost band — estimates, not reviews or price lists. Opening hours are
+category-level approximations, and `wheelchair_accessible` is left unknown for
+every world place rather than asserted. Keep any UI copy consistent with that.
 
 ### Optional: real LLM providers
 
@@ -156,8 +182,13 @@ which is what makes CI meaningful.
 | GET | `/trips/{id}/itineraries` | Every version |
 | POST | `/trips/{id}/share` | Public link behind an unguessable token |
 | POST | `/itineraries/{id}/reorder` | Times and travel legs recomputed server-side |
-| POST | `/itineraries/optimize-route` | Solver over arbitrary places, no trip needed |
+| POST | `/itineraries/optimize-route` | Solver over arbitrary places, no trip needed; takes `algorithm` |
+| POST | `/itineraries/optimize-route/compare` | Run several algorithms on the same places and compare |
+| GET | `/itineraries/optimizer/algorithms` | The algorithms available, with their trade-offs |
 | GET | `/ai/runs` | Per-stage audit trail for every generation |
+
+Both route endpoints take `start_date`. Opening hours are checked against that
+date's weekday, so pass it when planning a specific day; it defaults to today.
 
 ---
 
@@ -192,6 +223,36 @@ and is covered by the same tests; it simply makes no optimality claim.
 
 Typical effect on the seeded corpus: **27 km → 19 km** over three days in Paris,
 **18 km → 13 km** for a six-stop Rome route.
+
+### Choosing an algorithm
+
+`app/optimization/algorithms.py` adds five alternatives to OR-Tools. The point
+that makes them comparable: **one evaluator scores every plan**, including
+OR-Tools' own after conversion, reproducing the OR-Tools objective exactly. Plan
+costs are therefore directly comparable, and lower is better.
+
+Set `OPTIMIZER_ALGORITHM`, or pass `algorithm` per request. Measured over 20
+random instances of 10-60 places:
+
+| Value | Gap to best plan | Typical solve |
+|---|---|---|
+| `ortools` *(default)* | 0.01% | ~2 s |
+| `simulated_annealing` | 0.4% | ~0.1 s |
+| `genetic` | 1.1% | ~0.1 s |
+| `local_search` | 1.5% | ~0.1 s |
+| `cheapest_insertion` | 7.0% | ~0.1 s |
+| `nearest_neighbor` | 72% | ~0.1 s |
+| `auto` | runs all, keeps the best | sum of the above |
+
+Two details worth knowing:
+
+- `OPTIMIZER_TIME_LIMIT_SECONDS` applies **only** to OR-Tools. The others stop on
+  iteration counts, so their output does not vary with machine speed.
+- The randomised algorithms take a `seed` (default 42), so a given request always
+  produces the same plan.
+
+Solves run in a worker thread via `asyncio.to_thread`, so they never block the
+event loop. Keep any new solver endpoint on that path.
 
 ---
 

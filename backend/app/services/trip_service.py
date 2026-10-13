@@ -8,6 +8,7 @@ from typing import Any
 from beanie import PydanticObjectId
 
 from app.core.exceptions import NotFoundError, PermissionDeniedError
+from app.db.sorting import descending
 from app.models.enums import TripStatus
 from app.models.itinerary import Itinerary
 from app.models.trip import Trip
@@ -92,7 +93,13 @@ async def list_trips(
         query["status"] = status
 
     total = await Trip.find(query).count()
-    items = await Trip.find(query).sort(-Trip.created_at).skip(skip).limit(limit).to_list()
+    items = (
+        await Trip.find(query)
+        .sort(descending(Trip.created_at))
+        .skip(skip)
+        .limit(limit)
+        .to_list()
+    )
     return items, total
 
 

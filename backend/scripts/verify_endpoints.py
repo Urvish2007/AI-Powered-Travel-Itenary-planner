@@ -577,6 +577,119 @@ async def main(base_url: str) -> int:
             check.check("POST", "/itineraries/optimize-route (too few places)", r, 422)
 
         # ------------------------------------------------------------------
+        section("Optimiser algorithms")
+        r = await client.get(f"{api}/itineraries/optimizer/algorithms", headers=auth)
+        algorithms = r.json() if r.status_code == 200 else []
+        check.check(
+            "GET",
+            "/itineraries/optimizer/algorithms",
+            r,
+            200,
+            f"{len(algorithms)} algorithms",
+        )
+        check.assertion(
+            "every algorithm describes its speed and quality",
+            bool(algorithms)
+            and all(
+                all(a.get(field) for field in ("key", "label", "speed", "quality"))
+                for a in algorithms
+            ),
+        )
+
+        if len(rome) >= 4:
+            r = await client.post(
+                f"{api}/itineraries/optimize-route/compare",
+                headers=auth,
+                json={
+                    "place_ids": rome[:6],
+                    "start_latitude": 41.9028,
+                    "start_longitude": 12.4964,
+                    "day_start_time": "09:00",
+                    "day_end_time": "19:00",
+                    "days": 1,
+                    "transport_mode": "walking",
+                    "max_places_per_day": 6,
+                    # Opening hours depend on the weekday, so the comparison is
+                    # pinned to a known date rather than drifting with "today".
+                    "start_date": start.isoformat(),
+                    "time_limit_seconds": 3,
+                },
+            )
+            check.check("POST", "/itineraries/optimize-route/compare", r, 200)
+
+            if r.status_code == 200:
+                data = r.json()
+                runs = data["runs"]
+                for run in runs:
+                    print(
+                        f"      {run['label']:32} cost={run['objective']:>6} "
+                        f"gap={run['gap_percent']:>6.2f}%  {run['duration_seconds']:.2f}s"
+                        f"{'  <- best' if run['is_best'] else ''}"
+                    )
+
+                check.assertion(
+                    "every algorithm returned a run",
+                    len(runs) == 6,
+                    f"{len(runs)} runs",
+                )
+                check.assertion(
+                    "exactly one run is marked best",
+                    sum(1 for run in runs if run["is_best"]) == 1,
+                    f"{sum(1 for run in runs if run['is_best'])} marked best",
+                )
+                best = next((run for run in runs if run["is_best"]), None)
+                check.assertion(
+                    "the best run names itself in best_algorithm",
+                    best is not None and data["best_algorithm"] == best["algorithm"],
+                    f"{data.get('best_algorithm')}",
+                )
+                check.assertion(
+                    "the best run has the lowest cost of any feasible run",
+                    best is not None
+                    and all(
+                        run["objective"] >= best["objective"]
+                        for run in runs
+                        if run["scheduled_count"] > 0
+                    ),
+                )
+                check.assertion(
+                    "the best run's gap is zero",
+                    best is not None and abs(best["gap_percent"]) < 0.005,
+                    f"{best['gap_percent'] if best else '?'}%",
+                )
+                check.assertion(
+                    "fastest_algorithm is the quickest run",
+                    data["fastest_algorithm"]
+                    == min(runs, key=lambda run: run["duration_seconds"])["algorithm"],
+                    data["fastest_algorithm"],
+                )
+
+            # An unknown algorithm must be rejected by the schema, not guessed at.
+            r = await client.post(
+                f"{api}/itineraries/optimize-route/compare",
+                headers=auth,
+                json={
+                    "place_ids": rome[:3],
+                    "start_latitude": 41.9,
+                    "start_longitude": 12.5,
+                    "algorithms": ["definitely-not-an-algorithm"],
+                },
+            )
+            check.check(
+                "POST", "/itineraries/optimize-route/compare (unknown algorithm)", r, 422
+            )
+
+        r = await client.post(
+            f"{api}/itineraries/optimize-route/compare",
+            json={
+                "place_ids": rome[:3] if len(rome) >= 3 else ["0" * 24, "1" * 24],
+                "start_latitude": 41.9,
+                "start_longitude": 12.5,
+            },
+        )
+        check.check("POST", "/itineraries/optimize-route/compare (no auth)", r, 401)
+
+        # ------------------------------------------------------------------
         section("Sharing")
         r = await client.post(f"{api}/trips/{trip_id}/share", headers=auth)
         check.check("POST", "/trips/{id}/share", r, 200)

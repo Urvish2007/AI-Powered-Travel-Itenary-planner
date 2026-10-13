@@ -203,6 +203,8 @@ export function SignUpForm() {
     formState: { errors, isSubmitting },
   } = useForm<SignUpValues>({ resolver: zodResolver(signUpSchema) });
 
+  // useWatch rather than watch(): watch() hands back a new function on every
+  // render, which the React Compiler cannot memoize without risking stale UI.
   const password = useWatch({ control, name: "password" }) ?? "";
   const strength = passwordStrength(password);
 

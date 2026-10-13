@@ -12,6 +12,10 @@ import {
 } from "@/components/ui/overlays";
 import { cn } from "@/lib/utils";
 
+/** The "is this the client?" value never changes after hydration, so nothing
+ *  ever needs to notify a subscriber. */
+const subscribeToNothing = () => () => {};
+
 const OPTIONS = [
   { value: "light", label: "Light", icon: Sun },
   { value: "dark", label: "Dark", icon: Moon },
@@ -20,15 +24,17 @@ const OPTIONS = [
 
 export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme, resolvedTheme } = useTheme();
+
+  // The server cannot know the user's preference, so the icon is only decided
+  // after hydration. useSyncExternalStore is the sanctioned way to return a
+  // different value on the server than on the client: it reports false during
+  // SSR and true once hydrated, with no state update in an effect.
   const mounted = useSyncExternalStore(
-    () => () => {},
+    subscribeToNothing,
     () => true,
     () => false,
   );
 
-  // The server cannot know the user's preference, so the icon is only decided
-  // after hydration. Rendering a fixed placeholder first avoids a mismatch and
-  // the flash of the wrong icon.
   const Icon = !mounted ? Sun : resolvedTheme === "dark" ? Moon : Sun;
 
   return (

@@ -881,13 +881,16 @@ def solve_portfolio(
         candidates.append((problem.objective(problem.from_result(result)), rank, result))
 
     if ortools_solver is not None:
+        ortools_result: OptimizationResult | None
         try:
-            result = ortools_solver(request)
+            ortools_result = ortools_solver(request)
         except Exception:  # pragma: no cover - solver internals
-            result = None
-        if result is not None and result.feasible:
-            sol = problem.from_result(result)
-            candidates.append((problem.objective(sol), len(NATIVE_ALGORITHMS), result))
+            ortools_result = None
+        if ortools_result is not None and ortools_result.feasible:
+            sol = problem.from_result(ortools_result)
+            candidates.append(
+                (problem.objective(sol), len(NATIVE_ALGORITHMS), ortools_result)
+            )
 
     objective, _, best = min(candidates, key=lambda c: (c[0], c[1]))
     best.objective_value = objective

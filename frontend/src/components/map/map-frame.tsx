@@ -15,6 +15,8 @@ export function MapFrame({
   layerId,
   onLayerChange,
   tilesFailed,
+  onRetry,
+  onDismiss,
   onFit,
   label,
   className,
@@ -24,6 +26,8 @@ export function MapFrame({
   layerId: TileLayerId;
   onLayerChange: (id: TileLayerId) => void;
   tilesFailed: boolean;
+  onRetry?: () => void;
+  onDismiss?: () => void;
   onFit?: () => void;
   label: string;
   className?: string;
@@ -36,8 +40,6 @@ export function MapFrame({
         className,
       )}
     >
-      {/* z-0 gives the map its own stacking context, so Leaflet's internal
-          z-indexes (up to 700) stay underneath the controls below. */}
       <div
         ref={containerRef}
         className="absolute inset-0 z-0"
@@ -83,13 +85,42 @@ export function MapFrame({
       {tilesFailed && (
         <div
           role="status"
-          className="absolute inset-x-3 top-14 z-10 flex items-center gap-2 rounded-lg border border-warning/30 bg-card/95 px-3 py-2 text-xs shadow-md backdrop-blur"
+          aria-live="polite"
+          className="absolute inset-x-3 top-14 z-10 flex flex-col items-start gap-3 rounded-lg border border-warning/30 bg-card/95 px-4 py-3 text-xs shadow-md backdrop-blur pointer-events-none"
         >
-          <WifiOff className="size-4 shrink-0 text-warning" />
-          <span>
-            The map background could not load, so the route is shown without
-            it. Check your connection, or try another style.
-          </span>
+          <div className="flex items-center gap-2">
+            <WifiOff className="size-4 shrink-0 text-warning" />
+            <span>
+              The map background could not load. Your route is still shown.
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-2 pointer-events-auto">
+            {onRetry && (
+              <button
+                type="button"
+                onClick={onRetry}
+                className="rounded bg-primary px-2.5 py-1.5 text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                Retry
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => onLayerChange("clear")}
+              className="rounded border border-border bg-background px-2.5 py-1.5 transition-colors hover:bg-muted"
+            >
+              Use Clear style
+            </button>
+            {onDismiss && (
+              <button
+                type="button"
+                onClick={onDismiss}
+                className="rounded border border-border bg-background px-2.5 py-1.5 transition-colors hover:bg-muted"
+              >
+                Dismiss
+              </button>
+            )}
+          </div>
         </div>
       )}
 

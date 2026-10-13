@@ -36,7 +36,7 @@ export function PlacesMap({
   onSelect?: (id: string) => void;
   label?: string;
 }) {
-  const { containerRef, ctx, layerId, selectLayer, tilesFailed } =
+  const { containerRef, ctx, layerId, selectLayer, tilesFailed, setTilesFailed, retryTiles } =
     useLeafletMap();
   const bounds = useRef<Leaflet.LatLngBounds | null>(null);
   const markers = useRef(new Map<string, Leaflet.Marker>());
@@ -114,6 +114,20 @@ export function PlacesMap({
       animate: false,
     });
 
+    // After fitting bounds, the container may still be at its initial size.
+    // A deferred invalidateSize forces Leaflet to re-read the real dimensions
+    // so every tile loads.
+    requestAnimationFrame(() => {
+      map.invalidateSize({ animate: false });
+      if (bounds.current) {
+        map.fitBounds(bounds.current, {
+          padding: [48, 48],
+          maxZoom: 15,
+          animate: false,
+        });
+      }
+    });
+
     return () => {
       group.remove();
       registry.clear();
@@ -141,6 +155,8 @@ export function PlacesMap({
       layerId={layerId}
       onLayerChange={selectLayer}
       tilesFailed={tilesFailed}
+      onRetry={retryTiles}
+      onDismiss={() => setTilesFailed(false)}
       onFit={located.length > 1 ? fit : undefined}
       label={label}
       className={className}

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 import sys
-from typing import Any
+from typing import Any, cast
 
 import structlog
 
@@ -56,4 +56,6 @@ def get_logger(name: str | None = None) -> structlog.stdlib.BoundLogger:
     """Return a bound structlog logger, configuring logging on first use."""
     if not _configured:
         configure_logging()
-    return structlog.get_logger(name)  # type: ignore[return-value]
+    # structlog ships no annotation for get_logger, so the bound type has to be
+    # stated here rather than inferred.
+    return cast(structlog.stdlib.BoundLogger, structlog.get_logger(name))

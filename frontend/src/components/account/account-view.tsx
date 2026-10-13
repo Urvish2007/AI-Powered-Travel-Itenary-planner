@@ -65,9 +65,11 @@ export function AccountView() {
   const [deleteOpen, setDeleteOpen] = useState(false);
 
   // Seed the form once the user arrives, and again if they change elsewhere.
-  const [seededUser, setSeededUser] = useState(user);
-  if (user && user !== seededUser) {
-    setSeededUser(user);
+  // Adjusting during render rather than in an effect means the inputs are
+  // already populated on the first paint, instead of flashing empty.
+  const [seededFrom, setSeededFrom] = useState<typeof user>(null);
+  if (user && seededFrom !== user) {
+    setSeededFrom(user);
     setFullName(user.full_name);
     setHomeCity(user.home_city ?? "");
     setPrefs(user.preferences);
@@ -244,7 +246,7 @@ export function AccountView() {
           <div>
             <div className="flex items-baseline justify-between">
               <label htmlFor="walk-pref" className="text-sm font-medium">
-                Most you&apos;ll walk in a day
+                Most you&rsquo;ll walk in a day
               </label>
               <span className="text-sm font-semibold text-primary tabular-nums">
                 {prefs.max_daily_walking_km} km

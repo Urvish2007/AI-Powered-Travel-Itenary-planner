@@ -159,28 +159,30 @@ export function PlanWizard() {
     staleTime: 10 * 60_000,
   });
 
+  // Both of the blocks below adjust state during render rather than in an
+  // effect. The wizard is the first thing the traveller sees, so seeding it a
+  // frame late shows them an empty form that then jumps.
+
   // Seed from the landing-page search box, so a destination typed there is not
   // asked for a second time.
   const prefill = searchParams.get("destination");
-  useEffect(() => {
-    if (!prefill || !cities || state.destination) return;
+  const [prefilledFrom, setPrefilledFrom] = useState<CitySummary[] | null>(null);
+  if (prefill && cities && cities !== prefilledFrom && !state.destination) {
+    setPrefilledFrom(cities);
     const match = cities.find(
       (city) => city.city.toLowerCase() === prefill.trim().toLowerCase(),
     );
-    // One-time seed from the URL once the async city list has loaded.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (match) patch({ destination: match });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [prefill, cities]);
+  }
 
   // A returning traveller's saved preferences become the starting point.
-  useEffect(() => {
-    if (!user) return;
+  const [seededFrom, setSeededFrom] = useState<typeof user>(null);
+  if (user && seededFrom !== user) {
+    setSeededFrom(user);
     const prefs = user.preferences;
-    // Seeds the form from the saved profile when it arrives (async), not on every render.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setState((current) => ({
       ...current,
+      // Anything the traveller has already chosen wins over the saved profile.
       interests: current.interests.length ? current.interests : prefs.interests,
       pace: prefs.pace,
       budget: prefs.budget_level,
@@ -190,7 +192,7 @@ export function PlanWizard() {
       dayStart: prefs.day_start_time,
       dayEnd: prefs.day_end_time,
     }));
-  }, [user]);
+  }
 
   const nights = daysBetween(state.startDate, state.endDate);
 
@@ -556,7 +558,7 @@ function StepParty({
   return (
     <div className="space-y-8">
       <header>
-        <h1 className="text-3xl font-extrabold">Who&apos;s coming?</h1>
+        <h1 className="text-3xl font-extrabold">Who&rsquo;s coming?</h1>
         <p className="mt-2 text-muted-foreground">
           Travelling with children changes what we suggest and how long we leave
           between stops.
@@ -731,7 +733,7 @@ function StepPreferences({
       <div>
         <div className="flex items-baseline justify-between">
           <label htmlFor="walking" className="text-lg font-semibold">
-            Most you&apos;ll walk in a day
+            Most you&rsquo;ll walk in a day
           </label>
           <span className="font-semibold text-primary tabular-nums">
             {state.maxWalkingKm} km
@@ -831,7 +833,7 @@ function StepBrief({
         <h1 className="text-3xl font-extrabold">Anything else we should know?</h1>
         <p className="mt-2 text-muted-foreground">
           Optional, but this is where the plan gets personal. Write it however
-          you&apos;d say it out loud.
+          you&rsquo;d say it out loud.
         </p>
       </header>
 
@@ -897,7 +899,7 @@ function StepBrief({
             <dd className="mt-1.5 flex flex-wrap gap-1.5">
               {state.interests.length === 0 ? (
                 <span className="text-muted-foreground">
-                  None picked — we&apos;ll go with the classics
+                  None picked — we&rsquo;ll go with the classics
                 </span>
               ) : (
                 state.interests.map((interest) => (
@@ -913,7 +915,7 @@ function StepBrief({
 
       {!isAuthenticated && !authLoading && (
         <p className="rounded-xl bg-accent-soft px-4 py-3 text-sm text-accent-foreground">
-          You&apos;ll be asked to sign in before we build the plan — that&apos;s how it
+          You&rsquo;ll be asked to sign in before we build the plan — that&rsquo;s how it
           gets saved to your account.
         </p>
       )}
@@ -957,7 +959,7 @@ function GeneratingState({ destination }: { destination: string }) {
         Building your {destination} itinerary
       </h1>
       <p className="mt-2 text-muted-foreground">
-        This takes a few seconds — we&apos;re solving a real routing problem, not
+        This takes a few seconds — we&rsquo;re solving a real routing problem, not
         guessing.
       </p>
 

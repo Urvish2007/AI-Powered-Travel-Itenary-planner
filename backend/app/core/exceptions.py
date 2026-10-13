@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from typing import Any
 
 from fastapi import FastAPI, Request, status
@@ -134,7 +135,7 @@ def register_exception_handlers(app: FastAPI) -> None:
         )
 
 
-def _jsonable_errors(errors: list[Any]) -> list[dict[str, Any]]:
+def _jsonable_errors(errors: Sequence[Any]) -> list[dict[str, Any]]:
     """Strip non-serialisable ``ctx`` values out of pydantic error dicts."""
     cleaned: list[dict[str, Any]] = []
     for error in errors:
