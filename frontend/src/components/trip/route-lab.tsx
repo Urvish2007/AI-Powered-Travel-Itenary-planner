@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/overlays";
 import { Badge } from "@/components/ui/primitives";
 import { ApiError, api } from "@/lib/api";
-import { cn, formatDistance } from "@/lib/utils";
+import { cn, formatDistance, formatDuration } from "@/lib/utils";
 import type {
   Activity,
   AlgorithmRun,
@@ -127,9 +127,9 @@ export function RouteLab({
           <DialogHeader>
             <DialogTitle>How else could this day be ordered?</DialogTitle>
             <DialogDescription>
-              Six algorithms plan day {day.day_number}&rsquo;s {eligible.length}{" "}
-              stops from the same starting point. This is a comparison only —
-              your itinerary is not changed.
+              Several algorithms plan day {day.day_number}&rsquo;s{" "}
+              {eligible.length} stops from the same starting point. This is a
+              comparison only — your itinerary is not changed.
             </DialogDescription>
           </DialogHeader>
 
@@ -181,8 +181,10 @@ export function RouteLab({
               )}
 
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Cost = minutes of travel and visiting, plus a penalty for every
-                place left out. Lower is better.
+                Score = minutes of travel and visiting, plus a penalty for every
+                place left out. Lower is better, and it is the measure the
+                algorithms are ranked on — so the shortest route is not always
+                the best-scoring one.
               </p>
             </div>
           ) : null}
@@ -191,6 +193,47 @@ export function RouteLab({
     </div>
   );
 }
+
+/** One metric cell: label-above-value on mobile, bare value under a column heading on desktop. */
+function Metric({
+  label,
+  value,
+  sub,
+  emphasis,
+}: {
+  label: string;
+  value: string;
+  sub?: string;
+  emphasis?: boolean;
+}) {
+  return (
+    <span className="min-w-0 sm:text-right">
+      {/* The desktop layout has a heading row, so the inline label is mobile-only.
+          aria-hidden because each row's own aria-label already names its values. */}
+      <span
+        aria-hidden
+        className="block text-[11px] uppercase tracking-wide text-muted-foreground sm:hidden"
+      >
+        {label}
+      </span>
+      <span
+        className={cn(
+          "block truncate tabular-nums",
+          emphasis ? "font-semibold" : "text-muted-foreground",
+        )}
+      >
+        {value}
+      </span>
+      {sub && (
+        <span className="block truncate text-xs tabular-nums text-muted-foreground">
+          {sub}
+        </span>
+      )}
+    </span>
+  );
+}
+
+const COLUMNS = ["Algorithm", "Score", "Distance", "Travel", "Visits", "Stops"];
 
 function ResultsTable({
   runs,
@@ -201,29 +244,38 @@ function ResultsTable({
   selectedKey: string | null;
   onSelect: (algorithm: string) => void;
 }) {
+  // Which run wins on each measure. The backend marks the best score; distance
+  // and travel time are derived here so the table can show when a different
+  // algorithm wins on one of them — a plan can be shortest on the road and
+  // still score worse once waiting and skipped places are counted.
+  const bestScore = runs.find((run) => run.is_best)?.algorithm ?? null;
+  const bestDistance = bestBy(runs, (run) => run.total_distance_km);
+  const bestTravel = bestBy(runs, (run) => run.travel_minutes);
+
   return (
     <div
       role="group"
       aria-label="Algorithm results — select one to see its route"
       className="overflow-hidden rounded-xl border border-border"
     >
-      {/* Column headings. Hidden from assistive tech because each row already
-          labels its own values; this is a visual guide only. */}
+      {/* Visual column guide. Hidden on mobile, where each cell carries its own
+          label, and hidden from assistive tech because every row is self-describing. */}
       <div
         aria-hidden
-        className="grid grid-cols-[1fr_auto_auto] gap-3 border-b border-border bg-secondary/50 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:grid-cols-[1.4fr_repeat(4,auto)]"
+        className="hidden gap-3 border-b border-border bg-secondary/50 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:grid sm:grid-cols-[1.5fr_repeat(5,minmax(0,auto))]"
       >
-        <span>Algorithm</span>
-        <span className="text-right">Cost</span>
-        <span className="hidden text-right sm:block">Distance</span>
-        <span className="hidden text-right sm:block">Time</span>
-        <span className="text-right">Gap</span>
+        {COLUMNS.map((column, index) => (
+          <span key={column} className={index === 0 ? undefined : "text-right"}>
+            {column}
+          </span>
+        ))}
       </div>
 
       <ul className="divide-y divide-border">
         {runs.map((run) => {
           const selectable = run.scheduled_count > 0;
           const isSelected = run.algorithm === selectedKey;
+          const visitMinutes = visitMinutesOf(run);
 
           return (
             <li key={run.algorithm}>
@@ -232,16 +284,44 @@ function ResultsTable({
                 aria-pressed={isSelected}
                 disabled={!selectable}
                 onClick={() => onSelect(run.algorithm)}
+                aria-label={describeRun(run, visitMinutes, {
+                  bestScore,
+                  bestDistance,
+                  bestTravel,
+                })}
                 className={cn(
-                  "grid w-full grid-cols-[1fr_auto_auto] items-center gap-3 px-4 py-3 text-left text-sm transition-colors",
-                  "sm:grid-cols-[1.4fr_repeat(4,auto)]",
+                  "grid w-full gap-x-3 gap-y-2 px-4 py-3 text-left text-sm transition-colors",
+                  // Mobile: a card, two metrics per line. Desktop: one row.
+                  "grid-cols-2 sm:grid-cols-[1.5fr_repeat(5,minmax(0,auto))] sm:items-center sm:gap-y-0",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
                   isSelected ? "bg-primary-soft" : "hover:bg-secondary",
                   !selectable && "cursor-not-allowed opacity-55",
                 )}
               >
-                <span className="min-w-0">
+                <span className="col-span-2 min-w-0 sm:col-span-1">
                   <span className="block truncate font-medium">{run.label}</span>
+
+                  <span className="mt-1 flex flex-wrap items-center gap-1">
+                    {run.algorithm === bestScore && (
+                      <Badge variant="success" size="sm">
+                        Best overall
+                      </Badge>
+                    )}
+                    {/* Only worth a badge when it is not the same run as the best
+                        score; otherwise it is three badges saying one thing. */}
+                    {run.algorithm === bestDistance &&
+                      bestDistance !== bestScore && (
+                        <Badge variant="primary" size="sm">
+                          Shortest
+                        </Badge>
+                      )}
+                    {run.algorithm === bestTravel && bestTravel !== bestScore && (
+                      <Badge variant="accent" size="sm">
+                        Least travel
+                      </Badge>
+                    )}
+                  </span>
+
                   {run.dropped_count > 0 && (
                     <span className="block text-xs text-warning-foreground dark:text-warning">
                       skips {run.dropped_count}
@@ -252,34 +332,38 @@ function ResultsTable({
                       no feasible plan
                     </span>
                   )}
+                  <span className="mt-0.5 flex items-center gap-1 text-xs text-muted-foreground">
+                    <Timer className="size-3" aria-hidden />
+                    solved in {run.duration_seconds.toFixed(2)}s
+                  </span>
                 </span>
 
-                <span className="text-right font-semibold tabular-nums">
-                  {selectable ? `${run.objective} min` : "—"}
-                </span>
-
-                <span className="hidden text-right tabular-nums text-muted-foreground sm:block">
-                  {formatDistance(run.total_distance_km)}
-                </span>
-
-                <span className="hidden items-center justify-end gap-1 text-right tabular-nums text-muted-foreground sm:flex">
-                  <Timer className="size-3.5" />
-                  {run.duration_seconds.toFixed(2)}s
-                </span>
-
-                <span className="text-right">
-                  {run.is_best ? (
-                    <Badge variant="success" size="sm">
-                      Best
-                    </Badge>
-                  ) : selectable ? (
-                    <span className="tabular-nums text-muted-foreground">
-                      +{run.gap_percent.toFixed(1)}%
-                    </span>
-                  ) : (
-                    <span className="text-muted-foreground">—</span>
-                  )}
-                </span>
+                <Metric
+                  label="Score"
+                  emphasis
+                  value={selectable ? `${run.objective} min` : "—"}
+                  sub={
+                    selectable && run.algorithm !== bestScore
+                      ? `+${run.gap_percent.toFixed(1)}%`
+                      : undefined
+                  }
+                />
+                <Metric
+                  label="Distance"
+                  value={selectable ? formatDistance(run.total_distance_km) : "—"}
+                />
+                <Metric
+                  label="Travel"
+                  value={selectable ? formatDuration(run.travel_minutes) : "—"}
+                />
+                <Metric
+                  label="Visits"
+                  value={selectable ? formatDuration(visitMinutes) : "—"}
+                />
+                <Metric
+                  label="Stops"
+                  value={selectable ? String(run.scheduled_count) : "—"}
+                />
               </button>
             </li>
           );
@@ -287,6 +371,76 @@ function ResultsTable({
       </ul>
     </div>
   );
+}
+
+/** The algorithm of the feasible run with the lowest `measure`, or null if none is feasible. */
+function bestBy(
+  runs: AlgorithmRun[],
+  measure: (run: AlgorithmRun) => number,
+): string | null {
+  const feasible = runs.filter((run) => run.scheduled_count > 0);
+  if (feasible.length === 0) return null;
+  return feasible.reduce((best, run) =>
+    measure(run) < measure(best) ? run : best,
+  ).algorithm;
+}
+
+function clockToMinutes(clock: string): number {
+  const [hours, minutes] = clock.split(":").map(Number);
+  if (Number.isNaN(hours) || Number.isNaN(minutes)) return 0;
+  return hours * 60 + minutes;
+}
+
+/**
+ * Minutes this plan spends actually at places, as opposed to getting between them.
+ *
+ * The run reports travel time directly but not visiting time, so it comes from
+ * each stop's own arrival and departure.
+ */
+function visitMinutesOf(run: AlgorithmRun): number {
+  return run.stops.reduce((total, stop) => {
+    const span =
+      clockToMinutes(stop.departure_time) - clockToMinutes(stop.arrival_time);
+    // A stop that reads as ending before it starts has either crossed midnight
+    // or is malformed. Either way it contributes nothing, never a negative.
+    return total + (span > 0 ? span : 0);
+  }, 0);
+}
+
+/** A row's accessible name: the numbers a sighted user reads across the row. */
+function describeRun(
+  run: AlgorithmRun,
+  visitMinutes: number,
+  best: { bestScore: string | null; bestDistance: string | null; bestTravel: string | null },
+): string {
+  if (run.scheduled_count === 0) {
+    return `${run.label}: no feasible plan for this day`;
+  }
+
+  const wins = [
+    run.algorithm === best.bestScore && "best overall",
+    run.algorithm === best.bestDistance &&
+      best.bestDistance !== best.bestScore &&
+      "shortest distance",
+    run.algorithm === best.bestTravel &&
+      best.bestTravel !== best.bestScore &&
+      "least travel time",
+  ].filter((win): win is string => Boolean(win));
+
+  return [
+    `${run.label}: score ${run.objective} minutes`,
+    run.algorithm === best.bestScore
+      ? null
+      : `${run.gap_percent.toFixed(1)} percent worse than the best`,
+    `${formatDistance(run.total_distance_km)} of travel`,
+    `${formatDuration(run.travel_minutes)} travelling`,
+    `${formatDuration(visitMinutes)} visiting`,
+    `${run.scheduled_count} stops`,
+    run.dropped_count > 0 ? `${run.dropped_count} places skipped` : null,
+    wins.length > 0 ? wins.join(", ") : null,
+  ]
+    .filter(Boolean)
+    .join(", ");
 }
 
 /**
