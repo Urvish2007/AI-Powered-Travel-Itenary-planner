@@ -395,6 +395,9 @@ async def optimize_schedule(state: PlanningState) -> PlanningState:
         max_places_per_day=per_day,
         max_daily_distance_km=max(trip.constraints.max_daily_walking_km * 3.0, 10.0),
         time_limit_seconds=_time_limit_for(len(opt_places)),
+        # The trip's own choice. `None` defers to OPTIMIZER_ALGORITHM; see
+        # `engine.resolve_algorithm` for the precedence order.
+        algorithm=trip.constraints.optimizer_algorithm,
     )
 
     result = optimize(request)

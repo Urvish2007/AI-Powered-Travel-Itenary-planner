@@ -262,6 +262,13 @@ export interface TripConstraints {
   must_include_place_ids: string[];
   must_avoid_place_ids: string[];
   notes: string | null;
+  /**
+   * Which algorithm plans this trip's routes.
+   *
+   * `null` means no choice has been saved — the case for every trip created
+   * before the field existed — and the server's OPTIMIZER_ALGORITHM decides.
+   */
+  optimizer_algorithm: OptimizerAlgorithm | null;
 }
 
 export interface Trip {

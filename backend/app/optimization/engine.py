@@ -73,9 +73,35 @@ MANDATORY_UNSERVED_PENALTY = 10_000_000
 def resolve_algorithm(
     request: OptimizationRequest, algorithm: OptimizerAlgorithm | str | None = None
 ) -> OptimizerAlgorithm:
-    """Pick the algorithm: an explicit argument, else the request, else settings."""
+    """Pick which algorithm runs, in a fixed order of precedence.
+
+    **This is the one place that order is decided**, and it is:
+
+    1. ``algorithm`` — an explicit argument from the caller, which is how a
+       single API request overrides everything else for itself.
+    2. ``request.algorithm`` — carried on the optimisation request. The planner
+       fills this in from the trip's own ``constraints.optimizer_algorithm``, so
+       in practice this rung *is* the plan's saved setting.
+    3. ``settings.optimizer_algorithm`` — the ``OPTIMIZER_ALGORITHM`` environment
+       variable, the deployment-wide default.
+    4. ``AUTO`` — a last resort, reached only if the setting is somehow empty.
+       It compares every algorithm and keeps the best plan, so it is a safe thing
+       to fall back to, just a slower one.
+
+    A trip stored before ``optimizer_algorithm`` existed has ``None`` there, which
+    falls through to the environment exactly as it did before — hence no document
+    migration.
+
+    Raises:
+        ValueError: when the value is not a known algorithm. Pydantic rejects an
+            unknown value at the API boundary first, so this guards non-HTTP
+            callers rather than user input.
+    """
     return OptimizerAlgorithm(
-        algorithm or request.algorithm or settings.optimizer_algorithm
+        algorithm
+        or request.algorithm
+        or settings.optimizer_algorithm
+        or OptimizerAlgorithm.AUTO
     )
 
 

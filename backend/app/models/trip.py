@@ -9,6 +9,7 @@ from beanie import PydanticObjectId
 from pydantic import BaseModel, Field, model_validator
 from pymongo import IndexModel
 
+from app.core.config import OptimizerAlgorithm
 from app.models.base import GeoPoint, TimestampedDocument
 from app.models.enums import (
     AccessibilityNeed,
@@ -56,6 +57,11 @@ class TripConstraints(BaseModel):
     dietary_restrictions: list[str] = Field(default_factory=list)
     day_start_time: str = Field(default="09:00", pattern=r"^([01]\d|2[0-3]):[0-5]\d$")
     day_end_time: str = Field(default="21:00", pattern=r"^([01]\d|2[0-3]):[0-5]\d$")
+    # Which route algorithm plans this trip. Optional on purpose: ``None`` means
+    # "not chosen", which is how every trip stored before this field existed
+    # reads, and defers to OPTIMIZER_ALGORITHM. See `engine.resolve_algorithm`
+    # for the full precedence order.
+    optimizer_algorithm: OptimizerAlgorithm | None = None
     max_daily_walking_km: float = Field(default=8.0, ge=0, le=100)
     # Places the user insists on; the optimiser treats these as mandatory nodes.
     must_include_place_ids: list[PydanticObjectId] = Field(default_factory=list)

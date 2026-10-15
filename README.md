@@ -126,8 +126,30 @@ plan. Endpoints:
 Pass `start_date` on either request when planning a specific day — opening hours
 are checked against that date's weekday, and it defaults to today.
 
+### Which algorithm runs
+
+Four places can name an algorithm. They are consulted in this order, and the
+first one that answers wins:
+
+1. **The request** — `algorithm` on an `optimize-route` call. Applies to that
+   call only.
+2. **The plan** — `constraints.optimizer_algorithm` on the trip, set from the
+   selector in the plan wizard and the day view. Saved with the trip, so it
+   survives a reload and every later re-plan.
+3. **The environment** — `OPTIMIZER_ALGORITHM`, the deployment-wide default.
+4. **`auto`** — a last resort if the environment variable is empty. It runs every
+   algorithm and keeps the best plan: safe, just slower.
+
+The order lives in one function, `engine.resolve_algorithm`, which is the only
+thing that decides it.
+
+A trip created before the field existed has `optimizer_algorithm: null`, which
+falls through to the environment exactly as it did before — so there is nothing
+to migrate. An unknown algorithm name is rejected with `422` by the enum at the
+API boundary, never a `500`.
+
 The frontend surfaces the comparison in the day view, under the map
-("Compare route algorithms").
+("Compare route algorithms"), with the selector beside it.
 
 ## Maps
 

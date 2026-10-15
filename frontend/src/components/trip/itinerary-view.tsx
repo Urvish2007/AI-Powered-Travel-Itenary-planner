@@ -25,6 +25,7 @@ import {
   DaySelector,
   DayTimeline,
 } from "@/components/trip/itinerary-timeline";
+import { AlgorithmSelect } from "@/components/trip/algorithm-select";
 import { RouteLab } from "@/components/trip/route-lab";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,7 +45,7 @@ import {
   formatMoney,
   pluralize,
 } from "@/lib/utils";
-import type { Itinerary } from "@/types/api";
+import type { Itinerary, OptimizerAlgorithm } from "@/types/api";
 
 export function ItineraryView({
   tripId,
@@ -92,6 +93,31 @@ export function ItineraryView({
     onError(error) {
       toast.error(
         error instanceof ApiError ? error.message : "Could not rebuild the plan.",
+      );
+    },
+  });
+
+  // Saving the algorithm and re-planning are one action from the traveller's
+  // point of view: choosing a different solver means nothing until a plan comes
+  // back from it. Persisting first means a failed re-plan still leaves the
+  // choice saved, so retrying does not require picking it again.
+  const setAlgorithm = useMutation({
+    async mutationFn(algorithm: OptimizerAlgorithm) {
+      if (!trip) throw new Error("The trip is still loading.");
+      await api.trips.update(trip.id, {
+        constraints: { ...trip.constraints, optimizer_algorithm: algorithm },
+      });
+      return api.trips.generate(trip.id, { regenerate: true });
+    },
+    onSuccess() {
+      toast.success("Re-planned with the new algorithm.");
+      queryClient.invalidateQueries({ queryKey: ["trip", tripId] });
+    },
+    onError(error) {
+      toast.error(
+        error instanceof ApiError
+          ? error.message
+          : "Could not re-plan with that algorithm.",
       );
     },
   });
@@ -354,6 +380,17 @@ export function ItineraryView({
                 />
               )}
             </div>
+            {trip && (
+              <div className="mt-3 lg:mt-0 lg:shrink-0">
+                <AlgorithmSelect
+                  id="day-algorithm"
+                  label="Route algorithm"
+                  value={trip.constraints.optimizer_algorithm}
+                  onChange={(algorithm) => setAlgorithm.mutate(algorithm)}
+                  disabled={setAlgorithm.isPending || regenerate.isPending}
+                />
+              </div>
+            )}
             {currentDay && (
               <RouteLab
                 day={currentDay}
