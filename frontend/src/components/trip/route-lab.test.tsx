@@ -312,4 +312,76 @@ describe("RouteLab", () => {
 
     expect(await screen.findByText(/took longer than 20 seconds/i)).toBeInTheDocument();
   });
+
+  describe("applying a run", () => {
+    it("offers nothing to apply on a read-only itinerary", async () => {
+      compareAlgorithms.mockResolvedValue(response);
+      renderLab(<RouteLab day={day(4)} />);
+      await openDialog();
+
+      await screen.findByRole("group");
+      expect(screen.queryByRole("button", { name: /use this route/i })).not.toBeInTheDocument();
+    });
+
+    it("hands the selected run to onApply and closes on success", async () => {
+      compareAlgorithms.mockResolvedValue(response);
+      const onApply = vi.fn().mockResolvedValue(undefined);
+      renderLab(<RouteLab day={day(4)} onApply={onApply} />);
+      await openDialog();
+
+      await userEvent.click(
+        await screen.findByRole("button", { name: /^Genetic: score 330 minutes/ }),
+      );
+      await userEvent.click(screen.getByRole("button", { name: /use this route/i }));
+
+      expect(onApply).toHaveBeenCalledWith(expect.objectContaining({ algorithm: "genetic" }));
+      await waitFor(() => expect(screen.queryByRole("group")).not.toBeInTheDocument());
+    });
+
+    it("explains instead of applying a plan that drops stops", async () => {
+      compareAlgorithms.mockResolvedValue({
+        ...response,
+        runs: [run({ dropped_count: 1, dropped_place_ids: ["place-4"] })],
+      });
+      renderLab(<RouteLab day={day(4)} onApply={vi.fn()} />);
+      await openDialog();
+
+      expect(await screen.findByText(/leaves out 1 stop,/i)).toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: /use this route/i })).not.toBeInTheDocument();
+    });
+
+    it("on 409, says the day changed and compares again on request", async () => {
+      compareAlgorithms.mockResolvedValue(response);
+      const onApply = vi
+        .fn()
+        .mockRejectedValue(new ApiError(409, "conflict", "The itinerary changed.", {}));
+      renderLab(<RouteLab day={day(4)} onApply={onApply} />);
+      await openDialog();
+
+      await userEvent.click(await screen.findByRole("button", { name: /use this route/i }));
+
+      expect(
+        await screen.findByText(/this day changed while you were comparing/i),
+      ).toBeInTheDocument();
+      await userEvent.click(screen.getByRole("button", { name: /compare again/i }));
+
+      await waitFor(() => expect(compareAlgorithms).toHaveBeenCalledTimes(2));
+      expect(screen.queryByText(/this day changed/i)).not.toBeInTheDocument();
+    });
+
+    it("shows any other failure without offering to compare again", async () => {
+      compareAlgorithms.mockResolvedValue(response);
+      const onApply = vi
+        .fn()
+        .mockRejectedValue(new ApiError(422, "validation_error", "Those places are not on this day.", {}));
+      renderLab(<RouteLab day={day(4)} onApply={onApply} />);
+      await openDialog();
+
+      await userEvent.click(await screen.findByRole("button", { name: /use this route/i }));
+
+      expect(await screen.findByText(/could not apply that route/i)).toBeInTheDocument();
+      expect(screen.getByText("Those places are not on this day.")).toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: /compare again/i })).not.toBeInTheDocument();
+    });
+  });
 });

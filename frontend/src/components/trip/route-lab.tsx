@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/overlays";
 import { Badge } from "@/components/ui/primitives";
 import { ApiError, api } from "@/lib/api";
-import { cn, formatDistance, formatDuration } from "@/lib/utils";
+import { cn, formatDistance, formatDuration, pluralize } from "@/lib/utils";
 import type {
   Activity,
   AlgorithmRun,
@@ -72,10 +72,20 @@ export function RouteLab({
   day,
   transportMode,
   className,
+  onApply,
 }: {
   day: ItineraryDay;
   transportMode?: TransportMode;
   className?: string;
+  /**
+   * Write a run's order onto the day. Omitted when the day is read-only (a
+   * shared itinerary), in which case no "Use this route" button is offered.
+   *
+   * Rejecting with a 409 `ApiError` means the day changed since the comparison;
+   * the dialog offers to re-run it rather than retrying a choice that no longer
+   * applies.
+   */
+  onApply?: (run: AlgorithmRun) => Promise<void>;
 }) {
   const [open, setOpen] = useState(false);
   // null means "follow the best run". Derived rather than synced in an effect,
@@ -129,6 +139,19 @@ export function RouteLab({
     },
   });
 
+  const apply = useMutation({
+    mutationFn: async (run: AlgorithmRun) => {
+      if (!onApply) throw new Error("This itinerary cannot be edited.");
+      await onApply(run);
+    },
+    onSuccess: () => setOpen(false),
+  });
+
+  // A 409 means the day moved on underneath the comparison, so the right offer
+  // is to compare again rather than to retry a choice that no longer applies.
+  const isStale =
+    apply.error instanceof ApiError && apply.error.status === 409;
+
   const runs = compare.data?.runs ?? [];
   const bestAlgorithm = compare.data?.best_algorithm;
   const selectedKey = chosen ?? bestAlgorithm ?? null;
@@ -175,6 +198,7 @@ export function RouteLab({
     // Fired from the user's click, not from an effect, so this never trips the
     // set-state-in-effect rule.
     setChosen(null);
+    apply.reset();
     if (enoughToCompare) compare.mutate();
   }
 
@@ -269,6 +293,80 @@ export function RouteLab({
                     distanceKm={selected?.total_distance_km}
                     label={`Route planned by ${selected?.label ?? "the selected algorithm"}, compared against your current order`}
                   />
+                </div>
+              )}
+
+              {apply.isError && (
+                <div
+                  className={cn(
+                    "flex items-start gap-3 rounded-xl border p-4",
+                    isStale
+                      ? "border-warning/40 bg-warning/10"
+                      : "border-destructive/30 bg-destructive/10",
+                  )}
+                >
+                  <AlertTriangle
+                    className={cn(
+                      "mt-0.5 size-4 shrink-0",
+                      isStale ? "text-warning-foreground dark:text-warning" : "text-destructive",
+                    )}
+                  />
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium">
+                      {isStale
+                        ? "This day changed while you were comparing"
+                        : "Could not apply that route"}
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {describeError(apply.error)}
+                    </p>
+                    {isStale && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="mt-3"
+                        onClick={() => {
+                          apply.reset();
+                          setChosen(null);
+                          compare.mutate();
+                        }}
+                      >
+                        Compare again
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* A plan that leaves stops out cannot be applied as-is: the
+                  server keeps every place on the day, and putting the dropped
+                  ones anywhere would be an order no algorithm chose. */}
+              {onApply && selected && selected.dropped_count > 0 && (
+                <p className="rounded-xl border border-border bg-secondary/40 p-4 text-sm text-muted-foreground">
+                  {selected.label} leaves out{" "}
+                  {selected.dropped_count}{" "}
+                  {pluralize(selected.dropped_count, "stop")}, so it can&apos;t
+                  be applied to this day. Pick a plan that keeps every stop.
+                </p>
+              )}
+
+              {onApply && selected && selected.scheduled_count > 0 && selected.dropped_count === 0 && (
+                <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-secondary/40 p-4">
+                  <p className="min-w-0 text-sm text-muted-foreground">
+                    Reorder day {day.day_number} to the{" "}
+                    <span className="font-medium text-foreground">
+                      {selected.label}
+                    </span>{" "}
+                    plan. Times and totals are recalculated.
+                  </p>
+                  <Button
+                    size="sm"
+                    onClick={() => apply.mutate(selected)}
+                    isLoading={apply.isPending}
+                    disabled={apply.isPending}
+                  >
+                    Use this route
+                  </Button>
                 </div>
               )}
 

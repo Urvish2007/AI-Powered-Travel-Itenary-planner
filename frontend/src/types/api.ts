@@ -505,6 +505,19 @@ export interface AlgorithmRun {
   dropped_place_ids: string[];
 }
 
+export interface ApplyRouteInput {
+  /** The day's routable places, in the order to apply. */
+  place_ids: string[];
+  algorithm: OptimizerAlgorithm;
+  /**
+   * The itinerary's `updated_at` as of the comparison.
+   *
+   * Echoed back verbatim — the server compares it with the stored value and
+   * returns 409 if the day changed in the meantime.
+   */
+  expected_updated_at: string;
+}
+
 export interface CompareRouteResponse {
   runs: AlgorithmRun[];
   best_algorithm: string;

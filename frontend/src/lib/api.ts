@@ -17,6 +17,7 @@
 import type {
   AIRun,
   AlgorithmInfo,
+  ApplyRouteInput,
   ApiErrorBody,
   ApiMessage,
   AuthMethods,
@@ -452,6 +453,25 @@ export const api = {
 
     algorithms: () =>
       request<AlgorithmInfo[]>("/itineraries/optimizer/algorithms"),
+
+    /**
+     * Write a compared route's order onto a day.
+     *
+     * `expected_updated_at` is the itinerary's own `updated_at` as of the
+     * comparison. The server rejects the call with 409 if the day has moved on
+     * since, rather than letting a stale choice overwrite a newer edit.
+     */
+    applyRoute: (
+      id: string,
+      dayNumber: number,
+      input: ApplyRouteInput,
+      signal?: AbortSignal,
+    ) =>
+      request<Itinerary>(`/itineraries/${id}/days/${dayNumber}/apply-route`, {
+        method: "POST",
+        body: input,
+        signal,
+      }),
 
     removeActivity: (id: string, dayNumber: number, activityIndex: number) =>
       request<Itinerary>(
