@@ -15,6 +15,7 @@ import { useCallback, useEffect, useMemo, useRef } from "react";
 import { MapFrame } from "@/components/map/map-frame";
 import { useLeafletMap } from "@/components/map/use-leaflet-map";
 import {
+  BASELINE_COLOR,
   ROUTE_COLOR,
   arrowHtml,
   bearing,
@@ -56,12 +57,20 @@ export function ItineraryMap({
   distanceKm,
   routeColor = ROUTE_COLOR,
   label = "Map of the day's route",
+  baseline: incomingBaseline,
+  baselineLabel = "current route",
 }: {
   stops: MapStop[];
   className?: string;
   distanceKm?: number;
   routeColor?: string;
   label?: string;
+  /**
+   * An existing route to show dashed underneath, for contrast. Used when
+   * previewing a proposed reordering against the one already saved.
+   */
+  baseline?: MapStop[];
+  baselineLabel?: string;
 }) {
   const { containerRef, ctx, layerId, selectLayer, tilesFailed, setTilesFailed, retryTiles } =
     useLeafletMap();
@@ -73,6 +82,12 @@ export function ItineraryMap({
   const key = JSON.stringify(incoming);
   const stops = useMemo(() => JSON.parse(key) as MapStop[], [key]);
 
+  const baselineKey = JSON.stringify(incomingBaseline ?? []);
+  const baseline = useMemo(
+    () => JSON.parse(baselineKey) as MapStop[],
+    [baselineKey],
+  );
+
   useEffect(() => {
     if (!ctx || stops.length === 0) return;
     const { L, map } = ctx;
@@ -80,6 +95,23 @@ export function ItineraryMap({
     const points = stops.map(
       (stop) => [stop.latitude, stop.longitude] as Leaflet.LatLngTuple,
     );
+    const baselinePoints = baseline.map(
+      (stop) => [stop.latitude, stop.longitude] as Leaflet.LatLngTuple,
+    );
+
+    // Drawn first so the proposed route layers over it, and dashed so the two
+    // are distinguishable without relying on colour alone.
+    if (baselinePoints.length > 1) {
+      L.polyline(baselinePoints, {
+        color: BASELINE_COLOR,
+        weight: 3,
+        opacity: 0.9,
+        dashArray: "6 7",
+        lineCap: "round",
+        lineJoin: "round",
+        interactive: false,
+      }).addTo(group);
+    }
 
     if (stops.length > 1) {
       // A white casing under the coloured line keeps the route legible over
@@ -149,7 +181,9 @@ export function ItineraryMap({
         .addTo(group);
     }
 
-    bounds.current = L.latLngBounds(points);
+    // The baseline is part of what the user is comparing, so it has to fit in
+    // view too — otherwise half the contrast is off-screen.
+    bounds.current = L.latLngBounds([...points, ...baselinePoints]);
     map.fitBounds(bounds.current, {
       padding: [56, 56],
       maxZoom: 16,
@@ -173,7 +207,7 @@ export function ItineraryMap({
     return () => {
       group.remove();
     };
-  }, [ctx, stops, routeColor]);
+  }, [ctx, stops, baseline, routeColor]);
 
   const fit = useCallback(() => {
     if (ctx && bounds.current) {
@@ -210,6 +244,24 @@ export function ItineraryMap({
           {distanceKm != null && distanceKm > 0 && (
             <span className="text-muted-foreground">
               · {formatDistance(distanceKm)}
+            </span>
+          )}
+          {baseline.length > 1 && (
+            <span className="flex items-center gap-1.5 text-muted-foreground">
+              ·
+              <svg width="18" height="4" aria-hidden className="shrink-0">
+                <line
+                  x1="0"
+                  y1="2"
+                  x2="18"
+                  y2="2"
+                  stroke={BASELINE_COLOR}
+                  strokeWidth="3"
+                  strokeDasharray="5 5"
+                  strokeLinecap="round"
+                />
+              </svg>
+              {baselineLabel}
             </span>
           )}
         </div>

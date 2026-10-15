@@ -1,8 +1,8 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { AlertTriangle, Loader2, Route, Timer } from "lucide-react";
-import { useMemo, useState } from "react";
+import { AlertTriangle, Info, Loader2, Route, Timer } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
 
 import { ItineraryMap, type MapStop } from "@/components/map/itinerary-map";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,23 @@ import type {
 const MAX_PLACES_PER_DAY = 12;
 const DEFAULT_DAY_START = "09:00";
 const DEFAULT_DAY_END = "21:00";
+
+/**
+ * Below this, comparing is theatre.
+ *
+ * With two stops every algorithm returns the same single ordering, so a table
+ * of identical rows would imply a choice that does not exist.
+ */
+const MIN_PLACES_TO_COMPARE = 3;
+
+/**
+ * How long to wait before giving up on the comparison.
+ *
+ * The server caps its own solver at `time_limit_seconds` per algorithm, so this
+ * only has to cover that plus transit. It exists so a stalled request fails
+ * with an explanation instead of spinning forever.
+ */
+const COMPARE_TIMEOUT_MS = 20_000;
 
 /**
  * An activity the route solver can actually plan around.
@@ -70,22 +87,46 @@ export function RouteLab({
     [day.activities],
   );
 
+  // The run in flight, so closing the dialog can call off work nobody is
+  // waiting for any more.
+  const inFlight = useRef<AbortController | null>(null);
+
   const compare = useMutation({
-    mutationFn: () =>
-      api.itineraries.compareAlgorithms({
-        place_ids: eligible.map((activity) => activity.place_id),
-        // GeoJSON stores [longitude, latitude] — index 1 is the latitude.
-        start_latitude: eligible[0].location.coordinates[1],
-        start_longitude: eligible[0].location.coordinates[0],
-        days: 1,
-        max_places_per_day: Math.min(MAX_PLACES_PER_DAY, eligible.length),
-        ...dayWindow(day.activities),
-        // Opening hours are checked against this date's weekday, so a day that
-        // falls on a Monday is planned around Monday closures.
-        start_date: day.day_date,
-        transport_mode: transportMode ?? "walking",
-        time_limit_seconds: 3,
-      }),
+    mutationFn: async () => {
+      // Supersede anything still running, so a quick close-and-reopen cannot
+      // leave two comparisons racing to fill the same table.
+      inFlight.current?.abort();
+      const controller = new AbortController();
+      inFlight.current = controller;
+
+      const timeout = setTimeout(() => {
+        controller.abort(
+          new DOMException("The comparison timed out.", "TimeoutError"),
+        );
+      }, COMPARE_TIMEOUT_MS);
+
+      try {
+        return await api.itineraries.compareAlgorithms(
+          {
+            place_ids: eligible.map((activity) => activity.place_id),
+            // GeoJSON stores [longitude, latitude] — index 1 is the latitude.
+            start_latitude: eligible[0].location.coordinates[1],
+            start_longitude: eligible[0].location.coordinates[0],
+            days: 1,
+            max_places_per_day: Math.min(MAX_PLACES_PER_DAY, eligible.length),
+            ...dayWindow(day.activities),
+            // Opening hours are checked against this date's weekday, so a day
+            // that falls on a Monday is planned around Monday closures.
+            start_date: day.day_date,
+            transport_mode: transportMode ?? "walking",
+            time_limit_seconds: 3,
+          },
+          controller.signal,
+        );
+      } finally {
+        clearTimeout(timeout);
+      }
+    },
   });
 
   const runs = compare.data?.runs ?? [];
@@ -98,16 +139,43 @@ export function RouteLab({
     [selected, eligible],
   );
 
-  // Fewer than two stops is not a route; there is nothing to compare.
-  if (eligible.length < 2) return null;
+  // The order already saved on the day, drawn dashed under whichever plan is
+  // selected. Without it the preview is a route with nothing to be better than.
+  const savedStops = useMemo<MapStop[]>(
+    () =>
+      eligible.map((activity, index) => ({
+        title: activity.title,
+        latitude: activity.location.coordinates[1],
+        longitude: activity.location.coordinates[0],
+        startTime: activity.start_time,
+        order: index + 1,
+        kind: activity.kind,
+      })),
+    [eligible],
+  );
+
+  const enoughToCompare = eligible.length >= MIN_PLACES_TO_COMPARE;
+
+  // No stop the solver could route between: there is nothing to offer, so the
+  // button itself would be noise.
+  if (eligible.length === 0) return null;
 
   function handleOpenChange(next: boolean) {
     setOpen(next);
-    if (!next) return;
+
+    if (!next) {
+      // Call off the request and drop its results. Reopening always starts a
+      // fresh run, so no stale table or error can survive the close.
+      inFlight.current?.abort();
+      inFlight.current = null;
+      compare.reset();
+      return;
+    }
+
     // Fired from the user's click, not from an effect, so this never trips the
     // set-state-in-effect rule.
     setChosen(null);
-    compare.mutate();
+    if (enoughToCompare) compare.mutate();
   }
 
   return (
@@ -122,7 +190,9 @@ export function RouteLab({
         Compare route algorithms
       </Button>
 
-      <Dialog open={open} onOpenChange={setOpen}>
+      {/* handleOpenChange, not setOpen: Esc and the backdrop have to abort the
+          request too, not just hide the dialog in front of it. */}
+      <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent sheetOnMobile className="sm:max-w-3xl">
           <DialogHeader>
             <DialogTitle>How else could this day be ordered?</DialogTitle>
@@ -133,11 +203,33 @@ export function RouteLab({
             </DialogDescription>
           </DialogHeader>
 
-          {compare.isPending ? (
-            <div className="flex flex-col items-center justify-center gap-3 py-16">
+          {!enoughToCompare ? (
+            <div
+              role="status"
+              className="flex items-start gap-3 rounded-xl border border-border bg-secondary/40 p-4"
+            >
+              <Info className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+              <div className="min-w-0">
+                <p className="text-sm font-medium">
+                  Not enough stops to compare
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Day {day.day_number} has{" "}
+                  {eligible.length === 1 ? "one routable stop" : "two routable stops"}
+                  . Every algorithm returns the same order below{" "}
+                  {MIN_PLACES_TO_COMPARE}, so there would be nothing to choose
+                  between. Add another place with a location to compare.
+                </p>
+              </div>
+            </div>
+          ) : compare.isPending ? (
+            <div
+              role="status"
+              className="flex flex-col items-center justify-center gap-3 py-16"
+            >
               <Loader2 className="size-6 animate-spin text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
-                Solving the same day six ways…
+                Solving the same day several ways…
               </p>
             </div>
           ) : compare.isError ? (
@@ -148,9 +240,7 @@ export function RouteLab({
                   Could not compare the algorithms
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {compare.error instanceof ApiError
-                    ? compare.error.message
-                    : "Something went wrong. Please try again."}
+                  {describeError(compare.error)}
                 </p>
                 <Button
                   variant="outline"
@@ -174,8 +264,10 @@ export function RouteLab({
                 <div className="h-56 sm:h-64">
                   <ItineraryMap
                     stops={mapStops}
+                    baseline={savedStops}
+                    baselineLabel="your current order"
                     distanceKm={selected?.total_distance_km}
-                    label={`Route planned by ${selected?.label ?? "the selected algorithm"}`}
+                    label={`Route planned by ${selected?.label ?? "the selected algorithm"}, compared against your current order`}
                   />
                 </div>
               )}
@@ -371,6 +463,15 @@ function ResultsTable({
       </ul>
     </div>
   );
+}
+
+/** What to tell the user went wrong, in their terms rather than the transport's. */
+function describeError(error: unknown): string {
+  if (error instanceof DOMException && error.name === "TimeoutError") {
+    return `The comparison took longer than ${Math.round(COMPARE_TIMEOUT_MS / 1000)} seconds. The server may be busy — try again, or try a day with fewer stops.`;
+  }
+  if (error instanceof ApiError) return error.message;
+  return "Something went wrong. Please try again.";
 }
 
 /** The algorithm of the feasible run with the lowest `measure`, or null if none is feasible. */

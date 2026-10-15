@@ -88,6 +88,14 @@ export const DEFAULT_TILE_LAYER: TileLayerId = TILE_LAYERS[0].id;
 
 export const ROUTE_COLOR = "#0f6f76";
 
+/**
+ * The route being compared *against*, drawn dashed beneath the proposed one.
+ *
+ * Deliberately desaturated: the baseline is context, and giving it a second
+ * strong colour would read as two routes of equal standing.
+ */
+export const BASELINE_COLOR = "#94a3b8";
+
 const KIND_STYLE: Record<string, { color: string; label: string }> = {
   visit: { color: ROUTE_COLOR, label: "Sight" },
   meal: { color: "#c2410c", label: "Meal" },

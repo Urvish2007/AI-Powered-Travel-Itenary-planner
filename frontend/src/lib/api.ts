@@ -222,7 +222,17 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
             ? body
             : JSON.stringify(body),
     });
-  } catch {
+  } catch (cause) {
+    // An abort is the caller's own doing — a dialog the user closed, a request
+    // superseded by a newer one, a timeout it set itself — not a failure of the
+    // network. Rethrowing it unchanged is what lets the caller tell those apart
+    // and stay quiet about the ones it caused.
+    if (
+      cause instanceof DOMException &&
+      (cause.name === "AbortError" || cause.name === "TimeoutError")
+    ) {
+      throw cause;
+    }
     throw new NetworkError();
   }
 
@@ -426,11 +436,18 @@ export const api = {
     reorderDay: (id: string, input: { day_number: number; activity_order: number[] }) =>
       request<Itinerary>(`/itineraries/${id}/reorder`, { method: "POST", body: input }),
 
-    /** Re-plan a set of places with several algorithms and compare the results. */
-    compareAlgorithms: (input: CompareRouteInput) =>
+    /**
+     * Re-plan a set of places with several algorithms and compare the results.
+     *
+     * Takes a signal because this is the one call in the client that runs several
+     * solvers server-side: it is slow enough that a caller needs to be able to
+     * walk away from it.
+     */
+    compareAlgorithms: (input: CompareRouteInput, signal?: AbortSignal) =>
       request<CompareRouteResponse>("/itineraries/optimize-route/compare", {
         method: "POST",
         body: input,
+        signal,
       }),
 
     algorithms: () =>
