@@ -180,15 +180,14 @@ The maps need **no API key**: Leaflet over openly-licensed tiles — CARTO Voyag
 
 Those are free community servers with usage policies. Before real traffic, point
 `NEXT_PUBLIC_MAP_TILE_URL` and `NEXT_PUBLIC_MAP_TILE_ATTRIBUTION` at a hosted
-provider (MapTiler, Stadia, Mapbox...). Setting `NEXT_PUBLIC_MAPBOX_TOKEN` adds a
-Mapbox style to the switcher but is not required.
+provider (MapTiler, Stadia...).
 
 ## CI/CD
 
 | Workflow | When | What |
 |---|---|---|
-| `backend.yml` | PRs and pushes touching `backend/` | ruff, mypy (report-only), tests on real MongoDB, migrations + endpoint smoke test, `pip-audit` (report-only), Docker build |
-| `frontend.yml` | PRs and pushes touching `frontend/` | `tsc`, ESLint (report-only, see below), `next build`, `npm audit` (report-only), Docker build |
+| `backend.yml` | PRs and pushes touching `backend/` | ruff, mypy, tests on real MongoDB (fails if it is missing), migrations + endpoint smoke test, `pip-audit` (report-only), Docker build |
+| `frontend.yml` | PRs and pushes touching `frontend/` | `tsc`, ESLint, Vitest, `next build`, `npm audit` (report-only), Docker build |
 | `deploy.yml` | Push to `main` | build + push images to GHCR → **staging** (migrate, deploy hook, readiness check) → **production** (same, after approval) |
 
 `dependabot.yml` opens weekly update PRs for pip, npm, Docker and Actions.
@@ -229,14 +228,13 @@ automatically.
 
 ### Frontend hosting
 
+**Step by step for Atlas + Render + Vercel, with every variable:
+[`docs/deployment.md`](docs/deployment.md).**
+
 Vercel works as-is (set the `NEXT_PUBLIC_*` variables in the project settings).
 Alternatively self-host the image from `frontend/Dockerfile`; `NEXT_PUBLIC_*` values are
 baked in at build time, so pass them as `--build-arg`.
 
 ## Known issues
 
-- Frontend ESLint reports 16 errors (`react-hooks/set-state-in-effect` in 7 places and
-  9 unescaped apostrophes). They pre-date CI, so lint is report-only for now; remove
-  `continue-on-error` in `frontend.yml` once they are fixed.
-- Backend `mypy` reports type errors and is report-only for the same reason.
 - Access tokens are kept in `localStorage`. Add a Content Security Policy before launch.

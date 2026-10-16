@@ -404,8 +404,9 @@ nothing about HTTP or MongoDB, which is why it is testable on its own.
 
 ## Known limitations
 
-- Travel time is haversine distance × 1.3 with per-mode speeds, not real routing.
-  `build_travel_matrix` is the single seam to swap in the Mapbox Matrix API.
+- Travel time is estimated (haversine distance × 1.3 at per-mode speeds) unless
+  `ROUTING_PROVIDER` is set, and stays estimated for transit and for generation
+  pools larger than `ROUTING_MAX_LOCATIONS`. Responses say which via `estimated`.
 - The hashing embedder used without an API key captures lexical overlap, not
   learned semantics. Retrieval behaves sensibly, but it is not a substitute for
   real embeddings in production.
