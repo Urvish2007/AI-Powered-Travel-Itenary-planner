@@ -221,6 +221,18 @@ export interface Place {
   search_score?: number | null;
 }
 
+/** A freely licensed photo of a city, with what its licence asks us to show. */
+export interface CityPhoto {
+  image_url: string;
+  width: number | null;
+  height: number | null;
+  author: string | null;
+  license: string | null;
+  license_url: string | null;
+  source_url: string | null;
+  source: string;
+}
+
 export interface CitySummary {
   city: string;
   country: string;
@@ -228,6 +240,8 @@ export interface CitySummary {
   average_rating: number;
   latitude: number | null;
   longitude: number | null;
+  /** Absent from servers that predate city photos; null when none was found. */
+  photo?: CityPhoto | null;
 }
 
 // ---------------------------------------------------------------------------

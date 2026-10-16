@@ -20,6 +20,18 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         pathname: "/**",
       },
+      // Licensed city photos from Wikimedia Commons (see fetch_city_photos.py).
+      // Commons serves thumbnails from either host.
+      {
+        protocol: "https",
+        hostname: "thumb.wikimedia.org",
+        pathname: "/wikipedia/commons/**",
+      },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+        pathname: "/wikipedia/commons/**",
+      },
       // Profile pictures from federated sign-in.
       {
         protocol: "https",

@@ -2,14 +2,13 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, MapPin, Sparkles, Star } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
+import { CityBackdrop, PhotoCredit } from "@/components/places/city-backdrop";
 import { CityExplorer } from "@/components/places/city-explorer";
 import { Button } from "@/components/ui/button";
 import { EmptyState, Skeleton } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
-import { blurPhoto, cityImage, photo } from "@/lib/images";
 import { pluralize, titleCase } from "@/lib/utils";
 
 export function CityPage({ citySlug }: { citySlug: string }) {
@@ -61,22 +60,26 @@ export function CityPage({ citySlug }: { citySlug: string }) {
     );
   }
 
-  const imageKey = cityImage(city.city);
-
   return (
     <>
       <section className="relative isolate flex min-h-[46svh] items-end">
-        <Image
-          src={photo(imageKey, { width: 1900, height: 900 })}
-          alt={`${city.city}, ${city.country}`}
-          fill
-          priority
-          sizes="100vw"
-          placeholder="blur"
-          blurDataURL={blurPhoto(imageKey)}
-          className="-z-10 object-cover"
-        />
+        <div className="absolute inset-0 -z-10">
+          <CityBackdrop
+            city={city.city}
+            country={city.country}
+            cityPhoto={city.photo}
+            priority
+            sizes="100vw"
+            className="object-cover"
+            showCredit={false}
+          />
+        </div>
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/92 via-slate-950/45 to-slate-950/55" />
+
+        {/* Above the gradient, so it stays legible and clickable. */}
+        {city.photo?.image_url && (
+          <PhotoCredit photo={city.photo} linked className="bottom-3 right-3 top-auto" />
+        )}
 
         <div className="mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-6 lg:px-8 lg:pb-14">
           <Link

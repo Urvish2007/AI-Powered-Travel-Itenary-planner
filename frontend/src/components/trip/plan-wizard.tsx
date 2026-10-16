@@ -429,6 +429,7 @@ function StepDestination({
               >
                 <CityBackdrop
                   city={city.city}
+                  cityPhoto={city.photo}
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
