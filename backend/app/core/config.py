@@ -243,9 +243,6 @@ class Settings(BaseSettings):
     photos_timeout_seconds: float = 15.0
     photos_max_retries: int = 3
 
-    # ---- External services ----
-    mapbox_access_token: SecretStr | None = None
-
     # ---- Observability ----
     sentry_dsn: str | None = None
     log_level: str = "INFO"
