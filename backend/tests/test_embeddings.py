@@ -343,6 +343,7 @@ class TestReembed:
         resumed = await reembed_places(batch_size=2)
         assert (resumed.written, resumed.remaining, resumed.stopped) == (3, 0, None)
 
+    @pytest.mark.vector
     async def test_search_never_compares_across_spaces(
         self, database: Any, fake: FakeEmbedder
     ) -> None:

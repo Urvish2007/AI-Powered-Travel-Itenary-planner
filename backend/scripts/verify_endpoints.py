@@ -206,6 +206,16 @@ async def main(base_url: str) -> int:
         r = await client.get(f"{api}/places/cities")
         cities = r.json() if r.status_code == 200 else []
         check.check("GET", "/places/cities", r, 200, f"{len(cities)} cities")
+        photos = [c["photo"] for c in cities if c.get("photo")]
+        check.assertion(
+            "every city says whether it has a photo",
+            bool(cities) and all("photo" in c for c in cities),
+            f"{len(photos)} with a photo",
+        )
+        check.assertion(
+            "every city photo carries its licence and source",
+            all(p.get("license") and p.get("source_url") for p in photos),
+        )
 
         r = await client.get(
             f"{api}/places/nearby",
@@ -518,6 +528,90 @@ async def main(base_url: str) -> int:
                     f"{count} -> {len(after['activities'])}",
                 )
 
+        # ------------------------------------------------------------------
+        section("Apply a compared route")
+        r = await client.get(f"{api}/itineraries/{itinerary_id}", headers=auth)
+        current = r.json() if r.status_code == 200 else None
+        apply_day = next(
+            (
+                d
+                for d in (current or {}).get("days", [])
+                if sum(1 for a in d["activities"] if a.get("place_id")) >= 2
+            ),
+            None,
+        )
+        if current and apply_day:
+            place_ids = [
+                a["place_id"] for a in apply_day["activities"] if a.get("place_id")
+            ]
+            wanted = list(reversed(place_ids))
+            day_path = f"days/{apply_day['day_number']}/apply-route"
+            apply_url = f"{api}/itineraries/{itinerary_id}/{day_path}"
+            body = {
+                "place_ids": wanted,
+                "algorithm": "nearest_neighbor",
+                "expected_updated_at": current["updated_at"],
+            }
+            r = await client.post(apply_url, headers=auth, json=body)
+            check.check("POST", "/itineraries/{id}/days/{d}/apply-route", r, 200)
+            if r.status_code == 200:
+                applied = r.json()
+                day_after = next(
+                    d for d in applied["days"] if d["day_number"] == apply_day["day_number"]
+                )
+                check.assertion(
+                    "apply-route used the requested order",
+                    [a["place_id"] for a in day_after["activities"] if a.get("place_id")]
+                    == wanted,
+                )
+                check.assertion(
+                    "apply-route recorded the algorithm",
+                    applied["optimization"]["solver_status"] == "applied:nearest_neighbor",
+                    applied["optimization"]["solver_status"],
+                )
+                _verify_schedule(check, [day_after], label="after apply-route")
+
+                # The same comparison again is stale now: the day has moved on.
+                r = await client.post(apply_url, headers=auth, json=body)
+                check.check("POST", ".../apply-route (stale comparison)", r, 409)
+
+                r = await client.post(
+                    apply_url,
+                    headers=auth,
+                    json={
+                        **body,
+                        "place_ids": [wanted[0], wanted[0]],
+                        "expected_updated_at": applied["updated_at"],
+                    },
+                )
+                check.check("POST", ".../apply-route (duplicate places)", r, 422)
+        else:
+            check.assertion("a day with two places to apply a route to", False)
+
+        section("Route algorithm per trip")
+        r = await client.get(f"{api}/trips/{trip_id}", headers=auth)
+        if check.check("GET", "/trips/{id}", r, 200):
+            constraints = r.json()["constraints"]
+            r = await client.patch(
+                f"{api}/trips/{trip_id}",
+                headers=auth,
+                json={
+                    "constraints": {**constraints, "optimizer_algorithm": "local_search"}
+                },
+            )
+            check.check("PATCH", "/trips/{id} (optimizer_algorithm)", r, 200)
+            check.assertion(
+                "the trip keeps its chosen algorithm",
+                r.status_code == 200
+                and r.json()["constraints"]["optimizer_algorithm"] == "local_search",
+            )
+            r = await client.patch(
+                f"{api}/trips/{trip_id}",
+                headers=auth,
+                json={"constraints": {**constraints, "optimizer_algorithm": "nope"}},
+            )
+            check.check("PATCH", "/trips/{id} (unknown algorithm)", r, 422)
+
         r = await client.post(f"{api}/itineraries/{itinerary_id}/activate", headers=auth)
         check.check("POST", "/itineraries/{id}/activate", r, 200)
 
@@ -656,6 +750,11 @@ async def main(base_url: str) -> int:
                     "the best run's gap is zero",
                     best is not None and abs(best["gap_percent"]) < 0.005,
                     f"{best['gap_percent'] if best else '?'}%",
+                )
+                check.assertion(
+                    "the comparison says whether its distances were measured",
+                    isinstance(data.get("estimated"), bool),
+                    f"estimated={data.get('estimated')} via {data.get('routing_provider')}",
                 )
                 check.assertion(
                     "fastest_algorithm is the quickest run",

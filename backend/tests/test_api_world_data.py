@@ -73,6 +73,7 @@ class TestWorldSeed:
             assert 0 < city["place_count"] <= 40, city["city"]
 
 
+@pytest.mark.geo
 class TestGeospatialSearchOnWorldData:
     async def test_finds_places_near_a_world_city(
         self, client: AsyncClient, world: int
@@ -159,6 +160,7 @@ class TestTextSearchOnWorldData:
         assert response.json() == []
 
 
+@pytest.mark.vector
 class TestSemanticSearchOnWorldData:
     async def test_shared_vocabulary_ranks_first(
         self, client: AsyncClient, world: int

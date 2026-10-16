@@ -333,6 +333,9 @@ event loop. Keep any new solver endpoint on that path.
 ```bash
 pytest                               # everything
 pytest tests/test_optimization.py    # solver only, no database needed
+pytest -m geo                        # 2dsphere / radius search
+pytest -m vector                     # semantic search
+pytest -m "not vector"               # everything else
 pytest --cov=app --cov-report=term-missing
 ```
 
@@ -340,7 +343,9 @@ Tests run against a **real MongoDB** on a throwaway database, not a mock —
 geospatial queries, text indexes and TTL behaviour are precisely the parts a
 mock would fail to exercise. Point at another server with `TEST_MONGODB_URI`.
 If no server is reachable the database-backed tests skip rather than fail, so
-the pure-unit tests still run anywhere.
+the pure-unit tests still run anywhere — except under `REQUIRE_MONGODB=1`, which
+CI sets so a missing service container fails the run instead of passing it with
+the database tests silently skipped.
 
 There is also a live end-to-end check against a running server:
 
@@ -348,10 +353,13 @@ There is also a live end-to-end check against a running server:
 python -m scripts.verify_endpoints --base-url http://127.0.0.1:8000
 ```
 
-It walks the real journey — register, plan, edit, share, clean up — and asserts
-on the invariants that matter: no overlapping activities, the daily window
-respected, no place scheduled twice, the optimised route no longer than the
-naive one, and one user unable to read another's trip.
+It walks the real journey — register, plan, edit, compare routes, apply one,
+choose an algorithm, share, clean up — and asserts on the invariants that
+matter: no overlapping activities, the daily window respected, no place
+scheduled twice, the optimised route no longer than the naive one, a stale
+route comparison refused with 409, and one user unable to read another's trip.
+It creates and deletes data, so point it at a seeded throwaway database (CI's
+smoke job does exactly that), never at one you care about.
 
 ---
 

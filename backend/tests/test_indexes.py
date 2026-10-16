@@ -97,6 +97,7 @@ class TestUniqueIndexes:
             await place().insert()
 
 
+@pytest.mark.geo
 class TestGeospatialIndex:
     async def test_near_query_returns_ordered_results(self, database: Any) -> None:
         """Proves the 2dsphere index exists and coordinates are in GeoJSON order."""
