@@ -1,5 +1,55 @@
 import type { NextConfig } from "next";
 
+/** The origin of a URL, or null when it is unset or not a URL. */
+function originOf(url: string | undefined): string | null {
+  if (!url) return null;
+  try {
+    return new URL(url).origin;
+  } catch {
+    return null;
+  }
+}
+
+const isDev = process.env.NODE_ENV === "development";
+const apiOrigin = originOf(process.env.NEXT_PUBLIC_API_URL);
+
+/**
+ * Content-Security-Policy, sent in **Report-Only** mode: the browser reports
+ * what would have been blocked (in the console) and blocks nothing. Promote it
+ * to `Content-Security-Policy` once a release shows no violations.
+ *
+ * Built from what the app actually loads: its own origin and the API; the
+ * Google and Apple sign-in scripts and frames; images over HTTPS (a place's own
+ * photo may live on any host, and a hosted tile provider is loaded directly).
+ * Inline scripts and styles are allowed because Next's bootstrap and Leaflet
+ * use them; replacing that with nonces needs dynamic rendering for every page.
+ */
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  [
+    "script-src 'self' 'unsafe-inline'",
+    "https://accounts.google.com https://appleid.cdn-apple.com",
+    // Fast Refresh evaluates code in development only.
+    isDev ? "'unsafe-eval'" : "",
+  ].join(" "),
+  "style-src 'self' 'unsafe-inline' https://accounts.google.com",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' data:",
+  [
+    "connect-src 'self'",
+    apiOrigin ?? "",
+    "https://accounts.google.com",
+    isDev ? "ws: wss:" : "",
+  ].join(" "),
+  "frame-src https://accounts.google.com https://appleid.apple.com",
+  "form-action 'self' https://appleid.apple.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "frame-ancestors 'none'",
+]
+  .map((directive) => directive.replace(/\s+/g, " ").trim())
+  .join("; ");
+
 const nextConfig: NextConfig = {
   // Emits a self-contained server (.next/standalone) so the Docker image ships
   // only what it needs to run. Vercel ignores this setting.
@@ -63,6 +113,10 @@ const nextConfig: NextConfig = {
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=(self)",
+          },
+          {
+            key: "Content-Security-Policy-Report-Only",
+            value: contentSecurityPolicy,
           },
         ],
       },
