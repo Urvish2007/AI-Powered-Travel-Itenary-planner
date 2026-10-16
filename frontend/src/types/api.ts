@@ -315,6 +315,8 @@ export interface TravelLeg {
   distance_km: number;
   duration_minutes: number;
   polyline: string | null;
+  /** False only when a routing provider measured this leg. */
+  estimated?: boolean;
 }
 
 export interface Activity {
@@ -359,6 +361,9 @@ export interface OptimizationReport {
   places_dropped: number;
   dropped_reasons: Record<string, string>;
   distance_saved_km: number | null;
+  /** Whether travel was measured on the road network or estimated. */
+  estimated?: boolean;
+  routing_provider?: string;
 }
 
 export interface GenerationMeta {
@@ -522,6 +527,13 @@ export interface CompareRouteResponse {
   runs: AlgorithmRun[];
   best_algorithm: string;
   fastest_algorithm: string;
+  /**
+   * True when distances and times are straight-line estimates. Optional
+   * because a server from before road routing omits it, and its figures were
+   * estimates.
+   */
+  estimated?: boolean;
+  routing_provider?: string;
 }
 
 export interface CompareRouteInput {

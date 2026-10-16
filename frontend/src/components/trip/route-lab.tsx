@@ -284,6 +284,15 @@ export function RouteLab({
                 onSelect={setChosen}
               />
 
+              {/* Said every time, not only when measured: a figure that looks
+                  precise reads as measured unless told otherwise. A response
+                  without the field predates routing, so it is an estimate. */}
+              <p className="text-xs text-muted-foreground">
+                {compare.data?.estimated === false
+                  ? `Distances and travel times measured on the road network (${compare.data.routing_provider}).`
+                  : "Distances and travel times are estimated from straight-line distance, not measured routes."}
+              </p>
+
               {mapStops.length > 0 && (
                 <div className="h-56 sm:h-64">
                   <ItineraryMap

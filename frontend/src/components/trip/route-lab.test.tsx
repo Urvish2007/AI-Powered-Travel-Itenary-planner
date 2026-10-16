@@ -252,6 +252,26 @@ describe("RouteLab", () => {
     expect(infeasible).toBeDisabled();
   });
 
+  it("says the figures are estimates unless the server measured them", async () => {
+    compareAlgorithms.mockResolvedValueOnce(response);
+    renderLab(<RouteLab day={day(4)} />);
+    await openDialog();
+    expect(await screen.findByText(/estimated from straight-line distance/i)).toBeInTheDocument();
+  });
+
+  it("names the provider when the figures were measured", async () => {
+    compareAlgorithms.mockResolvedValueOnce({
+      ...response,
+      estimated: false,
+      routing_provider: "openrouteservice",
+    });
+    renderLab(<RouteLab day={day(4)} />);
+    await openDialog();
+    expect(
+      await screen.findByText(/measured on the road network \(openrouteservice\)/i),
+    ).toBeInTheDocument();
+  });
+
   it("previews the selected run against the saved order as a baseline", async () => {
     compareAlgorithms.mockResolvedValue(response);
 
