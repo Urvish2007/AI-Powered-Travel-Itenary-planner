@@ -132,11 +132,16 @@ GOOGLE_GEMINI_KEY=...        # https://aistudio.google.com/apikey
 # OR:
 LLM_PROVIDER=groq
 GROQ_API_KEY=gsk_...         # https://console.groq.com/keys
+GROQ_MODEL=...               # https://console.groq.com/docs/models
 ```
 
-Leave `LLM_MODEL` unset to use the provider default (`gemini-3.8-flash`, or
-`openai/gpt-oss-120b` on Groq). Providers retire models on a schedule, so check
-their model pages before pinning one. `GEMINI_API_KEY` is still accepted as an
+Gemini defaults to `gemini-3.8-flash` when `LLM_MODEL` is unset. Groq has **no**
+default: name the model in `GROQ_MODEL` (and optionally `GROQ_FAST_MODEL`), since
+Groq retires models too often for a built-in ID to stay valid. Deployed, the API
+refuses to start on Groq without `GROQ_API_KEY` and `GROQ_MODEL`. Groq calls
+have a timeout (`LLM_TIMEOUT_SECONDS`) and retry with backoff on timeouts, 429
+and 5xx (`LLM_MAX_RETRIES`); a rate limit that outlasts the retries is returned
+as a 429 that says how long to wait. `GEMINI_API_KEY` is still accepted as an
 alias for `GOOGLE_GEMINI_KEY`. Anthropic and OpenAI remain available
 (`LLM_PROVIDER=anthropic|openai`; OpenAI also needs `LLM_MODEL`).
 
@@ -146,6 +151,73 @@ the stub instead of failing to start.
 Without a key the service runs on `LLM_PROVIDER=stub` — a deterministic,
 offline provider. The rest of the pipeline, including the solver, is identical,
 which is what makes CI meaningful.
+
+### Embeddings
+
+Semantic search embeds places with `EMBEDDING_PROVIDER`, which is separate from
+the LLM. The default, `hash`, needs no key or network, so the app works end to
+end with nothing but `GROQ_API_KEY` (Groq has no embeddings API). For learned
+embeddings set `EMBEDDING_PROVIDER=gemini|openai|local` plus `EMBEDDING_MODEL`
+and, for the hosted ones, their key.
+
+Every stored vector records the provider, model and dimension that made it
+(`embedding_space`, e.g. `hash:hash-v1:384`), and search only compares vectors
+from the configured space — there is no silent fallback to another embedder, so
+a provider outage is an error instead of a quietly corrupted index. After
+changing the provider, model or `EMBEDDING_DIMENSIONS`:
+
+```bash
+python -m scripts.reembed --dry-run   # how many places need it
+python -m scripts.reembed             # do it (idempotent; re-run to resume)
+```
+
+Until it runs, places embedded the old way are invisible to semantic search
+(geographic recall still works). `GET /api/v1/health/details` reports how many
+places are in the current space. A run stopped by a rate limit exits with code
+2 and picks up where it left off next time.
+
+On Atlas, the index the app creates (and updates in place if the dimension or
+fields change) is:
+
+```json
+{
+  "name": "place_embedding_index",
+  "type": "vectorSearch",
+  "definition": {
+    "fields": [
+      {"type": "vector", "path": "embedding", "numDimensions": 384, "similarity": "cosine"},
+      {"type": "filter", "path": "city"},
+      {"type": "filter", "path": "category"},
+      {"type": "filter", "path": "is_active"},
+      {"type": "filter", "path": "embedding_space"}
+    ]
+  }
+}
+```
+
+`numDimensions` must equal `EMBEDDING_DIMENSIONS`; the name is
+`MONGODB_VECTOR_INDEX_NAME`.
+
+### City photos
+
+Destination cards and city pages show a freely licensed photo of the city from
+Wikimedia Commons, credited with its author and licence (linked on the city
+page). Fetch them once per environment:
+
+```bash
+python -m scripts.fetch_city_photos                  # cities not yet checked
+python -m scripts.fetch_city_photos --retry-missing  # also retry cities with none
+python -m scripts.fetch_city_photos --refresh        # re-check everything
+```
+
+A photo is kept only if the file is on Commons under CC0, public domain, CC BY
+or CC BY-SA (never NC/ND or fair use), the Wikipedia article's coordinates are
+within 50 km of the city's own centre (so a same-named town elsewhere is never
+used), and it is a photograph rather than a map, flag or emblem. Every city
+checked is recorded either way, so reruns resume instead of starting over; the
+fetch is sequential, paced, and backs off on 429/503. A city with no usable
+photo falls back to the curated photo, then to a plain gradient — never an
+unrelated stock image. On the 103 seeded cities the first run found 87.
 
 ---
 
@@ -261,6 +333,9 @@ event loop. Keep any new solver endpoint on that path.
 ```bash
 pytest                               # everything
 pytest tests/test_optimization.py    # solver only, no database needed
+pytest -m geo                        # 2dsphere / radius search
+pytest -m vector                     # semantic search
+pytest -m "not vector"               # everything else
 pytest --cov=app --cov-report=term-missing
 ```
 
@@ -268,7 +343,9 @@ Tests run against a **real MongoDB** on a throwaway database, not a mock —
 geospatial queries, text indexes and TTL behaviour are precisely the parts a
 mock would fail to exercise. Point at another server with `TEST_MONGODB_URI`.
 If no server is reachable the database-backed tests skip rather than fail, so
-the pure-unit tests still run anywhere.
+the pure-unit tests still run anywhere — except under `REQUIRE_MONGODB=1`, which
+CI sets so a missing service container fails the run instead of passing it with
+the database tests silently skipped.
 
 There is also a live end-to-end check against a running server:
 
@@ -276,10 +353,13 @@ There is also a live end-to-end check against a running server:
 python -m scripts.verify_endpoints --base-url http://127.0.0.1:8000
 ```
 
-It walks the real journey — register, plan, edit, share, clean up — and asserts
-on the invariants that matter: no overlapping activities, the daily window
-respected, no place scheduled twice, the optimised route no longer than the
-naive one, and one user unable to read another's trip.
+It walks the real journey — register, plan, edit, compare routes, apply one,
+choose an algorithm, share, clean up — and asserts on the invariants that
+matter: no overlapping activities, the daily window respected, no place
+scheduled twice, the optimised route no longer than the naive one, a stale
+route comparison refused with 409, and one user unable to read another's trip.
+It creates and deletes data, so point it at a seeded throwaway database (CI's
+smoke job does exactly that), never at one you care about.
 
 ---
 
@@ -324,8 +404,9 @@ nothing about HTTP or MongoDB, which is why it is testable on its own.
 
 ## Known limitations
 
-- Travel time is haversine distance × 1.3 with per-mode speeds, not real routing.
-  `build_travel_matrix` is the single seam to swap in the Mapbox Matrix API.
+- Travel time is estimated (haversine distance × 1.3 at per-mode speeds) unless
+  `ROUTING_PROVIDER` is set, and stays estimated for transit and for generation
+  pools larger than `ROUTING_MAX_LOCATIONS`. Responses say which via `estimated`.
 - The hashing embedder used without an API key captures lexical overlap, not
   learned semantics. Retrieval behaves sensibly, but it is not a substitute for
   real embeddings in production.

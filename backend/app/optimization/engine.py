@@ -33,15 +33,11 @@ from itertools import pairwise
 from typing import Any
 
 from app.core.config import OptimizerAlgorithm, settings
+from app.models.enums import TransportMode
 from app.observability.logging import get_logger
 from app.observability.metrics import OPTIMIZER_DURATION, OPTIMIZER_RUNS
 from app.optimization import algorithms
-from app.optimization.distance import (
-    Coordinate,
-    build_travel_matrix,
-    effective_mode,
-    haversine_km,
-)
+from app.optimization.distance import leg_figures
 from app.optimization.schemas import (
     MINUTES_PER_DAY,
     DaySchedule,
@@ -73,9 +69,35 @@ MANDATORY_UNSERVED_PENALTY = 10_000_000
 def resolve_algorithm(
     request: OptimizationRequest, algorithm: OptimizerAlgorithm | str | None = None
 ) -> OptimizerAlgorithm:
-    """Pick the algorithm: an explicit argument, else the request, else settings."""
+    """Pick which algorithm runs, in a fixed order of precedence.
+
+    **This is the one place that order is decided**, and it is:
+
+    1. ``algorithm`` — an explicit argument from the caller, which is how a
+       single API request overrides everything else for itself.
+    2. ``request.algorithm`` — carried on the optimisation request. The planner
+       fills this in from the trip's own ``constraints.optimizer_algorithm``, so
+       in practice this rung *is* the plan's saved setting.
+    3. ``settings.optimizer_algorithm`` — the ``OPTIMIZER_ALGORITHM`` environment
+       variable, the deployment-wide default.
+    4. ``AUTO`` — a last resort, reached only if the setting is somehow empty.
+       It compares every algorithm and keeps the best plan, so it is a safe thing
+       to fall back to, just a slower one.
+
+    A trip stored before ``optimizer_algorithm`` existed has ``None`` there, which
+    falls through to the environment exactly as it did before — hence no document
+    migration.
+
+    Raises:
+        ValueError: when the value is not a known algorithm. Pydantic rejects an
+            unknown value at the API boundary first, so this guards non-HTTP
+            callers rather than user input.
+    """
     return OptimizerAlgorithm(
-        algorithm or request.algorithm or settings.optimizer_algorithm
+        algorithm
+        or request.algorithm
+        or settings.optimizer_algorithm
+        or OptimizerAlgorithm.AUTO
     )
 
 
@@ -197,10 +219,9 @@ def _solve_with_ortools(request: OptimizationRequest) -> OptimizationResult | No
     num_days = len(days)
 
     # Node 0 is the depot (the traveller's base); nodes 1..n are places.
-    coords: list[Coordinate] = [request.origin] + [p.coordinate for p in places]
-    num_nodes = len(coords)
-
-    distance_km, duration_min = build_travel_matrix(coords, request.mode)
+    matrix = request.travel_matrix()
+    num_nodes = matrix.size
+    distance_km, duration_min = matrix.distance_km, matrix.duration_minutes
     # Metres keep the distance dimension integral without losing precision.
     distance_m = (distance_km * 1000.0).astype(int)
 
@@ -412,8 +433,9 @@ def _extract_solution(
 
             place = request.places[node - 1]
             arrival = assignment.Value(time_dim.CumulVar(index)) - offset
-            leg_km = float(distance_km[previous_node][node])
-            leg_mode = effective_mode(leg_km, request.mode)
+            leg_km, leg_minutes, leg_mode = leg_figures(
+                request.travel_matrix(), previous_node, node, request.mode
+            )
 
             schedule.stops.append(
                 ScheduledStop(
@@ -421,7 +443,7 @@ def _extract_solution(
                     arrival_minutes=arrival,
                     departure_minutes=arrival + place.visit_minutes,
                     travel_km=round(leg_km, 3),
-                    travel_minutes=_leg_minutes(previous_node, node, request, leg_km),
+                    travel_minutes=leg_minutes,
                     mode=leg_mode,
                 )
             )
@@ -435,16 +457,6 @@ def _extract_solution(
 
     dropped = [i for i in range(len(request.places)) if i not in visited]
     return OptimizationResult(days=days, dropped=dropped)
-
-
-def _leg_minutes(
-    from_node: int, to_node: int, request: OptimizationRequest, distance: float
-) -> int:
-    from app.optimization.distance import travel_minutes
-
-    if from_node == to_node:
-        return 0
-    return travel_minutes(distance, effective_mode(distance, request.mode))
 
 
 def _status_name(status: int) -> str:
@@ -482,7 +494,7 @@ def _solve_greedy(request: OptimizationRequest) -> OptimizationResult:
     for day in request.days:
         schedule = DaySchedule(day_index=day.index)
         clock = day.start_minutes
-        current = request.origin
+        current = 0  # node 0 is the origin; place ``i`` is node ``i + 1``
         picked: list[int] = []
 
         while len(picked) < request.max_places_per_day:
@@ -492,7 +504,7 @@ def _solve_greedy(request: OptimizationRequest) -> OptimizationResult:
             if candidate is None:
                 break
 
-            index, arrival, leg_km, leg_minutes = candidate
+            index, arrival, leg_km, leg_minutes, leg_mode = candidate
             place = request.places[index]
             schedule.stops.append(
                 ScheduledStop(
@@ -501,12 +513,12 @@ def _solve_greedy(request: OptimizationRequest) -> OptimizationResult:
                     departure_minutes=arrival + place.visit_minutes,
                     travel_km=round(leg_km, 3),
                     travel_minutes=leg_minutes,
-                    mode=effective_mode(leg_km, request.mode),
+                    mode=leg_mode,
                 )
             )
             schedule.total_distance_km += leg_km
             clock = arrival + place.visit_minutes
-            current = place.coordinate
+            current = index + 1
             scheduled.add(index)
             picked.append(index)
 
@@ -529,14 +541,13 @@ def _next_greedy_stop(
     request: OptimizationRequest,
     order: list[int],
     scheduled: set[int],
-    current: Coordinate,
+    current: int,
     clock: int,
     day: Any,
-) -> tuple[int, int, float, int] | None:
-    """Pick the cheapest feasible next stop, or None when the day is full."""
-    from app.optimization.distance import travel_minutes
-
-    best: tuple[int, int, float, int] | None = None
+) -> tuple[int, int, float, int, TransportMode] | None:
+    """Pick the cheapest feasible next stop from node ``current``, or None."""
+    matrix = request.travel_matrix()
+    best: tuple[int, int, float, int, TransportMode] | None = None
     best_cost = float("inf")
 
     for index in order:
@@ -547,8 +558,9 @@ def _next_greedy_stop(
         if window is None:
             continue
 
-        leg_km = haversine_km(current, place.coordinate) * settings.road_distance_factor
-        leg_minutes = travel_minutes(leg_km, effective_mode(leg_km, request.mode))
+        leg_km, leg_minutes, leg_mode = leg_figures(
+            matrix, current, index + 1, request.mode
+        )
         arrival = max(clock + leg_minutes, day.start_minutes, window[0])
 
         if arrival + place.visit_minutes > min(day.end_minutes, window[1]):
@@ -561,7 +573,7 @@ def _next_greedy_stop(
             cost -= 1000.0
         if cost < best_cost:
             best_cost = cost
-            best = (index, arrival, leg_km, leg_minutes)
+            best = (index, arrival, leg_km, leg_minutes, leg_mode)
 
     return best
 
@@ -593,52 +605,43 @@ def _two_opt_days(request: OptimizationRequest, days: list[DaySchedule]) -> None
 
 
 def _route_length(request: OptimizationRequest, order: list[int]) -> float:
-    total = 0.0
-    current = request.origin
-    for index in order:
-        total += haversine_km(current, request.places[index].coordinate)
-        current = request.places[index].coordinate
-    return total
+    """Distance from the origin through ``order``, read from the request matrix."""
+    distance = request.travel_matrix().distance_km
+    nodes = [0] + [index + 1 for index in order]
+    return float(sum(distance[a][b] for a, b in pairwise(nodes)))
 
 
 def _feasible(request: OptimizationRequest, order: list[int], day: Any) -> bool:
-    from app.optimization.distance import travel_minutes
-
+    matrix = request.travel_matrix()
     clock = day.start_minutes
-    current = request.origin
+    current = 0
     for index in order:
         place = request.places[index]
         window = place.window_for(day.weekday)
         if window is None:
             return False
-        leg_km = haversine_km(current, place.coordinate) * settings.road_distance_factor
-        clock = max(
-            clock + travel_minutes(leg_km, effective_mode(leg_km, request.mode)),
-            window[0],
-        )
+        _, leg_minutes, _ = leg_figures(matrix, current, index + 1, request.mode)
+        clock = max(clock + leg_minutes, window[0])
         if clock + place.visit_minutes > min(day.end_minutes, window[1]):
             return False
         clock += place.visit_minutes
-        current = place.coordinate
+        current = index + 1
     return True
 
 
 def _rewrite_day(
     request: OptimizationRequest, schedule: DaySchedule, order: list[int], day: Any
 ) -> None:
-    from app.optimization.distance import travel_minutes
-
+    matrix = request.travel_matrix()
     clock = day.start_minutes
-    current = request.origin
+    current = 0
     stops: list[ScheduledStop] = []
     total_km = 0.0
 
     for index in order:
         place = request.places[index]
         window = place.window_for(day.weekday) or (0, MINUTES_PER_DAY)
-        leg_km = haversine_km(current, place.coordinate) * settings.road_distance_factor
-        mode = effective_mode(leg_km, request.mode)
-        leg_minutes = travel_minutes(leg_km, mode)
+        leg_km, leg_minutes, mode = leg_figures(matrix, current, index + 1, request.mode)
         arrival = max(clock + leg_minutes, window[0])
 
         stops.append(
@@ -653,7 +656,7 @@ def _rewrite_day(
         )
         total_km += leg_km
         clock = arrival + place.visit_minutes
-        current = place.coordinate
+        current = index + 1
 
     schedule.stops = stops
     schedule.total_distance_km = round(total_km, 3)
@@ -666,9 +669,4 @@ def _baseline_distance_km(request: OptimizationRequest) -> float:
     order = list(range(min(limit, len(request.places))))
     if not order:
         return 0.0
-    total = 0.0
-    current = request.origin
-    for index in order:
-        total += haversine_km(current, request.places[index].coordinate)
-        current = request.places[index].coordinate
-    return round(total * settings.road_distance_factor, 3)
+    return round(_route_length(request, order), 3)

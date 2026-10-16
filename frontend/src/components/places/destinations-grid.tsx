@@ -104,6 +104,7 @@ export function DestinationsGrid() {
                 <CityBackdrop
                   city={city.city}
                   country={city.country}
+                  cityPhoto={city.photo}
                   priority={index < 3}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

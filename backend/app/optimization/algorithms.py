@@ -40,11 +40,7 @@ from collections.abc import Callable, Iterator
 from dataclasses import dataclass, field
 
 from app.core.config import OptimizerAlgorithm
-from app.optimization.distance import (
-    build_travel_matrix,
-    effective_mode,
-    travel_minutes,
-)
+from app.optimization.distance import leg_figures
 from app.optimization.schemas import (
     DaySchedule,
     OptimizationRequest,
@@ -92,12 +88,11 @@ class RoutingProblem:
         self.n = len(request.places)
         self.num_days = len(request.days)
 
-        coords = [request.origin] + [p.coordinate for p in request.places]
-        dist, dur = build_travel_matrix(coords, request.mode)
+        self.matrix = request.travel_matrix()
         # Node 0 is the base; place ``i`` is node ``i + 1``. Plain lists beat numpy
         # scalar indexing by a wide margin in tight Python loops.
-        self.dist: list[list[float]] = dist.tolist()
-        self.dur: list[list[int]] = dur.tolist()
+        self.dist: list[list[float]] = self.matrix.distance_km.tolist()
+        self.dur: list[list[int]] = self.matrix.duration_minutes.tolist()
         self.service = [0] + [p.visit_minutes for p in request.places]
 
         self.cap = request.max_places_per_day
@@ -685,17 +680,14 @@ class RoutingProblem:
                 window = self.win[d][i] or (self.days[d].start_minutes, 0)
                 arrive = clock + self.service[prev] + self.dur[prev][node]
                 start = max(arrive, window[0])
-                leg_km = self.dist[prev][node]
-                leg_mode = effective_mode(leg_km, mode)
+                leg_km, leg_minutes, leg_mode = leg_figures(self.matrix, prev, node, mode)
                 schedule.stops.append(
                     ScheduledStop(
                         place_index=i,
                         arrival_minutes=start,
                         departure_minutes=start + self.places[i].visit_minutes,
                         travel_km=round(leg_km, 3),
-                        travel_minutes=0
-                        if position == 0 and leg_km == 0
-                        else travel_minutes(leg_km, leg_mode),
+                        travel_minutes=0 if position == 0 and leg_km == 0 else leg_minutes,
                         mode=leg_mode,
                     )
                 )

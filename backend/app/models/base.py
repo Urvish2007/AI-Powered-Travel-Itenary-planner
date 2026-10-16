@@ -10,6 +10,7 @@ from beanie import (
     Insert,
     PydanticObjectId,
     Replace,
+    Save,
     SaveChanges,
     Update,
     before_event,
@@ -72,7 +73,12 @@ class TimestampedDocument(Document):
         self.created_at = now
         self.updated_at = now
 
-    @before_event(Replace, Update, SaveChanges)
+    # `Save` matters as much as the rest: Beanie wraps `save()` in its own SAVE
+    # event, not Replace or Update, and `save()` is how this codebase persists
+    # nearly everything. Without it listed here, `updated_at` stayed frozen at
+    # whatever `_set_created` wrote, so every document claimed never to have been
+    # touched since it was made.
+    @before_event(Save, Replace, Update, SaveChanges)
     def _set_updated(self) -> None:
         self.updated_at = utcnow()
 

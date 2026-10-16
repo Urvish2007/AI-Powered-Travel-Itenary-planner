@@ -11,7 +11,7 @@ from dataclasses import dataclass, field
 from datetime import date
 
 from app.models.enums import TransportMode
-from app.optimization.distance import Coordinate
+from app.optimization.distance import Coordinate, TravelMatrix, estimated_matrix
 
 # Minutes in a day. The multi-day model lays every day out on one global
 # timeline, so day ``d`` occupies ``[d * MINUTES_PER_DAY, (d + 1) * MINUTES_PER_DAY)``.
@@ -75,6 +75,29 @@ class OptimizationRequest:
     algorithm: str | None = None
     # Seeds the randomised algorithms so a given request always yields the same plan.
     seed: int = 42
+    # Travel between node 0 (the origin) and node ``i + 1`` (place ``i``). ``None``
+    # means "estimate it"; a measured matrix is fetched by the service layer,
+    # since this package does no I/O.
+    matrix: TravelMatrix | None = None
+
+    def travel_matrix(self) -> TravelMatrix:
+        """The matrix every solver and the evaluator read legs from.
+
+        Built once and kept, so a comparison of six algorithms prices every one
+        of them against the same figures.
+
+        Raises:
+            ValueError: when a supplied matrix does not cover origin + places.
+        """
+        expected = len(self.places) + 1
+        if self.matrix is None:
+            coords = [self.origin] + [p.coordinate for p in self.places]
+            self.matrix = estimated_matrix(coords, self.mode)
+        elif self.matrix.size != expected:
+            raise ValueError(
+                f"travel matrix covers {self.matrix.size} points; expected {expected}"
+            )
+        return self.matrix
 
 
 @dataclass(slots=True)

@@ -57,9 +57,7 @@ async def connect_to_mongo(
                 " mongodb+srv:// URIs require the 'dnspython' package. "
                 "Install it with: pip install dnspython"
             )
-        raise RuntimeError(
-            f"Failed to create MongoDB client: {exc}.{_hint}"
-        ) from exc
+        raise RuntimeError(f"Failed to create MongoDB client: {exc}.{_hint}") from exc
 
     _database = _client[db_name]
 

@@ -21,9 +21,17 @@ from starlette.routing import Route
 from app.ai import llm
 from app.ai.llm import GeminiProvider, GroqProvider, LLMMessage, StubProvider
 from app.core.config import DEFAULT_MODELS, Environment, LLMProvider, Settings, settings
-from app.core.exceptions import ExternalServiceError
+from app.core.exceptions import ExternalServiceError, RateLimitError
 
-_KEY_VARS = ("GOOGLE_GEMINI_KEY", "GEMINI_API_KEY", "GROQ_API_KEY", "LLM_MODEL")
+_KEY_VARS = (
+    "GOOGLE_GEMINI_KEY",
+    "GEMINI_API_KEY",
+    "GROQ_API_KEY",
+    "LLM_MODEL",
+    "LLM_FAST_MODEL",
+    "GROQ_MODEL",
+    "GROQ_FAST_MODEL",
+)
 
 
 @pytest.fixture(autouse=True)
@@ -71,15 +79,39 @@ class TestSettingsKeys:
 
 
 class TestModelResolution:
-    @pytest.mark.parametrize("provider", [LLMProvider.GEMINI, LLMProvider.GROQ])
-    def test_provider_default_is_used(
-        self, monkeypatch: pytest.MonkeyPatch, provider: LLMProvider
-    ) -> None:
-        monkeypatch.setenv("LLM_PROVIDER", provider.value)
+    def test_gemini_default_is_used(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setenv("LLM_PROVIDER", "gemini")
         cfg = _fresh_settings()
-        main, fast = DEFAULT_MODELS[provider]
+        main, fast = DEFAULT_MODELS[LLMProvider.GEMINI]
         assert cfg.resolved_llm_model == main
         assert cfg.resolved_llm_fast_model == fast
+
+    def test_groq_has_no_hardcoded_model(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setenv("LLM_PROVIDER", "groq")
+        assert LLMProvider.GROQ not in DEFAULT_MODELS
+        assert _fresh_settings().resolved_llm_model == ""
+
+    def test_groq_model_comes_from_the_environment(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        monkeypatch.setenv("LLM_PROVIDER", "groq")
+        monkeypatch.setenv("GROQ_MODEL", "vendor/main-model")
+        cfg = _fresh_settings()
+        assert cfg.resolved_llm_model == "vendor/main-model"
+        # No fast model configured: the main one, not a guess.
+        assert cfg.resolved_llm_fast_model == "vendor/main-model"
+
+        monkeypatch.setenv("GROQ_FAST_MODEL", "vendor/small-model")
+        assert _fresh_settings().resolved_llm_fast_model == "vendor/small-model"
+
+    def test_groq_model_wins_over_a_stale_llm_model(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """An LLM_MODEL left over from another provider must not reach Groq."""
+        monkeypatch.setenv("LLM_PROVIDER", "groq")
+        monkeypatch.setenv("LLM_MODEL", "claude-something")
+        monkeypatch.setenv("GROQ_MODEL", "vendor/main-model")
+        assert _fresh_settings().resolved_llm_model == "vendor/main-model"
 
     def test_explicit_model_overrides_default(
         self, monkeypatch: pytest.MonkeyPatch
@@ -102,6 +134,30 @@ class TestModelResolution:
             assert fast not in retired
 
 
+class TestDeployedGroqConfiguration:
+    """Deployed, a misconfigured Groq must stop the boot, not serve stub plans."""
+
+    def _deployed(self, monkeypatch: pytest.MonkeyPatch, **env: str) -> Settings:
+        monkeypatch.setenv("ENVIRONMENT", "production")
+        monkeypatch.setenv("SECRET_KEY", "x" * 48)
+        monkeypatch.setenv("LLM_PROVIDER", "groq")
+        for name, value in env.items():
+            monkeypatch.setenv(name, value)
+        return _fresh_settings()
+
+    def test_missing_key_is_refused(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        with pytest.raises(ValueError, match="GROQ_API_KEY"):
+            self._deployed(monkeypatch, GROQ_MODEL="vendor/model")
+
+    def test_missing_model_is_refused(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        with pytest.raises(ValueError, match="GROQ_MODEL"):
+            self._deployed(monkeypatch, GROQ_API_KEY="gsk_x")
+
+    def test_complete_configuration_boots(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        cfg = self._deployed(monkeypatch, GROQ_API_KEY="gsk_x", GROQ_MODEL="vendor/model")
+        assert cfg.resolved_llm_model == "vendor/model"
+
+
 class TestProviderSelection:
     def test_gemini_without_key_falls_back_to_stub(
         self, monkeypatch: pytest.MonkeyPatch
@@ -121,10 +177,31 @@ class TestProviderSelection:
         assert llm._PROVIDERS[LLMProvider.GROQ] is GroqProvider
 
 
-def _fake_groq_module(captured: dict, reply: str = "hello") -> types.ModuleType:
+class _FakeRateLimitError(Exception):
+    status_code = 429
+
+    def __init__(self, retry_after: str | None) -> None:
+        super().__init__("rate limited")
+        headers = {"retry-after": retry_after} if retry_after else {}
+        self.response = SimpleNamespace(headers=headers)
+
+
+class _FakeTimeoutError(Exception):
+    pass
+
+
+class _FakeStatusError(Exception):
+    status_code = 503
+
+
+def _fake_groq_module(
+    captured: dict, reply: str = "hello", error: Exception | None = None
+) -> types.ModuleType:
     class _Completions:
         async def create(self, **kwargs):
             captured.update(kwargs)
+            if error is not None:
+                raise error
             return SimpleNamespace(
                 choices=[SimpleNamespace(message=SimpleNamespace(content=reply))],
                 usage=SimpleNamespace(prompt_tokens=11, completion_tokens=7),
@@ -137,18 +214,25 @@ def _fake_groq_module(captured: dict, reply: str = "hello") -> types.ModuleType:
 
     module = types.ModuleType("groq")
     module.AsyncGroq = AsyncGroq
+    module.RateLimitError = _FakeRateLimitError
+    module.APITimeoutError = _FakeTimeoutError
     return module
+
+
+@pytest.fixture
+def groq_configured(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(settings, "llm_provider", LLMProvider.GROQ)
+    monkeypatch.setattr(settings, "llm_model", None)
+    monkeypatch.setattr(settings, "groq_model", "vendor/main-model")
+    monkeypatch.setattr(settings, "groq_api_key", SecretStr("gsk_test"))
 
 
 class TestGroqProvider:
     async def test_complete_maps_request_and_response(
-        self, monkeypatch: pytest.MonkeyPatch
+        self, monkeypatch: pytest.MonkeyPatch, groq_configured: None
     ) -> None:
         captured: dict = {}
         monkeypatch.setitem(sys.modules, "groq", _fake_groq_module(captured, "hi there"))
-        monkeypatch.setattr(settings, "llm_provider", LLMProvider.GROQ)
-        monkeypatch.setattr(settings, "llm_model", None)
-        monkeypatch.setattr(settings, "groq_api_key", SecretStr("gsk_test"))
 
         provider = GroqProvider()
         result = await provider.complete(
@@ -158,7 +242,11 @@ class TestGroqProvider:
         )
 
         assert captured["client_kwargs"]["api_key"] == "gsk_test"
-        assert captured["model"] == DEFAULT_MODELS[LLMProvider.GROQ][0]
+        # Every call is bounded: a timeout, and the SDK's retries with backoff.
+        assert captured["client_kwargs"]["timeout"] == settings.llm_timeout_seconds
+        assert captured["client_kwargs"]["max_retries"] == settings.llm_max_retries
+        assert captured["model"] == "vendor/main-model"
+        assert "response_format" not in captured
         assert captured["max_completion_tokens"] == 256
         assert captured["messages"][0] == {"role": "system", "content": "be brief"}
         assert captured["messages"][1] == {"role": "user", "content": "plan a trip"}
@@ -166,7 +254,9 @@ class TestGroqProvider:
         assert result.provider == "groq"
         assert (result.prompt_tokens, result.completion_tokens) == (11, 7)
 
-    async def test_complete_json_round_trip(self, monkeypatch: pytest.MonkeyPatch) -> None:
+    async def test_complete_json_round_trip(
+        self, monkeypatch: pytest.MonkeyPatch, groq_configured: None
+    ) -> None:
         from pydantic import BaseModel
 
         class Out(BaseModel):
@@ -176,12 +266,66 @@ class TestGroqProvider:
         monkeypatch.setitem(
             sys.modules, "groq", _fake_groq_module(captured, '{"city": "Lisbon"}')
         )
-        monkeypatch.setattr(settings, "groq_api_key", SecretStr("gsk_test"))
 
         parsed, _ = await GroqProvider().complete_json(
             [LLMMessage(role="user", content="where?")], Out
         )
         assert parsed.city == "Lisbon"
+        assert captured["response_format"] == {"type": "json_object"}
+
+    async def test_json_of_the_wrong_shape_is_rejected(
+        self, monkeypatch: pytest.MonkeyPatch, groq_configured: None
+    ) -> None:
+        from pydantic import BaseModel
+
+        class Out(BaseModel):
+            city: str
+
+        monkeypatch.setitem(
+            sys.modules, "groq", _fake_groq_module({}, '{"town": "Lisbon"}')
+        )
+        with pytest.raises(ExternalServiceError, match="does not match Out"):
+            await GroqProvider().complete_json([LLMMessage(role="user", content="?")], Out)
+
+    async def test_rate_limit_is_reported_as_429_with_the_wait(
+        self, monkeypatch: pytest.MonkeyPatch, groq_configured: None
+    ) -> None:
+        monkeypatch.setitem(
+            sys.modules,
+            "groq",
+            _fake_groq_module({}, error=_FakeRateLimitError(retry_after="7")),
+        )
+        with pytest.raises(RateLimitError, match="about 7 seconds") as caught:
+            await GroqProvider().complete([LLMMessage(role="user", content="hi")])
+        assert caught.value.status_code == 429
+        assert caught.value.details["retry_after_seconds"] == 7
+
+    async def test_timeout_says_so(
+        self, monkeypatch: pytest.MonkeyPatch, groq_configured: None
+    ) -> None:
+        monkeypatch.setitem(
+            sys.modules, "groq", _fake_groq_module({}, error=_FakeTimeoutError())
+        )
+        with pytest.raises(ExternalServiceError, match="did not answer within"):
+            await GroqProvider().complete([LLMMessage(role="user", content="hi")])
+
+    async def test_server_error_names_the_status(
+        self, monkeypatch: pytest.MonkeyPatch, groq_configured: None
+    ) -> None:
+        monkeypatch.setitem(
+            sys.modules, "groq", _fake_groq_module({}, error=_FakeStatusError())
+        )
+        with pytest.raises(ExternalServiceError, match="HTTP 503"):
+            await GroqProvider().complete([LLMMessage(role="user", content="hi")])
+
+    def test_missing_model_raises(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setitem(sys.modules, "groq", _fake_groq_module({}))
+        monkeypatch.setattr(settings, "llm_provider", LLMProvider.GROQ)
+        monkeypatch.setattr(settings, "llm_model", None)
+        monkeypatch.setattr(settings, "groq_model", None)
+        monkeypatch.setattr(settings, "groq_api_key", SecretStr("gsk_test"))
+        with pytest.raises(ExternalServiceError, match="GROQ_MODEL"):
+            GroqProvider()
 
     def test_missing_key_raises(self, monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.setitem(sys.modules, "groq", _fake_groq_module({}))

@@ -164,8 +164,19 @@ async def delete_place(
 @router.post(
     "/admin/backfill-embeddings",
     response_model=Message,
-    summary="Embed every place missing an embedding (admin only)",
+    summary="Embed every place not yet in the configured embedding space (admin only)",
 )
 async def backfill_embeddings(admin: AdminUser) -> Message:
-    written = await place_service.backfill_embeddings()
-    return Message(message="Backfill complete.", details={"embedded": written})
+    report = await place_service.reembed_places()
+    return Message(
+        message=(
+            "Backfill complete."
+            if report.stopped is None
+            else f"Backfill stopped early: {report.stopped} Run it again to continue."
+        ),
+        details={
+            "embedded": report.written,
+            "remaining": report.remaining,
+            "space": report.space,
+        },
+    )

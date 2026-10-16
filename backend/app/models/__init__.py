@@ -7,6 +7,7 @@ never be initialised.
 
 from app.models.ai_run import AIRun
 from app.models.base import GeoPoint, TimestampedDocument
+from app.models.city_photo import CityPhoto, PhotoStatus
 from app.models.itinerary import (
     Activity,
     GenerationMeta,
@@ -19,12 +20,13 @@ from app.models.place import OpeningHours, Place, PlaceCost
 from app.models.trip import Destination, PartyComposition, Trip, TripConstraints
 from app.models.user import RefreshToken, TravelPreferences, User
 
-ALL_DOCUMENTS = [User, RefreshToken, Place, Trip, Itinerary, AIRun]
+ALL_DOCUMENTS = [User, RefreshToken, Place, Trip, Itinerary, AIRun, CityPhoto]
 
 __all__ = [
     "ALL_DOCUMENTS",
     "AIRun",
     "Activity",
+    "CityPhoto",
     "Destination",
     "GenerationMeta",
     "GeoPoint",
@@ -33,6 +35,7 @@ __all__ = [
     "OpeningHours",
     "OptimizationReport",
     "PartyComposition",
+    "PhotoStatus",
     "Place",
     "PlaceCost",
     "RefreshToken",

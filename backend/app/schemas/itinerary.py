@@ -68,6 +68,35 @@ class ReorderDayRequest(BaseModel):
     )
 
 
+class ApplyRouteRequest(BaseModel):
+    """Write a compared route's ordering back onto a day.
+
+    The client sends the order it chose and nothing else it could get wrong: no
+    times, no distances, no totals. Those are recomputed here from the stored
+    places, because a client that reported its own figures could report any
+    figures, and the stored plan has to stay internally consistent.
+    """
+
+    place_ids: list[PydanticObjectId] = Field(
+        min_length=2,
+        max_length=60,
+        description=(
+            "The day's routable places, in the order to apply. Must be exactly "
+            "the set already on the day - no additions, removals or repeats."
+        ),
+    )
+    algorithm: OptimizerAlgorithm = Field(
+        description="Which algorithm produced this order, recorded on the day."
+    )
+    expected_updated_at: datetime = Field(
+        description=(
+            "The itinerary's `updated_at` as of the comparison. If the stored "
+            "itinerary has moved on, the comparison was made against a day that "
+            "no longer exists and the request is refused with 409."
+        )
+    )
+
+
 class ReoptimizeRequest(BaseModel):
     """Re-run the optimiser over an existing itinerary's places."""
 
@@ -155,6 +184,16 @@ class OptimizeRouteResponse(BaseModel):
         default=None,
         description="Plan cost in minutes (travel + visits + penalties). Lower is better.",
     )
+    estimated: bool = Field(
+        default=True,
+        description=(
+            "True when distances and times are straight-line estimates rather "
+            "than measured on the road network."
+        ),
+    )
+    routing_provider: str = Field(
+        default="haversine", description="Where travel figures came from."
+    )
 
 
 class AlgorithmRun(BaseModel):
@@ -179,6 +218,16 @@ class CompareRouteResponse(BaseModel):
     runs: list[AlgorithmRun]
     best_algorithm: str
     fastest_algorithm: str
+    estimated: bool = Field(
+        default=True,
+        description=(
+            "True when distances and times are straight-line estimates rather "
+            "than measured on the road network."
+        ),
+    )
+    routing_provider: str = Field(
+        default="haversine", description="Where travel figures came from."
+    )
 
 
 class AlgorithmInfo(BaseModel):

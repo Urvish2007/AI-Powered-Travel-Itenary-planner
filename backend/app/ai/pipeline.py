@@ -24,7 +24,7 @@ from datetime import date, timedelta
 from itertools import pairwise
 from typing import Any
 
-from app.ai.embeddings import place_embedding_text, vector_search
+from app.ai.embeddings import vector_search
 from app.ai.llm import BaseLLMProvider, LLMMessage, get_llm_provider
 from app.ai.prompts import (
     NARRATE_SYSTEM,
@@ -63,6 +63,7 @@ from app.optimization.schemas import (
     OptimizationRequest,
     OptimizationResult,
 )
+from app.services import routing_service
 
 logger = get_logger(__name__)
 
@@ -105,6 +106,9 @@ class PlanningState:
     steps: list[dict[str, Any]] = field(default_factory=list)
     provider: str = "stub"
     model: str = "stub"
+    # How travel was priced: measured by a routing provider, or estimated.
+    travel_estimated: bool = True
+    routing_provider: str = "haversine"
     prompt_tokens: int = 0
     completion_tokens: int = 0
     started_at: float = field(default_factory=time.perf_counter)
@@ -395,7 +399,18 @@ async def optimize_schedule(state: PlanningState) -> PlanningState:
         max_places_per_day=per_day,
         max_daily_distance_km=max(trip.constraints.max_daily_walking_km * 3.0, 10.0),
         time_limit_seconds=_time_limit_for(len(opt_places)),
+        # The trip's own choice. `None` defers to OPTIMIZER_ALGORITHM; see
+        # `engine.resolve_algorithm` for the precedence order.
+        algorithm=trip.constraints.optimizer_algorithm,
     )
+
+    # One matrix call for the whole candidate pool. A pool larger than
+    # ROUTING_MAX_LOCATIONS is estimated, and the itinerary records that.
+    request.matrix = await routing_service.travel_matrix(
+        [request.origin] + [p.coordinate for p in request.places], request.mode
+    )
+    state.travel_estimated = request.matrix.estimated
+    state.routing_provider = request.matrix.provider
 
     result = optimize(request)
     if not result.feasible:
@@ -475,6 +490,7 @@ async def assemble_itinerary(state: PlanningState) -> PlanningState:
                     mode=stop.mode,
                     distance_km=round(stop.travel_km, 3),
                     duration_minutes=stop.travel_minutes,
+                    estimated=state.travel_estimated,
                 )
                 if stop.travel_km > 0
                 else None
@@ -818,6 +834,8 @@ def build_itinerary_document(state: PlanningState, version: int = 1) -> Itinerar
             places_scheduled=result.scheduled_count,
             places_dropped=len(result.dropped),
             dropped_reasons=dropped_names,
+            estimated=state.travel_estimated,
+            routing_provider=state.routing_provider,
         )
 
     itinerary.recalculate_totals()
@@ -826,20 +844,13 @@ def build_itinerary_document(state: PlanningState, version: int = 1) -> Itinerar
 
 
 async def ensure_place_embedding(place: Place) -> bool:
-    """Backfill a place's embedding when missing. Returns True when it wrote one."""
-    from app.ai.embeddings import embed_text
-    from app.core.config import settings
+    """Embed a place not yet in the current space. Returns True when it wrote one."""
+    from app.ai.embeddings import current_space
+    from app.services.place_service import attach_embedding
 
-    if place.embedding and place.embedding_model == settings.embedding_model:
+    if place.embedding and place.embedding_space == current_space().key:
         return False
-    text = place_embedding_text(
-        place.name,
-        place.description,
-        str(place.category),
-        [str(t) for t in place.tags],
-        place.city,
-    )
-    place.embedding = await embed_text(text)
-    place.embedding_model = settings.embedding_model
+    if not await attach_embedding(place):
+        return False
     await place.save()
     return True

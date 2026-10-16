@@ -9,6 +9,7 @@ from app.db.sorting import descending
 from app.schemas.common import Message, Page, PaginationDep
 from app.schemas.itinerary import (
     AlgorithmInfo,
+    ApplyRouteRequest,
     CompareRouteRequest,
     CompareRouteResponse,
     ItineraryPublic,
@@ -134,6 +135,30 @@ async def reorder(
     itinerary = await itinerary_service.get_owned_itinerary(itinerary_id, user)
     return ItineraryPublic.model_validate(
         await itinerary_service.reorder_day(itinerary, payload)
+    )
+
+
+@router.post(
+    "/{itinerary_id}/days/{day_number}/apply-route",
+    response_model=ItineraryPublic,
+    summary="Apply a compared route's order to a day",
+    description=(
+        "Send the order chosen from a comparison, plus the itinerary's "
+        "`updated_at` as of that comparison. The place ids must be exactly the "
+        "day's routable places; times, travel legs and totals are recomputed "
+        "server-side. Returns 409 if the day changed after the comparison, so a "
+        "stale choice cannot overwrite someone else's edit."
+    ),
+)
+async def apply_route(
+    itinerary_id: str,
+    day_number: int,
+    payload: ApplyRouteRequest,
+    user: CurrentUser,
+) -> ItineraryPublic:
+    itinerary = await itinerary_service.get_owned_itinerary(itinerary_id, user)
+    return ItineraryPublic.model_validate(
+        await itinerary_service.apply_route_to_day(itinerary, day_number, payload)
     )
 
 

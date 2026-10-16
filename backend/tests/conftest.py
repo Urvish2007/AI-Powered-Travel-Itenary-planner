@@ -32,6 +32,17 @@ TEST_DB_NAME = f"itinerary_planner_test_{uuid.uuid4().hex[:8]}"
 
 def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "db: requires a reachable MongoDB server")
+    # Both run on any MongoDB the db tests use (CI's mongo:8 service container
+    # included). Marked so they can be selected or skipped as a group, e.g.
+    # `pytest -m "not vector"` on a deployment whose search is being changed.
+    config.addinivalue_line(
+        "markers", "geo: exercises 2dsphere queries ($near, radius search)"
+    )
+    config.addinivalue_line(
+        "markers",
+        "vector: exercises semantic search (Atlas $vectorSearch when enabled, "
+        "otherwise the in-process cosine fallback)",
+    )
 
 
 @pytest.fixture(scope="session")
@@ -61,6 +72,11 @@ async def database(mongodb_available: bool) -> AsyncIterator[Any]:
     that makes the next one pass or fail spuriously.
     """
     if not mongodb_available:
+        # Locally, skipping keeps the unit tests usable without a server. In CI
+        # a skip would turn a broken service container into a green run that
+        # tested almost nothing, so REQUIRE_MONGODB makes it a failure.
+        if os.getenv("REQUIRE_MONGODB") == "1":
+            pytest.fail(f"REQUIRE_MONGODB=1 but no MongoDB at {TEST_MONGODB_URI}")
         pytest.skip(f"no MongoDB at {TEST_MONGODB_URI}")
 
     from app.db import mongodb as mongo_module

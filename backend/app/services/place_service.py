@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import asyncio
+from dataclasses import dataclass
 from typing import Any
 
 from beanie import PydanticObjectId
@@ -9,10 +11,14 @@ from pymongo.errors import DuplicateKeyError
 from slugify import slugify
 
 from app.ai.embeddings import (
+    EmbeddingUnavailableError,
+    current_space,
+    embed_documents,
+    embed_text,
     place_embedding_text,
     vector_search,
 )
-from app.core.exceptions import ConflictError, NotFoundError
+from app.core.exceptions import ConflictError, NotFoundError, RateLimitError
 from app.db.mongodb import get_database
 from app.db.sorting import descending
 from app.models.base import GeoPoint
@@ -67,7 +73,7 @@ async def create_place(payload: PlaceCreate, *, embed: bool = True) -> Place:
         source="api",
     )
     if embed:
-        await _attach_embedding(place)
+        await attach_embedding(place)
 
     try:
         await place.insert()
@@ -76,19 +82,41 @@ async def create_place(payload: PlaceCreate, *, embed: bool = True) -> Place:
     return place
 
 
-async def _attach_embedding(place: Place) -> None:
-    from app.ai.embeddings import embed_text
-    from app.core.config import settings
+def _embedding_text(document: Any) -> str:
+    """The text embedded for a place, from a model or a raw document."""
 
-    text = place_embedding_text(
-        place.name,
-        place.description,
-        str(place.category),
-        [str(t) for t in place.tags],
-        place.city,
+    def field(name: str) -> Any:
+        return document.get(name) if isinstance(document, dict) else getattr(document, name)
+
+    return place_embedding_text(
+        field("name") or "",
+        field("description") or "",
+        str(field("category") or ""),
+        [str(tag) for tag in field("tags") or []],
+        field("city") or "",
     )
-    place.embedding = await embed_text(text)
-    place.embedding_model = settings.embedding_model
+
+
+async def attach_embedding(place: Place) -> bool:
+    """Embed ``place`` in the current space. Returns whether it got a vector.
+
+    A provider failure does not fail the save: the place is stored without a
+    vector (never with one for text that has since changed) and the next
+    re-embed picks it up. Until then it is simply absent from semantic search.
+    """
+    try:
+        vector = await embed_text(_embedding_text(place))
+    except (EmbeddingUnavailableError, RateLimitError) as exc:
+        place.embedding = None
+        place.embedding_model = None
+        place.embedding_space = None
+        logger.warning("place_embedding_deferred", slug=place.slug, reason=exc.message)
+        return False
+    space = current_space()
+    place.embedding = vector
+    place.embedding_model = space.model
+    place.embedding_space = space.key
+    return True
 
 
 async def get_place(place_id: str | PydanticObjectId) -> Place:
@@ -121,8 +149,8 @@ async def update_place(place_id: str | PydanticObjectId, payload: PlaceUpdate) -
     for field, value in data.items():
         setattr(place, field, value)
 
-    if {"name", "description", "category", "tags"} & set(data):
-        await _attach_embedding(place)
+    if {"name", "description", "category", "tags", "city"} & set(data):
+        await attach_embedding(place)
 
     await place.save()
     return place
@@ -252,20 +280,82 @@ async def semantic_search(
     return results
 
 
-async def backfill_embeddings(*, batch_size: int = 200) -> int:
-    """Embed every place that is missing one. Returns how many were written."""
-    from app.ai.pipeline import ensure_place_embedding
+@dataclass(slots=True)
+class ReembedReport:
+    space: str
+    written: int
+    remaining: int
+    # Why it stopped early (rate limit, provider down), or None when it finished.
+    stopped: str | None = None
+
+
+async def reembed_places(
+    *, batch_size: int | None = None, limit: int | None = None, dry_run: bool = False
+) -> ReembedReport:
+    """Embed every place whose vector is missing or from another space.
+
+    Idempotent and resumable: it selects only places not already in the current
+    space, so a second run does nothing and an interrupted run carries on where
+    it stopped. A rate limit that outlasts the provider retries ends the run
+    early with the counts so far, instead of failing what was already written.
+    """
+    space = current_space()
+    collection = get_database()["places"]
+    stale: dict[str, Any] = {
+        "$or": [{"embedding_space": {"$ne": space.key}}, {"embedding": None}]
+    }
+    size = batch_size or 200
+    if dry_run:
+        return ReembedReport(space.key, 0, await collection.count_documents(stale))
 
     written = 0
-    while True:
-        batch = await Place.find({"embedding": None}).limit(batch_size).to_list()
-        if not batch:
+    stopped: str | None = None
+    projection = {"name": 1, "description": 1, "category": 1, "tags": 1, "city": 1}
+    while limit is None or written < limit:
+        take = size if limit is None else min(size, limit - written)
+        documents = await collection.find(stale, projection).limit(take).to_list(take)
+        if not documents:
             break
-        for place in batch:
-            if await ensure_place_embedding(place):
-                written += 1
-    logger.info("embeddings_backfilled", count=written)
-    return written
+        try:
+            vectors = await embed_documents([_embedding_text(d) for d in documents])
+        except (EmbeddingUnavailableError, RateLimitError) as exc:
+            stopped = exc.message
+            break
+        results = await asyncio.gather(
+            *(
+                collection.update_one(
+                    # Re-checked, so a concurrent run never overwrites newer work.
+                    {"_id": d["_id"], "embedding_space": {"$ne": space.key}},
+                    {
+                        "$set": {
+                            "embedding": vector,
+                            "embedding_model": space.model,
+                            "embedding_space": space.key,
+                        }
+                    },
+                )
+                for d, vector in zip(documents, vectors, strict=True)
+            )
+        )
+        modified = sum(r.modified_count for r in results)
+        if modified == 0:  # another run took them; avoid spinning
+            break
+        written += modified
+
+    remaining = await collection.count_documents(stale)
+    logger.info(
+        "places_reembedded",
+        space=space.key,
+        written=written,
+        remaining=remaining,
+        stopped=stopped,
+    )
+    return ReembedReport(space.key, written, remaining, stopped)
+
+
+async def backfill_embeddings(*, batch_size: int = 200) -> int:
+    """Re-embed what needs it. Returns how many were written."""
+    return (await reembed_places(batch_size=batch_size)).written
 
 
 MAX_CITIES = 500  # comfortably above the 100 cities in the world corpus
@@ -296,6 +386,7 @@ async def city_summary() -> list[dict[str, Any]]:
         {"$limit": MAX_CITIES},
     ]
     rows = await database["places"].aggregate(pipeline).to_list(length=MAX_CITIES)
+    photos = await _city_photos(database)
     return [
         {
             "city": row["_id"]["city"],
@@ -304,6 +395,24 @@ async def city_summary() -> list[dict[str, Any]]:
             "average_rating": round(row["average_rating"] or 0.0, 2),
             "latitude": row.get("latitude"),
             "longitude": row.get("longitude"),
+            # A licensed photo with its attribution, or None for the fallback.
+            "photo": photos.get((row["_id"]["city"], row["_id"]["country"])),
         }
         for row in rows
     ]
+
+
+async def _city_photos(database: Any) -> dict[tuple[str, str], dict[str, Any]]:
+    """Found city photos by (city, country), with only their public fields."""
+    from app.services.photo_service import PUBLIC_FIELDS
+
+    projection = {"_id": 0, "city": 1, "country": 1, **dict.fromkeys(PUBLIC_FIELDS, 1)}
+    documents = (
+        await database["city_photos"]
+        .find({"status": "found"}, projection)
+        .to_list(length=None)
+    )
+    return {
+        (d.pop("city"), d.pop("country")): {f: d.get(f) for f in PUBLIC_FIELDS}
+        for d in documents
+    }

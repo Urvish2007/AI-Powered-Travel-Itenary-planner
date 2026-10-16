@@ -186,6 +186,10 @@ async def mock_db(monkeypatch: pytest.MonkeyPatch):
     database = client["world_seed_test"]
     await init_beanie(database=database, document_models=[Place])
     monkeypatch.setattr(world_seed, "get_database", lambda: database)
+    # Seeding embeds through the shared re-embed, which reads the collection there.
+    from app.services import place_service
+
+    monkeypatch.setattr(place_service, "get_database", lambda: database)
     return database
 
 
@@ -251,6 +255,9 @@ class TestSeeding:
         await world_seed.seed_world_places(embed=True)
         place = await Place.find_one(Place.name == "Sagrada Família")
         assert place.embedding and len(place.embedding) == settings.embedding_dimensions
+        # And it says which embedder made it, so search never mixes spaces.
+        assert place.embedding_space == f"hash:hash-v1:{settings.embedding_dimensions}"
+        assert place.embedding_model == "hash-v1"
 
 
 class TestCitySummaryAtScale:

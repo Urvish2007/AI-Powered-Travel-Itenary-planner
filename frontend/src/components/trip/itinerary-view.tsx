@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { ItineraryMap, activitiesToStops } from "@/components/map/itinerary-map";
@@ -25,6 +25,7 @@ import {
   DaySelector,
   DayTimeline,
 } from "@/components/trip/itinerary-timeline";
+import { AlgorithmSelect } from "@/components/trip/algorithm-select";
 import { RouteLab } from "@/components/trip/route-lab";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +38,7 @@ import {
 } from "@/components/ui/overlays";
 import { Badge, Card, Skeleton } from "@/components/ui/primitives";
 import { ApiError, api } from "@/lib/api";
+import { applyRouteToDay } from "@/lib/apply-route";
 import { blurPhoto, cityImage, photo } from "@/lib/images";
 import {
   formatDateRange,
@@ -44,7 +46,7 @@ import {
   formatMoney,
   pluralize,
 } from "@/lib/utils";
-import type { Itinerary } from "@/types/api";
+import type { Itinerary, OptimizerAlgorithm } from "@/types/api";
 
 export function ItineraryView({
   tripId,
@@ -95,6 +97,47 @@ export function ItineraryView({
       );
     },
   });
+
+  // Saving the algorithm and re-planning are one action from the traveller's
+  // point of view: choosing a different solver means nothing until a plan comes
+  // back from it. Persisting first means a failed re-plan still leaves the
+  // choice saved, so retrying does not require picking it again.
+  const setAlgorithm = useMutation({
+    async mutationFn(algorithm: OptimizerAlgorithm) {
+      if (!trip) throw new Error("The trip is still loading.");
+      await api.trips.update(trip.id, {
+        constraints: { ...trip.constraints, optimizer_algorithm: algorithm },
+      });
+      return api.trips.generate(trip.id, { regenerate: true });
+    },
+    onSuccess() {
+      toast.success("Re-planned with the new algorithm.");
+      queryClient.invalidateQueries({ queryKey: ["trip", tripId] });
+    },
+    onError(error) {
+      toast.error(
+        error instanceof ApiError
+          ? error.message
+          : "Could not re-plan with that algorithm.",
+      );
+    },
+  });
+
+  /**
+   * Apply a compared route to a day, then offer to put it back.
+   *
+   * Undo is held client-side rather than as server history: the order being
+   * replaced is already on screen, so keeping it costs nothing, whereas a
+   * one-step history on the server would mean a new field on every itinerary
+   * and a second endpoint for an affordance that lives as long as a toast. The
+   * undo goes back through apply-route, so restoring an order is revalidated
+   * exactly like choosing one.
+   */
+  const applyRoute = useCallback(
+    (dayNumber: number, placeIds: string[], algorithm: OptimizerAlgorithm) =>
+      applyRouteToDay(queryClient, tripId, dayNumber, placeIds, algorithm),
+    [queryClient, tripId],
+  );
 
   const removeActivity = useMutation({
     mutationFn: ({ day, index }: { day: number; index: number }) =>
@@ -354,11 +397,29 @@ export function ItineraryView({
                 />
               )}
             </div>
+            {trip && (
+              <div className="mt-3 lg:mt-0 lg:shrink-0">
+                <AlgorithmSelect
+                  id="day-algorithm"
+                  label="Route algorithm"
+                  value={trip.constraints.optimizer_algorithm}
+                  onChange={(algorithm) => setAlgorithm.mutate(algorithm)}
+                  disabled={setAlgorithm.isPending || regenerate.isPending}
+                />
+              </div>
+            )}
             {currentDay && (
               <RouteLab
                 day={currentDay}
                 transportMode={trip?.constraints.preferred_transport}
                 className="mt-3 lg:mt-0 lg:shrink-0"
+                onApply={async (run) => {
+                  await applyRoute(
+                    currentDay.day_number,
+                    run.stops.map((stop) => stop.place_id),
+                    run.algorithm as OptimizerAlgorithm,
+                  );
+                }}
               />
             )}
           </aside>

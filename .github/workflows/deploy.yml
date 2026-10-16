@@ -75,6 +75,9 @@ jobs:
           tags: |
             ${{ env.BACKEND_IMAGE }}:${{ steps.tag.outputs.tag }}
             ${{ env.BACKEND_IMAGE }}:latest
+          # Reported by /health; the rollout waits until it sees this commit.
+          build-args: |
+            BUILD_SHA=${{ github.sha }}
           cache-from: type=gha,scope=backend
           cache-to: type=gha,mode=max,scope=backend
 
@@ -94,7 +97,6 @@ jobs:
             NEXT_PUBLIC_SITE_URL=${{ vars.PRODUCTION_SITE_URL }}
             NEXT_PUBLIC_MAP_TILE_URL=${{ vars.NEXT_PUBLIC_MAP_TILE_URL }}
             NEXT_PUBLIC_MAP_TILE_ATTRIBUTION=${{ vars.NEXT_PUBLIC_MAP_TILE_ATTRIBUTION }}
-            NEXT_PUBLIC_MAPBOX_TOKEN=${{ vars.NEXT_PUBLIC_MAPBOX_TOKEN }}
             NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ vars.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
           cache-from: type=gha,scope=frontend
           cache-to: type=gha,mode=max,scope=frontend

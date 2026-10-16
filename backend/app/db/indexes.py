@@ -40,6 +40,8 @@ def vector_index_definition() -> dict[str, Any]:
                 {"type": "filter", "path": "city"},
                 {"type": "filter", "path": "category"},
                 {"type": "filter", "path": "is_active"},
+                # Search compares only vectors from the configured embedder.
+                {"type": "filter", "path": "embedding_space"},
             ]
         },
     }
@@ -59,15 +61,28 @@ async def ensure_vector_search_index() -> bool:
     database = get_database()
     try:
         existing = await database["places"].list_search_indexes().to_list(length=None)
-        names = {index.get("name") for index in existing}
-        if settings.mongodb_vector_index_name in names:
-            logger.info("vector_index_present", name=settings.mongodb_vector_index_name)
+        wanted = vector_index_definition()
+        current = next((i for i in existing if i.get("name") == wanted["name"]), None)
+        if current is not None:
+            # An index built for another dimension, or before the space filter
+            # existed, would reject every query; bring it up to date in place.
+            if current.get("latestDefinition") != wanted["definition"]:
+                await database.command(
+                    {
+                        "updateSearchIndex": "places",
+                        "name": wanted["name"],
+                        "definition": wanted["definition"],
+                    }
+                )
+                logger.info("vector_index_updated", name=wanted["name"])
+            else:
+                logger.info("vector_index_present", name=wanted["name"])
             return True
 
         await database.command(
             {
                 "createSearchIndexes": "places",
-                "indexes": [vector_index_definition()],
+                "indexes": [wanted],
             }
         )
     except (OperationFailure, PyMongoError) as exc:

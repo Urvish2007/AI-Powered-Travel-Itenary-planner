@@ -35,7 +35,11 @@ if _env_file.is_file() and str(Path.cwd()) != _BACKEND_DIR:
 
 from app.core.config import settings  # noqa: E402
 from app.db.indexes import ensure_vector_search_index  # noqa: E402
-from app.db.mongodb import close_mongo_connection, connect_to_mongo, drop_database  # noqa: E402
+from app.db.mongodb import (  # noqa: E402
+    close_mongo_connection,
+    connect_to_mongo,
+    drop_database,
+)
 from app.db.seed import seed_all  # noqa: E402
 from app.db.world_seed import seed_world_places  # noqa: E402
 from app.observability.logging import configure_logging, get_logger  # noqa: E402

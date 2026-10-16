@@ -6,7 +6,12 @@ const SOURCES: Record<string, string> = {
   satellite: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
 };
 
-const UA = process.env.TILE_USER_AGENT ?? "WaypointApp/1.0 (contact: info@example.com)";
+// The community tile servers' policies ask for an agent that identifies the
+// app and a Referer naming the real site; a placeholder contact or a localhost
+// Referer in production is exactly what gets a client blocked.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const UA = process.env.TILE_USER_AGENT ?? `Waypoint/1.0 (+${SITE_URL})`;
+const REFERER = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export async function GET(
   _req: Request,
@@ -36,7 +41,7 @@ export async function GET(
   
   try {
     const up = await fetch(url, {
-      headers: { "User-Agent": UA, Referer: "http://localhost:3000/" },
+      headers: { "User-Agent": UA, Referer: REFERER },
       signal: ctrl.signal,
       next: { revalidate: 86400 },
     });

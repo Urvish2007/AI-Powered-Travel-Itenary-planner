@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import time
-from datetime import timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from beanie import PydanticObjectId
@@ -12,7 +12,13 @@ from beanie import PydanticObjectId
 from app.ai.graph import run_planner
 from app.ai.pipeline import build_itinerary_document
 from app.core.config import OptimizerAlgorithm
-from app.core.exceptions import NotFoundError, OptimizationError, PermissionDeniedError
+from app.core.exceptions import (
+    ConflictError,
+    NotFoundError,
+    OptimizationError,
+    PermissionDeniedError,
+    ValidationError,
+)
 from app.core.timeutils import MINUTES_PER_DAY, overflows_day, to_clock, to_minutes
 from app.db.sorting import descending
 from app.models.ai_run import AIRun
@@ -27,12 +33,7 @@ from app.models.trip import Trip
 from app.models.user import User
 from app.observability.logging import get_logger
 from app.optimization.algorithms import ALGORITHM_INFO
-from app.optimization.distance import (
-    Coordinate,
-    effective_mode,
-    haversine_km,
-    travel_minutes,
-)
+from app.optimization.distance import Coordinate, TravelMatrix, leg_figures
 from app.optimization.engine import compare_algorithms, optimize
 from app.optimization.schemas import (
     DayConfig,
@@ -43,6 +44,7 @@ from app.optimization.schemas import (
 from app.schemas.itinerary import (
     AlgorithmInfo,
     AlgorithmRun,
+    ApplyRouteRequest,
     CompareRouteRequest,
     CompareRouteResponse,
     OptimizedStop,
@@ -50,6 +52,7 @@ from app.schemas.itinerary import (
     OptimizeRouteResponse,
     ReorderDayRequest,
 )
+from app.services import routing_service
 
 logger = get_logger(__name__)
 
@@ -245,23 +248,35 @@ async def reorder_day(itinerary: Itinerary, payload: ReorderDayRequest) -> Itine
 
     reordered = [day.activities[i] for i in payload.activity_order]
 
+    # One matrix for the day, over its located activities in the new order;
+    # node ``k`` is the ``k``-th of them. Legs are priced exactly as the
+    # optimiser prices them, so applying a compared route yields the figures
+    # the comparison showed.
+    located = [a for a in reordered if a.location is not None]
+    node_of = {id(a): k for k, a in enumerate(located)}
+    matrix = await routing_service.travel_matrix(
+        [Coordinate(*a.location.as_lat_lng()) for a in located if a.location is not None],
+        TransportMode.WALKING,
+    )
+
     # Flow the whole day first, so an overrun is rejected before anything is
     # mutated and the stored itinerary is never left half-rewritten.
     clock = day_start
-    previous_location = None
+    previous_node: int | None = None
     planned: list[tuple[int, int, TravelLeg | None]] = []
 
     for activity in reordered:
         leg: TravelLeg | None = None
-        if previous_location is not None and activity.location is not None:
-            distance = haversine_km(
-                Coordinate(*previous_location.as_lat_lng()),
-                Coordinate(*activity.location.as_lat_lng()),
+        node = node_of.get(id(activity))
+        if previous_node is not None and node is not None:
+            distance, minutes, mode = leg_figures(
+                matrix, previous_node, node, TransportMode.WALKING
             )
-            mode = effective_mode(distance, TransportMode.WALKING)
-            minutes = travel_minutes(distance, mode)
             leg = TravelLeg(
-                mode=mode, distance_km=round(distance, 3), duration_minutes=minutes
+                mode=mode,
+                distance_km=round(distance, 3),
+                duration_minutes=minutes,
+                estimated=matrix.estimated,
             )
             clock += minutes
 
@@ -281,8 +296,8 @@ async def reorder_day(itinerary: Itinerary, payload: ReorderDayRequest) -> Itine
 
         planned.append((start, end, leg))
         clock = end
-        if activity.location is not None:
-            previous_location = activity.location
+        if node is not None:
+            previous_node = node
 
     for order, (activity, (start, end, leg)) in enumerate(
         zip(reordered, planned, strict=True)
@@ -298,6 +313,125 @@ async def reorder_day(itinerary: Itinerary, payload: ReorderDayRequest) -> Itine
     itinerary.optimization.solver_status = "manually_reordered"
     await itinerary.save()
     return itinerary
+
+
+def _to_milliseconds(value: datetime) -> datetime:
+    """Normalise to UTC at millisecond precision, MongoDB's own resolution.
+
+    Timestamps read back from the database are naive UTC; one parsed from a JSON
+    body may carry an offset. Both are brought to the same footing before any
+    comparison.
+    """
+    value = value.replace(tzinfo=UTC) if value.tzinfo is None else value.astimezone(UTC)
+    return value.replace(microsecond=(value.microsecond // 1000) * 1000)
+
+
+async def apply_route_to_day(
+    itinerary: Itinerary, day_number: int, payload: ApplyRouteRequest
+) -> Itinerary:
+    """Apply a compared route's ordering to one day.
+
+    Everything the client sends is treated as a claim to be checked:
+
+    * **Staleness.** ``expected_updated_at`` must match the stored itinerary. A
+      comparison made before someone else edited the day describes a day that no
+      longer exists, so applying it would silently discard their edit.
+    * **Membership.** The place ids must be exactly the day's routable places -
+      no foreign ids, none missing, none repeated. Anything else is a payload
+      that was not produced by comparing *this* day.
+    * **Figures.** None are accepted. Times, travel legs and totals are
+      recomputed from the stored places by the same code path a manual reorder
+      uses, so an applied route cannot disagree with itself.
+
+    Activities with no ``place_id`` - a meal dropped into a gap, a block of free
+    time - are not part of the comparison and keep their position in the
+    sequence, so applying a route cannot shuffle lunch to the end of the day.
+
+    Raises:
+        NotFoundError: when the day is not part of this itinerary.
+        ConflictError: when the itinerary changed after the comparison was made.
+        ValidationError: when the ids are not exactly the day's routable places.
+        OptimizationError: when the order cannot fit inside the day.
+    """
+    day = next((d for d in itinerary.days if d.day_number == day_number), None)
+    if day is None:
+        raise NotFoundError(f"Day {day_number} is not part of this itinerary.")
+
+    # Compared at millisecond resolution, which is what MongoDB actually stores.
+    # Neither looser nor tighter works: a response serialised straight from the
+    # in-memory document carries microseconds that the database never kept, so an
+    # exact match can never hold; truncating to whole seconds would miss two
+    # edits inside the same second, which is precisely when a stale apply is most
+    # likely to happen.
+    stored = _to_milliseconds(itinerary.updated_at)
+    expected = _to_milliseconds(payload.expected_updated_at)
+    if stored != expected:
+        raise ConflictError(
+            "This day has changed since the routes were compared. Re-run the "
+            "comparison so you are choosing between the current options.",
+            details={
+                "expected_updated_at": expected.isoformat(),
+                "current_updated_at": stored.isoformat(),
+            },
+        )
+
+    requested = [str(place_id) for place_id in payload.place_ids]
+    if len(set(requested)) != len(requested):
+        raise ValidationError(
+            "The same place appears more than once in the requested order.",
+            details={"place_ids": requested},
+        )
+
+    # Index by position so the routable slots can be refilled in place.
+    routable = {
+        str(activity.place_id): index
+        for index, activity in enumerate(day.activities)
+        if activity.place_id is not None
+    }
+
+    unknown = [place_id for place_id in requested if place_id not in routable]
+    if unknown:
+        raise ValidationError(
+            "Those places are not on this day.",
+            details={"unknown_place_ids": unknown},
+        )
+
+    missing = [place_id for place_id in routable if place_id not in set(requested)]
+    if missing:
+        raise ValidationError(
+            "The requested order leaves out places that are on this day. Applying "
+            "a route reorders the day; it does not remove anything from it.",
+            details={"missing_place_ids": missing},
+        )
+
+    # Non-routable activities hold their slots; the routable ones are dealt into
+    # the slots that remain, in the requested order.
+    fixed_slots = {
+        index for index, activity in enumerate(day.activities) if activity.place_id is None
+    }
+    reordered_indices = iter(routable[place_id] for place_id in requested)
+    activity_order = [
+        index if index in fixed_slots else next(reordered_indices)
+        for index in range(len(day.activities))
+    ]
+
+    updated = await reorder_day(
+        itinerary,
+        ReorderDayRequest(day_number=day_number, activity_order=activity_order),
+    )
+    # reorder_day marks the day as hand-edited; this one was not, so name the
+    # algorithm that produced it instead.
+    updated.optimization.solver_status = f"applied:{payload.algorithm.value}"
+    await updated.save()
+
+    logger.info(
+        "route_applied",
+        itinerary_id=str(updated.id),
+        day_number=day_number,
+        algorithm=payload.algorithm.value,
+        places=len(requested),
+    )
+    return updated
 
 
 async def remove_activity(
@@ -416,6 +550,7 @@ async def optimize_places(
     """
     ordered = await _load_ordered_places(payload.place_ids)
     request = _build_route_request(payload, ordered)
+    request.matrix = await _route_matrix(request)
 
     # The solvers are CPU-bound; a worker thread keeps the event loop responsive.
     result = await asyncio.to_thread(optimize, request)
@@ -434,6 +569,8 @@ async def optimize_places(
         engine=result.engine,
         duration_seconds=result.duration_seconds,
         objective=result.objective_value,
+        estimated=request.matrix.estimated,
+        routing_provider=request.matrix.provider,
     )
 
 
@@ -446,6 +583,8 @@ async def compare_route_algorithms(payload: CompareRouteRequest) -> CompareRoute
     """
     ordered = await _load_ordered_places(payload.place_ids)
     request = _build_route_request(payload, ordered)
+    # Fetched once, before any algorithm runs: every run is priced on it.
+    matrix = request.matrix = await _route_matrix(request)
 
     results = await asyncio.to_thread(compare_algorithms, request, payload.algorithms)
     feasible = [r for r in results if r.feasible]
@@ -481,8 +620,18 @@ async def compare_route_algorithms(payload: CompareRouteRequest) -> CompareRoute
         )
 
     return CompareRouteResponse(
-        runs=runs, best_algorithm=best.engine, fastest_algorithm=fastest.engine
+        runs=runs,
+        best_algorithm=best.engine,
+        fastest_algorithm=fastest.engine,
+        estimated=matrix.estimated,
+        routing_provider=matrix.provider,
     )
+
+
+async def _route_matrix(request: OptimizationRequest) -> TravelMatrix:
+    """The travel matrix for a request: origin first, then each place."""
+    coords = [request.origin] + [p.coordinate for p in request.places]
+    return await routing_service.travel_matrix(coords, request.mode)
 
 
 def _comparable_cost(result: OptimizationResult) -> int:

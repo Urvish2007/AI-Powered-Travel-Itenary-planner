@@ -68,6 +68,7 @@ class TestListing:
         assert "embedding" not in response.text
 
 
+@pytest.mark.geo
 class TestGeospatialSearch:
     async def test_finds_places_within_the_radius(
         self, client: AsyncClient, seeded: dict[str, int]
@@ -164,6 +165,7 @@ class TestTextSearch:
         assert (await client.get(f"{PLACES}/search", params={"q": "a"})).status_code == 422
 
 
+@pytest.mark.vector
 class TestSemanticSearch:
     async def test_returns_ranked_results(
         self, client: AsyncClient, seeded: dict[str, int]
@@ -324,6 +326,7 @@ class TestPlaceAdministration:
         ).status_code == 200
         assert (await client.get(f"{PLACES}/{place_id}")).status_code == 404
 
+    @pytest.mark.vector
     async def test_created_places_are_semantically_searchable(
         self, client: AsyncClient, admin_token: dict[str, str]
     ) -> None:

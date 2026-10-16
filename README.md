@@ -37,9 +37,10 @@ The app runs with **no key** on a deterministic stub. For real plans, set one:
 | `LLM_PROVIDER` | Key variable | Default model |
 |---|---|---|
 | `gemini` | `GOOGLE_GEMINI_KEY` | `gemini-3.8-flash` |
-| `groq` | `GROQ_API_KEY` | `openai/gpt-oss-120b` |
+| `groq` | `GROQ_API_KEY` | none - set `GROQ_MODEL` |
 
-Override with `LLM_MODEL` / `LLM_FAST_MODEL`. Providers retire models on a
+Override Gemini's with `LLM_MODEL` / `LLM_FAST_MODEL`; Groq always reads
+`GROQ_MODEL` / `GROQ_FAST_MODEL`. Providers retire models on a
 schedule, so re-check their model pages before pinning one. If the key for the
 chosen provider is missing, the API logs a warning and falls back to the stub.
 
@@ -126,8 +127,51 @@ plan. Endpoints:
 Pass `start_date` on either request when planning a specific day — opening hours
 are checked against that date's weekday, and it defaults to today.
 
+### Which algorithm runs
+
+Four places can name an algorithm. They are consulted in this order, and the
+first one that answers wins:
+
+1. **The request** — `algorithm` on an `optimize-route` call. Applies to that
+   call only.
+2. **The plan** — `constraints.optimizer_algorithm` on the trip, set from the
+   selector in the plan wizard and the day view. Saved with the trip, so it
+   survives a reload and every later re-plan.
+3. **The environment** — `OPTIMIZER_ALGORITHM`, the deployment-wide default.
+4. **`auto`** — a last resort if the environment variable is empty. It runs every
+   algorithm and keeps the best plan: safe, just slower.
+
+The order lives in one function, `engine.resolve_algorithm`, which is the only
+thing that decides it.
+
+A trip created before the field existed has `optimizer_algorithm: null`, which
+falls through to the environment exactly as it did before — so there is nothing
+to migrate. An unknown algorithm name is rejected with `422` by the enum at the
+API boundary, never a `500`.
+
 The frontend surfaces the comparison in the day view, under the map
-("Compare route algorithms").
+("Compare route algorithms"), with the selector beside it.
+
+### Road distances: estimated or measured
+
+By default every distance and travel time is an **estimate**: straight-line
+distance times `ROAD_DISTANCE_FACTOR` (1.3), at a typical speed per mode. It
+needs no network and never fails.
+
+Set `ROUTING_PROVIDER=openrouteservice` (with `ROUTING_API_KEY`) or
+`ROUTING_PROVIDER=osrm` (with `ROUTING_BASE_URL` pointing at your own server) to
+measure them on the road network instead. One matrix call covers every point of
+a request, and every algorithm, the comparison's scoring, and the legs of an
+applied route all read that same matrix, so their figures always agree.
+
+If the provider is slow, down, rate-limiting, or returns something unusable, the
+request still succeeds on the estimate. After `ROUTING_BREAKER_THRESHOLD`
+consecutive failures the provider is skipped for
+`ROUTING_BREAKER_COOLDOWN_SECONDS`. Responses carry `"estimated": true|false`
+and `"routing_provider"` so the UI never presents a guess as a measurement;
+itineraries record the same on `optimization` and on each travel leg.
+Generation weighs many candidates at once, so it is estimated whenever the pool
+exceeds `ROUTING_MAX_LOCATIONS`.
 
 ## Maps
 
@@ -136,15 +180,14 @@ The maps need **no API key**: Leaflet over openly-licensed tiles — CARTO Voyag
 
 Those are free community servers with usage policies. Before real traffic, point
 `NEXT_PUBLIC_MAP_TILE_URL` and `NEXT_PUBLIC_MAP_TILE_ATTRIBUTION` at a hosted
-provider (MapTiler, Stadia, Mapbox...). Setting `NEXT_PUBLIC_MAPBOX_TOKEN` adds a
-Mapbox style to the switcher but is not required.
+provider (MapTiler, Stadia...).
 
 ## CI/CD
 
 | Workflow | When | What |
 |---|---|---|
-| `backend.yml` | PRs and pushes touching `backend/` | ruff, mypy (report-only), tests on real MongoDB, migrations + endpoint smoke test, `pip-audit` (report-only), Docker build |
-| `frontend.yml` | PRs and pushes touching `frontend/` | `tsc`, ESLint (report-only, see below), `next build`, `npm audit` (report-only), Docker build |
+| `backend.yml` | PRs and pushes touching `backend/` | ruff, mypy, tests on real MongoDB (fails if it is missing), migrations + endpoint smoke test, `pip-audit` (report-only), Docker build |
+| `frontend.yml` | PRs and pushes touching `frontend/` | `tsc`, ESLint, Vitest, `next build`, `npm audit` (report-only), Docker build |
 | `deploy.yml` | Push to `main` | build + push images to GHCR → **staging** (migrate, deploy hook, readiness check) → **production** (same, after approval) |
 
 `dependabot.yml` opens weekly update PRs for pip, npm, Docker and Actions.
@@ -178,6 +221,10 @@ include the runners' address ranges. If your database is locked down, leave
 `MONGODB_URI` unset and run `sh scripts/migrate.sh` as your host's pre-deploy /
 release command instead.
 
+**Post-deploy check:** the API reports the commit it runs (`build` on
+`/api/v1/health`), and the rollout waits until `/health/ready` reports the commit
+being deployed — not merely any 200, which the old instance would also give.
+
 **Rollback:** run the *Deploy* workflow manually (`workflow_dispatch`) with
 `image_tag` set to a previous `sha-xxxxxxx`. It skips the build and redeploys that
 image through the same staging → production path. Migrations are not rolled back
@@ -185,14 +232,18 @@ automatically.
 
 ### Frontend hosting
 
+**Step by step for Atlas + Render + Vercel, with every variable:
+[`docs/deployment.md`](docs/deployment.md).**
+
 Vercel works as-is (set the `NEXT_PUBLIC_*` variables in the project settings).
 Alternatively self-host the image from `frontend/Dockerfile`; `NEXT_PUBLIC_*` values are
 baked in at build time, so pass them as `--build-arg`.
 
 ## Known issues
 
-- Frontend ESLint reports 16 errors (`react-hooks/set-state-in-effect` in 7 places and
-  9 unescaped apostrophes). They pre-date CI, so lint is report-only for now; remove
-  `continue-on-error` in `frontend.yml` once they are fixed.
-- Backend `mypy` reports type errors and is report-only for the same reason.
-- Access tokens are kept in `localStorage`. Add a Content Security Policy before launch.
+- Tokens are kept in `localStorage`, readable by any script on the site. A
+  Content-Security-Policy now ships in **report-only** mode (promote it to
+  enforcing once a release shows no violations); moving the refresh token into
+  an httpOnly cookie is proposed in
+  [`docs/proposals/cookie-auth.md`](docs/proposals/cookie-auth.md) and awaits a
+  decision.

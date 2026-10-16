@@ -19,6 +19,10 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { CityBackdrop } from "@/components/places/city-backdrop";
+import {
+  AlgorithmSelect,
+  DEFAULT_ALGORITHM,
+} from "@/components/trip/algorithm-select";
 import { Button } from "@/components/ui/button";
 import { Progress, Slider } from "@/components/ui/controls";
 import {
@@ -43,6 +47,7 @@ import type {
   BudgetLevel,
   CitySummary,
   InterestTag,
+  OptimizerAlgorithm,
   TransportMode,
   TravelPace,
 } from "@/types/api";
@@ -118,6 +123,7 @@ interface PlanState {
   access: AccessibilityNeed[];
   dayStart: string;
   dayEnd: string;
+  algorithm: OptimizerAlgorithm;
   brief: string;
 }
 
@@ -138,6 +144,7 @@ function defaultState(): PlanState {
     access: [],
     dayStart: "09:00",
     dayEnd: "20:00",
+    algorithm: DEFAULT_ALGORITHM,
     brief: "",
   };
 }
@@ -225,6 +232,7 @@ export function PlanWizard() {
           day_start_time: state.dayStart,
           day_end_time: state.dayEnd,
           max_daily_walking_km: state.maxWalkingKm,
+          optimizer_algorithm: state.algorithm,
           currency: "EUR",
           notes: state.brief.trim() || null,
         },
@@ -421,6 +429,7 @@ function StepDestination({
               >
                 <CityBackdrop
                   city={city.city}
+                  cityPhoto={city.photo}
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -772,6 +781,12 @@ function StepPreferences({
           />
         </Field>
       </div>
+
+      <AlgorithmSelect
+        id="wizard-algorithm"
+        value={state.algorithm}
+        onChange={(algorithm) => patch({ algorithm })}
+      />
 
       <fieldset>
         <legend className="text-lg font-semibold">Access needs</legend>

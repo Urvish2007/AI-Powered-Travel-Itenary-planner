@@ -2,7 +2,7 @@
  * Map configuration and small helpers shared by every map in the product.
  *
  * Everything here works with **no API key**: the maps are drawn with Leaflet over
- * openly-licensed tiles. A hosted provider (MapTiler, Stadia, Mapbox...) can be
+ * openly-licensed tiles. A hosted provider (MapTiler, Stadia...) can be
  * dropped in with environment variables, which is what you should do before
  * serious production traffic, because the free community tile servers have usage
  * policies (see the notes on each layer).
@@ -10,7 +10,7 @@
 
 import type { ActivityKind, PlaceCategory } from "@/types/api";
 
-export type TileLayerId = "custom" | "mapbox" | "clear" | "standard" | "satellite";
+export type TileLayerId = "custom" | "clear" | "standard" | "satellite";
 
 export interface TileLayerDef {
   id: TileLayerId;
@@ -19,12 +19,11 @@ export interface TileLayerDef {
   attribution: string;
   maxZoom: number;
   subdomains?: string;
-  /** Mapbox's raster API serves 512px tiles and needs this offset. */
+  /** For providers that serve 512px tiles (with zoomOffset -1). */
   tileSize?: number;
   zoomOffset?: number;
 }
 
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const CUSTOM_URL = process.env.NEXT_PUBLIC_MAP_TILE_URL;
 const CUSTOM_ATTRIBUTION = process.env.NEXT_PUBLIC_MAP_TILE_ATTRIBUTION;
 
@@ -40,19 +39,6 @@ export const TILE_LAYERS: TileLayerDef[] = [
           url: CUSTOM_URL,
           attribution: CUSTOM_ATTRIBUTION ?? OSM,
           maxZoom: 19,
-        },
-      ]
-    : []),
-  ...(MAPBOX_TOKEN
-    ? [
-        {
-          id: "mapbox" as const,
-          label: "Mapbox",
-          url: `/api/tiles/mapbox/{z}/{x}/{y}`, // Assuming proxy handles or we just keep it direct if we want
-          attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> " + OSM,
-          maxZoom: 19,
-          tileSize: 512,
-          zoomOffset: -1,
         },
       ]
     : []),
@@ -87,6 +73,14 @@ export const DEFAULT_TILE_LAYER: TileLayerId = TILE_LAYERS[0].id;
 // ---------------------------------------------------------------------------
 
 export const ROUTE_COLOR = "#0f6f76";
+
+/**
+ * The route being compared *against*, drawn dashed beneath the proposed one.
+ *
+ * Deliberately desaturated: the baseline is context, and giving it a second
+ * strong colour would read as two routes of equal standing.
+ */
+export const BASELINE_COLOR = "#94a3b8";
 
 const KIND_STYLE: Record<string, { color: string; label: string }> = {
   visit: { color: ROUTE_COLOR, label: "Sight" },

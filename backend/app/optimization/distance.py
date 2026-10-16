@@ -2,8 +2,12 @@
 
 Straight-line (haversine) distance is scaled by ``road_distance_factor`` to
 approximate real street distance. That keeps the optimiser dependency-free and
-fast; swapping in a Mapbox Matrix API call later only requires replacing
-``build_travel_matrix`` - the shape of its return value is the contract.
+fast, and it is always available.
+
+A measured road matrix can be supplied instead, as a :class:`TravelMatrix` on
+the request (see ``app.services.routing_service``). Either way every solver and
+the shared evaluator read legs from the same matrix, so a comparison between
+algorithms never mixes estimated and measured figures.
 """
 
 from __future__ import annotations
@@ -125,6 +129,59 @@ def build_travel_matrix(
     # A node costs nothing to "travel" to from itself.
     np.fill_diagonal(durations, 0.0)
     return distances, durations.astype(int)
+
+
+@dataclass(frozen=True, slots=True)
+class TravelMatrix:
+    """Distances and durations between every pair of a list of points.
+
+    Attributes:
+        distance_km: ``(n, n)`` kilometres.
+        duration_minutes: ``(n, n)`` whole minutes, door to door (the per-mode
+            overhead is included). Integral because OR-Tools needs integral arcs.
+        estimated: ``False`` only when a routing provider measured the network.
+        provider: Where the figures came from, e.g. ``"haversine"``.
+        fallback_reason: Why a configured provider was not used, when it wasn't.
+    """
+
+    distance_km: np.ndarray
+    duration_minutes: np.ndarray
+    estimated: bool = True
+    provider: str = "haversine"
+    fallback_reason: str | None = None
+
+    @property
+    def size(self) -> int:
+        return int(self.distance_km.shape[0])
+
+
+def estimated_matrix(
+    coords: list[Coordinate],
+    mode: TransportMode = TransportMode.WALKING,
+    fallback_reason: str | None = None,
+) -> TravelMatrix:
+    """The straight-line estimate as a :class:`TravelMatrix`."""
+    distances, durations = build_travel_matrix(coords, mode)
+    return TravelMatrix(distances, durations, fallback_reason=fallback_reason)
+
+
+def leg_figures(
+    matrix: TravelMatrix, from_node: int, to_node: int, preferred: TransportMode
+) -> tuple[float, int, TransportMode]:
+    """Distance, minutes and mode for one leg, as shown to the traveller.
+
+    The single place a displayed leg is priced, so every engine reports legs the
+    same way. A long walk is shown as transit (see :func:`effective_mode`); a
+    provider measures one profile only, so a measured duration is used when the
+    leg keeps the mode it was measured in, and the estimate otherwise.
+    """
+    if from_node == to_node:
+        return 0.0, 0, preferred
+    distance = float(matrix.distance_km[from_node][to_node])
+    mode = effective_mode(distance, preferred)
+    if not matrix.estimated and mode is preferred:
+        return distance, int(matrix.duration_minutes[from_node][to_node]), mode
+    return distance, travel_minutes(distance, mode), mode
 
 
 def effective_mode(distance_km: float, preferred: TransportMode) -> TransportMode:

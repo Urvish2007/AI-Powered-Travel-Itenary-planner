@@ -221,6 +221,18 @@ export interface Place {
   search_score?: number | null;
 }
 
+/** A freely licensed photo of a city, with what its licence asks us to show. */
+export interface CityPhoto {
+  image_url: string;
+  width: number | null;
+  height: number | null;
+  author: string | null;
+  license: string | null;
+  license_url: string | null;
+  source_url: string | null;
+  source: string;
+}
+
 export interface CitySummary {
   city: string;
   country: string;
@@ -228,6 +240,8 @@ export interface CitySummary {
   average_rating: number;
   latitude: number | null;
   longitude: number | null;
+  /** Absent from servers that predate city photos; null when none was found. */
+  photo?: CityPhoto | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -262,6 +276,13 @@ export interface TripConstraints {
   must_include_place_ids: string[];
   must_avoid_place_ids: string[];
   notes: string | null;
+  /**
+   * Which algorithm plans this trip's routes.
+   *
+   * `null` means no choice has been saved — the case for every trip created
+   * before the field existed — and the server's OPTIMIZER_ALGORITHM decides.
+   */
+  optimizer_algorithm: OptimizerAlgorithm | null;
 }
 
 export interface Trip {
@@ -308,6 +329,8 @@ export interface TravelLeg {
   distance_km: number;
   duration_minutes: number;
   polyline: string | null;
+  /** False only when a routing provider measured this leg. */
+  estimated?: boolean;
 }
 
 export interface Activity {
@@ -352,6 +375,9 @@ export interface OptimizationReport {
   places_dropped: number;
   dropped_reasons: Record<string, string>;
   distance_saved_km: number | null;
+  /** Whether travel was measured on the road network or estimated. */
+  estimated?: boolean;
+  routing_provider?: string;
 }
 
 export interface GenerationMeta {
@@ -498,10 +524,30 @@ export interface AlgorithmRun {
   dropped_place_ids: string[];
 }
 
+export interface ApplyRouteInput {
+  /** The day's routable places, in the order to apply. */
+  place_ids: string[];
+  algorithm: OptimizerAlgorithm;
+  /**
+   * The itinerary's `updated_at` as of the comparison.
+   *
+   * Echoed back verbatim — the server compares it with the stored value and
+   * returns 409 if the day changed in the meantime.
+   */
+  expected_updated_at: string;
+}
+
 export interface CompareRouteResponse {
   runs: AlgorithmRun[];
   best_algorithm: string;
   fastest_algorithm: string;
+  /**
+   * True when distances and times are straight-line estimates. Optional
+   * because a server from before road routing omits it, and its figures were
+   * estimates.
+   */
+  estimated?: boolean;
+  routing_provider?: string;
 }
 
 export interface CompareRouteInput {
