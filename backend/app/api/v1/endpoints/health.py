@@ -24,6 +24,7 @@ async def health() -> HealthStatus:
         status="ok",
         version=__version__,
         environment=str(settings.environment),
+        build=settings.build_sha,
         mongodb="not_checked",
     )
 
@@ -47,6 +48,7 @@ async def readiness(response: Response) -> HealthStatus:
         status="ok" if database_ok else "degraded",
         version=__version__,
         environment=str(settings.environment),
+        build=settings.build_sha,
         mongodb="up" if database_ok else "down",
         checks={"mongodb": database_ok},
     )

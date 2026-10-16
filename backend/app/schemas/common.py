@@ -74,4 +74,6 @@ class HealthStatus(BaseModel):
     version: str
     environment: str
     mongodb: str
+    # The commit this instance runs, when the build recorded one.
+    build: str | None = None
     checks: dict[str, Any] = Field(default_factory=dict)

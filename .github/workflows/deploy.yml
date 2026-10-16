@@ -75,6 +75,9 @@ jobs:
           tags: |
             ${{ env.BACKEND_IMAGE }}:${{ steps.tag.outputs.tag }}
             ${{ env.BACKEND_IMAGE }}:latest
+          # Reported by /health; the rollout waits until it sees this commit.
+          build-args: |
+            BUILD_SHA=${{ github.sha }}
           cache-from: type=gha,scope=backend
           cache-to: type=gha,mode=max,scope=backend
 

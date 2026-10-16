@@ -33,6 +33,9 @@ RUN groupadd --system app && useradd --system --gid app --create-home app
 WORKDIR /app
 
 COPY --from=builder /opt/venv /opt/venv
+# Reported by /health, so a deploy can confirm the new version is the one serving.
+ARG BUILD_SHA=
+ENV BUILD_SHA=${BUILD_SHA}
 COPY --chown=app:app app ./app
 COPY --chown=app:app scripts ./scripts
 COPY --chown=app:app migrations ./migrations

@@ -243,6 +243,14 @@ class Settings(BaseSettings):
     photos_timeout_seconds: float = 15.0
     photos_max_retries: int = 3
 
+    # ---- Build identity ----
+    # The commit this process runs, reported by /health so a deploy can wait for
+    # *its* version rather than accept the old instance's 200. Docker images get
+    # it as a build arg; Render sets RENDER_GIT_COMMIT on its own builds.
+    build_sha: str | None = Field(
+        default=None, validation_alias=AliasChoices("BUILD_SHA", "RENDER_GIT_COMMIT")
+    )
+
     # ---- Observability ----
     sentry_dsn: str | None = None
     log_level: str = "INFO"

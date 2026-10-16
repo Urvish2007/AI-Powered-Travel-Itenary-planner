@@ -83,15 +83,37 @@ runs:
           "$HOOK"
         echo "Deploy triggered for ${IMAGE_TAG}"
 
-    - name: Wait for the API to be ready
+    - name: Wait for the new version to be ready
       shell: bash
       env:
         API_URL: ${{ inputs.api_url }}
+        IMAGE_TAG: ${{ inputs.image_tag }}
       run: |
-        # /health/ready pings MongoDB, so a 200 means the new instance can serve.
-        # Up to ~10 minutes: hosts take a while to pull and start a new image.
-        curl --fail --silent --show-error \
-          --retry 60 --retry-delay 10 --retry-all-errors --max-time 15 \
-          "${API_URL%/}/api/v1/health/ready"
-        echo
-        echo "API is ready at ${API_URL}"
+        # A 200 alone proves nothing: right after the hook fires, the OLD instance
+        # is still the one answering. /health/ready reports the commit it runs, so
+        # wait for the one being deployed (and for MongoDB, which ready pings).
+        expected=""
+        case "$IMAGE_TAG" in
+          sha-*) expected="${IMAGE_TAG#sha-}" ;;
+          *) echo "::warning::Tag '$IMAGE_TAG' names no commit; only readiness is checked." ;;
+        esac
+
+        deadline=$((SECONDS + 600))  # hosts take a while to pull and start an image
+        while :; do
+          body="$(curl --silent --fail --max-time 15 "${API_URL%/}/api/v1/health/ready" || true)"
+          # Plain sed rather than jq, so the gate depends on nothing being installed.
+          build="$(printf '%s' "$body" | sed -n 's/.*"build"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')"
+          if [ -n "$body" ]; then
+            if [ -z "$expected" ] || [ "${build#"$expected"}" != "$build" ]; then
+              echo "Ready at ${API_URL}: build ${build:-unknown}"
+              exit 0
+            fi
+            echo "Still serving build '${build:-unknown}', waiting for ${expected}..."
+          fi
+          if [ "$SECONDS" -ge "$deadline" ]; then
+            if [ -n "$expected" ]; then what="Build $expected never became ready"; else what="The API never became ready"; fi
+            echo "::error::$what at ${API_URL} within 10 minutes. The previous version may still be serving; see the rollback steps in docs/deployment.md."
+            exit 1
+          fi
+          sleep 10
+        done
