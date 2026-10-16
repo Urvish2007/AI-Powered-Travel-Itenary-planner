@@ -34,8 +34,6 @@ jobs:
 
       - name: mypy
         run: mypy app
-        # The codebase is progressively typed; failures are reported, not fatal.
-        continue-on-error: true
 
   test:
     name: Tests
@@ -56,6 +54,8 @@ jobs:
       # The stub provider keeps CI deterministic and free of network calls.
       LLM_PROVIDER: stub
       RATE_LIMIT_ENABLED: "false"
+      # Fail, rather than skip, the database tests if the service is missing.
+      REQUIRE_MONGODB: "1"
 
     steps:
       - uses: actions/checkout@v4
@@ -68,6 +68,8 @@ jobs:
 
       - run: pip install -r requirements-dev.txt
 
+      # Everything, against the mongo:8 service container. Geospatial and
+      # vector-search tests are marked (`-m geo`, `-m vector`) and run here too.
       - name: Run tests
         run: pytest --cov=app --cov-report=term-missing --cov-report=xml
 
