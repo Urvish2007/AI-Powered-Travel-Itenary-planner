@@ -21,6 +21,9 @@ class TravelLeg(BaseModel):
     duration_minutes: int = Field(default=0, ge=0)
     # Optional encoded polyline, so the frontend can draw the leg on a map.
     polyline: str | None = None
+    # False only when a routing provider measured this leg. Every leg stored
+    # before providers existed was an estimate, which is what the default says.
+    estimated: bool = True
 
 
 class Activity(BaseModel):
@@ -83,6 +86,9 @@ class OptimizationReport(BaseModel):
     places_scheduled: int = 0
     places_dropped: int = 0
     dropped_reasons: dict[str, str] = Field(default_factory=dict)
+    # Whether travel was measured on the road network or estimated, and by what.
+    estimated: bool = True
+    routing_provider: str = "haversine"
 
     @computed_field  # type: ignore[prop-decorator]
     @property

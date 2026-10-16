@@ -33,12 +33,7 @@ from app.models.trip import Trip
 from app.models.user import User
 from app.observability.logging import get_logger
 from app.optimization.algorithms import ALGORITHM_INFO
-from app.optimization.distance import (
-    Coordinate,
-    effective_mode,
-    haversine_km,
-    travel_minutes,
-)
+from app.optimization.distance import Coordinate, TravelMatrix, leg_figures
 from app.optimization.engine import compare_algorithms, optimize
 from app.optimization.schemas import (
     DayConfig,
@@ -57,6 +52,7 @@ from app.schemas.itinerary import (
     OptimizeRouteResponse,
     ReorderDayRequest,
 )
+from app.services import routing_service
 
 logger = get_logger(__name__)
 
@@ -252,23 +248,35 @@ async def reorder_day(itinerary: Itinerary, payload: ReorderDayRequest) -> Itine
 
     reordered = [day.activities[i] for i in payload.activity_order]
 
+    # One matrix for the day, over its located activities in the new order;
+    # node ``k`` is the ``k``-th of them. Legs are priced exactly as the
+    # optimiser prices them, so applying a compared route yields the figures
+    # the comparison showed.
+    located = [a for a in reordered if a.location is not None]
+    node_of = {id(a): k for k, a in enumerate(located)}
+    matrix = await routing_service.travel_matrix(
+        [Coordinate(*a.location.as_lat_lng()) for a in located if a.location is not None],
+        TransportMode.WALKING,
+    )
+
     # Flow the whole day first, so an overrun is rejected before anything is
     # mutated and the stored itinerary is never left half-rewritten.
     clock = day_start
-    previous_location = None
+    previous_node: int | None = None
     planned: list[tuple[int, int, TravelLeg | None]] = []
 
     for activity in reordered:
         leg: TravelLeg | None = None
-        if previous_location is not None and activity.location is not None:
-            distance = haversine_km(
-                Coordinate(*previous_location.as_lat_lng()),
-                Coordinate(*activity.location.as_lat_lng()),
+        node = node_of.get(id(activity))
+        if previous_node is not None and node is not None:
+            distance, minutes, mode = leg_figures(
+                matrix, previous_node, node, TransportMode.WALKING
             )
-            mode = effective_mode(distance, TransportMode.WALKING)
-            minutes = travel_minutes(distance, mode)
             leg = TravelLeg(
-                mode=mode, distance_km=round(distance, 3), duration_minutes=minutes
+                mode=mode,
+                distance_km=round(distance, 3),
+                duration_minutes=minutes,
+                estimated=matrix.estimated,
             )
             clock += minutes
 
@@ -288,8 +296,8 @@ async def reorder_day(itinerary: Itinerary, payload: ReorderDayRequest) -> Itine
 
         planned.append((start, end, leg))
         clock = end
-        if activity.location is not None:
-            previous_location = activity.location
+        if node is not None:
+            previous_node = node
 
     for order, (activity, (start, end, leg)) in enumerate(
         zip(reordered, planned, strict=True)
@@ -542,6 +550,7 @@ async def optimize_places(
     """
     ordered = await _load_ordered_places(payload.place_ids)
     request = _build_route_request(payload, ordered)
+    request.matrix = await _route_matrix(request)
 
     # The solvers are CPU-bound; a worker thread keeps the event loop responsive.
     result = await asyncio.to_thread(optimize, request)
@@ -560,6 +569,8 @@ async def optimize_places(
         engine=result.engine,
         duration_seconds=result.duration_seconds,
         objective=result.objective_value,
+        estimated=request.matrix.estimated,
+        routing_provider=request.matrix.provider,
     )
 
 
@@ -572,6 +583,8 @@ async def compare_route_algorithms(payload: CompareRouteRequest) -> CompareRoute
     """
     ordered = await _load_ordered_places(payload.place_ids)
     request = _build_route_request(payload, ordered)
+    # Fetched once, before any algorithm runs: every run is priced on it.
+    matrix = request.matrix = await _route_matrix(request)
 
     results = await asyncio.to_thread(compare_algorithms, request, payload.algorithms)
     feasible = [r for r in results if r.feasible]
@@ -607,8 +620,18 @@ async def compare_route_algorithms(payload: CompareRouteRequest) -> CompareRoute
         )
 
     return CompareRouteResponse(
-        runs=runs, best_algorithm=best.engine, fastest_algorithm=fastest.engine
+        runs=runs,
+        best_algorithm=best.engine,
+        fastest_algorithm=fastest.engine,
+        estimated=matrix.estimated,
+        routing_provider=matrix.provider,
     )
+
+
+async def _route_matrix(request: OptimizationRequest) -> TravelMatrix:
+    """The travel matrix for a request: origin first, then each place."""
+    coords = [request.origin] + [p.coordinate for p in request.places]
+    return await routing_service.travel_matrix(coords, request.mode)
 
 
 def _comparable_cost(result: OptimizationResult) -> int:

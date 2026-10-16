@@ -184,6 +184,16 @@ class OptimizeRouteResponse(BaseModel):
         default=None,
         description="Plan cost in minutes (travel + visits + penalties). Lower is better.",
     )
+    estimated: bool = Field(
+        default=True,
+        description=(
+            "True when distances and times are straight-line estimates rather "
+            "than measured on the road network."
+        ),
+    )
+    routing_provider: str = Field(
+        default="haversine", description="Where travel figures came from."
+    )
 
 
 class AlgorithmRun(BaseModel):
@@ -208,6 +218,16 @@ class CompareRouteResponse(BaseModel):
     runs: list[AlgorithmRun]
     best_algorithm: str
     fastest_algorithm: str
+    estimated: bool = Field(
+        default=True,
+        description=(
+            "True when distances and times are straight-line estimates rather "
+            "than measured on the road network."
+        ),
+    )
+    routing_provider: str = Field(
+        default="haversine", description="Where travel figures came from."
+    )
 
 
 class AlgorithmInfo(BaseModel):

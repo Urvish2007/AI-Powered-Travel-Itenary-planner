@@ -59,6 +59,19 @@ class OptimizerAlgorithm(StrEnum):
     GENETIC = "genetic"
 
 
+class RoutingProviderName(StrEnum):
+    """Where travel distances and durations come from.
+
+    ``HAVERSINE`` is the straight-line estimate: no network, never fails, and
+    what every plan used before routing providers existed. The others measure
+    the road network; see ``app.services.routing_service``.
+    """
+
+    HAVERSINE = "haversine"
+    OPENROUTESERVICE = "openrouteservice"
+    OSRM = "osrm"
+
+
 # Model IDs used when LLM_MODEL / LLM_FAST_MODEL are not set. Providers retire
 # models on a schedule (Gemini 2.5 and Groq's Llama 3.x lines are already on it),
 # so these are deliberately overridable from the environment rather than baked
@@ -160,6 +173,28 @@ class Settings(BaseSettings):
     # Straight-line distance is scaled by this factor to approximate road distance.
     road_distance_factor: float = 1.3
     default_travel_speed_kmh: float = 30.0
+
+    # ---- Road routing ----
+    # haversine (estimate, the default) | openrouteservice | osrm. Any failure
+    # falls back to the estimate and responses say so ("estimated": true).
+    routing_provider: RoutingProviderName = RoutingProviderName.HAVERSINE
+    # openrouteservice API key. Not needed for a self-hosted ORS or for OSRM.
+    routing_api_key: SecretStr | None = None
+    # Provider root URL. ORS defaults to https://api.openrouteservice.org; OSRM
+    # has no default, because the public demo server is not for production.
+    routing_base_url: str | None = None
+    routing_timeout_seconds: float = 4.0
+    # Retries apply to timeouts, connection errors, 429 and 5xx only.
+    routing_max_retries: int = 2
+    routing_retry_backoff_seconds: float = 0.5
+    # More points than this use the estimate: ORS's free matrix allows 3,500
+    # cells (59 points), and generation can weigh hundreds of candidates.
+    routing_max_locations: int = 50
+    routing_cache_ttl_seconds: int = 86_400
+    routing_cache_max_entries: int = 512
+    # Consecutive failures that open the breaker, and how long it stays open.
+    routing_breaker_threshold: int = 3
+    routing_breaker_cooldown_seconds: int = 300
 
     # ---- External services ----
     mapbox_access_token: SecretStr | None = None

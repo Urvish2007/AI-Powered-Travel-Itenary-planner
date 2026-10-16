@@ -63,6 +63,7 @@ from app.optimization.schemas import (
     OptimizationRequest,
     OptimizationResult,
 )
+from app.services import routing_service
 
 logger = get_logger(__name__)
 
@@ -105,6 +106,9 @@ class PlanningState:
     steps: list[dict[str, Any]] = field(default_factory=list)
     provider: str = "stub"
     model: str = "stub"
+    # How travel was priced: measured by a routing provider, or estimated.
+    travel_estimated: bool = True
+    routing_provider: str = "haversine"
     prompt_tokens: int = 0
     completion_tokens: int = 0
     started_at: float = field(default_factory=time.perf_counter)
@@ -400,6 +404,14 @@ async def optimize_schedule(state: PlanningState) -> PlanningState:
         algorithm=trip.constraints.optimizer_algorithm,
     )
 
+    # One matrix call for the whole candidate pool. A pool larger than
+    # ROUTING_MAX_LOCATIONS is estimated, and the itinerary records that.
+    request.matrix = await routing_service.travel_matrix(
+        [request.origin] + [p.coordinate for p in request.places], request.mode
+    )
+    state.travel_estimated = request.matrix.estimated
+    state.routing_provider = request.matrix.provider
+
     result = optimize(request)
     if not result.feasible:
         raise OptimizationError(
@@ -478,6 +490,7 @@ async def assemble_itinerary(state: PlanningState) -> PlanningState:
                     mode=stop.mode,
                     distance_km=round(stop.travel_km, 3),
                     duration_minutes=stop.travel_minutes,
+                    estimated=state.travel_estimated,
                 )
                 if stop.travel_km > 0
                 else None
@@ -821,6 +834,8 @@ def build_itinerary_document(state: PlanningState, version: int = 1) -> Itinerar
             places_scheduled=result.scheduled_count,
             places_dropped=len(result.dropped),
             dropped_reasons=dropped_names,
+            estimated=state.travel_estimated,
+            routing_provider=state.routing_provider,
         )
 
     itinerary.recalculate_totals()
