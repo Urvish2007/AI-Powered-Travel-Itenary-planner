@@ -1,6 +1,6 @@
 # Convenience targets. On Windows, run the underlying commands directly or use
 # Git Bash / WSL.
-.PHONY: help install dev seed seed-core reset reembed validate-data test test-unit test-cov lint format typecheck verify run worker beat docker-up docker-down clean
+.PHONY: help install dev seed seed-core reset reembed city-photos validate-data test test-unit test-cov lint format typecheck verify run worker beat docker-up docker-down clean
 
 VENV := .venv
 PY   := $(VENV)/bin/python
@@ -30,6 +30,9 @@ reset:  ## Drop the database and reseed everything
 
 reembed:  ## Re-embed places into the configured embedding space (idempotent)
 	$(PY) -m scripts.reembed
+
+city-photos:  ## Find a freely licensed Wikimedia photo for each city (resumable)
+	$(PY) -m scripts.fetch_city_photos
 
 validate-data:  ## Check the world data for structural and geographic errors
 	$(PY) -m scripts.validate_world_data

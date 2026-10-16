@@ -231,6 +231,18 @@ class Settings(BaseSettings):
     routing_breaker_threshold: int = 3
     routing_breaker_cooldown_seconds: int = 300
 
+    # ---- City photos (scripts/fetch_city_photos.py) ----
+    # Wikimedia asks every client to identify itself and how to reach its
+    # maintainer: https://meta.wikimedia.org/wiki/User-Agent_policy
+    photos_user_agent: str = (
+        "AI-Itinerary-Planner/1.0 "
+        "(https://github.com/Urvish2007/AI-Powered-Travel-Itenary-planner)"
+    )
+    # Pause before every request: one at a time, well inside Wikimedia's limits.
+    photos_request_interval_seconds: float = 0.5
+    photos_timeout_seconds: float = 15.0
+    photos_max_retries: int = 3
+
     # ---- External services ----
     mapbox_access_token: SecretStr | None = None
 

@@ -198,6 +198,27 @@ fields change) is:
 `numDimensions` must equal `EMBEDDING_DIMENSIONS`; the name is
 `MONGODB_VECTOR_INDEX_NAME`.
 
+### City photos
+
+Destination cards and city pages show a freely licensed photo of the city from
+Wikimedia Commons, credited with its author and licence (linked on the city
+page). Fetch them once per environment:
+
+```bash
+python -m scripts.fetch_city_photos                  # cities not yet checked
+python -m scripts.fetch_city_photos --retry-missing  # also retry cities with none
+python -m scripts.fetch_city_photos --refresh        # re-check everything
+```
+
+A photo is kept only if the file is on Commons under CC0, public domain, CC BY
+or CC BY-SA (never NC/ND or fair use), the Wikipedia article's coordinates are
+within 50 km of the city's own centre (so a same-named town elsewhere is never
+used), and it is a photograph rather than a map, flag or emblem. Every city
+checked is recorded either way, so reruns resume instead of starting over; the
+fetch is sequential, paced, and backs off on 429/503. A city with no usable
+photo falls back to the curated photo, then to a plain gradient — never an
+unrelated stock image. On the 103 seeded cities the first run found 87.
+
 ---
 
 ## API

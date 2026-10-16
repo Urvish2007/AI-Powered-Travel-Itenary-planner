@@ -386,6 +386,7 @@ async def city_summary() -> list[dict[str, Any]]:
         {"$limit": MAX_CITIES},
     ]
     rows = await database["places"].aggregate(pipeline).to_list(length=MAX_CITIES)
+    photos = await _city_photos(database)
     return [
         {
             "city": row["_id"]["city"],
@@ -394,6 +395,24 @@ async def city_summary() -> list[dict[str, Any]]:
             "average_rating": round(row["average_rating"] or 0.0, 2),
             "latitude": row.get("latitude"),
             "longitude": row.get("longitude"),
+            # A licensed photo with its attribution, or None for the fallback.
+            "photo": photos.get((row["_id"]["city"], row["_id"]["country"])),
         }
         for row in rows
     ]
+
+
+async def _city_photos(database: Any) -> dict[tuple[str, str], dict[str, Any]]:
+    """Found city photos by (city, country), with only their public fields."""
+    from app.services.photo_service import PUBLIC_FIELDS
+
+    projection = {"_id": 0, "city": 1, "country": 1, **dict.fromkeys(PUBLIC_FIELDS, 1)}
+    documents = (
+        await database["city_photos"]
+        .find({"status": "found"}, projection)
+        .to_list(length=None)
+    )
+    return {
+        (d.pop("city"), d.pop("country")): {f: d.get(f) for f in PUBLIC_FIELDS}
+        for d in documents
+    }
