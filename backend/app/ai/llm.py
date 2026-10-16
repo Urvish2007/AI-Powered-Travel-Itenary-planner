@@ -19,7 +19,7 @@ from typing import Any, TypeVar
 from pydantic import BaseModel, ValidationError
 
 from app.core.config import LLMProvider, settings
-from app.core.exceptions import ExternalServiceError
+from app.core.exceptions import ExternalServiceError, RateLimitError
 from app.observability.logging import get_logger
 from app.observability.metrics import LLM_CALLS, LLM_TOKENS
 
@@ -77,7 +77,9 @@ class BaseLLMProvider(abc.ABC):
                 the requested schema.
         """
         instruction = (f"{system}\n\n" if system else "") + _json_instruction(schema)
-        response = await self.complete(messages, system=instruction, max_tokens=max_tokens)
+        response = await self._complete_for_json(
+            messages, system=instruction, max_tokens=max_tokens
+        )
         payload = extract_json(response.text)
         if payload is None:
             raise ExternalServiceError(
@@ -91,6 +93,21 @@ class BaseLLMProvider(abc.ABC):
                 f"{self.name} returned JSON that does not match {schema.__name__}.",
                 details={"errors": exc.errors()[:5]},
             ) from exc
+
+    async def _complete_for_json(
+        self,
+        messages: list[LLMMessage],
+        *,
+        system: str,
+        max_tokens: int | None,
+    ) -> LLMResponse:
+        """The completion behind :meth:`complete_json`.
+
+        A provider with a native JSON mode overrides this to switch it on. The
+        reply is validated against the schema either way: JSON mode makes a
+        well-formed object likely, never a correct one.
+        """
+        return await self.complete(messages, system=system, max_tokens=max_tokens)
 
 
 def _json_instruction(schema: type[BaseModel]) -> str:
@@ -490,24 +507,35 @@ class GeminiProvider(BaseLLMProvider):
 class GroqProvider(BaseLLMProvider):
     """Groq's hosted inference, through the official ``groq`` SDK.
 
-    The default models are OpenAI's open-weight ``gpt-oss`` pair, which is what
-    Groq recommends now that its Llama 3.x models are retired.
+    The model always comes from the environment (``GROQ_MODEL``): Groq retires
+    models often enough that any ID written here would go stale. Every call
+    has a timeout and the SDK's bounded retries with exponential backoff on
+    timeouts, connection errors, 429 and 5xx, honouring ``Retry-After``. What
+    still fails after that is reported for what it is - a rate limit as 429
+    with how long to wait, never as a generic failure.
     """
 
     name = "groq"
 
     def __init__(self) -> None:
         try:
-            from groq import AsyncGroq
+            import groq
         except ImportError as exc:  # pragma: no cover
             raise ExternalServiceError(
                 "The groq SDK is not installed; run `pip install -r requirements-ai.txt`."
             ) from exc
         if not settings.groq_api_key:
             raise ExternalServiceError("GROQ_API_KEY is not configured.")
-        self._client = AsyncGroq(
+        if not settings.resolved_llm_model:
+            raise ExternalServiceError(
+                "GROQ_MODEL is not configured; pick a model from "
+                "https://console.groq.com/docs/models."
+            )
+        self._sdk = groq
+        self._client = groq.AsyncGroq(
             api_key=settings.groq_api_key.get_secret_value(),
             timeout=settings.llm_timeout_seconds,
+            max_retries=settings.llm_max_retries,
         )
 
     async def complete(
@@ -518,23 +546,31 @@ class GroqProvider(BaseLLMProvider):
         tools: list[dict[str, Any]] | None = None,
         max_tokens: int | None = None,
         temperature: float | None = None,
+        json_mode: bool = False,
     ) -> LLMResponse:
         started = time.perf_counter()
+        model = settings.resolved_llm_model
         payload = [{"role": "system", "content": system}] if system else []
         payload += [{"role": m.role, "content": m.content} for m in messages]
+        extra: dict[str, Any] = {}
+        if json_mode:
+            # Groq requires the word "JSON" in the prompt for this mode; the
+            # schema instruction from complete_json always contains it.
+            extra["response_format"] = {"type": "json_object"}
 
         try:
             response = await self._client.chat.completions.create(
-                model=settings.resolved_llm_model,
+                model=model,
                 messages=payload,  # type: ignore[arg-type]
                 max_completion_tokens=max_tokens or settings.llm_max_tokens,
                 temperature=(
                     settings.llm_temperature if temperature is None else temperature
                 ),
+                **extra,
             )
-        except Exception as exc:  # pragma: no cover - network
+        except Exception as exc:
             LLM_CALLS.labels(self.name, "error").inc()
-            raise ExternalServiceError(f"Groq request failed: {exc}") from exc
+            raise self._translate(exc, model, started) from exc
 
         usage = response.usage
         prompt_tokens = getattr(usage, "prompt_tokens", 0) or 0
@@ -545,11 +581,75 @@ class GroqProvider(BaseLLMProvider):
         return LLMResponse(
             text=response.choices[0].message.content or "",
             provider=self.name,
-            model=settings.resolved_llm_model,
+            model=model,
             prompt_tokens=prompt_tokens,
             completion_tokens=completion_tokens,
             latency_ms=int((time.perf_counter() - started) * 1000),
         )
+
+    async def _complete_for_json(
+        self,
+        messages: list[LLMMessage],
+        *,
+        system: str,
+        max_tokens: int | None,
+    ) -> LLMResponse:
+        return await self.complete(
+            messages, system=system, max_tokens=max_tokens, json_mode=True
+        )
+
+    def _translate(self, exc: Exception, model: str, started: float) -> Exception:
+        """Turn an SDK error into one that tells the user what happened.
+
+        Logged with the model, status and latency only: never the prompt (it
+        holds the traveller's plans) or the key.
+        """
+        status_code = getattr(exc, "status_code", None)
+        logger.warning(
+            "llm_call_failed",
+            provider=self.name,
+            model=model,
+            status=status_code,
+            error_type=type(exc).__name__,
+            elapsed_ms=int((time.perf_counter() - started) * 1000),
+        )
+
+        rate_limited = getattr(self._sdk, "RateLimitError", None)
+        is_rate_limit = rate_limited is not None and isinstance(exc, rate_limited)
+        if is_rate_limit or status_code == 429:
+            retry_after = _retry_after_seconds(exc)
+            wait = f"about {retry_after} seconds" if retry_after else "a minute"
+            return RateLimitError(
+                "The AI provider (Groq) is rate-limiting requests right now. "
+                f"Try again in {wait}.",
+                details={"provider": self.name, "retry_after_seconds": retry_after},
+            )
+
+        timed_out = getattr(self._sdk, "APITimeoutError", None)
+        if timed_out is not None and isinstance(exc, timed_out):
+            return ExternalServiceError(
+                f"Groq did not answer within {settings.llm_timeout_seconds} seconds.",
+                details={"provider": self.name},
+            )
+
+        if status_code is not None:
+            return ExternalServiceError(
+                f"Groq returned an error (HTTP {status_code}).",
+                details={"provider": self.name, "status": status_code},
+            )
+        return ExternalServiceError(
+            "Could not reach Groq.", details={"provider": self.name}
+        )
+
+
+def _retry_after_seconds(exc: Exception) -> int | None:
+    """The provider's ``Retry-After`` hint, in whole seconds, when it sent one."""
+    headers = getattr(getattr(exc, "response", None), "headers", None)
+    value = headers.get("retry-after") if headers is not None else None
+    try:
+        return max(1, round(float(value))) if value is not None else None
+    except (TypeError, ValueError):
+        return None
 
 
 _PROVIDERS: dict[LLMProvider, type[BaseLLMProvider]] = {

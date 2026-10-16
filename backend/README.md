@@ -132,11 +132,16 @@ GOOGLE_GEMINI_KEY=...        # https://aistudio.google.com/apikey
 # OR:
 LLM_PROVIDER=groq
 GROQ_API_KEY=gsk_...         # https://console.groq.com/keys
+GROQ_MODEL=...               # https://console.groq.com/docs/models
 ```
 
-Leave `LLM_MODEL` unset to use the provider default (`gemini-3.8-flash`, or
-`openai/gpt-oss-120b` on Groq). Providers retire models on a schedule, so check
-their model pages before pinning one. `GEMINI_API_KEY` is still accepted as an
+Gemini defaults to `gemini-3.8-flash` when `LLM_MODEL` is unset. Groq has **no**
+default: name the model in `GROQ_MODEL` (and optionally `GROQ_FAST_MODEL`), since
+Groq retires models too often for a built-in ID to stay valid. Deployed, the API
+refuses to start on Groq without `GROQ_API_KEY` and `GROQ_MODEL`. Groq calls
+have a timeout (`LLM_TIMEOUT_SECONDS`) and retry with backoff on timeouts, 429
+and 5xx (`LLM_MAX_RETRIES`); a rate limit that outlasts the retries is returned
+as a 429 that says how long to wait. `GEMINI_API_KEY` is still accepted as an
 alias for `GOOGLE_GEMINI_KEY`. Anthropic and OpenAI remain available
 (`LLM_PROVIDER=anthropic|openai`; OpenAI also needs `LLM_MODEL`).
 

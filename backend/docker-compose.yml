@@ -73,6 +73,8 @@ services:
       CELERY_RESULT_BACKEND: redis://redis:6379/2
       LLM_PROVIDER: ${LLM_PROVIDER:-stub}
       LLM_MODEL: ${LLM_MODEL:-}
+      GROQ_MODEL: ${GROQ_MODEL:-}
+      GROQ_FAST_MODEL: ${GROQ_FAST_MODEL:-}
       GOOGLE_GEMINI_KEY: ${GOOGLE_GEMINI_KEY:-}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       SECRET_KEY: ${SECRET_KEY:-dev-only-insecure-secret-key-change-me-in-every-real-environment}
@@ -104,6 +106,8 @@ services:
       CELERY_RESULT_BACKEND: redis://redis:6379/2
       LLM_PROVIDER: ${LLM_PROVIDER:-stub}
       LLM_MODEL: ${LLM_MODEL:-}
+      GROQ_MODEL: ${GROQ_MODEL:-}
+      GROQ_FAST_MODEL: ${GROQ_FAST_MODEL:-}
       GOOGLE_GEMINI_KEY: ${GOOGLE_GEMINI_KEY:-}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       SECRET_KEY: ${SECRET_KEY:-dev-only-insecure-secret-key-change-me-in-every-real-environment}

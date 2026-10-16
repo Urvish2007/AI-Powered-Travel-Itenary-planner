@@ -80,7 +80,8 @@ DEFAULT_MODELS: dict[LLMProvider, tuple[str, str]] = {
     # (main model, fast model)
     LLMProvider.STUB: ("stub", "stub"),
     LLMProvider.GEMINI: ("gemini-3.8-flash", "gemini-3.5-flash-lite"),
-    LLMProvider.GROQ: ("openai/gpt-oss-120b", "openai/gpt-oss-20b"),
+    # Groq has no default on purpose: its catalogue changes often enough that a
+    # baked-in ID goes stale. Set GROQ_MODEL (see Settings.groq_model).
     LLMProvider.ANTHROPIC: ("claude-sonnet-5-5", "claude-haiku-4-5-20251001"),
 }
 
@@ -158,6 +159,15 @@ class Settings(BaseSettings):
         validation_alias=AliasChoices("GOOGLE_GEMINI_KEY", "GEMINI_API_KEY"),
     )
     groq_api_key: SecretStr | None = None
+    # Groq models come from the environment, never from code. GROQ_MODEL wins
+    # over LLM_MODEL when LLM_PROVIDER=groq, so a stale LLM_MODEL left over from
+    # another provider is never sent to Groq. The fast model falls back to the
+    # main one rather than to a guess.
+    groq_model: str | None = None
+    groq_fast_model: str | None = None
+    # Retries for transient provider failures (timeouts, connection errors, 429
+    # and 5xx), with exponential backoff that honours Retry-After.
+    llm_max_retries: int = 2
     anthropic_api_key: SecretStr | None = None
     openai_api_key: SecretStr | None = None
     embedding_model: str = "text-embedding-3-small"
@@ -230,11 +240,24 @@ class Settings(BaseSettings):
                 )
             if len(self.secret_key.get_secret_value().encode()) < 32:
                 raise ValueError("SECRET_KEY must be at least 32 bytes for HS256.")
+            # Locally a misconfigured provider falls back to the stub, which is
+            # convenient. Deployed, that would serve canned itineraries as if
+            # they were real, so it is refused instead.
+            if self.llm_provider is LLMProvider.GROQ:
+                if self.groq_api_key is None:
+                    raise ValueError("LLM_PROVIDER=groq needs GROQ_API_KEY.")
+                if not self.resolved_llm_model:
+                    raise ValueError(
+                        "LLM_PROVIDER=groq needs GROQ_MODEL; pick one from "
+                        "https://console.groq.com/docs/models."
+                    )
         return self
 
     @property
     def resolved_llm_model(self) -> str:
-        """The model the active provider should call."""
+        """The model the active provider should call; empty when none is set."""
+        if self.llm_provider is LLMProvider.GROQ and self.groq_model:
+            return self.groq_model
         if self.llm_model:
             return self.llm_model
         return DEFAULT_MODELS.get(self.llm_provider, ("", ""))[0]
@@ -242,6 +265,8 @@ class Settings(BaseSettings):
     @property
     def resolved_llm_fast_model(self) -> str:
         """The cheaper/faster model for lightweight calls."""
+        if self.llm_provider is LLMProvider.GROQ:
+            return self.groq_fast_model or self.llm_fast_model or self.resolved_llm_model
         if self.llm_fast_model:
             return self.llm_fast_model
         return DEFAULT_MODELS.get(self.llm_provider, ("", ""))[1]

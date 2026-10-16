@@ -37,9 +37,10 @@ The app runs with **no key** on a deterministic stub. For real plans, set one:
 | `LLM_PROVIDER` | Key variable | Default model |
 |---|---|---|
 | `gemini` | `GOOGLE_GEMINI_KEY` | `gemini-3.8-flash` |
-| `groq` | `GROQ_API_KEY` | `openai/gpt-oss-120b` |
+| `groq` | `GROQ_API_KEY` | none - set `GROQ_MODEL` |
 
-Override with `LLM_MODEL` / `LLM_FAST_MODEL`. Providers retire models on a
+Override Gemini's with `LLM_MODEL` / `LLM_FAST_MODEL`; Groq always reads
+`GROQ_MODEL` / `GROQ_FAST_MODEL`. Providers retire models on a
 schedule, so re-check their model pages before pinning one. If the key for the
 chosen provider is missing, the API logs a warning and falls back to the stub.
 
