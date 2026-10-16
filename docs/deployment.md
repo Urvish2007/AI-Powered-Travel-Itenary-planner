@@ -58,6 +58,7 @@ unreachable, so Render will not route traffic to a broken instance).
 | `MONGODB_VECTOR_SEARCH_ENABLED` | `true` on Atlas | Indexed semantic search |
 | `RATE_LIMIT_REQUESTS` / `RATE_LIMIT_WINDOW_SECONDS` | `120` / `60` | Per-client request limit |
 | `PHOTOS_USER_AGENT` | `YourApp/1.0 (https://your-site)` | Wikimedia asks clients to identify themselves |
+| `BUILD_SHA` | set automatically | Render provides `RENDER_GIT_COMMIT`; Docker images get it as a build arg |
 
 ### Optional
 
@@ -113,9 +114,24 @@ To run the full end-to-end check, point `scripts/verify_endpoints.py` at a
 **staging** API with a seeded throwaway database only — it creates and deletes
 data.
 
+`/api/v1/health` reports `build`: the commit the instance runs (Render sets
+`RENDER_GIT_COMMIT` on its own builds). Check it after a deploy or rollback to
+confirm which version is actually serving. The GitHub *Deploy* workflow does
+this automatically and fails if the expected build never appears.
+
+## Security headers
+
+The web app sends a `Content-Security-Policy-Report-Only` header (see
+`frontend/next.config.ts`): violations appear in the browser console and nothing
+is blocked. After a release with no violations, rename the header to
+`Content-Security-Policy` to enforce it. Tokens are still kept in
+`localStorage`; see [`proposals/cookie-auth.md`](proposals/cookie-auth.md).
+
 ## Rollback
 
 Render: *Manual Deploy* → pick the previous deploy, or redeploy its commit. Vercel:
-*Deployments* → previous → *Promote to Production*. Migrations are not reversed
+*Deployments* → previous → *Promote to Production*. Then confirm with
+`curl https://YOUR-API/api/v1/health` that `build` names the commit you rolled
+back to. Migrations are not reversed
 automatically; this release's are additive (new optional fields and a new
 `city_photos` collection), so the previous version runs against the new data.

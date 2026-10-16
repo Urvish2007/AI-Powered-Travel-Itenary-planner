@@ -221,6 +221,10 @@ include the runners' address ranges. If your database is locked down, leave
 `MONGODB_URI` unset and run `sh scripts/migrate.sh` as your host's pre-deploy /
 release command instead.
 
+**Post-deploy check:** the API reports the commit it runs (`build` on
+`/api/v1/health`), and the rollout waits until `/health/ready` reports the commit
+being deployed — not merely any 200, which the old instance would also give.
+
 **Rollback:** run the *Deploy* workflow manually (`workflow_dispatch`) with
 `image_tag` set to a previous `sha-xxxxxxx`. It skips the build and redeploys that
 image through the same staging → production path. Migrations are not rolled back
@@ -237,4 +241,9 @@ baked in at build time, so pass them as `--build-arg`.
 
 ## Known issues
 
-- Access tokens are kept in `localStorage`. Add a Content Security Policy before launch.
+- Tokens are kept in `localStorage`, readable by any script on the site. A
+  Content-Security-Policy now ships in **report-only** mode (promote it to
+  enforcing once a release shows no violations); moving the refresh token into
+  an httpOnly cookie is proposed in
+  [`docs/proposals/cookie-auth.md`](docs/proposals/cookie-auth.md) and awaits a
+  decision.

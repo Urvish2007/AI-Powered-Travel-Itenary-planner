@@ -42,6 +42,10 @@ fields with defaults, and a new endpoint. Existing clients keep working.
 - `geo` / `vector` test markers; the smoke check covers apply-route, the
   algorithm setting, routing and photos.
 - [`docs/deployment.md`](docs/deployment.md): Atlas + Render + Vercel, step by step.
+- A `Content-Security-Policy-Report-Only` header on the web app.
+- `build` on `/api/v1/health`: the commit the instance runs.
+- [`docs/proposals/cookie-auth.md`](docs/proposals/cookie-auth.md): moving the
+  refresh token into an httpOnly cookie (awaiting a decision).
 
 ### Changed
 
@@ -65,6 +69,11 @@ fields with defaults, and a new endpoint. Existing clients keep working.
   that had not produced them.
 - The city page hero showed an unrelated stock photo (a lake, a mountain) for
   cities without their own.
+- The post-deploy check accepted the *old* instance's 200, so a deploy or a
+  rollback was reported ready before the new version ever served. It now waits
+  for the deployed commit.
+- The map tile proxy identified itself to tile servers as `localhost` with a
+  placeholder contact in every environment.
 
 ### Removed
 
