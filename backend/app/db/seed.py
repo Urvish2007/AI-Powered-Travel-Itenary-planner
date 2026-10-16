@@ -779,9 +779,8 @@ async def seed_places(*, embed: bool = True) -> int:
     """
     from slugify import slugify
 
-    from app.ai.embeddings import embed_text, place_embedding_text
-    from app.core.config import settings
     from app.models.base import GeoPoint
+    from app.services.place_service import reembed_places
 
     inserted = 0
     for row in ALL_SEED_PLACES:
@@ -809,21 +808,12 @@ async def seed_places(*, embed: bool = True) -> int:
             family_friendly=row["family"],
             source="seed",
         )
-        if embed:
-            place.embedding = await embed_text(
-                place_embedding_text(
-                    place.name,
-                    place.description,
-                    str(place.category),
-                    [str(t) for t in place.tags],
-                    place.city,
-                )
-            )
-            place.embedding_model = settings.embedding_model
-
         await place.insert()
         inserted += 1
 
+    if embed:
+        # Batched, and resumable if the provider stops it part-way.
+        await reembed_places()
     logger.info("places_seeded", inserted=inserted, total=len(ALL_SEED_PLACES))
     return inserted
 

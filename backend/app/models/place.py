@@ -92,6 +92,11 @@ class Place(TimestampedDocument):
         description="Dense embedding of name+description+tags, used for semantic recall.",
     )
     embedding_model: str | None = None
+    # Which embedder made ``embedding``: "provider:model:dimensions". Search only
+    # compares vectors from the configured space (see app.ai.embeddings), so a
+    # vector without one - written before this field existed - is re-embedded
+    # rather than trusted.
+    embedding_space: str | None = None
 
     is_active: bool = True
 

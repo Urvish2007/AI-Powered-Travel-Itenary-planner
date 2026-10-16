@@ -76,10 +76,27 @@ async def details(admin: AdminUser) -> dict:
             "provider": str(settings.llm_provider),
             "model": settings.resolved_llm_model,
             "embedding_dimensions": settings.embedding_dimensions,
+            "embeddings": await _embedding_coverage(),
             "langgraph_available": LANGGRAPH_AVAILABLE,
         },
         "optimization": {
             "ortools_available": ORTOOLS_AVAILABLE,
             "time_limit_seconds": settings.optimizer_time_limit_seconds,
         },
+    }
+
+
+async def _embedding_coverage() -> dict[str, object]:
+    """How much of the corpus semantic search can currently see."""
+    from app.ai.embeddings import EmbeddingUnavailableError, current_space
+
+    try:
+        space = current_space().key
+    except EmbeddingUnavailableError as exc:
+        return {"space": None, "error": exc.message}
+    places = mongodb.get_database()["places"]
+    return {
+        "space": space,
+        "embedded": await places.count_documents({"embedding_space": space}),
+        "total": await places.count_documents({}),
     }

@@ -152,6 +152,52 @@ Without a key the service runs on `LLM_PROVIDER=stub` — a deterministic,
 offline provider. The rest of the pipeline, including the solver, is identical,
 which is what makes CI meaningful.
 
+### Embeddings
+
+Semantic search embeds places with `EMBEDDING_PROVIDER`, which is separate from
+the LLM. The default, `hash`, needs no key or network, so the app works end to
+end with nothing but `GROQ_API_KEY` (Groq has no embeddings API). For learned
+embeddings set `EMBEDDING_PROVIDER=gemini|openai|local` plus `EMBEDDING_MODEL`
+and, for the hosted ones, their key.
+
+Every stored vector records the provider, model and dimension that made it
+(`embedding_space`, e.g. `hash:hash-v1:384`), and search only compares vectors
+from the configured space — there is no silent fallback to another embedder, so
+a provider outage is an error instead of a quietly corrupted index. After
+changing the provider, model or `EMBEDDING_DIMENSIONS`:
+
+```bash
+python -m scripts.reembed --dry-run   # how many places need it
+python -m scripts.reembed             # do it (idempotent; re-run to resume)
+```
+
+Until it runs, places embedded the old way are invisible to semantic search
+(geographic recall still works). `GET /api/v1/health/details` reports how many
+places are in the current space. A run stopped by a rate limit exits with code
+2 and picks up where it left off next time.
+
+On Atlas, the index the app creates (and updates in place if the dimension or
+fields change) is:
+
+```json
+{
+  "name": "place_embedding_index",
+  "type": "vectorSearch",
+  "definition": {
+    "fields": [
+      {"type": "vector", "path": "embedding", "numDimensions": 384, "similarity": "cosine"},
+      {"type": "filter", "path": "city"},
+      {"type": "filter", "path": "category"},
+      {"type": "filter", "path": "is_active"},
+      {"type": "filter", "path": "embedding_space"}
+    ]
+  }
+}
+```
+
+`numDimensions` must equal `EMBEDDING_DIMENSIONS`; the name is
+`MONGODB_VECTOR_INDEX_NAME`.
+
 ---
 
 ## API

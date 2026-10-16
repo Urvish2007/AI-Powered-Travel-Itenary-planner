@@ -290,8 +290,6 @@ async def seed_world_places(*, embed: bool = True, batch_size: int = 250) -> int
     """
     from slugify import slugify
 
-    from app.ai.embeddings import embed_text, place_embedding_text
-    from app.core.config import settings
     from app.models.base import GeoPoint
     from app.models.place import OpeningHours, Place, PlaceCost
 
@@ -335,22 +333,14 @@ async def seed_world_places(*, embed: bool = True, batch_size: int = 250) -> int
             family_friendly=row["family"],
             source=SOURCE_NAME,
         )
-        if embed:
-            place.embedding = await embed_text(
-                place_embedding_text(
-                    place.name,
-                    place.description,
-                    str(place.category),
-                    [str(t) for t in place.tags],
-                    place.city,
-                )
-            )
-            place.embedding_model = settings.embedding_model
-
         pending.append(place)
         if len(pending) >= batch_size:
             await flush()
 
     await flush()
+    if embed:
+        from app.services.place_service import reembed_places
+
+        await reembed_places()
     logger.info("world_places_seeded", inserted=inserted, total=len(rows))
     return inserted

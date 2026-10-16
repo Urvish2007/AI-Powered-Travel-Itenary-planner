@@ -59,6 +59,20 @@ class OptimizerAlgorithm(StrEnum):
     GENETIC = "genetic"
 
 
+class EmbeddingProviderName(StrEnum):
+    """Where place and query embeddings come from. Independent of the LLM.
+
+    ``HASH`` is a deterministic lexical embedder: no key, no network, and the
+    only option that works with nothing but a Groq key (Groq has no embeddings
+    API). The others are learned embeddings; see ``app.ai.embeddings``.
+    """
+
+    HASH = "hash"
+    OPENAI = "openai"
+    GEMINI = "gemini"
+    LOCAL = "local"
+
+
 class RoutingProviderName(StrEnum):
     """Where travel distances and durations come from.
 
@@ -170,8 +184,19 @@ class Settings(BaseSettings):
     llm_max_retries: int = 2
     anthropic_api_key: SecretStr | None = None
     openai_api_key: SecretStr | None = None
-    embedding_model: str = "text-embedding-3-small"
+    # ---- Embeddings ----
+    # hash (default) | openai | gemini | local. Every stored vector records the
+    # provider, model and dimension that made it, and search only compares
+    # vectors from the configured one - so changing this needs a re-embed
+    # (`python -m scripts.reembed`) before semantic search finds anything.
+    embedding_provider: EmbeddingProviderName = EmbeddingProviderName.HASH
+    # Required for openai / gemini / local; ignored by hash.
+    embedding_model: str | None = None
     embedding_dimensions: int = 384
+    embedding_batch_size: int = 64
+    embedding_timeout_seconds: float = 30.0
+    # Retries on timeouts, 429 and 5xx, with exponential backoff.
+    embedding_max_retries: int = 3
 
     # ---- Optimization ----
     # Wall-clock ceiling handed to the OR-Tools solver per optimisation request.
@@ -228,6 +253,25 @@ class Settings(BaseSettings):
         if isinstance(value, str):
             return [origin.strip() for origin in value.split(",") if origin.strip()]
         return value
+
+    @model_validator(mode="after")
+    def _check_embedding_provider(self) -> Settings:
+        """A learned-embedding provider must say which model, and have its key.
+
+        Checked in every environment: unlike the LLM there is no sensible
+        fallback, because a silent switch to another embedder would mix vector
+        spaces and make every similarity meaningless.
+        """
+        provider = self.embedding_provider
+        if provider is EmbeddingProviderName.HASH:
+            return self
+        if not self.embedding_model:
+            raise ValueError(f"EMBEDDING_PROVIDER={provider} needs EMBEDDING_MODEL.")
+        if provider is EmbeddingProviderName.OPENAI and self.openai_api_key is None:
+            raise ValueError("EMBEDDING_PROVIDER=openai needs OPENAI_API_KEY.")
+        if provider is EmbeddingProviderName.GEMINI and self.google_gemini_key is None:
+            raise ValueError("EMBEDDING_PROVIDER=gemini needs GOOGLE_GEMINI_KEY.")
+        return self
 
     @model_validator(mode="after")
     def _reject_default_secret(self) -> Settings:

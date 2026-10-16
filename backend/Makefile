@@ -1,6 +1,6 @@
 # Convenience targets. On Windows, run the underlying commands directly or use
 # Git Bash / WSL.
-.PHONY: help install dev seed seed-core reset validate-data test test-unit test-cov lint format typecheck verify run worker beat docker-up docker-down clean
+.PHONY: help install dev seed seed-core reset reembed validate-data test test-unit test-cov lint format typecheck verify run worker beat docker-up docker-down clean
 
 VENV := .venv
 PY   := $(VENV)/bin/python
@@ -27,6 +27,9 @@ seed-core:  ## Seed without the world corpus (Paris, Rome and Tokyo only)
 
 reset:  ## Drop the database and reseed everything
 	$(PY) -m scripts.seed_db --reset
+
+reembed:  ## Re-embed places into the configured embedding space (idempotent)
+	$(PY) -m scripts.reembed
 
 validate-data:  ## Check the world data for structural and geographic errors
 	$(PY) -m scripts.validate_world_data

@@ -24,7 +24,7 @@ from datetime import date, timedelta
 from itertools import pairwise
 from typing import Any
 
-from app.ai.embeddings import place_embedding_text, vector_search
+from app.ai.embeddings import vector_search
 from app.ai.llm import BaseLLMProvider, LLMMessage, get_llm_provider
 from app.ai.prompts import (
     NARRATE_SYSTEM,
@@ -844,20 +844,13 @@ def build_itinerary_document(state: PlanningState, version: int = 1) -> Itinerar
 
 
 async def ensure_place_embedding(place: Place) -> bool:
-    """Backfill a place's embedding when missing. Returns True when it wrote one."""
-    from app.ai.embeddings import embed_text
-    from app.core.config import settings
+    """Embed a place not yet in the current space. Returns True when it wrote one."""
+    from app.ai.embeddings import current_space
+    from app.services.place_service import attach_embedding
 
-    if place.embedding and place.embedding_model == settings.embedding_model:
+    if place.embedding and place.embedding_space == current_space().key:
         return False
-    text = place_embedding_text(
-        place.name,
-        place.description,
-        str(place.category),
-        [str(t) for t in place.tags],
-        place.city,
-    )
-    place.embedding = await embed_text(text)
-    place.embedding_model = settings.embedding_model
+    if not await attach_embedding(place):
+        return False
     await place.save()
     return True
