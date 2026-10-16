@@ -151,6 +151,27 @@ API boundary, never a `500`.
 The frontend surfaces the comparison in the day view, under the map
 ("Compare route algorithms"), with the selector beside it.
 
+### Road distances: estimated or measured
+
+By default every distance and travel time is an **estimate**: straight-line
+distance times `ROAD_DISTANCE_FACTOR` (1.3), at a typical speed per mode. It
+needs no network and never fails.
+
+Set `ROUTING_PROVIDER=openrouteservice` (with `ROUTING_API_KEY`) or
+`ROUTING_PROVIDER=osrm` (with `ROUTING_BASE_URL` pointing at your own server) to
+measure them on the road network instead. One matrix call covers every point of
+a request, and every algorithm, the comparison's scoring, and the legs of an
+applied route all read that same matrix, so their figures always agree.
+
+If the provider is slow, down, rate-limiting, or returns something unusable, the
+request still succeeds on the estimate. After `ROUTING_BREAKER_THRESHOLD`
+consecutive failures the provider is skipped for
+`ROUTING_BREAKER_COOLDOWN_SECONDS`. Responses carry `"estimated": true|false`
+and `"routing_provider"` so the UI never presents a guess as a measurement;
+itineraries record the same on `optimization` and on each travel leg.
+Generation weighs many candidates at once, so it is estimated whenever the pool
+exceeds `ROUTING_MAX_LOCATIONS`.
+
 ## Maps
 
 The maps need **no API key**: Leaflet over openly-licensed tiles — CARTO Voyager
