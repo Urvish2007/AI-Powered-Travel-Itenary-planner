@@ -41,7 +41,7 @@ jobs:
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Resolve image tag
         id: tag
@@ -111,7 +111,7 @@ jobs:
     env:
       IMAGE_TAG: ${{ needs.build.outputs.tag }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/rollout
         with:
           image_tag: ${{ env.IMAGE_TAG }}
@@ -145,7 +145,7 @@ jobs:
     env:
       IMAGE_TAG: ${{ needs.build.outputs.tag }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/rollout
         with:
           image_tag: ${{ env.IMAGE_TAG }}
